@@ -1,0 +1,76 @@
+.wrap {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    -webkit-perspective: 2000px;
+    -webkit-perspective-origin: 50% 50%;
+    transition: all 1s ease-in-out;
+    -webkit-transform-style: preserve-3d;
+    -webkit-transform: rotateY(0deg);
+    margin-bottom: 20px;
+}
+.front,
+.back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #ccc;
+    -webkit-backface-visibility: hidden;
+}
+
+.back {
+    -webkit-transform: rotateY(180deg);
+    width: 100%;
+    line-height: 38px;
+    display: table-cell;
+}
+.form_photo {
+    position: relative;
+    width: 200px;
+    height: 200px;
+}
+
+.photo {
+    float: left;
+    width: 200px;
+    height: 200px;
+    margin: 10px 15px 10px 10px;
+}
+
+.item_title {
+    font-size: 30px;
+    color: #333;
+    font-weight: normal;
+}
+
+.photo {
+    float: left;
+    width: 200px;
+    height: 200px;
+    margin: 10px 15px 10px 10px;
+}
+
+.post {
+    width: 940px;
+    height: 250px;
+    padding: 10px;
+}
+
+.testphoto {
+    width: 200px;
+    height: 200px;
+}
+
+.description {
+    font-size: 20px;
+    color: black;
+    font-weight: normal;
+    font-family: "pbRegular",Helvetica,Arial,sans-serif;
+}
+
+.title, .footer {
+    font-size: 37px;
+    color: #333;
+    font-weight: normal;
+    font-family: "pbRegular",Helvetica,Arial,sans-serif;
+}
