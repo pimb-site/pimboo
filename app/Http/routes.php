@@ -34,8 +34,10 @@ Route::get('upload/getTriviaForm/{id}', 'TriviaController@getNewForm');
 Route::post('upload_end_trivia', 'TriviaController@saveTriviaQuiz');
 
 
-
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
 ]);
+Route::post('auth/register', 'Auth\AuthController@postRegister');
+Route::get('auth/activate','Auth\AuthController@activate');
+Route::post('auth/login','Auth\AuthController@postLogin');

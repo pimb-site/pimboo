@@ -1,24 +1,6 @@
 @extends('page')
 
 @section('content')
-	<body class="home">
-		<header>
-			<div class="left">
-				<a href="/" class="logo"></a>
-				<a href="#" class="text">HOME</a>
-				<a href="#" class="text">PIMBOO CHARITY</a>
-			</div>
-			<div class="right">
-				@if (Auth::guest())
-				<button id="register-button" onclick='window.location.href = "/auth/register"'>REGISTER</button>
-				<button id="login-button" onclick='window.location.href = "/auth/login"'>LOGIN</button>
-				@else
-					<button id="register-button" class="view_flip_cards" onclick='window.location.href = "/view_flip_cards"'>View Flip Cards</button>
-					<button id="login-button" class="add_flip_cards" onclick='window.location.href = "/add_flip_cards"'>Add Flip Card</button>
-				@endif
-
-			</div>
-		</header>
 		<div class="body">
 			<div class="slider">
 				<div class="wrap">
