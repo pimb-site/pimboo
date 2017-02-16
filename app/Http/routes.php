@@ -19,17 +19,19 @@ Route::get('add_flip_cards', 'FlipcardsController@addFlipCards');
 Route::get('viewID/{id}', 'FlipcardsController@viewID');
 Route::get('success/{id}', 'FlipcardsController@successID');
 Route::get('view_flip_cards', 'FlipcardsController@viewFlipCards');
-Route::get('upload/getForm/{id}', 'FlipcardsController@getNewForm');
+Route::post('upload/img_url', 'FlipcardsController@imageURL');
 // flipcards post
 Route::post('test_upload_end', 'FlipcardsController@testUploadEnd');
 Route::post('upload_end', 'FlipcardsController@postUploadEnd');
 Route::post('upload/image', 'FlipcardsController@postUpload');
+
+//trivia post
+Route::post('upload/valid_url', 'TriviaController@validURL');
 // trivia get
 Route::get('view_trivia_quiz', 'TriviaController@viewTriviaQuiz');
 Route::get('add_trivia_quiz', 'TriviaController@addTriviaQuiz');
 Route::get('save_trivia_quiz', 'TriviaController@saveTriviaQuiz');
 Route::get('upload/getTriviaForm/{id}', 'TriviaController@getNewForm');
-
 
 Route::post('upload_end_trivia', 'TriviaController@saveTriviaQuiz');
 

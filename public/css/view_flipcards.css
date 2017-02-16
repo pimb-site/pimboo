@@ -4,11 +4,18 @@
 .post {
 	background: #ffffff;
 	width:660px;
-	height: 120px;
+	height: auto;
 	margin-left: auto;
 	margin-right: auto;
 	border: 1px solid #eee;
 	margin-bottom: 5px;
+	float:left;
+	
+}
+
+.posts {
+	float:left;
+	height:auto;
 }
 
 .testphoto {
@@ -39,5 +46,8 @@
 
 .description {
 	color: #797979;
-	margin-left: 156px;
+	float:left;
+	width:500px;
+	margin-left:15px;
+	height:auto;
 }

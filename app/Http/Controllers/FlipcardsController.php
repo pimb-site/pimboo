@@ -42,19 +42,45 @@ class FlipcardsController extends Controller
     }
 
     public function viewFlipCards() {
-        $contentflip = \DB::select('select * from posts where type = "flipcards"');
+        $contentflip = \DB::select('select * from posts where type = "flipcards" and isDraft = "publish"');
         return view('view_flip_cards', ['contentflip' => $contentflip]);
     }
 
 
     public function viewID($id) {
-        $content = \DB::select('select * from posts where id = ?', [$id]);
+        $content = \DB::select('select * from posts where id = ? and isDraft = ?', [$id, 'publish']);
         return view('viewID', ['content' => $content[0]]);
     }
 	
 	public function successID($id) {
         return view('success', ['id' => $id]);
     }
+	
+	public function imageURL() {
+		
+		$url = \Input::get('image_url');
+
+		if (!filter_var($url, FILTER_VALIDATE_URL) === false) {
+			
+			$name = uniqid().'.jpg';
+			$image = file_get_contents($url);
+			
+			if(!file_exists("temp/".\Session::getId())) {
+				mkdir("temp/".\Session::getId());
+			}
+			
+			$full_path = \Session::getId()."/".$name;
+			$success = file_put_contents("temp/".$full_path, $image);
+			
+			if($success) {
+				return \Response::json(['success' => true, 'file' => $full_path]);
+			}
+			
+		} else {
+			return \Response::json(['success' => false, 'errors' => 'Invalid URL']);
+		}
+		
+	}
 
     public function postUpload() {
         if(\Auth::guest()) return view('auth/login');
@@ -78,6 +104,158 @@ class FlipcardsController extends Controller
         if(\Auth::guest()) return view('auth/login');
 
         $input = \Input::all();
+		
+		
+		if(isset($input['isDraft'])) {
+			if($input['isDraft'] == 'preview') {
+				
+				$tags = [];
+				if(isset($input['tags'])) {
+					if(count($input['tags']) > 0) {
+						foreach ($input['tags'] as $key => $value) {
+							$tags[] = $value;
+						}
+					}
+				}
+				$content_main = [
+					'author' => \Auth::user()->name,
+					'title' => $input['form_flip']['form_flip_cards_title'],
+					'description' => $input['form_flip']['form_description'],
+					'footer' => $input['form_flip']['form_footer']
+				];
+				
+				$rules_colors = array('blue', 'green', 'turquoise', 'purple');
+				
+				foreach ($input['flip_cards'] as $key => $value) {
+					if(isset($value['theme1'])) {
+						if(in_array($value['theme1'], $rules_colors)) {
+							$theme_front = $value['theme1'];
+						} else $theme_front = 'blue';
+					} else {
+						$theme_front = 'blue';
+					}
+					
+					if(isset($value['theme2'])) {
+						if(in_array($value['theme2'], $rules_colors)) {
+							$theme_back = $value['theme2'];
+						} else $theme_back = 'blue';
+					} else {
+						$theme_back = 'blue';
+					}
+					
+					$text_back = $text_front = '';
+					if(isset($value['text_back'])) $text_back = $value['text_back'];
+					if(isset($value['text_front'])) $text_front = $value['text_front'];
+					
+					if(isset($value['type_front'])) {
+						if($value['type_front'] == 'text') $type_front = 'text';
+						else $type_front = 'image';
+					} else {
+						$type_front = 'image';
+					}
+					
+					if(isset($value['type_back'])) {
+						if($value['type_back'] == 'text') $type_back = 'text';
+						else $type_back = 'image'; 
+					} else {
+						$type_back = 'image';
+					}
+					
+					
+					$content_other[] = [
+                        'item_title' => $value['form_item_title'],
+                        'front_card' => $value['img_src1'],
+                        'back_card' => $value['img_src2'],
+						'text_back' => $text_back,
+						'text_front' => $text_front,
+						'theme_front' => $theme_front,
+						'theme_back'  => $theme_back,
+						'type_front'  => $type_front,
+						'type_back'   => $type_back
+                    ];
+				}
+				return \Response::json(['content' => $content_main, 'cards' => $content_other, 'tags' => $tags]);
+			} else if($input['isDraft'] == 'save') {
+				
+				$tags = [];
+				if(isset($input['tags'])) {
+					if(count($input['tags']) > 0) {
+						foreach ($input['tags'] as $key => $value) {
+							$tags[] = $value;
+						}
+					}
+				}
+				$tags = serialize($tags);
+				
+				$content = array();
+				foreach ($input['flip_cards'] as $key => $value) {
+					$rules_colors = array('blue', 'green', 'turquoise', 'purple');
+						
+					if(isset($value['theme1'])) {
+						if(in_array($value['theme1'], $rules_colors)) {
+							$theme_front = $value['theme1'];
+						} else $theme_front = 'blue';
+					} else {
+						$theme_front = 'blue';
+					}
+						
+					if(isset($value['theme2'])) {
+						if(in_array($value['theme2'], $rules_colors)) {
+							$theme_back = $value['theme2'];
+						} else $theme_back = 'blue';
+					} else {
+						$theme_back = 'blue';
+					}
+						
+					$text_back = $text_front = '';
+					if(isset($value['text_back'])) $text_back = $value['text_back'];
+					if(isset($value['text_front'])) $text_front = $value['text_front'];
+					
+					
+					$content[] = [
+                        'item_title' => $value['form_item_title'],
+                        'front_card' => '/temp/'.$value['img_src1'],
+                        'back_card' => '/temp/'.$value['img_src2'],
+						'text_back' => $text_back,
+						'text_front' => $text_front,
+						'theme_front' => $theme_front,
+						'theme_back'  => $theme_back
+                    ];
+					
+					if($input['form_flip']['form_photo_facebook'] == "") $photo_fb = "";
+					else $photo_fb = '/temp/'.$input['form_flip']['form_photo_facebook'];
+					
+					if($input['form_flip']['form_photo'] == "") $photo = "";
+					else $photo = '/temp/'.$input['form_flip']['form_photo'];
+				}
+				
+				if(isset($input['postID'])) {
+					$postID = (int)$input['postID'];
+					if(is_int($postID) && $postID > 0) {
+						$current_owner = \DB::select('select user_id from posts where id = ?', [$postID]);
+						if(count($current_owner != 0)) {
+							if($current_owner[0]->user_id == \Auth::user()->id) {
+								\DB::table('posts')
+									->where('id', $postID)
+									->update(['description_title' => $input['form_flip']['form_flip_cards_title'], 'description_text' => $input['form_flip']['form_description'],
+											'description_footer' => $input['form_flip']['form_footer'], 'content' => serialize($content), 'description_image' => $photo, 'image_facebook' => $photo_fb,
+											'type' => 'flipcards', 'isDraft' => 'save', 'tags' => $tags
+										]);
+								return \Response::json(['success' => true, 'id' => $postID]);
+							}
+						}
+					}
+				}
+				
+				$id = \DB::table('posts')->insertGetId(
+					['user_id' => \Auth::user()->id, 'description_title' => $input['form_flip']['form_flip_cards_title'], 'description_text' => $input['form_flip']['form_description'],
+					'description_footer' => $input['form_flip']['form_footer'], 'content' => serialize($content), 'description_image' => $photo, 'image_facebook' => $photo_fb,
+					'type' => 'flipcards', 'isDraft' => 'save', 'tags' => $tags]
+				);
+				return \Response::json(['success' => true, 'id' => $id]);
+			}
+		}
+		
 
         $validator = \Validator::make(
             array(
@@ -95,7 +273,7 @@ class FlipcardsController extends Controller
 				'Flip Cards Facebook Photo' => 'required'
             )
         );
-
+		
         if (!$validator->fails())
         {
             foreach ($input['flip_cards'] as $key => $value) {
@@ -210,10 +388,41 @@ class FlipcardsController extends Controller
                         ];
                     }
 					
+					$photo = $uniqid3.'.jpeg';
+					$photo_fb = $uniqid4.'.jpeg';
+					
+					$tags = [];
+					if(isset($input['tags'])) {
+						if(count($input['tags']) > 0) {
+							foreach ($input['tags'] as $key => $value) {
+								$tags[] = $value;
+							}
+						}
+					}
+					$tags = serialize($tags);
+					
+					if(isset($input['postID'])) {
+						$postID = (int)$input['postID'];
+						if(is_int($postID) && $postID > 0) {
+							$current_owner = \DB::select('select user_id from posts where id = ?', [$postID]);
+							if(count($current_owner != 0)) {
+								if($current_owner[0]->user_id == \Auth::user()->id) {
+									\DB::table('posts')
+										->where('id', $postID)
+										->update(['description_title' => $input['form_flip']['form_flip_cards_title'], 'description_text' => $input['form_flip']['form_description'],
+												'description_footer' => $input['form_flip']['form_footer'], 'content' => serialize($content), 'description_image' => $photo, 'image_facebook' => $photo_fb,
+												'type' => 'flipcards', 'isDraft' => 'publish', 'tags' => $tags
+											]);
+									return \Response::json(['success' => true, 'id' => $postID]);
+								}
+							}
+						}
+					}
+					
 					$id = \DB::table('posts')->insertGetId(
 						['user_id' => \Auth::user()->id, 'description_title' => $input['form_flip']['form_flip_cards_title'], 'description_text' => $input['form_flip']['form_description'],
 						'description_footer' => $input['form_flip']['form_footer'], 'content' => serialize($content), 'description_image' => $uniqid3.".jpeg", 'image_facebook' => $uniqid4.".jpeg",
-						'type' => 'flipcards']
+						'type' => 'flipcards', 'isDraft' => 'publish']
 					);
                     return \Response::json(['success' => true, 'id' => $id]);
                 }

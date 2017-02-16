@@ -419,6 +419,7 @@ input[type='file'] {
 	padding-top:10px;
 	padding-left:21px;
 	font-size:16px;
+	color:#6e8dc9;
 }
 
 .edit-answers {
@@ -457,6 +458,7 @@ input[type='file'] {
 	text-align:center;
 	font-size:16px;
 	padding-top:60px;
+	cursor:pointer;
 }
 
 .edit-answers .add-answer {
@@ -571,6 +573,7 @@ input[type='file'] {
 	border: 1px solid #c9d5eb;
 	text-align:center;
 	padding-top: 60px;
+	cursor:pointer;
 	float:left;
 }
 
@@ -587,6 +590,7 @@ input[type='file'] {
 	border: 2px solid #afc0e1;
 	margin-top:19px;
 	padding-left:26px;
+	color:#6e8dc9;
 }
 
 .media-answer .buttons-answer {
@@ -604,6 +608,30 @@ input[type='file'] {
 	width:60px;
 	height:60px;
 	margin-right:10px;
+	cursor:pointer;
+	float:left;	
+}
+
+.buttons-img .modal-url-icon {
+	border: 0;
+    background-image: url(/img/from-url.png);
+    background-repeat: no-repeat;
+	width:90px;
+	height:90px;
+	cursor:pointer;
+	margin-left: 100px;
+	margin-right:100px;
+	float:left;	
+}
+
+.buttons-img .modal-youtube-icon {
+	border: 0;
+    background-image: url(/img/from-youtube.png);
+    background-repeat: no-repeat;
+	width:90px;
+	height:90px;
+	cursor:pointer;
+	margin-left:14px;
 	float:left;	
 }
 
@@ -613,12 +641,81 @@ input[type='file'] {
     background-repeat: no-repeat;
 	width:60px;
 	height:60px;
+	cursor:pointer;
 	float:left;
 }
 
-.add_plus{
-	border:0;background-image:url(/img/plus-icon.png);background-repeat:no-repeat;width:90px;height:90px;margin-left:329px;margin-top:21px;float:left; cursor:pointer;
+.choose-upload {
+	width:751px;
+	height:676px;
+	border: 2px solid #97a8c9;
+	border-radius: 5px;
+	background-color: #f1f4fa;
+	margin-top:90px;
+	text-align:center;
 }
 
+.modal-upload-column .buttons-img{
+	margin-top:23px;
+	margin-left:119px;
+	width:auto;
+	height:auto;
+	font-size:20px;
+}
+
+.choose-upload  .modal-title {
+	font-size:30px;
+	margin-top:30px;
+	margin-bottom:19px;
+}
+
+.modal-upload-column .title{
+	font-size:20px;
+	margin-top:35px;
+}
+
+.modal-file-upl {
+	float:left;
+}
+
+.modal-text-upl {
+	height:30px;
+	margin-top:18px;
+}
+
+.modal-video-url input{
+	width:606px;
+	height:60px;
+	border-radius:5px;
+	border: 2px solid #b7c3d9;
+	color: #99afd9;
+	font-size:18px;
+	padding-left:19px;
+	margin-top:50px;
+	position:relative;
+}
+
+.modal-video-url button {
+	width:160px;
+	height:57px;
+	color: #fff;
+	border: 0 none;
+	background-color:#99afd9;
+	border-radius: 0px 5px 5px 0px;
+	position:absolute;
+	margin-top:52px;
+	margin-left:-160px;
+
+}
+
+.modal-input-youtube {
+	width:751px;
+	height:150px;
+	background-color: #f1f4fa;
+	border-radius:5px;
+	margin-top:90px;
+}
+
+.add_plus{border:0;background-image:url(/img/plus-icon.png);background-repeat:no-repeat;width:90px;height:90px;margin-left:329px;margin-top:21px;float:left; cursor:pointer; }
 .front_card_question{background-image:url(/img/question-icon.png);background-position:159px 14px;text-align:left;padding-left:41px;padding-top:5px;letter-spacing:-.5px}
 .back_card_question{background-image:url(/img/result-icon.png);background-position:159px 14px;text-align:left;padding-left:41px;padding-top:5px;letter-spacing:-.5px}

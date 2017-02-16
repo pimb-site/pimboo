@@ -5,6 +5,20 @@ use Illuminate\View\View;
 class TriviaController extends Controller
 {
 
+	public function validURL() {
+		
+		$url = \Input::get('video_url');
+		
+		if (!filter_var($url, FILTER_VALIDATE_URL) === false) {
+			$content = @file_get_contents('https://www.youtube.com/oembed?url='.$url.'&format=json');
+			$array_information = json_decode($content, true);
+			if(is_array($array_information)) {
+				return \Response::json(['success' => true, 'thumbnail_url' => $array_information['thumbnail_url']]);
+			}
+		}
+	
+	}
+
     public function getNewForm($id) {
         if(\Auth::guest()) return view('auth/login');
         else return view('getNewFormTrivia', ['id' => $id]);

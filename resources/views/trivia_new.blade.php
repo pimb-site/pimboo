@@ -28,31 +28,37 @@
 					<div class="top">
 						<div class="photo">CLICK<br>TO ADD PHOTO</div>
 						<div class="text_info">
-							<input type="text" name="form_flip[form_flip_cards_title]" placeholder="Trivia title" autocomplete="off">
-							<input type="text" name="form_flip[form_description]" style="" placeholder="Trivia description" autocomplete="off">
+							<input type="text" name="form_flip[form_flip_cards_title]" placeholder="Trivia title" autocomplete="off" style="color:#6e8dc9;">
+							<textarea name="form_flip[form_description]" style="height:102px; margin-bottom: 0px; margin-top:0px; margin-left:0px; width:490px; resize: none; color:#6e8dc9;" placeholder="Trivia description" autocomplete="off"></textarea>
 						</div>
 					</div>
-					<textarea name="form_flip[form_footer]" placeholder="Footer text (1500 symbols max)" maxlength="1500" autocomplete="off"></textarea>
+					<textarea name="form_flip[form_footer]" placeholder="Footer text (1500 symbols max)" maxlength="1500" autocomplete="off" style="color:#6e8dc9;"></textarea>
 				</div>
 				<div class="buttons">
-					<button type="button" class="front_card_question" data-id="1">QUESTION</button>
+					<button type="button" class="front_card_question" data-id="1" style="background-color: #99afd9;">QUESTION</button>
 					<button type="button" class="back_card_question" data-id="1">RESULT</button>
 				</div>
 				<div class="editor" data-id="1">
 					<div class="front-card" data-id="1">
-						<div class="title">CLICK TO ADD PHOTO OR VIDEO</div>
-						<div class="butts">
-							<div class="add_plus" data-id="1" data-side="1"></div>
+						<div class="main-remove-front" data-id="1">
+							<div class="title">CLICK TO ADD PHOTO OR VIDEO</div>
+							<div class="butts">
+								<div class="add_plus" data-id="1" data-side="1"></div>
+							</div>
 						</div>
 						<div class="block-type-caption">
-							<textarea class="type-caption" placeholder="Type your caption"></textarea>
+							<textarea class="type-caption" placeholder="Type your caption" style="position:relative;" data-id="1" data-side="1"></textarea>
 						</div>
 					</div>
 					<div class="back-card" data-id="1">
-						<div class="title">CLICK TO ADD PHOTO OR TEXT</div>
-						<div class="butts">
-							<div class="add_image" data-id="1" data-side="2"></div>
-							<div class="add_text" data-id="1" data-side="2"></div>
+						<div class="main-remove-back" data-id="1">
+							<div class="title">CLICK TO ADD PHOTO OR VIDEO</div>
+							<div class="butts">
+								<div class="add_plus" data-id="1" data-side="2"></div>
+							</div>
+						</div>
+						<div class="block-type-caption">
+							<textarea class="type-caption" placeholder="Type your caption" style="position:relative;" data-id="1" data-side="2"></textarea>
 						</div>
 					</div>	
 				</div>
@@ -66,14 +72,14 @@
 						</div>
 					</div>
 					<div class="add-answer">
-						<div class="answer-photo"><b>Click<br/> to add photo</b></div>
+						<div class="answer-photo" data-id="1" data-side="1"><b>CLICK<br/> TO ADD PHOTO</b></div>
 						<div class="answer-text"> <textarea placeholder="Enter text"></textarea></div>
 						<div class="answer-checkbox">
 							<label>  <input type="checkbox">Correct answer</label>
 						</div>
 					</div>
 					<div class="add-answer">
-						<div class="answer-photo"><b>Click<br/> to add photo</b></div>
+						<div class="answer-photo" data-id="1" data-side="2"><b>CLICK<br/> TO ADD PHOTO</b></div>
 						<div class="answer-text"> <textarea placeholder="Enter text"></textarea></div>
 						<div class="answer-checkbox">
 							<label>  <input type="checkbox">Correct answer</label>
@@ -82,7 +88,7 @@
 				</div>
 				<div class="edit-questions">
 					<div class="media-questions">CHOOSE QUESTIONS MEDIA</div>
-					<div class="button-add-question"><button>ADD QUESTION</button></div>
+					<div class="button-add-question"><button class="add-question">ADD QUESTION</button></div>
 				</div>
 				<div class="edit-quiz-result">
 					<div class="left-block-quiz">
@@ -216,6 +222,31 @@
 			</div>
 		</div>
 		
+		<div id="choose-upload" class="choose-upload" style="display: none;">
+			<div class="modal-title">ADD PHOTO/VIDEO</div>
+			<div class="modal-upload-column">
+				<div class="title"> UPLOAD </div>
+				<div class="buttons-img">
+					<div class="modal-file-icon" style="float:left;"><div class="select-file" style="margin-left:0px; height:0px; margin-top:0px;"><input type="file" name="filedata" style="top:0px;"><div class="modal-text-upl">From File</div></div></div>
+					<div class="modal-file-upl"><div class="modal-url-icon"></div><div class="modal-text-upl" style="margin-top:108px;">From URL</div></div>
+					<div class="modal-file-upl"><div class="modal-youtube-icon"></div><div class="modal-text-upl" style="margin-top:108px;">YouTube Clip</div></div>
+				</div>
+				<div class="modal-video-url">
+					<input type="text" class="upl-input-video-url" placeholder="Enter clip URL">
+					<button type="button" class="upl-video-valid">UPLOAD</button>
+				</div>
+				<div class="size-img-alert" style="margin-top:64px;">Please make sure you upload an image at least of 200x160 for Landscape</div>
+			</div>
+		</div>
+		
+		<div id="modal-input-youtube" class="modal-input-youtube" style="display: none;">
+			<div class="modal-video-url" style="margin-left: 72px;">
+					<input type="text" class="upl-input-video-url" placeholder="Enter clip URL">
+					<button type="button" class="upl-video-valid">UPLOAD</button>
+			</div>
+		</div>
+		
+		
 		<div id="modal-test" class="modal-test" style="display: none;">
 			<div class="popup__body"><div class="js-img"></div></div>
 			<div style="margin: 0 0 5px; text-align: center;">
@@ -230,6 +261,8 @@
 				</div>
 			</div>
 		</div>
+		
+		
 	<script>
 	var token = '{!! csrf_token() !!}';
 	</script>
@@ -240,6 +273,6 @@
 	<script src="test/jcrop/jquery.Jcrop.min.js"></script>
 	<script src="test/statics/jquery.modal.js"></script>
 	<script src="{!! url() !!}/js/jquery.form.js"></script>
-	<script src="{!! url() !!}/js/script3.js"></script>
+	<script src="{!! url() !!}/js/script4.js"></script>
 	</body>
 </html>
