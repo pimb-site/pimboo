@@ -62,6 +62,8 @@ class FlipcardsController extends Controller
 
 		if (!filter_var($url, FILTER_VALIDATE_URL) === false) {
 			
+			$enabled = array( 'png', 'jpeg' );
+			
 			$name = uniqid().'.jpg';
 			$image = file_get_contents($url);
 			
@@ -71,9 +73,17 @@ class FlipcardsController extends Controller
 			
 			$full_path = \Session::getId()."/".$name;
 			$success = file_put_contents("temp/".$full_path, $image);
+			unset($image);
 			
 			if($success) {
-				return \Response::json(['success' => true, 'file' => $full_path]);
+				if( $info = getimagesize("temp/".$full_path)) {
+					$type = trim( strrchr( $info['mime'], '/' ), '/' );
+					if( !in_array( $type, $enabled ) ) {
+						return \Response::json(['success' => false, 'errors' => 'Invalid image mimetype']);
+					} else {
+						return \Response::json(['success' => true, 'file' => $full_path]);
+					}
+				} else return \Response::json(['success' => false, 'errors' => 'Invalid image']);
 			}
 			
 		} else {

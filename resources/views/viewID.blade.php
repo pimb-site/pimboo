@@ -120,79 +120,49 @@
 						<div class="title">{!! $content->description_title !!}</div>
 						@foreach($uncontent as $key => $value)
 						<div class="set-number">{!! $data_id !!}</div>
-						<div class="item_title"> {!! $value['item_title'] !!} </div>
+						<div class="item_title">  Question</div>
 						<div class="wrap2" data-id="{!! $data_id !!}">
+						
+						@if($value['type_card_front'] == 'image')
 							<div class="front" data-id="{!! $data_id !!}" style="background-image: url(/uploads/{!! $value['front_card'] !!}); background-size: 640px 480px;">
-								<div class="text-image">{!! $value['caption'] !!}</div>
+								<div class="text-image">{!! $value['caption1'] !!}</div>
 							</div>
-						</div>
-						@if ($value['main_type'] == 2)
-							@if ($value['answer3'] != '')
-								@if($value['answer4'] != '')
-									@if($value['answer_img1'] != '')
-										<button style="width: 160px; height: 280px;" class="answer-button button-type1" type="button" data-id="{!! $data_id !!}"><img class="test-img-answer-4" src="/uploads/{!! $value['answer_img1']!!}"><br/> {!! $value['answer1'] !!}</button>
-									@else
-										<button style="width: 310px; height: 70px;" class="answer-button button-type1" type="button" data-id="{!! $data_id !!}">{!! $value['answer1'] !!}</button>
-									@endif
-									
-									@if($value['answer_img2'] != '')
-										<button style="width: 160px; height: 280px;" class="answer-button button-type2" type="button" data-id="{!! $data_id !!}"><img class="test-img-answer-4" src="/uploads/{!! $value['answer_img2']!!}"><br/> {!! $value['answer1'] !!}</button>
-									@else
-										<button style="width: 310px; height: 70px;" class="answer-button button-type2" type="button" data-id="{!! $data_id !!}">{!! $value['answer2'] !!}</button>
-									@endif
-									
-								@else
-									
-									@if($value['answer_img1'] != '')
-										<button style="width: 213px; height: 230px;" class="answer-button button-type1" type="button" data-id="{!! $data_id !!}"><img class="test-img-answer-3" src="/uploads/{!! $value['answer_img1']!!}"> <br/>{!! $value['answer1'] !!}</button>
-									@else
-										<button style="width: 213px; height: 70px;" class="answer-button button-type1" type="button" data-id="{!! $data_id !!}">{!! $value['answer1'] !!}</button>
-									@endif
-								
-									@if($value['answer_img2'] != '')
-										<button style="width: 213px; height: 230px;" class="answer-button button-type2" type="button" data-id="{!! $data_id !!}"><img class="test-img-answer-3" src="/uploads/{!! $value['answer_img2']!!}"> <br/>{!! $value['answer2'] !!}</button></br>
-									@else 
-										<button style="width: 213px; height: 70px;" class="answer-button button-type2" type="button" data-id="{!! $data_id !!}">{!! $value['answer2'] !!}</button></br>
-									@endif
-								@endif
-							@else
-								<div class="buttons-test">
-								@if($value['answer_img1'] != '')
-									<button style="width: 310px; height: 280px;" class="answer-button button-type1" type="button" data-id="{!! $data_id !!}"><img class="test-img-answer" src="/uploads/{!! $value['answer_img1']!!}"><br/> {!! $value['answer1'] !!}</button>
-								@else 
-									<button style="width: 310px; height: 70px;" class="answer-button button-type1" type="button" data-id="{!! $data_id !!}">{!! $value['answer1'] !!}</button>
-								@endif
-								@if($value['answer_img2'] != '')
-									<button style="width: 310px; height: 280px;" class="answer-button button-type2" type="button" data-id="{!! $data_id !!}"><img class="test-img-answer" src="/uploads/{!! $value['answer_img2']!!}"> <br/>{!! $value['answer2'] !!}</button>
-								@else 
-									<button style="width: 310px; height: 70px;" class="answer-button button-type2" type="button" data-id="{!! $data_id !!}">{!! $value['answer2'] !!}</button>
-								@endif
-								</div>
-							@endif
-							@if ($value['answer3'] != '') 
-								@if($value['answer_img1'] != '' or $value['answer_img2'] != '' or $value['answer_img3'] != '')
-									<button style="width: 110px; height: 70px;" class="answer-button button-type3" type="button" data-id="{!! $data_id !!}">{!! $value['answer3'] !!}</button></br>
-								@else
-									<button style="width: 640px; height: 38px;" class="answer-button button-type3" type="button" data-id="{!! $data_id !!}">{!! $value['answer3'] !!}</button></br>
-								@endif
-							@endif
-							@if ($value['answer4'] != '')
-								<button style="width: 640px; height: 38px;" class="answer-button button-type4" type="button" data-id="{!! $data_id !!}">{!! $value['answer4'] !!}</button></br>
-							@endif
 						@else
-							@if ($value['answer3'] != '')
-								<button style="width: 640px; height: 38px;" class="answer-button button-type1" type="button" data-id="{!! $data_id !!}">{!! $value['answer1'] !!}</button>
-								<button style="width: 640px; height: 38px;" class="answer-button button-type2" type="button" data-id="{!! $data_id !!}">{!! $value['answer2'] !!}</button></br>
+							<div class="front" data-id="{!! $data_id !!}">
+								{!! $value['youtube_clip1'] !!}
+								<div class="text-image" style="position:relative; top:-485px;">{!! $value['caption1'] !!}</div>
+							</div>
+						@endif
+					
+						@if($value['type_card_back'] == 'image')
+							<div class="back" data-id="{!! $data_id !!}" style="background-image: url(/uploads/{!! $value['back_card'] !!}); background-size: 640px 480px;">
+								<div class="text-image">{!! $value['caption2'] !!}</div>
+							</div>
+						@else
+							<div class="back" data-id="{!! $data_id !!}">
+								{!! $value['youtube_clip2'] !!}
+								<div class="text-image" style="position:relative; top:-485px;">{!! $value['caption2'] !!}</div>
+							</div>
+						@endif
+						</div>
+						<?php $data_id++ ?>
+						@if($value['answers_type'] == 'image')
+							
+							@if($value['answer_img1'] != "")
+								<button style="width: 310px; height: 280px;" class="answer-button button-type1" type="button" data-id="{!! $data_id !!}"><img class="test-img-answer-4" src="/uploads/{!! $value['answer_img1']!!}"><br/> {!! $value['answer1'] !!}</button>
 							@else
 								<button style="width: 310px; height: 70px;" class="answer-button button-type1" type="button" data-id="{!! $data_id !!}">{!! $value['answer1'] !!}</button>
-								<button style="width: 310px; height: 70px;" class="answer-button button-type2" type="button" data-id="{!! $data_id !!}">{!! $value['answer2'] !!}</button></br>
 							@endif
-							@if ($value['answer3'] != '') <button style="width: 640px; height: 38px;" class="answer-button button-type3" type="button" data-id="{!! $data_id !!}">{!! $value['answer3'] !!}</button></br>
+							
+							@if($value['answer_img2'] != "")
+								<button style="width: 310px; height: 280px;" class="answer-button button-type2" type="button" data-id="{!! $data_id !!}"><img class="test-img-answer-4" src="/uploads/{!! $value['answer_img2']!!}"><br/> {!! $value['answer2'] !!}</button>
+							@else
+								<button style="width: 310px; height: 70px;" class="answer-button button-type2" type="button" data-id="{!! $data_id !!}">{!! $value['answer2'] !!}</button>
 							@endif
-							@if ($value['answer4'] != '') <button style="width: 640px; height: 38px;" class="answer-button button-type4" type="button" data-id="{!! $data_id !!}">{!! $value['answer4'] !!}</button></br>
-							@endif
+						@else
+							<button style="width: 310px; height: 70px;" class="answer-button button-type1" type="button" data-id="{!! $data_id - 1 !!}">{!! $value['answer1'] !!}</button>
+							<button style="width: 310px; height: 70px;" class="answer-button button-type2" type="button" data-id="{!! $data_id - 1 !!}">{!! $value['answer2'] !!}</button>
 						@endif
-						<?php $data_id++ ?>
 						@endforeach
 						<div id="score" style="display: hidden"></div>
 						<div class="footer">{!! $content->description_footer !!}</div>
@@ -224,7 +194,7 @@
 	var question_check = [];
 	
 @foreach($uncontent as $key => $value)
-	question_check.push([{!! $value['answer_check1']!!}, {!! $value['answer_check2'] !!}, {!! $value['answer_check3'] !!}, {!! $value['answer_check4'] !!}]);
+	question_check.push([{!! $value['answer_check1']!!}, {!! $value['answer_check2'] !!}]);
 	@endforeach
 	
 	
@@ -233,16 +203,10 @@
 		if(question_check[current_question - 1][0] == true) {
 			$('.button-type1[data-id="'+current_question+'"]').prop( 'disabled', true );
 			$('.button-type2[data-id="'+current_question+'"]').prop( 'disabled', true );
-			$('.button-type3[data-id="'+current_question+'"]').prop( 'disabled', true );
-			$('.button-type4[data-id="'+current_question+'"]').prop( 'disabled', true );
 			$('.button-type1[data-id="'+current_question+'"]').removeClass("answer-button");
 			$('.button-type2[data-id="'+current_question+'"]').removeClass("answer-button");
-			$('.button-type3[data-id="'+current_question+'"]').removeClass("answer-button");
-			$('.button-type4[data-id="'+current_question+'"]').removeClass("answer-button");
 			$('.button-type1[data-id="'+current_question+'"]').addClass('true-answer');
 			$('.button-type2[data-id="'+current_question+'"]').addClass('answer-button-inactive');
-			$('.button-type3[data-id="'+current_question+'"]').addClass('answer-button-inactive');
-			$('.button-type4[data-id="'+current_question+'"]').addClass('answer-button-inactive');
 			answer++;
 			score++;
 			if(answer == questions) {
@@ -253,24 +217,10 @@
 		} else {
 			$('.button-type1[data-id="'+current_question+'"]').prop( 'disabled', true );
 			$('.button-type2[data-id="'+current_question+'"]').prop( 'disabled', true );
-			$('.button-type3[data-id="'+current_question+'"]').prop( 'disabled', true );
-			$('.button-type4[data-id="'+current_question+'"]').prop( 'disabled', true );
 			$('.button-type1[data-id="'+current_question+'"]').removeClass("answer-button");
 			$('.button-type2[data-id="'+current_question+'"]').removeClass("answer-button");
-			$('.button-type3[data-id="'+current_question+'"]').removeClass("answer-button");
-			$('.button-type4[data-id="'+current_question+'"]').removeClass("answer-button");
 			$('.button-type1[data-id="'+current_question+'"]').addClass('wrong-answer');
-			
-			
-			if(question_check[current_question - 1][2] == true) {
-				$('.button-type3[data-id="'+current_question+'"]').addClass('true-answer');
-				$('.button-type3[data-id="'+current_question+'"]').css({'opacity': '0.3'});
-			} else $('.button-type3[data-id="'+current_question+'"]').addClass('answer-button-inactive');
-			if(question_check[current_question - 1][3] == true) {
-				$('.button-type4[data-id="'+current_question+'"]').addClass('true-answer');
-				$('.button-type4[data-id="'+current_question+'"]').css({'opacity': '0.3'});
-			} else $('.button-type4[data-id="'+current_question+'"]').addClass('answer-button-inactive');
-			
+
 			if(question_check[current_question - 1][1] == true) {
 				$('.button-type2[data-id="'+current_question+'"]').addClass('true-answer');
 				$('.button-type2[data-id="'+current_question+'"]').css({'opacity': '0.3'});
@@ -282,6 +232,9 @@
 				location.href = "#score";
 			}
 		}
+		
+		$('.wrap2[data-id="'+current_question+'"]').css({'-webkit-transform':'rotateY(180deg)'});
+		
 	});
 	
 	$('.button-type2').click(function() {
@@ -289,16 +242,10 @@
 		if(question_check[current_question - 1][1] == true) {
 			$('.button-type1[data-id="'+current_question+'"]').prop( 'disabled', true );
 			$('.button-type2[data-id="'+current_question+'"]').prop( 'disabled', true );
-			$('.button-type3[data-id="'+current_question+'"]').prop( 'disabled', true );
-			$('.button-type4[data-id="'+current_question+'"]').prop( 'disabled', true );
 			$('.button-type1[data-id="'+current_question+'"]').removeClass("answer-button");
 			$('.button-type2[data-id="'+current_question+'"]').removeClass("answer-button");
-			$('.button-type3[data-id="'+current_question+'"]').removeClass("answer-button");
-			$('.button-type4[data-id="'+current_question+'"]').removeClass("answer-button");
 			$('.button-type2[data-id="'+current_question+'"]').addClass('true-answer');
 			$('.button-type1[data-id="'+current_question+'"]').addClass('answer-button-inactive');
-			$('.button-type3[data-id="'+current_question+'"]').addClass('answer-button-inactive');
-			$('.button-type4[data-id="'+current_question+'"]').addClass('answer-button-inactive');
 			answer++;
 			score++;
 			if(answer == questions) {
@@ -309,148 +256,25 @@
 		} else {
 			$('.button-type1[data-id="'+current_question+'"]').prop( 'disabled', true );
 			$('.button-type2[data-id="'+current_question+'"]').prop( 'disabled', true );
-			$('.button-type3[data-id="'+current_question+'"]').prop( 'disabled', true );
-			$('.button-type4[data-id="'+current_question+'"]').prop( 'disabled', true );
 			$('.button-type1[data-id="'+current_question+'"]').removeClass("answer-button");
 			$('.button-type2[data-id="'+current_question+'"]').removeClass("answer-button");
-			$('.button-type3[data-id="'+current_question+'"]').removeClass("answer-button");
-			$('.button-type4[data-id="'+current_question+'"]').removeClass("answer-button");
 			$('.button-type2[data-id="'+current_question+'"]').addClass('wrong-answer');
 			
-			if(question_check[current_question - 1][2] == true) {
-				$('.button-type3[data-id="'+current_question+'"]').addClass('true-answer');
-				$('.button-type3[data-id="'+current_question+'"]').css({'opacity': '0.3'});
-			} else $('.button-type3[data-id="'+current_question+'"]').addClass('answer-button-inactive');
-			if(question_check[current_question - 1][3] == true) {
-				$('.button-type4[data-id="'+current_question+'"]').addClass('true-answer');
-				$('.button-type4[data-id="'+current_question+'"]').css({'opacity': '0.3'});
-			} else $('.button-type4[data-id="'+current_question+'"]').addClass('answer-button-inactive');
-			
 			if(question_check[current_question - 1][0] == true) {
 				$('.button-type1[data-id="'+current_question+'"]').addClass('true-answer');
 				$('.button-type1[data-id="'+current_question+'"]').css({'opacity': '0.3'});
 			} else $('.button-type1[data-id="'+current_question+'"]').addClass('answer-button-inactive');
 			
 			answer++;
+			
 			if(answer == questions) {
 				$('#score').html('Congratulations! You got: '+score+'/'+questions);
 				$('#score').css('display', 'block');
 				location.href = "#score";
 			}
 		}
-	});
-	
-	$('.button-type3').click(function() {
-		current_question = $(this).data('id');
-		if(question_check[current_question - 1][2] == true) {
-			$('.button-type1[data-id="'+current_question+'"]').prop( 'disabled', true );
-			$('.button-type2[data-id="'+current_question+'"]').prop( 'disabled', true );
-			$('.button-type3[data-id="'+current_question+'"]').prop( 'disabled', true );
-			$('.button-type1[data-id="'+current_question+'"]').removeClass("answer-button");
-			$('.button-type2[data-id="'+current_question+'"]').removeClass("answer-button");
-			$('.button-type3[data-id="'+current_question+'"]').removeClass("answer-button");
-			$('.button-type3[data-id="'+current_question+'"]').addClass('true-answer');
-			$('.button-type2[data-id="'+current_question+'"]').addClass('answer-button-inactive');
-			$('.button-type1[data-id="'+current_question+'"]').addClass('answer-button-inactive');
-			$('.button-type4[data-id="'+current_question+'"]').prop( 'disabled', true );
-			$('.button-type4[data-id="'+current_question+'"]').removeClass("answer-button");
-			$('.button-type4[data-id="'+current_question+'"]').addClass('answer-button-inactive');
-			answer++;
-			score++;
-			if(answer == questions) {
-				$('#score').html('Congratulations! You got: '+score+'/'+questions);
-				$('#score').css('display', 'block');
-				location.href = "#score";
-			}
-		} else {
-			
-			$('.button-type1[data-id="'+current_question+'"]').prop( 'disabled', true );
-			$('.button-type2[data-id="'+current_question+'"]').prop( 'disabled', true );
-			$('.button-type3[data-id="'+current_question+'"]').prop( 'disabled', true );
-			$('.button-type4[data-id="'+current_question+'"]').prop( 'disabled', true );
-			$('.button-type1[data-id="'+current_question+'"]').removeClass("answer-button");
-			$('.button-type2[data-id="'+current_question+'"]').removeClass("answer-button");
-			$('.button-type3[data-id="'+current_question+'"]').removeClass("answer-button");
-			$('.button-type4[data-id="'+current_question+'"]').removeClass("answer-button");
-			$('.button-type3[data-id="'+current_question+'"]').addClass('wrong-answer');
-			
-			if(question_check[current_question - 1][3] == true) {
-				$('.button-type4[data-id="'+current_question+'"]').addClass('true-answer');
-				$('.button-type4[data-id="'+current_question+'"]').css({'opacity': '0.3'});
-			} else $('.button-type4[data-id="'+current_question+'"]').addClass('answer-button-inactive');
-
-			if(question_check[current_question - 1][0] == true) {
-				$('.button-type1[data-id="'+current_question+'"]').addClass('true-answer');
-				$('.button-type1[data-id="'+current_question+'"]').css({'opacity': '0.3'});
-			} else $('.button-type1[data-id="'+current_question+'"]').addClass('answer-button-inactive');
-			if(question_check[current_question - 1][1] == true) {
-				$('.button-type2[data-id="'+current_question+'"]').addClass('true-answer');
-				$('.button-type2[data-id="'+current_question+'"]').css({'opacity': '0.3'});
-			} else $('.button-type2[data-id="'+current_question+'"]').addClass('answer-button-inactive');
-			
-			answer++;
-			if(answer == questions) {
-				$('#score').html('Congratulations! You got: '+score+'/'+questions);
-				$('#score').css('display', 'block');
-				location.href = "#score";
-			}
-		}
-	});
-	
-	$('.button-type4').click(function() {
-		current_question = $(this).data('id');
-		if(question_check[current_question - 1][3] == true) {
-			$('.button-type1[data-id="'+current_question+'"]').prop( 'disabled', true );
-			$('.button-type2[data-id="'+current_question+'"]').prop( 'disabled', true );
-			$('.button-type3[data-id="'+current_question+'"]').prop( 'disabled', true );
-			$('.button-type1[data-id="'+current_question+'"]').removeClass("answer-button");
-			$('.button-type2[data-id="'+current_question+'"]').removeClass("answer-button");
-			$('.button-type3[data-id="'+current_question+'"]').removeClass("answer-button");
-			$('.button-type4[data-id="'+current_question+'"]').removeClass("answer-button");
-			$('.button-type3[data-id="'+current_question+'"]').addClass('answer-button-inactive');
-			$('.button-type2[data-id="'+current_question+'"]').addClass('answer-button-inactive');
-			$('.button-type1[data-id="'+current_question+'"]').addClass('answer-button-inactive');
-			$('.button-type4[data-id="'+current_question+'"]').prop( 'disabled', true );
-			$('.button-type4[data-id="'+current_question+'"]').addClass('true-answer');
-			answer++;
-			score++;
-			if(answer == questions) {
-				$('#score').html('Congratulations! You got: '+score+'/'+questions);
-				$('#score').css('display', 'block');
-				location.href = "#score";
-			}
-		} else {
-			
-			$('.button-type1[data-id="'+current_question+'"]').prop( 'disabled', true );
-			$('.button-type2[data-id="'+current_question+'"]').prop( 'disabled', true );
-			$('.button-type3[data-id="'+current_question+'"]').prop( 'disabled', true );
-			$('.button-type4[data-id="'+current_question+'"]').prop( 'disabled', true );
-			$('.button-type1[data-id="'+current_question+'"]').removeClass("answer-button");
-			$('.button-type2[data-id="'+current_question+'"]').removeClass("answer-button");
-			$('.button-type3[data-id="'+current_question+'"]').removeClass("answer-button");
-			$('.button-type4[data-id="'+current_question+'"]').removeClass("answer-button");
-			$('.button-type4[data-id="'+current_question+'"]').addClass('wrong-answer');
-
-			if(question_check[current_question - 1][0] == true) {
-				$('.button-type1[data-id="'+current_question+'"]').addClass('true-answer');
-				$('.button-type1[data-id="'+current_question+'"]').css({'opacity': '0.3'});
-			} else $('.button-type1[data-id="'+current_question+'"]').addClass('answer-button-inactive');
-			if(question_check[current_question - 1][1] == true) {
-				$('.button-type2[data-id="'+current_question+'"]').addClass('true-answer');
-				$('.button-type2[data-id="'+current_question+'"]').css({'opacity': '0.3'});
-			} else $('.button-type2[data-id="'+current_question+'"]').addClass('answer-button-inactive');
-			if(question_check[current_question - 1][2] == true) {
-				$('.button-type3[data-id="'+current_question+'"]').addClass('true-answer');
-				$('.button-type3[data-id="'+current_question+'"]').css({'opacity': '0.3'});
-			} else $('.button-type3[data-id="'+current_question+'"]').addClass('answer-button-inactive');
-			
-			answer++;
-			if(answer == questions) {
-				$('#score').html('Congratulations! You got: '+score+'/'+questions);
-				$('#score').css('display', 'block');
-				location.href = "#score";
-			}
-		}
+		
+		$('.wrap2[data-id="'+current_question+'"]').css({'-webkit-transform':'rotateY(180deg)'});
 	});
 	
 	
