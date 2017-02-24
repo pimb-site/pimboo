@@ -17,7 +17,22 @@
 				<a href="#" class="text">PIMBOO CHARITY</a>
 			</div>
 			<div class="right">
-				<button type="button" id="nickname-button" class="nickname">{{ Auth::user()->name }}</button>
+				<div class="dropdown">
+					<a id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<img id="header_user_photo" src="/img/header_default_photo.png" />
+						<img id="header_caret" src="/img/header_caret.png" />
+					</a>
+					<ul class="dropdown-menu" aria-labelledby="dLabel">
+						<li class="channels"><a>Channels</a></li>
+						<li class="channel"><a>{{ Auth::user()->name }}</a></li>
+						<li class="divider" role="separator"></li>
+						<li class="hrefs"><a>Profile Settings</a></li>
+						<li class="hrefs"><a>Impact</a></li>
+						<li class="divider" role="separator"></li>
+						<li class="hrefs"><a id="header_logout" href="/auth/logout" >Logout</a></li>
+					</ul>
+				</div>
+				<a id="header_create" href="/add_flip_cards" >CREATE</a>
 			</div>
 		</header>
 		<div class="body">

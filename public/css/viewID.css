@@ -1,6 +1,6 @@
 .wrap {
     position: relative;
-    width: 640px;
+    width: 640px !important;
     height: 480px;
     -webkit-perspective: 2000px;
     -webkit-perspective-origin: 50% 50%;

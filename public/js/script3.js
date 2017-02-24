@@ -131,7 +131,7 @@ $(document).ready(function () {
 										break;
 								}
 								$('.flipcard_main_back[data-id="'+i+'"]').css({'background-color': color});
-								$('.flipcard_main_back[data-id="'+i+'"]').append('<div class="flipcard_main_text">'+value.text_front+'</div>');
+								$('.flipcard_main_back[data-id="'+i+'"]').append('<div class="flipcard_main_text">'+value.text_back+'</div>');
 							}
 						});
 						

@@ -100,6 +100,143 @@ header .left a.text {
 }
 header .right {
   float: right;
+  display: table;
+  width: 340px;
+}
+header .right .dropdown {
+  float: left;
+  display: block;
+  margin-top: 20px;
+}
+header .right .dropdown ul li.channels a {
+  font-size: 14px;
+  font-weight: bold;
+}
+header .right .dropdown ul li.channel a {
+  width: 192px;
+  height: 34px;
+  background-color: #e2e8f4;
+  border-radius: 5px;
+  font-size: 14px;
+  margin-left: 6px;
+  margin-right: 6px;
+  line-height: 28px;
+}
+header .right #header_create {
+  float: left;
+  width: 115px;
+  height: 37px;
+  background-color: #00c402;
+  border-radius: 3px;
+  text-align: center;
+  line-height: 37px;
+  color: white;
+  font-size: 16px;
+  font-family: 'Leto Medium';
+  margin-left: 20px;
+  margin-top: 25px;
+}
+#register-modal .modal-dialog {
+  width: 751px;
+  height: 676px;
+}
+#register-modal .modal-dialog .modal-content {
+  margin-top: 90px;
+}
+#register-modal .title {
+  font-family: 'Leto Semibold';
+  font-size: 30px;
+  text-align: center;
+  margin-top: 4px;
+  margin-left: 4px;
+}
+#register-modal .sub_title {
+  font-size: 16px;
+  text-align: center;
+  margin-top: 10px;
+  width: 406px;
+  margin-left: auto;
+  margin-right: auto;
+  letter-spacing: 0.4px;
+}
+#register-modal .social_connect {
+  display: table;
+  width: 100%;
+  margin-left: 41px;
+  margin-top: 40px;
+}
+#register-modal .social_connect .text {
+  font-size: 16px;
+  color: #6e8dc9;
+  float: left;
+  letter-spacing: -0.5px;
+}
+#register-modal .social_connect .facebook {
+  background-image: url(/img/register_fb.png);
+  float: left;
+  width: 230px;
+  height: 44px;
+  position: relative;
+  top: -12px;
+  margin-left: 26px;
+}
+#register-modal .social_connect .google_plus {
+  background-image: url(/img/register_google_plus.png);
+  float: left;
+  width: 230px;
+  height: 44px;
+  margin-left: 20px;
+  top: -12px;
+  position: relative;
+}
+#register-modal .middle_text {
+  font-size: 16px;
+  text-align: center;
+  margin-top: 25px;
+  letter-spacing: -0.2px;
+  line-height: 23px;
+}
+#register-modal .form {
+  margin-top: 30px;
+}
+#register-modal .form .input_place {
+  display: table;
+  width: 100%;
+  margin-bottom: 20px;
+}
+#register-modal .form .input_place .name {
+  color: #6e8dc9;
+  float: left;
+  font-size: 16px;
+  text-align: right;
+  width: 177px;
+}
+#register-modal .form .input_place input {
+  float: left;
+  font-size: 16px;
+  border: 2px solid #afc0e1;
+  border-radius: 3px;
+  width: 480px;
+  height: 36px;
+  padding-left: 16px;
+  position: relative;
+  margin-left: 25px;
+  top: -8px;
+}
+#register-modal .form #register-submit {
+  background-color: #00c200;
+  border: 0 none;
+  border-radius: 3px;
+  color: #fff;
+  display: block;
+  font-family: "Leto Bold";
+  font-size: 18px;
+  height: 61px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 23px;
+  text-align: center;
+  width: 207px;
 }
 footer {
   display: table;
@@ -397,6 +534,92 @@ footer .down a.disclamer {
   margin-left: 83px;
   line-height: 58px;
   letter-spacing: 2.1px;
+}
+.login {
+  height: 500px;
+}
+.login .title {
+  font-family: "Leto Semibold";
+  font-size: 26px;
+  margin-bottom: 22px;
+  margin-left: 4px;
+  margin-top: 63px;
+  text-align: center;
+}
+.login .form input {
+  display: block;
+  font-size: 16px;
+  border: 2px solid #afc0e1;
+  border-radius: 3px;
+  width: 480px;
+  height: 36px;
+  padding-left: 16px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-bottom: 20px;
+}
+.login .form input:-moz-placeholder {
+  color: #6e8dc9;
+}
+.login .form input::-moz-placeholder {
+  color: #6e8dc9;
+}
+.login .form input:-ms-input-placeholder {
+  color: #6e8dc9;
+}
+.login .form input::-webkit-input-placeholder {
+  color: #6e8dc9;
+}
+.login .form button {
+  background-color: #00c200;
+  border: 0 none;
+  border-radius: 3px;
+  color: #fff;
+  display: block;
+  font-family: "Leto Bold";
+  font-size: 18px;
+  height: 61px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 24px;
+  text-align: center;
+  width: 207px;
+  margin-bottom: 21px;
+}
+.login .form a {
+  cursor: pointer;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  width: 200px;
+}
+.login .form .checkbox-custom {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  background-image: url(/img/checkbox_out.png);
+}
+.login .form .checkbox-custom,
+.login .form .label {
+  display: inline-block;
+  vertical-align: middle;
+}
+.login .form .checkbox:checked + .checkbox-custom {
+  background-image: url(/img/checkbox_in.png);
+}
+.login .form label {
+  margin-left: 344px;
+  cursor: pointer;
+  color: black;
+  font-size: 14px;
+}
+.login .form label span.label {
+  color: black;
+  font-size: 14px;
+}
+.login .form label input {
+  display: none;
 }
 .add_flip_cards .wrap {
   width: 1140px;
@@ -876,4 +1099,23 @@ footer .down a.disclamer {
 }
 .add_flip_cards footer .wrap {
   width: 1170px;
+}
+.member-main .body .top_menu {
+  display: table;
+  width: 100%;
+}
+.member-main .body .top_menu .menu {
+  float: left;
+  width: 25%;
+}
+.member-main .body .top_menu .menu img {
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+}
+.member-main .body .top_menu .menu .menu_text {
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  text-align: center;
 }

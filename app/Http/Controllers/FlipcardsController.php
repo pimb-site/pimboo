@@ -1,11 +1,8 @@
 <?php namespace App\Http\Controllers;
 use Illuminate\View\View;
-/**
- * Created by PhpStorm.
- * User: sasa
- * Date: 12.01.2017
- * Time: 10:12
- */
+use App\PostView;
+use Auth;
+use Illuminate\Http\Request;
 
 class FlipcardsController extends Controller
 {
@@ -42,12 +39,21 @@ class FlipcardsController extends Controller
     }
 
     public function viewFlipCards() {
+
         $contentflip = \DB::select('select * from posts where type = "flipcards" and isDraft = "publish"');
         return view('view_flip_cards', ['contentflip' => $contentflip]);
     }
 
 
-    public function viewID($id) {
+    public function viewID($id, Request $request) {
+    	$view = new PostView;
+    	$view->post_id = $id;
+    	if (!Auth::guest()) {
+    		$view->user_id = Auth::user()->id;
+    	}
+    	$view->ip = $request->ip();
+    	$view->browser_info = $request->header('User-Agent');
+    	$view->save();
         $content = \DB::select('select * from posts where id = ? and isDraft = ?', [$id, 'publish']);
         return view('viewID', ['content' => $content[0]]);
     }

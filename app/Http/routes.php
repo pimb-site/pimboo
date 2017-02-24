@@ -43,3 +43,17 @@ Route::controllers([
 Route::post('auth/register', 'Auth\AuthController@postRegister');
 Route::get('auth/activate','Auth\AuthController@activate');
 Route::post('auth/login','Auth\AuthController@postLogin');
+
+//user pages
+Route::get('user/account', 'UserController@getAccount');
+Route::post('user/account', 'UserController@getViewsInfo');
+
+Route::get('user/profile', 'UserController@getProfile');
+Route::post('user/profile', 'UserController@saveProfile');
+
+Route::get('user/organization', 'UserController@getOrganization');
+
+Route::get('user/referrals', 'UserController@getReferrals');
+
+//Referrals
+Route::get('ref/{id}', 'ReferralController@index');
