@@ -16,7 +16,7 @@
     height: 480px;
     -webkit-perspective: 2000px;
     -webkit-perspective-origin: 50% 50%;
-    transition: all 1s ease-in-out;
+    transition: all 0s ease-in-out;
     -webkit-transform-style: preserve-3d;
     -webkit-transform: rotateY(0deg);
     margin-bottom: 5px;
@@ -36,6 +36,16 @@
     width: 100%;
     line-height: 38px;
     display: table-cell;
+}
+
+.front iframe {
+	width: 100%;
+	height:100%;
+}
+
+.back iframe {
+	width: 100%;
+	height:100%;
 }
 
 .set-number {
