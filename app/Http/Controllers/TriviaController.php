@@ -19,11 +19,6 @@ class TriviaController extends Controller
 	
 	}
 
-    public function getNewForm($id) {
-        if(\Auth::guest()) return view('auth/login');
-        else return view('getNewFormTrivia', ['id' => $id]);
-    }
-
     public function addTriviaQuiz()
     {
         if(\Auth::guest()) return view('auth/login');
@@ -157,6 +152,20 @@ class TriviaController extends Controller
 						'result_photo_title' => $result_photo_title
                     ];
 					
+					$options = [];
+					if(isset($input['question_order'])) {
+						if($input['question_order'] == 'random') $question_order = 'random';
+						else $question_order = 'norandom';
+					} else $question_order = 'random';
+					
+					if(isset($input['answer_order'])) {
+						if($input['answer_order'] == 'random') $answer_order = 'random';
+						else $answer_order = 'norandom';
+					} else $answer_order = 'random';
+					
+					$options = ['question_order' => $question_order, 'answer_order' => $answer_order];
+					$options = serialize($options);
+					
 					if(isset($input['postID'])) {
 						$postID = (int)$input['postID'];
 						if(is_int($postID) && $postID > 0) {
@@ -167,7 +176,7 @@ class TriviaController extends Controller
 										->where('id', $postID)
 										->update(['description_title' => $input['form_flip']['form_flip_cards_title'], 'description_text' => $input['form_flip']['form_description'],
 												'description_footer' => $input['form_flip']['form_footer'], 'content' => serialize($content), 'description_image' => $photo, 'image_facebook' => $photo_fb,
-												'type' => 'trivia', 'isDraft' => 'save', 'tags' => $tags
+												'type' => 'trivia', 'isDraft' => 'save', 'tags' => $tags, 'permission' => 'public', 'options' => $options
 											]);
 									return \Response::json(['success' => true, 'id' => $postID]);
 								}
@@ -178,7 +187,7 @@ class TriviaController extends Controller
 					$id = \DB::table('posts')->insertGetId(
 						['user_id' => \Auth::user()->id, 'description_title' => $input['form_flip']['form_flip_cards_title'], 'description_text' => $input['form_flip']['form_description'],
 						'description_footer' => $input['form_flip']['form_footer'], 'content' => serialize($content), 'description_image' => $photo, 'image_facebook' => $photo_fb,
-						'type' => 'trivia', 'isDraft' => 'save', 'tags' => $tags]
+						'type' => 'trivia', 'isDraft' => 'save', 'tags' => $tags, 'permission' => 'public', 'options' => $options]
 					);
 					return \Response::json(['success' => true, 'id' => $id]);
 				}
@@ -571,6 +580,21 @@ class TriviaController extends Controller
 					}
 					$tags = serialize($tags);
 					
+					
+					$options = [];
+					if(isset($input['question_order'])) {
+						if($input['question_order'] == 'random') $question_order = 'random';
+						else $question_order = 'norandom';
+					} else $question_order = 'random';
+					
+					if(isset($input['answer_order'])) {
+						if($input['answer_order'] == 'random') $answer_order = 'random';
+						else $answer_order = 'norandom';
+					} else $answer_order = 'random';
+					
+					$options = ['question_order' => $question_order, 'answer_order' => $answer_order];
+					$options = serialize($options);
+					
 					if(isset($input['postID'])) {
 						$postID = (int)$input['postID'];
 						if(is_int($postID) && $postID > 0) {
@@ -581,7 +605,7 @@ class TriviaController extends Controller
 										->where('id', $postID)
 										->update(['description_title' => $input['form_flip']['form_flip_cards_title'], 'description_text' => $input['form_flip']['form_description'],
 												'description_footer' => $input['form_flip']['form_footer'], 'content' => serialize($content), 'description_image' => $photo, 'image_facebook' => $photo_fb,
-												'type' => 'trivia', 'isDraft' => 'publish', 'tags' => $tags
+												'type' => 'trivia', 'isDraft' => 'publish', 'tags' => $tags, 'permission' => 'public', 'options' => $options
 											]);
 									return \Response::json(['success' => true, 'id' => $postID]);
 								}
@@ -592,7 +616,7 @@ class TriviaController extends Controller
 				    $id = \DB::table('posts')->insertGetId(
 						['user_id' => \Auth::user()->id, 'description_title' => $input['form_flip']['form_flip_cards_title'], 'description_text' => $input['form_flip']['form_description'],
 						'description_footer' => $input['form_flip']['form_footer'], 'content' => serialize($content), 'description_image' => $uniqid3.".jpeg", 'image_facebook' => $uniqid4.".jpeg",
-						'type' => 'trivia', 'isDraft' => 'publish', 'tags' => $tags]
+						'type' => 'trivia', 'isDraft' => 'publish', 'tags' => $tags, 'permission' => 'public', 'options' => $options]
 					 );
                     return \Response::json(['success' => true, 'id' => $id]);
                 }

@@ -575,3 +575,7 @@ input[type='file'] {
 	margin-top:30px;
 	margin-bottom:30px;
 }
+
+.modal-alert ul {
+	margin-left:20px;
+}

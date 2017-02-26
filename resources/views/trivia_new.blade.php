@@ -180,16 +180,16 @@
 					<div class="title">QUESTION ORDER</div>
 					<div class="sub_title">Which order do you want the questions to be displayed in?</div>
 					<div class="radio">
-						<label><input class="checkbox" type="radio" name="display_item_numbers" checked><span class="checkbox-custom"></span><span class="label" >Random</span></label>
-						<label><input class="checkbox" type="radio" name="display_item_numbers"><span class="checkbox-custom"></span><span class="label">User defined</span></label>
+						<label><input class="checkbox" type="radio" name="question_order" value="random"><span class="checkbox-custom"></span><span class="label" >Random</span></label>
+						<label><input class="checkbox" type="radio" name="question_order" value="norandom" checked><span class="checkbox-custom"></span><span class="label">User defined</span></label>
 					</div>
 				</div>
 				<div class="display_item_numbers">
 					<div class="title"> ANSWER ORDER</div>
 					<div class="sub_title">Which order do you want the answers to be displayed in?</div>
 					<div class="radio">
-						<label><input class="checkbox" type="radio" name="display_answer_order" checked><span class="checkbox-custom"></span><span class="label">Random</span></label>
-						<label><input class="checkbox" type="radio" name="display_answer_order"><span class="checkbox-custom"></span><span class="label">User defined</span></label>
+						<label><input class="checkbox" type="radio" name="answer_order" value="random"><span class="checkbox-custom"></span><span class="label">Random</span></label>
+						<label><input class="checkbox" type="radio" name="answer_order" value="norandom" checked><span class="checkbox-custom"></span><span class="label">User defined</span></label>
 					</div>
 				</div>
 			</div>
@@ -325,13 +325,7 @@
 	<script>
 	var token = '{!! csrf_token() !!}';
 	</script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-	<script src="test/FileAPI/FileAPI.min.js"></script>
-	<script src="test/FileAPI/FileAPI.exif.js"></script>
-	<script src="test/jquery.fileapi.js"></script>
-	<script src="test/jcrop/jquery.Jcrop.min.js"></script>
-	<script src="test/statics/jquery.modal.js"></script>
-	<script src="{!! url() !!}/js/jquery.form.js"></script>
-	<script src="{!! url() !!}/js/script4.js"></script>
+	<script src="/js/main.js"></script>
+	<script src="/js/script4.js"></script>
 	</body>
 </html>

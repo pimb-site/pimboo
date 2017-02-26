@@ -14,7 +14,6 @@
 Route::get('/', 'HomeController@index');
 Route::get('home', 'HomeController@index');
 // flipcards get
-Route::get('test_upload', 'FlipcardsController@testUpload');
 Route::get('add_flip_cards', 'FlipcardsController@addFlipCards');
 Route::get('viewID/{id}', 'FlipcardsController@viewID');
 Route::get('success/{id}', 'FlipcardsController@successID');
@@ -31,7 +30,6 @@ Route::post('upload/valid_url', 'TriviaController@validURL');
 Route::get('view_trivia_quiz', 'TriviaController@viewTriviaQuiz');
 Route::get('add_trivia_quiz', 'TriviaController@addTriviaQuiz');
 Route::get('save_trivia_quiz', 'TriviaController@saveTriviaQuiz');
-Route::get('upload/getTriviaForm/{id}', 'TriviaController@getNewForm');
 
 Route::post('upload_end_trivia', 'TriviaController@saveTriviaQuiz');
 

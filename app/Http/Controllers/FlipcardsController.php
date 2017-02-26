@@ -17,25 +17,10 @@ class FlipcardsController extends Controller
 		}
 	}
 	
-	public function testUpload() {
-		return view('test_upload');
-	}
-	
     public function addFlipCards() {
         if(\Auth::guest()) {
             return view('auth/login');
         } else return view('add_flip_cards');
-    }
-	
-	public function addNew() {
-        if(\Auth::guest()) {
-            return view('auth/login');
-        } else return view('add_new');
-    }
-	
-    public function getNewForm($id) {
-        if(\Auth::guest()) return view('auth/login');
-        else return view('getNewForm', ['id' => $id]);
     }
 
     public function viewFlipCards() {
@@ -245,6 +230,17 @@ class FlipcardsController extends Controller
 					else $photo = '/temp/'.$input['form_flip']['form_photo'];
 				}
 				
+				
+				$options = [];
+				if(isset($input['display_item_numbers'])) {
+					if($input['display_item_numbers'] == 'yes') $display_item_numbers = 'yes';
+					else $display_item_numbers = 'no';
+				} else $display_item_numbers = 'no';
+					
+				$options = ['display_item_numbers' => $display_item_numbers];
+				$options = serialize($options);
+				
+				
 				if(isset($input['postID'])) {
 					$postID = (int)$input['postID'];
 					if(is_int($postID) && $postID > 0) {
@@ -255,7 +251,7 @@ class FlipcardsController extends Controller
 									->where('id', $postID)
 									->update(['description_title' => $input['form_flip']['form_flip_cards_title'], 'description_text' => $input['form_flip']['form_description'],
 											'description_footer' => $input['form_flip']['form_footer'], 'content' => serialize($content), 'description_image' => $photo, 'image_facebook' => $photo_fb,
-											'type' => 'flipcards', 'isDraft' => 'save', 'tags' => $tags
+											'type' => 'flipcards', 'isDraft' => 'save', 'tags' => $tags, 'permission' => 'public', 'options' => $options
 										]);
 								return \Response::json(['success' => true, 'id' => $postID]);
 							}
@@ -266,7 +262,7 @@ class FlipcardsController extends Controller
 				$id = \DB::table('posts')->insertGetId(
 					['user_id' => \Auth::user()->id, 'description_title' => $input['form_flip']['form_flip_cards_title'], 'description_text' => $input['form_flip']['form_description'],
 					'description_footer' => $input['form_flip']['form_footer'], 'content' => serialize($content), 'description_image' => $photo, 'image_facebook' => $photo_fb,
-					'type' => 'flipcards', 'isDraft' => 'save', 'tags' => $tags]
+					'type' => 'flipcards', 'isDraft' => 'save', 'tags' => $tags, 'permission' => 'public', 'options' => $options]
 				);
 				return \Response::json(['success' => true, 'id' => $id]);
 			}
@@ -417,6 +413,15 @@ class FlipcardsController extends Controller
 					}
 					$tags = serialize($tags);
 					
+					$options = [];
+					if(isset($input['display_item_numbers'])) {
+						if($input['display_item_numbers'] == 'yes') $display_item_numbers = 'yes';
+						else $display_item_numbers = 'no';
+					} else $display_item_numbers = 'no';
+					
+					$options = ['display_item_numbers' => $display_item_numbers];
+					$options = serialize($options);
+					
 					if(isset($input['postID'])) {
 						$postID = (int)$input['postID'];
 						if(is_int($postID) && $postID > 0) {
@@ -427,7 +432,7 @@ class FlipcardsController extends Controller
 										->where('id', $postID)
 										->update(['description_title' => $input['form_flip']['form_flip_cards_title'], 'description_text' => $input['form_flip']['form_description'],
 												'description_footer' => $input['form_flip']['form_footer'], 'content' => serialize($content), 'description_image' => $photo, 'image_facebook' => $photo_fb,
-												'type' => 'flipcards', 'isDraft' => 'publish', 'tags' => $tags
+												'type' => 'flipcards', 'isDraft' => 'publish', 'tags' => $tags, 'permission' => 'public', 'options' => $options
 											]);
 									return \Response::json(['success' => true, 'id' => $postID]);
 								}
@@ -438,7 +443,7 @@ class FlipcardsController extends Controller
 					$id = \DB::table('posts')->insertGetId(
 						['user_id' => \Auth::user()->id, 'description_title' => $input['form_flip']['form_flip_cards_title'], 'description_text' => $input['form_flip']['form_description'],
 						'description_footer' => $input['form_flip']['form_footer'], 'content' => serialize($content), 'description_image' => $uniqid3.".jpeg", 'image_facebook' => $uniqid4.".jpeg",
-						'type' => 'flipcards', 'isDraft' => 'publish']
+						'type' => 'flipcards', 'isDraft' => 'publish', 'tags' => $tags, 'permission' => 'public', 'options' => $options]
 					);
                     return \Response::json(['success' => true, 'id' => $id]);
                 }

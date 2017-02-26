@@ -46,7 +46,7 @@
 						<div class="text_info">
 							<input type="text" name="form_flip[form_flip_cards_title]" placeholder="Flip cards title" autocomplete="off">
 							<input type="text" name="form_flip[form_description]" placeholder="Flip cards description" autocomplete="off">
-							<input type="text" name="flip_cards[1][form_item_title]" placeholder="Enter item title (60 symbols max)" maxlength="60" autocomplete="off">
+							<input type="text" name="flip_cards[1][form_item_title]" placeholder="Enter item title (45 symbols max)" maxlength="45" autocomplete="off">
 						</div>
 					</div>
 					<textarea name="form_flip[form_footer]" placeholder="Footer text (1500 symbols max)" maxlength="1500" autocomplete="off"></textarea>
@@ -137,8 +137,8 @@
 					<div class="title">DISPLAY ITEM NUMBERS</div>
 					<div class="sub_title">Choose whether or not to display the item numbers. The numbers will still appear in the creator</div>
 					<div class="radio">
-						<label><input class="checkbox" type="radio" name="display_item_numbers" checked><span class="checkbox-custom"></span><span class="label">Yes</span></label>
-						<label><input class="checkbox" type="radio" name="display_item_numbers"><span class="checkbox-custom"></span><span class="label">No</span></label>
+						<label><input class="checkbox" type="radio" name="display_item_numbers" value="yes"><span class="checkbox-custom"></span><span class="label">Yes</span></label>
+						<label><input class="checkbox" type="radio" name="display_item_numbers" value="no" checked><span class="checkbox-custom"></span><span class="label">No</span></label>
 					</div>
 				</div>
 			</div>
@@ -228,13 +228,7 @@
 	<script>
 	var token = '{!! csrf_token() !!}';
 	</script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-	<script src="test/FileAPI/FileAPI.min.js"></script>
-	<script src="test/FileAPI/FileAPI.exif.js"></script>
-	<script src="test/jquery.fileapi.js"></script>
-	<script src="test/jcrop/jquery.Jcrop.min.js"></script>
-	<script src="test/statics/jquery.modal.js"></script>
-	<script src="{!! url() !!}/js/jquery.form.js"></script>
-	<script src="{!! url() !!}/js/script3.js"></script>
+	<script src="/js/main.js"></script>
+	<script src="/js/script3.js"></script>
 	</body>
 </html>

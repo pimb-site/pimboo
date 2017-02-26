@@ -55,13 +55,13 @@ $(document).ready(function () {
 					} else if(image_type_fc == 3) {
 						if(side_fc == 1) {
 							$('.main-remove-front[data-id="'+current_id+'"]').empty();
-							$('.type-caption[data-id="'+current_id+'"][data-side="1"]').css({'margin-top': '317px'})
+							if(current_id == 1) $('.type-caption[data-id="'+current_id+'"][data-side="1"]').css({'margin-top': '317px'});
 							$('.front-card[data-id="'+current_id+'"]').prepend("<img style='position:absolute;' class='image-card' src='temp/" + result.file + "'  />");
 							$('.input-form-img1[data-id="'+current_id+'"]').val(result.file);
 							$('.input-type-card[data-id="'+current_id+'"][data-side="1"]').val('image');
 						} else {
 							$('.main-remove-back[data-id="'+current_id+'"]').empty();
-							$('.type-caption[data-id="'+current_id+'"][data-side="2"]').css({'margin-top': '317px'})
+							if(current_id == 1) $('.type-caption[data-id="'+current_id+'"][data-side="2"]').css({'margin-top': '317px'});		
 							$('.back-card[data-id="'+current_id+'"]').prepend("<img style='position:absolute;' class='image-card' src='temp/" + result.file + "'  />");
 							$('.input-form-img2[data-id="'+current_id+'"]').val(result.file);
 							$('.input-type-card[data-id="'+current_id+'"][data-side="2"]').val('image');
@@ -243,10 +243,9 @@ $(document).ready(function () {
 						$('.trivia_main_author_by b').html(data.content.author);
 						$('.trivia_main_footer').html(data.content.footer);
 						
-						$.each(data.tags, function (i, value) {
-							$('.trivia_main_tags b').append(value+', ');
-						});
-						
+							
+						// TAGS
+						$('.trivia_main_tags b').append(data.tags.join());
 						
 						$.each(data.cards, function (i, value) {
 							
@@ -510,13 +509,13 @@ $(document).ready(function () {
 		   } else if(image_type_fc == 3) {
 			   if(side_fc == 1) {
 				   $('.main-remove-front[data-id="'+current_id+'"]').empty();
-				   $('.type-caption[data-id="'+current_id+'"][data-side="1"]').css({'margin-top': '317px'})
+				   if(current_id == 1) $('.type-caption[data-id="'+current_id+'"][data-side="1"]').css({'margin-top': '317px'})
 				   $('.front-card[data-id="'+current_id+'"]').prepend("<img style='position:absolute;' class='image-card' src='temp/" + result.file + "'  />");
 				   $('.input-form-img1[data-id="'+current_id+'"]').val(result.file);
 				   $('.input-type-card[data-id="'+current_id+'"][data-side="1"]').val('image');
 			   } else {
 				   $('.main-remove-back[data-id="'+current_id+'"]').empty();
-				   $('.type-caption[data-id="'+current_id+'"][data-side="2"]').css({'margin-top': '317px'})
+				   if(current_id == 1) $('.type-caption[data-id="'+current_id+'"][data-side="2"]').css({'margin-top': '317px'})
 				   $('.back-card[data-id="'+current_id+'"]').prepend("<img style='position:absolute;' class='image-card' src='temp/" + result.file + "'  />");
 				   $('.input-form-img2[data-id="'+current_id+'"]').val(result.file);
 				   $('.input-type-card[data-id="'+current_id+'"][data-side="2"]').val('image');

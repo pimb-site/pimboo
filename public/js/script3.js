@@ -50,6 +50,7 @@ $(document).ready(function () {
 	
 	$('#preview').click(function() {
 		$('.isDraft').val('preview');
+		$('.flipcard_main_tags b').empty();
 		$('.flipcard_main_cards').remove();
 		$('#form_upload_cards').ajaxSubmit({
 			dataType: "json",
@@ -63,9 +64,8 @@ $(document).ready(function () {
 						$('.flipcard_main_author_by b').html(data.content.author);
 						$('.flipcard_main_footer').html(data.content.footer);
 						
-						$.each(data.tags, function (i, value) {
-							$('.flipcard_main_tags b').append(value+', ');
-						});
+						// TAGS
+						$('.flipcard_main_tags b').append(data.tags.join());
 						
 						$.each(data.cards, function (i, value) {
 							$(".flipcard_main_footer").before('<div class="flipcard_main_cards">'
@@ -288,7 +288,6 @@ $(document).ready(function () {
 		$(".editor:last").after('<div class="buttons">'
 			+'<button type="button" class="front_card" data-id="'+count_fc+'">FRONT CARD</button>'
 			+'<button type="button" class="back_card" data-id="'+count_fc+'">BACK CARD</button>'
-			+'<button type="button" class="card_ratio">CARD RATIO</button>'
 			+'</div>'
 			+'<input class="item-title-input" type="text" name="flip_cards['+count_fc+'][form_item_title]" placeholder="Enter item title (60 symbols max)" maxlength="60">'
 			+'<div class="editor" data-id="'+count_fc+'"> <div class="front-card" data-id="'+count_fc+'">'
