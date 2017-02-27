@@ -8,27 +8,27 @@
 				<div class="selectors">
 					<div class="selector" id="acc_posts_select">
 						<select>
-							<option onclick="forma_in('all','All posts');">All posts</option>
+							<option onclick="account_forma_in('all','All posts');">All posts</option>
 							@foreach ($user_posts as $post)
-								<option onclick="forma_in({{ $post->id }},'{{ $post->description_title }}');">{{ $post->description_title }}</option>
+								<option onclick="account_forma_in({{ $post->id }},'{{ $post->description_title }}');">{{ $post->description_title }}</option>
 							@endforeach
 						</select>
 					</div>
 					<div class="selector" id="acc_time_select">
 						<select>
-							<option onclick="forma(0,'Today');" value="0" start="<?php echo date('Y-m-d H:i:s', mktime(0, 0, 0, date("m")  , date("d"), date("Y"))); ?>" end="<?php echo date('Y-m-d H:i:s', mktime(24, 0, 0, date("m")  , date("d"), date("Y"))); ?>">Today</option>
-							<option onclick="forma(1,'Yesterday');" value="1" start="<?php echo date('Y-m-d H:i:s', mktime(0, 0, 0, date("m")  , date("d")-1, date("Y"))); ?>" end="<?php echo date('Y-m-d H:i:s', mktime(24, 0, 0, date("m")  , date("d")-1, date("Y"))); ?>">Yesterday</option>
-							<option onclick="forma(2,'This week (Sun - Today)');" value="2" start="<?php echo date('Y-m-d H:i:s', strtotime('last Sun')); ?>" end="<?php echo date('Y-m-d H:i:s', mktime(24, 0, 0, date("m")  , date("d"), date("Y"))); ?>">This week (Sun - Today)</option>
-							<option onclick="forma(3,'This week (Mon - Today)');" value="3" start="<?php echo date('Y-m-d H:i:s', strtotime('Mon this week')); ?>" end="<?php echo date('Y-m-d H:i:s', mktime(24, 0, 0, date("m")  , date("d"), date("Y"))); ?>">This week (Mon - Today)</option>
-							<option onclick="forma(4,'Last 7 days');" value="4" start="<?php echo date('Y-m-d H:i:s', mktime(0, 0, 0, date("m")  , date("d")-7, date("Y"))); ?>" end="<?php echo date('Y-m-d H:i:s', mktime(24, 0, 0, date("m")  , date("d"), date("Y"))); ?>">Last 7 days</option>
-							<option onclick="forma(5,'Last week (Sun - Sat)');" value="5" start="<?php echo date('Y-m-d H:i:s', strtotime('Sun -1 week')); ?>" end="<?php echo date('Y-m-d H:i:s', mktime(24, 0, 0, date("m")  , date("d"), date("Y"))); ?>">Last week (Sun - Sat)</option>
-							<option onclick="forma(6,'Last week (Mon - Sun)');" value="6" start="<?php echo date('Y-m-d H:i:s', strtotime('Mon -2 week')); ?>" end="<?php echo date('Y-m-d H:i:s', strtotime('Sun -1 week')); ?>">Last week (Mon - Sun)</option>
-							<option onclick="forma(7,'Last business week (Mon - Fri)');" value="7" start="<?php echo date('Y-m-d H:i:s', strtotime('Mon -2 week')); ?>" end="<?php echo date('Y-m-d H:i:s', strtotime('Fri -1 week')); ?>">Last business week (Mon - Fri)</option>
-							<option onclick="forma(8,'Last 14 days');" value="8" start="<?php echo date('Y-m-d H:i:s', mktime(0, 0, 0, date("m")  , date("d")-14, date("Y"))); ?>" end="<?php echo date('Y-m-d H:i:s', mktime(24, 0, 0, date("m")  , date("d"), date("Y"))); ?>">Last 14 days</option>
-							<option onclick="forma(9,'This month');" value="9" start="<?php echo date('Y-m-d H:i:s', mktime(0, 0, 0, date("m")  , 1, date("Y"))); ?>" end="<?php echo date('Y-m-d H:i:s', mktime(24, 0, 0, date("m")  , date("d"), date("Y"))); ?>">This month</option>
-							<option onclick="forma(10,'Last 30 days');" value="10" start="<?php echo date('Y-m-d H:i:s', mktime(0, 0, 0, date("m")  , date("d")-30, date("Y"))); ?>" end="<?php echo date('Y-m-d H:i:s', mktime(24, 0, 0, date("m")  , date("d"), date("Y"))); ?>">Last 30 days</option>
-							<option onclick="forma(11,'Last month');" value="11" start="<?php echo date('Y-m-d H:i:s', mktime(0, 0, 0, date("m")-1  , 1, date("Y"))); ?>" end="<?php echo date('Y-m-d H:i:s', mktime(0, 0, 0, date("m")  , 1, date("Y"))); ?>">Last month</option>
-							<option onclick="forma(12,'All time');" value="12" start="<?php echo date('Y-m-d H:i:s', mktime(0, 0, 0, 0, 0, 0)); ?>" end="<?php echo date('Y-m-d H:i:s', mktime(24, 0, 0, date("m")  , date("d"), date("Y"))); ?>">All time</option>
+							<option onclick="account_forma(0,'Today');" value="0" start="<?php echo date('Y-m-d H:i:s', mktime(0, 0, 0, date("m")  , date("d"), date("Y"))); ?>" end="<?php echo date('Y-m-d H:i:s', mktime(24, 0, 0, date("m")  , date("d"), date("Y"))); ?>">Today</option>
+							<option onclick="account_forma(1,'Yesterday');" value="1" start="<?php echo date('Y-m-d H:i:s', mktime(0, 0, 0, date("m")  , date("d")-1, date("Y"))); ?>" end="<?php echo date('Y-m-d H:i:s', mktime(24, 0, 0, date("m")  , date("d")-1, date("Y"))); ?>">Yesterday</option>
+							<option onclick="account_forma(2,'This week (Sun - Today)');" value="2" start="<?php echo date('Y-m-d H:i:s', strtotime('last Sun')); ?>" end="<?php echo date('Y-m-d H:i:s', mktime(24, 0, 0, date("m")  , date("d"), date("Y"))); ?>">This week (Sun - Today)</option>
+							<option onclick="account_forma(3,'This week (Mon - Today)');" value="3" start="<?php echo date('Y-m-d H:i:s', strtotime('Mon this week')); ?>" end="<?php echo date('Y-m-d H:i:s', mktime(24, 0, 0, date("m")  , date("d"), date("Y"))); ?>">This week (Mon - Today)</option>
+							<option onclick="account_forma(4,'Last 7 days');" value="4" start="<?php echo date('Y-m-d H:i:s', mktime(0, 0, 0, date("m")  , date("d")-7, date("Y"))); ?>" end="<?php echo date('Y-m-d H:i:s', mktime(24, 0, 0, date("m")  , date("d"), date("Y"))); ?>">Last 7 days</option>
+							<option onclick="account_forma(5,'Last week (Sun - Sat)');" value="5" start="<?php echo date('Y-m-d H:i:s', strtotime('Sun -1 week')); ?>" end="<?php echo date('Y-m-d H:i:s', mktime(24, 0, 0, date("m")  , date("d"), date("Y"))); ?>">Last week (Sun - Sat)</option>
+							<option onclick="account_forma(6,'Last week (Mon - Sun)');" value="6" start="<?php echo date('Y-m-d H:i:s', strtotime('Mon -2 week')); ?>" end="<?php echo date('Y-m-d H:i:s', strtotime('Sun -1 week')); ?>">Last week (Mon - Sun)</option>
+							<option onclick="account_forma(7,'Last business week (Mon - Fri)');" value="7" start="<?php echo date('Y-m-d H:i:s', strtotime('Mon -2 week')); ?>" end="<?php echo date('Y-m-d H:i:s', strtotime('Fri -1 week')); ?>">Last business week (Mon - Fri)</option>
+							<option onclick="account_forma(8,'Last 14 days');" value="8" start="<?php echo date('Y-m-d H:i:s', mktime(0, 0, 0, date("m")  , date("d")-14, date("Y"))); ?>" end="<?php echo date('Y-m-d H:i:s', mktime(24, 0, 0, date("m")  , date("d"), date("Y"))); ?>">Last 14 days</option>
+							<option onclick="account_forma(9,'This month');" value="9" start="<?php echo date('Y-m-d H:i:s', mktime(0, 0, 0, date("m")  , 1, date("Y"))); ?>" end="<?php echo date('Y-m-d H:i:s', mktime(24, 0, 0, date("m")  , date("d"), date("Y"))); ?>">This month</option>
+							<option onclick="account_forma(10,'Last 30 days');" value="10" start="<?php echo date('Y-m-d H:i:s', mktime(0, 0, 0, date("m")  , date("d")-30, date("Y"))); ?>" end="<?php echo date('Y-m-d H:i:s', mktime(24, 0, 0, date("m")  , date("d"), date("Y"))); ?>">Last 30 days</option>
+							<option onclick="account_forma(11,'Last month');" value="11" start="<?php echo date('Y-m-d H:i:s', mktime(0, 0, 0, date("m")-1  , 1, date("Y"))); ?>" end="<?php echo date('Y-m-d H:i:s', mktime(0, 0, 0, date("m")  , 1, date("Y"))); ?>">Last month</option>
+							<option onclick="account_forma(12,'All time');" value="12" start="<?php echo date('Y-m-d H:i:s', mktime(0, 0, 0, 0, 0, 0)); ?>" end="<?php echo date('Y-m-d H:i:s', mktime(24, 0, 0, date("m")  , date("d"), date("Y"))); ?>">All time</option>
 						</select>
 					</div>
 				</div>

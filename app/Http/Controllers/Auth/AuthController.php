@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers\Auth;
 
+use Mail;
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\Registrar;
@@ -30,6 +31,26 @@ class AuthController extends Controller {
 		$this->middleware('guest', ['except' => 'getLogout']);
 	}
 
+	public function postRegister(Request $request)
+	{
+		$validator = $this->registrar->validator($request->all());
 
+		if ($validator->fails())
+		{
+			$this->throwValidationException(
+				$request, $validator
+			);
+		}
+
+		Mail::send('emails.new_user', array('name' => $request->input('name', ' ') ), function($message)
+		{
+		    $message->from('welcome@pimboobeta.com', 'Pimboo');
+
+		    $message->to('dyka_den@mail.ru')->subject('Welcome');;
+		});
+		$this->auth->login($this->registrar->create($request->all()));
+
+		return redirect($this->redirectPath());
+	}
 
 }
