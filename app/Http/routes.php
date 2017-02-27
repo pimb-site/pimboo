@@ -32,6 +32,12 @@ Route::get('add_trivia_quiz', 'TriviaController@addTriviaQuiz');
 Route::get('save_trivia_quiz', 'TriviaController@saveTriviaQuiz');
 
 Route::post('upload_end_trivia', 'TriviaController@saveTriviaQuiz');
+// Story
+Route::get('add_story', 'StoryController@addStory');
+Route::get('view_story/{id}', 'StoryController@viewID');
+Route::get('view_stories', 'StoryController@viewStories');
+Route::post('save_story', 'StoryController@postUploadEnd');
+
 
 
 Route::controllers([
