@@ -10,33 +10,10 @@
 	<link href="test/jcrop/jquery.Jcrop.min.css" rel="stylesheet" type="text/css"/>
 </head>
 	<body class="add_flip_cards">
-		<header>
-			<div class="left">
-				<a href="/" class="logo"></a>
-				<a href="#" class="text">HOME</a>
-				<a href="#" class="text">PIMBOO CHARITY</a>
-			</div>
-			<div class="right">
-				<div class="dropdown">
-					<a id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						<img id="header_user_photo" src="/img/header_default_photo.png" />
-						<img id="header_caret" src="/img/header_caret.png" />
-					</a>
-					<ul class="dropdown-menu" aria-labelledby="dLabel">
-						<li class="channels"><a>Channels</a></li>
-						<li class="channel"><a>{{ Auth::user()->name }}</a></li>
-						<li class="divider" role="separator"></li>
-						<li class="hrefs"><a>Profile Settings</a></li>
-						<li class="hrefs"><a>Impact</a></li>
-						<li class="divider" role="separator"></li>
-						<li class="hrefs"><a id="header_logout" href="/auth/logout" >Logout</a></li>
-					</ul>
-				</div>
-				<a id="header_create" href="/add_flip_cards" >CREATE</a>
-			</div>
-		</header>
+		@include('header')
 		<div class="body">
-		{!! Form::open(['action' => 'FlipcardsController@postUploadEnd', 'id' => 'form_upload_cards']) !!}
+		<form action="/upload_end" method="post" id="form_upload_cards">
+			<input type="hidden" name="_token" value="{{ csrf_token() }}">
 			<div class="left">
 				<div class="title">FLIP CARD CREATION</div>
 				<div class="sub_title">Add all necessary information to create new flip cards article</div>
@@ -142,7 +119,7 @@
 					</div>
 				</div>
 			</div>
-		{!! Form::close() !!}
+		</form>
 		</div>
 		<footer>
 			<div class="up">
@@ -228,7 +205,7 @@
 	<script>
 	var token = '{!! csrf_token() !!}';
 	</script>
-	<script src="/js/main.js"></script>
+	<script src="/js/footer.min.js"></script>
 	<script src="/js/script3.js"></script>
 	</body>
 </html>

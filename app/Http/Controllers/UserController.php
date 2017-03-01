@@ -9,12 +9,10 @@ use Illuminate\View\View;
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\Registrar;
-use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-	use AuthenticatesAndRegistersUsers;
 
 	public function getAccount() {
 		$my_all_posts = Post::where('user_id', Auth::user()->id)->get();

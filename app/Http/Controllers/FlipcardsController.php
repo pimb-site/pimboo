@@ -3,6 +3,7 @@ use Illuminate\View\View;
 use App\PostView;
 use Auth;
 use Illuminate\Http\Request;
+use Input;
 
 class FlipcardsController extends Controller
 {

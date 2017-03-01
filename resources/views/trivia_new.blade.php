@@ -10,16 +10,7 @@
 	<link href="test/jcrop/jquery.Jcrop.min.css" rel="stylesheet" type="text/css"/>
 </head>
 	<body class="add_flip_cards">
-		<header>
-			<div class="left">
-				<a href="/" class="logo"></a>
-				<a href="#" class="text">HOME</a>
-				<a href="#" class="text">PIMBOO CHARITY</a>
-			</div>
-			<div class="right">
-				<button type="button" id="nickname-button" class="nickname">{{ Auth::user()->name }}</button>
-			</div>
-		</header>
+		@include('header')
 		<div class="body">
 		{!! Form::open(['action' => 'TriviaController@saveTriviaQuiz', 'id' => 'form_upload_cards']) !!}
 			<div class="left">
@@ -325,7 +316,7 @@
 	<script>
 	var token = '{!! csrf_token() !!}';
 	</script>
-	<script src="/js/main.js"></script>
+	<script src="/js/footer.min.js"></script>
 	<script src="/js/script4.js"></script>
 	</body>
 </html>

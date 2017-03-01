@@ -64,7 +64,7 @@
 							<li class="hrefs"><a id="header_logout" href="/auth/logout" >Logout</a></li>
 						</ul>
 					</div>
-					<a id="header_create" href="/add_flip_cards" >CREATE</a>
+					<a id="header_create" href="/create" >CREATE</a>
 				@endif
 
 			</div>
