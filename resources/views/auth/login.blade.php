@@ -19,7 +19,7 @@
                             </div>
                         @endif
                         <button>LOGIN</button>
-                        <a href="/password/email">Forgot your password?</a>
+                        <a href="/password/reset">Forgot your password?</a>
                     </form>
                 </div>
             </div>

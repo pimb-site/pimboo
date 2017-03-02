@@ -62,9 +62,15 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        if (isset($_COOKIE['ref']) and !empty($_COOKIE['ref'])) {
+            $ref = $_COOKIE['ref'];
+        } else {
+            $ref = 0;
+        }
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
+            'refferal' => $ref,
             'password' => bcrypt($data['password']),
         ]);
     }

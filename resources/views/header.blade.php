@@ -7,7 +7,7 @@
 			<div class="right">
 				@if (Auth::guest())
 				<button type="button" data-toggle="modal" data-target="#register-modal" id="register-button">REGISTER</button>
-				<button id="login-button" onclick='window.location.href = "/auth/login"'>LOGIN</button>
+				<button id="login-button" onclick='window.location.href = "/login"'>LOGIN</button>
 				<div class="modal fade" id="register-modal" tabindex="-1" role="dialog" aria-labelledby="register-modalLabel">
 					<div class="modal-dialog" role="document">
 						<div class="modal-content">
