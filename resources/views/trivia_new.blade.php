@@ -12,7 +12,8 @@
 	<body class="add_flip_cards">
 		@include('header')
 		<div class="body">
-		{!! Form::open(['action' => 'TriviaController@saveTriviaQuiz', 'id' => 'form_upload_cards']) !!}
+		<form action="/save_trivia_quiz" method="post" id="form_upload_cards">
+			<input type="hidden" name="_token" value="{{ csrf_token() }}">
 			<div class="left">
 				<div class="title">TRIVIA CARD CREATION</div>
 				<div class="sub_title">Add all necessary information to create a new trivia card</div>
@@ -184,7 +185,7 @@
 					</div>
 				</div>
 			</div>
-			{!! Form::close() !!}
+			</form>
 		</div>
 		<footer>
 			<div class="up">

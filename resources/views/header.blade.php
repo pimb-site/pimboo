@@ -61,7 +61,7 @@
 							<li class="hrefs"><a href="/user/profile">Profile Settings</a></li>
 							<li class="hrefs"><a>Impact</a></li>
 							<li class="divider" role="separator"></li>
-							<li class="hrefs"><a id="header_logout" href="/auth/logout" >Logout</a></li>
+							<li class="hrefs"><a id="header_logout" href="/logout" >Logout</a></li>
 						</ul>
 					</div>
 					<a id="header_create" href="/create" >CREATE</a>

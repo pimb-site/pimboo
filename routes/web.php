@@ -62,3 +62,4 @@ Route::get('ref/{id}', 'ReferralController@index');
 
 Route::get('/home', 'HomeController@index');
 Auth::routes();
+Route::get('logout', 'Auth\LoginController@logout')->name('logout');

@@ -1,6 +1,6 @@
 $(document).ready(function () {
 	$("#register-submit").on('click', function() {
-		var jqxhr = $.post( "/auth/register", { name: $("#register_first_name").val(), email: $("#register_email").val(), password: $("#register_password").val(), password_confirmation: $("#register_confirm_password").val(), _token: $("#register_token").val() })
+		var jqxhr = $.post( "/register", { name: $("#register_first_name").val(), email: $("#register_email").val(), password: $("#register_password").val(), password_confirmation: $("#register_confirm_password").val(), _token: $("#register_token").val() })
 		jqxhr.always(function( data ) {
 			if (jqxhr.status == 422) {
 				json = JSON.parse(jqxhr.responseText);
