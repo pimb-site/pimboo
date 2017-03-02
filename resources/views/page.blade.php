@@ -19,9 +19,9 @@
 			<div class="up">
 				<div class="wrap">
 					<div class="left">
-						Pimboo OU<br>
-						Stureplan 4C, 4th floor<br>
-						Stockholm, Sweden 114 35<br>
+						Pimboo OÜ<br>
+						Laki tn 30 PK 302-3<br>
+						Tallinn, Estonia 12915<br>
 					</div>
 					<div class="center">@ Pimboo.com. Allrights Reserved.</div>
 					<div class="right">

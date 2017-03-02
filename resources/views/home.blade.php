@@ -2,16 +2,31 @@
 
 @section('content')
         <div class="body">
-            <div class="slider">
-                <div class="wrap">
-                    <div class="slide">
-                        <div class="logo"><img src="/img/home_slider_logo.png" /></div>
-                        <div class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In et nisi laoreet, maximus enim non, porta magna</div>
-                        <div class="slider-image"><img src="/img/slider_pimboo_1.gif" /></div>
-                        <a class="join_now">JOIN NOW</a>
+            <div id="carousel-example-generic" class="carousel slide slider" data-ride="carousel">
+                <div class="carousel-inner" role="listbox">
+                    <div class="item main active" style='background-image: url("/img/slider_pimboo_1.gif");'>
+                        <div class="wrap">
+                            <div class="text">With the help of Pimboo you can be<br>in the hottest regions of the country just one click away</div>
+                            <a class="join_now">JOIN NOW</a>
+                        </div>
+                    </div>
+                    <div class="item flipcard" style='background-image: url("/img/slider_pimboo_2.jpg");'>
+                        <div class="wrap">
+                            <div class="text1">Create Fun Flip cards</div>
+                            <div class="text2">SHARE & PROFIT!</div>
+                            <a class="join_now">JOIN NOW</a>
+                        </div>
+                    </div>
+                    <div class="item trivia" style='background-image: url("/img/slider_pimboo_3.jpg");'>
+                        <div class="wrap">
+                            <div class="text1">Stump Your Friends With</div>
+                            <div class="text2">Our Trivia Tool & Profit!</div>
+                            <a class="join_now">JOIN NOW</a>
+                        </div>
                     </div>
                 </div>
             </div>
+            
             <div class="posts-color">
                 <div class="wrap">
                     <div class="posts">
@@ -57,10 +72,6 @@
                             <div class="post">
                                 <a class="post_name" href="#">Daniel Dodarrio</a>
                                 <a class="post_text" href="#">The Myth That Christianity Provides Ethical Guidance</a>
-                            </div>
-                            <div class="post">
-                                <a class="post_name" href="#">Daniel Dodarrio</a>
-                                <a class="post_text" href="#">Arnold Schwarzenegger Is Lucky The Apprentice Ratings Are So Bad</a>
                             </div>
                         </div>
                     </div>
