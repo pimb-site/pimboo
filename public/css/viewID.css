@@ -93,6 +93,7 @@
 }
 
 .text-image {
+	position:relative;
 	background-color: rgba(216,244,23,.8);
 	font-size: 22px;
 	width: 640px;
@@ -167,4 +168,37 @@
 .test-img-answer-4 {
 	width: 140px;
 	height:180px;
+}
+
+.front iframe {
+	width:100%;
+	height:100%;
+	position:absolute;
+}
+
+.vote {
+	float:left;
+	margin-top:30px;
+}
+
+.vote b {
+	line-height:32px;
+}
+
+.vote .vote-button {
+	border: 0;
+    background-image: url(/img/arrow_up.png);
+    background-repeat: no-repeat;
+	background-size: 15px;
+	cursor:pointer;
+	float:left;
+	background-position:center;
+	border-radius:3px;
+	width:42px;
+	height:41px;
+	background-color:#c2d0e9;
+}
+
+.vote .vote-button:hover {
+	background-color:#6e8dc9;
 }

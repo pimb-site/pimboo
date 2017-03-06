@@ -873,6 +873,7 @@ input[type='file'] {
     transition: all 0s ease-in-out;
     -webkit-transform-style: preserve-3d;
     -webkit-transform: rotateY(0deg);
+	float:left;
 }
 
 .trivia_main_front,
@@ -1039,6 +1040,57 @@ input[type='file'] {
 
 .modal-alert ul {
 	margin-left:20px;
+}
+
+
+.post-title {
+	width: 100%;
+	height: 36px;
+	padding-left: 19px;
+	border-radius: 3px;
+	border: 2px solid #afc0e1;
+	color: #6e8dc9;
+	margin-top: 10px;
+	margin-bottom: 5px;
+}
+
+.add-question {
+	width:207px;
+	height:61px;
+	color:#fff;
+	background-color:#99afd9;
+	border:0 none;
+	border-radius:3px;
+	float:right;
+	margin-top:5px;
+	margin-bottom:5px;
+}
+
+.vote {
+	float:left;
+	margin-right:20px;
+}
+
+.vote b {
+	line-height:32px;
+}
+
+.vote .vote-button {
+	border: 0;
+    background-image: url(/img/arrow_up.png);
+    background-repeat: no-repeat;
+	background-size: 15px;
+	cursor:pointer;
+	float:left;
+	background-position:center;
+	border-radius:3px;
+	width:42px;
+	height:41px;
+	background-color:#c2d0e9;
+}
+
+.vote .vote-button:hover {
+	background-color:#6e8dc9;
 }
 
 .add_plus{border:0;background-image:url(/img/plus-icon.png);background-repeat:no-repeat;width:90px;height:90px;margin-left:329px;margin-top:21px;float:left; cursor:pointer; }

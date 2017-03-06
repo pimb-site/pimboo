@@ -40,6 +40,9 @@ Route::get('view_stories', 'StoryController@viewStories');
 Route::post('save_story', 'StoryController@postUploadEnd');
 
 
+Route::get('add_ranked_list', 'RankedlistController@addRankedList');
+Route::post('upload_end_rankedlist', 'RankedlistController@saveRankedList');
+Route::post('vote_rankedlist', 'RankedlistController@voteRankedList');
 
 Route::post('auth/register', 'Auth\AuthController@postRegister');
 Route::get('auth/activate','Auth\AuthController@activate');
