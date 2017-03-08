@@ -6,16 +6,16 @@
 		<div class="title">Select format and share with the world</div>
 		<div class="table">
 			<div class="creations">
-				<!--<div class="creation story">
+				<div class="creation story">
 					<div class="left">
 						<div class="name">STORIES</div>
 						<div class="text">Create ingaging stories using interactive formats and visuals.</div>
 					</div>
 					<div class="right">
-						<a class="butt">CREATE</a>
+						<a class="butt" href="/add_ranked_list">CREATE</a>
 						<a class="butt more_info">MORE INFO</a>
 					</div>
-				</div>-->
+				</div>
 				<div class="creation flip_cards">
 					<div class="left">
 						<div class="name">FLIP CARDS</div>
