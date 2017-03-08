@@ -28,7 +28,7 @@ class TriviaController extends Controller
     public function viewTriviaQuiz()
     {
 		$contentflip = \DB::select('select * from posts where type = "trivia"');
-        return view('view_trivia_quiz', ['contentflip' => $contentflip]);
+        return view('viewID', ['contentflip' => $contentflip, 'name' => 'trivia']);
     }
 
     public function saveTriviaQuiz()

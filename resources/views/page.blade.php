@@ -7,9 +7,9 @@
 	<title>Pimboo Home</title>
 	<link href="/css/style.min.css" rel="stylesheet">
 	@if(\Request::is('view_flip_cards') or Request::is('viewID') or Request::is('view_trivia_quiz'))
-		<link href="/css/app.css" rel="stylesheet">
 		<link href="/css/view_flipcards.css" rel="stylesheet">
 	@endif
+	@yield('css')
 </head>
 	<body class="{!! $body_class or 'home' !!}">
 		@include('header')
@@ -38,7 +38,8 @@
 				<a class="disclamer" href="#">Disclamer</a>
 			</div>
 		</footer>
-		<script src="/js/footer.min.js"></script>
-		<script src="/js/register.js"></script>
+		<script src="/js/footer.min.js" type="text/javascript"></script>
+		<script src="/js/register.js" type="text/javascript"></script>
+		@yield('script')
 	</body>
 </html>

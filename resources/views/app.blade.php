@@ -6,10 +6,6 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Laravel</title>
 
-	@if(\Request::is('add_flip_cards'))
-	@else
-		<link href="/css/app.css" rel="stylesheet">
-	@endif
 	@if(\Request::is('view_flip_cards') or Request::is('viewID') or Request::is('view_trivia_quiz'))
 		<link href="/css/view_flipcards.css" rel="stylesheet">
 	@endif

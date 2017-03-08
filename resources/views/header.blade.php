@@ -17,8 +17,8 @@
 								<div class="sub_title">Sign up to take advantage of our advanced features and to create your own playful content!</div>
 								<div class="social_connect">
 									<div class="text">SOCIAL CONNECT</div>
-									<div class="facebook"></div>
-									<div class="google_plus"></div>
+									<a class="facebook" href="/login/facebook"></a>
+									<a class="google_plus" href="/login/google"></a>
 								</div>
 								<div class="middle_text">OR<BR>ENTER YOUR INFORMATION</div>
 								<div class="form">

@@ -14,9 +14,10 @@
 Route::get('/', 'HomeController@index');
 Route::get('home', 'HomeController@index');
 Route::get('create', 'HomeController@create');
+
+Route::get('viewID/{id}', 'ToolsController@viewID');
 // flipcards get
 Route::get('add_flip_cards', 'FlipcardsController@addFlipCards');
-Route::get('viewID/{id}', 'FlipcardsController@viewID');
 Route::get('success/{id}', 'FlipcardsController@successID');
 Route::get('view_flip_cards', 'FlipcardsController@viewFlipCards');
 Route::post('upload/img_url', 'FlipcardsController@imageURL');
@@ -32,7 +33,7 @@ Route::get('view_trivia_quiz', 'TriviaController@viewTriviaQuiz');
 Route::get('add_trivia_quiz', 'TriviaController@addTriviaQuiz');
 Route::get('save_trivia_quiz', 'TriviaController@saveTriviaQuiz');
 
-Route::post('upload_end_trivia', 'TriviaController@saveTriviaQuiz');
+Route::post('save_trivia_quiz', 'TriviaController@saveTriviaQuiz');
 // Story
 Route::get('add_story', 'StoryController@addStory');
 Route::get('view_story/{id}', 'StoryController@viewID');
@@ -64,5 +65,19 @@ Route::get('ref/{id}', 'ReferralController@index');
 
 
 Route::get('/home', 'HomeController@index');
+
+// Auth
 Auth::routes();
+
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');
+
+Route::get('/login/{provider?}',[
+    'uses' => 'AuthController@getSocialAuth',
+    'as'   => 'auth.getSocialAuth'
+]);
+
+
+Route::get('/login/callback/{provider?}',[
+    'uses' => 'AuthController@getSocialAuthCallback',
+    'as'   => 'auth.getSocialAuthCallback'
+]);

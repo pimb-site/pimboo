@@ -34,5 +34,14 @@ return [
         'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],
-
+    'facebook' => [
+        'client_id'     => '1867537673522826',
+        'client_secret' => 'bb698555ccce032a07ec4977aefafe1c',
+        'redirect'      => 'http://pimboo.local/login/callback/facebook',
+    ],
+    'google' => [
+        'client_id' => '529934983719-udk3irn0msc0klajqoj6288gaesabric.apps.googleusercontent.com',
+        'client_secret' => '7qthOvZ4cFLkuQCfjw39j8xx',
+        'redirect' => 'http://pimboobeta.com/login/callback/google',
+    ],
 ];

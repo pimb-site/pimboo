@@ -27,7 +27,7 @@ class FlipcardsController extends Controller
     public function viewFlipCards() {
 
         $contentflip = \DB::select('select * from posts where type = "flipcards" and isDraft = "publish"');
-        return view('view_flip_cards', ['contentflip' => $contentflip]);
+        return view('tool_list', ['contentflip' => $contentflip, 'name' => 'Flip Cards']);
     }
 
 
@@ -44,7 +44,7 @@ class FlipcardsController extends Controller
         return view('viewID', ['content' => $content[0]]);
     }
 	
-	public function successID($id) {
+	public function successID($id, Request $request) {
         return view('success', ['id' => $id]);
     }
 	

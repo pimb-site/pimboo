@@ -18,11 +18,11 @@
 		<div class="item item-embed">&lt; &frasl; &gt; EMBED</div>
 		<div class="item item-more">MORE SHARE OPTION</div>
 	</div>
-	<input class="url-id" value="{!! url() !!}/viewID/{!! $id !!}" />
+	<input class="url-id" value="{!! url('/viewID/') !!}/{{ $id }}" />
 	<button class="view-item">VIEW ITEM</button>
 </div>
 	<!-- Scripts -->
-	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script src="/js/footer.min.js"></script>
 	<script> 
 	$('.view-item').click(function() {
 		var url = $('.url-id').val();
