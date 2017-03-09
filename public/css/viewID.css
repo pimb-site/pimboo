@@ -7,7 +7,7 @@
     transition: all 1s ease-in-out;
     -webkit-transform-style: preserve-3d;
     -webkit-transform: rotateY(0deg);
-    margin-bottom: 5px;
+    margin-bottom: 35px;
 }
 
 .wrap2 {
@@ -78,7 +78,7 @@
 }
 
 .item_title {
-	line-height: 70px;
+	line-height: 50px;
 	padding-bottom:0px;
 	margin-left:70px;
 	font-weight: normal;
@@ -177,7 +177,7 @@
 
 .vote {
 	float:left;
-	margin-top:16px;
+	margin-top:9px;
 	margin-right: 10px;
 }
 

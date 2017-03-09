@@ -6,7 +6,9 @@ class RankedlistController extends Controller
 {
 	
 	public function voteRankedList() {
-		if(\Auth::guest()) return view('auth/login');
+		if(\Auth::guest()) {
+			return \Response::json(['success' => false, 'error' => 'You are not authorized']);
+		}
 	
         $input = \Input::all();
 		
@@ -14,27 +16,34 @@ class RankedlistController extends Controller
 			$id = (int)$input['id'];
 			$cid = (int)$input['cid'];
 			
+			$session_vote = \Session::get('rankedlist_votes');
+			if(isset($session_vote[$cid][$id])) return \Response::json(['success' => false, 'error' => 'You already voted']);
+			
 			if(($id > 0) && ($cid > 0)) {
-				$options = \DB::table('posts')
-                     ->select('options')
+				$content = \DB::table('posts')
+                     ->select('content')
                      ->where('type', '=', 'rankedlist')
 					 ->where('id', '=', $cid)
 					 ->get();
 					 
-				if($options != '') {
-					$options = unserialize($options[0]->options);
+				
+				$content = unserialize($content[0]->content);
+				
+				if(isset($content[$id - 1])) {
 					
-					if(isset($options[$id - 1])) {
-						$options[$id - 1]['count'] += 1;
+					$session_vote[$cid][$id] = 'true';
+					\Session::put('rankedlist_votes', $session_vote);
+					
+					$current_vote = ++$content[$id - 1]['votes'];
+
+					$content = serialize($content);
+					
+					\DB::table('posts')
+						->where('id', $cid)
+						->where('type', 'rankedlist')
+						->update(['content' => $content]);
 						
-						$options = serialize($options);
-						
-						\DB::table('posts')
-							->where('id', $cid)
-							->update(['options' => $options]);
-							
-						return \Response::json(['success' => true]);
-					}
+					return \Response::json(['success' => true, 'votes' => $current_vote]);
 				}
 			}
 		}
@@ -330,7 +339,8 @@ class RankedlistController extends Controller
 							'caption1' => $value['caption1'],
                             'front_card' => $image_front,
 							'youtube_clip1' => $youtube_clip1,
-							'post_title' => $value['post_title']
+							'post_title' => $value['post_title'],
+							'votes' => 0
                         ];
                     }
 					
@@ -352,11 +362,6 @@ class RankedlistController extends Controller
 					
 					
 					$options = [];
-					
-					for($i = 0; $i < $count_content; $i++) {
-						$options[] = ['count' => 0];
-					}
-					
 					$options = serialize($options);
 					
 					if(isset($input['postID'])) {
