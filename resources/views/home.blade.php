@@ -7,21 +7,34 @@
                     <div class="item main active" style='background-image: url("/img/slider_pimboo_1.gif");'>
                         <div class="wrap">
                             <div class="text">With the help of Pimboo you can be<br>in the hottest regions of the country just one click away</div>
-                            <a class="join_now">JOIN NOW</a>
+                            @if (Auth::guest())
+                                <a class="join_now" data-toggle="modal" data-target="#register-modal">JOIN NOW</a>
+                            @else
+                                <a class="join_now" href="/create">JOIN NOW</a>
+                            @endif
                         </div>
                     </div>
                     <div class="item flipcard" style='background-image: url("/img/slider_pimboo_2.jpg");'>
                         <div class="wrap">
                             <div class="text1">Create Fun Flip cards</div>
                             <div class="text2">SHARE & PROFIT!</div>
-                            <a class="join_now">JOIN NOW</a>
+                            @if (Auth::guest())
+                                <a class="join_now" data-toggle="modal" data-target="#register-modal">JOIN NOW</a>
+                            @else
+                                <a class="join_now" href="/add_flip_cards">JOIN NOW</a>
+                            @endif
                         </div>
                     </div>
                     <div class="item trivia" style='background-image: url("/img/slider_pimboo_3.jpg");'>
                         <div class="wrap">
                             <div class="text1">Stump Your Friends With</div>
                             <div class="text2">Our Trivia Tool & Profit!</div>
-                            <a class="join_now">JOIN NOW</a>
+                            <a class="join_now" data-toggle="modal" data-target="#register-modal">JOIN NOW</a>
+                            @if (Auth::guest())
+                                <a class="join_now" data-toggle="modal" data-target="#register-modal">JOIN NOW</a>
+                            @else
+                                <a class="join_now" href="/add_trivia_quiz">JOIN NOW</a>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -115,7 +128,12 @@
                         <div class="right">
                             <div class="title">Why join us? </div>
                             <div class="text">Pellentesque egestas neque ac consequat finibus. Curabitur vel aliquet risus. Vivamus aliquam aliquam mauris quis hendrerit. Aliquam volutpat, eros eu<br><br>consequat mollis, Pellentesque egestas neque ac consequat finibus. Curabitur vel aliquet risus. Vivamus aliquam aliquam</div>
-                            <a href="#">JOIN US!</a>
+                            
+                            @if (Auth::guest())
+                                <a data-toggle="modal" data-target="#register-modal">JOIN NOW</a>
+                            @else
+                                <a href="/create">JOIN US!</a>
+                            @endif
                         </div>
                     </div>
                 </div>
