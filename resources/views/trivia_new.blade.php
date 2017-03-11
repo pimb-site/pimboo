@@ -205,9 +205,9 @@
 				</div>
 			</div>
 			<div class="down">
-				<a class="privacy_policy" href="#">Privacy Policy</a>
-				<a class="terms_of_service" href="#">Terms of Service</a>
-				<a class="disclamer" href="#">Disclamer</a>
+				<a class="privacy_policy" href="/privacy-policy">Privacy Policy</a>
+				<a class="terms_of_service" href="/terms-of-service">Terms of Service</a>
+				<a class="disclamer" href="/disclaimer">Disclamer</a>
 			</div>
 		</footer>
 		<div id="modal-alert" class="modal-alert" style="display:none;">

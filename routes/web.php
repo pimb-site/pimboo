@@ -81,3 +81,17 @@ Route::get('/login/callback/{provider?}',[
     'uses' => 'AuthController@getSocialAuthCallback',
     'as'   => 'auth.getSocialAuthCallback'
 ]);
+
+//Landings
+Route::get('/privacy-policy', function () {
+    return view('landings.privacy_policy');
+});
+Route::get('/charity', function () {
+    return view('landings.charity');
+});
+Route::get('/disclaimer', function () {
+    return view('landings.disclaimer');
+});
+Route::get('/terms-of-service', function () {
+    return view('landings.tos');
+});

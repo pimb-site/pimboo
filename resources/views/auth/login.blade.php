@@ -6,6 +6,11 @@
                 <div class="title">LOGIN</div>
                 <div class="form">
                     <form class="form-horizontal" role="form" method="POST" action="{{ route('login') }}">   
+                        <div class="social_connect">
+                            <div class="text">SOCIAL CONNECT</div>
+                            <a class="facebook" href="/login/facebook"></a>
+                            <a class="google_plus" href="/login/google"></a>
+                        </div>
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <input type="email" name="email" placeholder="E-mail" value="{{ old('email') }}">
                         <input type="password" name="password" placeholder="Password">

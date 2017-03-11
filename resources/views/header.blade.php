@@ -1,8 +1,8 @@
 		<header>
 			<div class="left">
 				<a href="/" class="logo"></a>
-				<a href="#" class="text">HOME</a>
-				<a href="#" class="text">PIMBOO CHARITY</a>
+				<a href="/" class="text">HOME</a>
+				<a href="/charity" class="text">PIMBOO CHARITY</a>
 			</div>
 			<div class="right">
 				@if (Auth::guest())
@@ -59,7 +59,7 @@
 							<li class="channel"><a>{{ Auth::user()->name }}</a></li>
 							<li class="divider" role="separator"></li>
 							<li class="hrefs"><a href="/user/profile">Profile Settings</a></li>
-							<li class="hrefs"><a>Impact</a></li>
+							<li class="hrefs"><a href="/user/account">Stats</a></li>
 							<li class="divider" role="separator"></li>
 							<li class="hrefs"><a id="header_logout" href="/logout" >Logout</a></li>
 						</ul>

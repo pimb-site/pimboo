@@ -5,9 +5,8 @@
 			<div class="wrap">
 				@include('user.header')
 				<div class="referals">
-					<img src="/img/referral_present.png">
-					<div class="title">Invite Friends. Get Premium for <span>Free!</span></div>
-					<div class="text">You’ll earn one free week of Premium for each friend who signs up and installs our<br>browser extension. They’ll get one week of Premium as well. Its a win win!</div>
+					<div class="title">Invite Friends. Get Paid For Life <span>!</span></div>
+					<div class="text">Use our tools to invite your friends to join Pimboo and get a % of their posts for life!<br>It's free for them as well, and always will be! Its a win win!</div>
 					<div class="address_book">
 						<div class="sub_title">Invite Your Contacts from Your Address Book</div>
 						<div class="mails">

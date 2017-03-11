@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Pimboo Home</title>
+	<title>Pimboo @yield('title')</title>
 	<link href="/css/style.min.css" rel="stylesheet">
 	@if(\Request::is('view_flip_cards') or Request::is('viewID') or Request::is('view_trivia_quiz'))
 		<link href="/css/view_flipcards.css" rel="stylesheet">
@@ -23,19 +23,19 @@
 						Laki tn 30 PK 302-3<br>
 						Tallinn, Estonia 12915<br>
 					</div>
-					<div class="center">@ Pimboo.com. Allrights Reserved.</div>
+					<div class="center">@ <a href="https://pimboo.com">Pimboo.com</a>. Allrights Reserved.</div>
 					<div class="right">
-						<a class="icon" id="fb_icon_footer"></a>
-						<a class="icon" id="twitter_icon_footer"></a>
-						<a class="icon" id="instagram_icon_footer"></a>
-						<a class="icon" id="youtube_icon_footer"></a>
+						<a class="icon" href="https://www.facebook.com/pimboosocial" id="fb_icon_footer"></a>
+						<a class="icon" href="https://twitter.com/pimboosocial" id="twitter_icon_footer"></a>
+						<a class="icon" href="https://www.instagram.com/pimboosocial/" id="instagram_icon_footer"></a>
+						<a class="icon" href="https://www.youtube.com/channel/UC6mXWfi-sXptlqRJ8Nr7qoQ" id="youtube_icon_footer"></a>
 					</div>
 				</div>
 			</div>
 			<div class="down">
-				<a class="privacy_policy" href="#">Privacy Policy</a>
-				<a class="terms_of_service" href="#">Terms of Service</a>
-				<a class="disclamer" href="#">Disclamer</a>
+				<a class="privacy_policy" href="/privacy-policy">Privacy Policy</a>
+				<a class="terms_of_service" href="/terms-of-service">Terms of Service</a>
+				<a class="disclamer" href="/disclaimer">Disclamer</a>
 			</div>
 		</footer>
 		<script src="/js/footer.min.js" type="text/javascript"></script>
