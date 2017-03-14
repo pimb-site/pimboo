@@ -32,7 +32,7 @@ class ToolsController extends Controller
 
         $content = \DB::select('select * from posts where id = ? and isDraft = ?', [$id, 'publish']);
         $content = $content[0];
-        return view('tools.'.$content->type, ['content' => $content, 'name' => $content->type]);
+        return view('tools.'.$content->type, ['body_class' => 'tools', 'content' => $content, 'name' => $content->type]);
     }
 	
 	public function successID($id) {

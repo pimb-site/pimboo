@@ -8,6 +8,16 @@
 			<div class="creations">
 				<div class="creation story">
 					<div class="left">
+						<div class="name">STORY</div>
+						<div class="text">Create Stories That Everyone Loves to Read & Share!</div>
+					</div>
+					<div class="right">
+						<a class="butt" href="/add_story">CREATE</a>
+						<a class="butt more_info">MORE INFO</a>
+					</div>
+				</div>
+				<div class="creation story">
+					<div class="left">
 						<div class="name">RANKED LIST</div>
 						<div class="text">Create Fun "Top Ten" Lists That Everyone Loves to Read & Share!</div>
 					</div>

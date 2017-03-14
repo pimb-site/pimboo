@@ -30,7 +30,6 @@
 				<textarea id="content_textarea" name="form_story[content]"></textarea>
 
 				<div class="down_butts">
-					<button type="button" id="preview">PREVIEW</button>
 					<button type="button" id="save_draft" class="btn-save">SAVE DRAFT</button>
 					<button type="button" id="publish">PUBLISH</button>
 				</div>

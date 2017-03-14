@@ -193,7 +193,7 @@ $(document).ready(function () {
             dataType: "json",
             success: function (data) {
                 if (data.success == true) {
-					url = "http://pimboo.local/success/"+data.id;
+					url = "/success/"+data.id;
 					$( location ).attr("href", url);
                 } else {
                     $.each(data.errors, function (i, value) {
@@ -214,7 +214,7 @@ $(document).ready(function () {
             dataType: "json",
             success: function (data) {
                 if (data.success == true) {
-					url = "http://pimboo.local/success/"+data.id;
+					url = "/success/"+data.id;
 					$( location ).attr("href", url);
                 } else {
                     $.each(data.errors, function (i, value) {

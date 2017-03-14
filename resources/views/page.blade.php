@@ -23,12 +23,12 @@
 						Laki tn 30 PK 302-3<br>
 						Tallinn, Estonia 12915<br>
 					</div>
-					<div class="center">@ <a href="https://pimboo.com">Pimboo.com</a>. Allrights Reserved.</div>
+					<div class="center">@ Pimboo.com. Allrights Reserved.</div>
 					<div class="right">
-						<a class="icon" href="https://www.facebook.com/pimboosocial" id="fb_icon_footer"></a>
-						<a class="icon" href="https://twitter.com/pimboosocial" id="twitter_icon_footer"></a>
-						<a class="icon" href="https://www.instagram.com/pimboosocial/" id="instagram_icon_footer"></a>
-						<a class="icon" href="https://www.youtube.com/channel/UC6mXWfi-sXptlqRJ8Nr7qoQ" id="youtube_icon_footer"></a>
+						<a class="icon" target="_blank" href="https://www.facebook.com/pimboosocial" id="fb_icon_footer"></a>
+						<a class="icon" target="_blank" href="https://twitter.com/pimboosocial" id="twitter_icon_footer"></a>
+						<a class="icon" target="_blank" href="https://www.instagram.com/pimboosocial/" id="instagram_icon_footer"></a>
+						<a class="icon" target="_blank" href="https://www.youtube.com/channel/UC6mXWfi-sXptlqRJ8Nr7qoQ" id="youtube_icon_footer"></a>
 					</div>
 				</div>
 			</div>
