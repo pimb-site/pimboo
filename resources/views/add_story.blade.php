@@ -25,7 +25,6 @@
 							<input type="text" name="form_story[form_description]" placeholder="Flip cards description" autocomplete="off">
 						</div>
 					</div>
-					<textarea name="form_story[form_footer]" placeholder="Footer text (1500 symbols max)" maxlength="1500" autocomplete="off"></textarea>
 				</div>
 				<textarea id="content_textarea" name="form_story[content]"></textarea>
 
@@ -181,7 +180,7 @@
 	<script src="/js/footer.min.js"></script>
 	<script src="http://cloud.tinymce.com/stable/tinymce.min.js?apiKey=me1xx87jvui3cahvnslljl2cp1xb1ivawta8z8je4iesro99"></script>
 	<script>tinymce.init({
-  selector: '#content_textarea',
+  selector: 'textarea#content_textarea',
   height: 500,
   theme: 'modern',
   plugins: [

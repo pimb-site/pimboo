@@ -66,6 +66,7 @@
 		@endforeach
 		<div class="footer">{!! $content->description_footer !!}</div>
 	</div>
+	</div>
 @endsection
 
 @section('script')

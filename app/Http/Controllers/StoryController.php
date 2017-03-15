@@ -94,7 +94,6 @@ class StoryController extends Controller
             array(
                 'Story Title' => $input['form_story']['form_story_cards_title'],
                 'Story Description' => $input['form_story']['form_description'],
-                'Story Footer' => $input['form_story']['form_footer'],
                 'Story Photo' => $input['form_story']['form_photo'],
 				'Story Facebook Photo' => $input['form_story']['form_photo_facebook'],
 				'Story Content' => $input['form_story']['content']
@@ -102,7 +101,6 @@ class StoryController extends Controller
             array(
                 'Story Title' => 'required',
                 'Story Description' => 'required',
-                'Story Footer' => 'required',
                 'Story Photo' => 'required',
 				'Story Facebook Photo' => 'required',
 				'Story Content' => 'required'
@@ -151,7 +149,7 @@ class StoryController extends Controller
 				
 				$id = \DB::table('posts')->insertGetId(
 					['user_id' => \Auth::user()->id, 'description_title' => $input['form_story']['form_story_cards_title'], 'description_text' => $input['form_story']['form_description'],
-					'description_footer' => $input['form_story']['form_footer'], 'content' => $input['form_story']['content'], 'description_image' => $uniqid3.".jpeg", 'image_facebook' => $uniqid4.".jpeg",
+					'content' => $input['form_story']['content'], 'description_image' => $uniqid3.".jpeg", 'image_facebook' => $uniqid4.".jpeg",
 					'type' => 'story', 'isDraft' => 'publish', 'tags' => $tags, 'permission' => 'public', 'options' => $options]
 				);
                 return \Response::json(['success' => true, 'id' => $id]);

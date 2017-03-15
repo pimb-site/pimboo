@@ -226,6 +226,7 @@ $(document).ready(function () {
 	$('#publish').click(function() {
 		$('.isDraft').val('publish');
 		var alertHtml = '<div class="warning-text"><b>Warning!</b></div> <ul>';
+		tinyMCE.get("content_textarea").save();
         $('#form_upload_cards').ajaxSubmit({
             dataType: "json",
             success: function (data) {
@@ -247,6 +248,7 @@ $(document).ready(function () {
 	$('.btn-publish').click(function() {
 		$('.isDraft').val('publish');
 		var alertHtml = '<div class="warning-text"><b>Warning!</b></div> <ul>';
+		tinyMCE.get("content_textarea").save();
         $('#form_upload_cards').ajaxSubmit({
             dataType: "json",
             success: function (data) {
