@@ -48,6 +48,12 @@ Route::post('vote_rankedlist', 'RankedlistController@voteRankedList');
 Route::post('auth/register', 'Auth\AuthController@postRegister');
 Route::get('auth/activate','Auth\AuthController@activate');
 
+// Video to GIF
+Route::post('upload_end_gif', 'VideoGifController@uploadEndGIF');
+Route::post('upload_gif', 'VideoGifController@uploadGIF');
+//Route::get('video_to_gif_test', 'VideoGifController@getPage');
+Route::get('video_to_gif', 'VideoGifController@addGIF');
+
 
 //user pages
 Route::get('user/account', 'UserController@getAccount');
