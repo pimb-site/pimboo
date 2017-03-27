@@ -28,8 +28,20 @@ class VideoGifController extends Controller
             mkdir("temp/".\Session::getId());
         }
         $temp_file = \Session::getId()."/".uniqid() . '.gif';
-        $file = "temp/".$temp_file;
-		$success = file_put_contents($file, $data);
+        $gif_path = "temp/".$temp_file;
+		$success = file_put_contents($gif_path, $data);
+		
+		$main_gif = \Input::get('gif_main');
+		if($main_gif != "" && file_exists('temp/'.$main_gif)) {
+			$main_path = "/var/www/pimboobeta.com/public/temp/";
+			$path_gif = \Session::getId()."/".uniqid() . '.gif';
+			$command_line = "convert -loop 0 ".$main_path.$main_gif." ".$main_path.$temp_file." ".$main_path.$path_gif;
+
+			$success = shell_exec($command_line);
+
+			if($success) $temp_file = $path_gif;
+		}
+		
 		if($success) {
             return \Response::json(['success' => true, 'file' => $temp_file]);
         }

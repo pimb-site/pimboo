@@ -152,6 +152,10 @@ $(document).ready(function () {
 	    },
     });
 });
+	
+	
+	
+	
 	var worker = new Worker('/js/mainGIF.js');
 
 	var URL = window.URL || window.webkitURL;
@@ -163,11 +167,16 @@ $(document).ready(function () {
 
 	worker.addEventListener('message', function(e) {
 		document.getElementById("output").innerHTML = "Done. Look below.";
-		image.src = e.data;
+	
+		//image.src = e.data;
+		
+		gif_main = $('.gif-input').val();
+		
 		$.post(
 		  "/upload_gif",
 		  {
 			gif: e.data,
+			gif_main: gif_main,
 			_token: token
 		  },
 		  onSuccessUploadGIF
@@ -176,7 +185,9 @@ $(document).ready(function () {
 	
 	function onSuccessUploadGIF(data) {
 		if(data.success == true) {
+			
 			$('.gif-input').val(data.file);
+			$('#image').attr('src', '/temp/'+data.file);
 		}
 	}
 

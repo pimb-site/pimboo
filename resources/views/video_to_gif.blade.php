@@ -35,8 +35,12 @@
 					<input type="range" style="display: none;" id="speed" min="30" max="1000" step="1" value="100">
 				</div>
 				<canvas id="c" style="display:none;"></canvas>
+				<!--<div class="youtube-clip-block">
+					<input type="text" placeholder="OR enter URL Youtube clip" class="url-youtube-clip" autocomplete="off">
+					<button type="button" class="url-youtube-button">OK</button>
+				</div>-->
 				<div class="status"> STATUS: <div id="output">Video not uploaded</div></div>
-				<video id="v" controls="" loop="" autoplay="" muted></video>
+				<video id="v" controls="" loop="" autoplay="" muted ></video>
 				<div class="editor" data-id="1">
 					<div class="front-card" data-id="1">
 						<img class="result-gif" id="image" src="" alt="" width="100%" height="100%" >
@@ -52,6 +56,7 @@
 				<input name="form_flip[form_photo_facebook]" type="hidden" value="" class="input-form-photo-facebook" autocomplete="off">
 				<input name="form_flip[gif]" type="hidden" value="" class="gif-input" autocomplete="off">
 			</div>
+			
 			<div class="right">
 				<div class="title">SOCIAL APPEARANCE</div>
 				<div class="sub_title">How your content will appear on social media</div>

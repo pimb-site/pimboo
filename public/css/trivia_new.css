@@ -1128,6 +1128,36 @@ video {
 	font-size: 18px;
 }
 
+.youtube-clip-block {
+	position:relative;
+}
+.url-youtube-clip {
+	width: 350px;
+	height: 35px;
+	color: #6e8dc9;
+	padding-left: 20px;
+	border-radius: 5px;
+	border: 2px solid #afc0e1;
+	margin-left:auto;
+	margin-right:auto;
+	display:block;
+	margin-top: 10px;
+	outline:none;
+}
+
+.url-youtube-button {
+	width: 35px;
+	height:35px;
+	color: #fff;
+	background-color: #123880;
+	border: 0 none;
+	border-radius: 0 5px 5px 0px;
+	position:absolute;
+	top:0;
+	right:201px;
+	outline:none;
+	
+}
 .add_plus{border:0;background-image:url(/img/plus-icon.png);background-repeat:no-repeat;width:90px;height:90px;margin-left:329px;margin-top:21px;float:left; cursor:pointer; }
 .front_card_question{background-image:url(/img/question-icon.png);background-position:159px 14px;text-align:left;padding-left:41px;padding-top:5px;letter-spacing:-.5px}
 .back_card_question{background-image:url(/img/result-icon.png);background-position:159px 14px;text-align:left;padding-left:41px;padding-top:5px;letter-spacing:-.5px}
