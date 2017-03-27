@@ -16,13 +16,11 @@
 	<![endif]-->
 @endsection
 
-@section('content')
+@section('tool_content')
 	<div class="wrap">
-		<div class="panel-heading"><a href="/view_flip_cards">View flip cards</a></div>
-		<?php $data_id = 1 ?>
 		<?php $uncontent = unserialize($content->content) ?>
 		<div class="post">
-			<div class="title">{!! $content->description_title !!}</div>
+			<?php $data_id = 1 ?>
 			@foreach($uncontent as $key => $value)
 				<div class="set-number">{!! $data_id !!}</div>
 				<div class="item_title"> {!! $value['item_title'] !!} </div>
@@ -53,7 +51,7 @@
 					<?php $data_id++ ?>
 				</div>
 			@endforeach
-			<div class="footer">{!! $content->description_footer !!}</div>
+			{!! $content->description_footer !!}
 		</div>
 	</div>
 @endsection

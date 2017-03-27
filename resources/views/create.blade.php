@@ -18,6 +18,16 @@
 				</div>
 				<div class="creation story">
 					<div class="left">
+						<div class="name">GIF Maker</div>
+						<div class="text">Create Your Own Fun GIF's & Share!</div>
+					</div>
+					<div class="right">
+						<a class="butt" href="/video_to_gif">CREATE</a>
+						<a class="butt more_info">MORE INFO</a>
+					</div>
+				</div>
+				<div class="creation story">
+					<div class="left">
 						<div class="name">RANKED LIST</div>
 						<div class="text">Create Fun "Top Ten" Lists That Everyone Loves to Read & Share!</div>
 					</div>
