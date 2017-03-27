@@ -16,9 +16,9 @@
 	<![endif]-->
 	
 @endsection
-@section('content')
+
+@section('tool_content')
 <div class="wrap">
-	<div class="panel-heading">View GIF</div>
 	<?php $uncontent = unserialize($content->content) ?>
 		@foreach($uncontent as $key=>$value)
 		<div class="post">

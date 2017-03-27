@@ -64,7 +64,7 @@
 		<?php $data_id++ ?>
 		@endforeach
 		@endforeach
-		<div class="footer">{!! $content->description_footer !!}</div>
+		{!! $content->description_footer !!}
 	</div>
 	</div>
 @endsection
