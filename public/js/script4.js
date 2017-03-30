@@ -164,27 +164,6 @@ $(document).ready(function () {
         });
 	});
 	
-	$('#publish').click(function() {
-		$('.isDraft').val('publish');
-		var alertHtml = '<div class="warning-text"><b>Warning!</b></div> <ul>';
-        $('#form_upload_cards').ajaxSubmit({
-            dataType: "json",
-            success: function (data) {
-                if (data.success == true) {
-					url = "/success/"+data.id;
-					$( location ).attr("href", url);
-                } else {
-                    $.each(data.errors, function (i, value) {
-                        alertHtml += '<li>' + value + '</li>';
-                    });
-                    alertHtml += '</ul>';
-					$('.modal-alert').html(alertHtml);
-					$('.modal-alert').modal().open();
-                }
-            }
-        });
-	});
-	
 	$('.btn-save').click(function() {
 		$('.isDraft').val('save');
 		
@@ -196,26 +175,17 @@ $(document).ready(function () {
 					var alertHtml = '<div class="success-save"><center>Trivia Quiz successfully saved!</center></div>';
 						$('.modal-alert').html(alertHtml);
 						$('.modal-alert').modal().open();
+				} else {
+					var alertHtml = '<div class="warning-text"><b>Warning!</b></div> <ul>';
+					$.each(data.errors, function (i, value) {
+                        alertHtml += '<li>' + value + '</li>';
+                    });
+                    alertHtml += '</ul>';
+					$('.modal-alert').html(alertHtml);
+					$('.modal-alert').modal().open();
 				}
 			}
 		});
-	});
-	
-	$('#save_draft').click(function() {
-		$('.isDraft').val('save');
-		
-		$('#form_upload_cards').ajaxSubmit({
-			dataType: "json",
-			success: function (data) {
-				if (data.success == true) {
-					$('.postID').val(data.id);
-					var alertHtml = '<div class="success-save"><center>Trivia Quiz successfully saved!</center></div>';
-						$('.modal-alert').html(alertHtml);
-						$('.modal-alert').modal().open();
-				}
-			}
-		});
-		
 	});
 	
 	$('#preview').click(function() {
@@ -255,8 +225,11 @@ $(document).ready(function () {
 							html_trivia += '<div class="trivia_item_title">QUESTION</div>';
 							html_trivia += '<div class="trivia_main_wrap" data-id="'+i+'">';
 							
+							if(value.caption1 == null) value.caption1 = "";
+							if(value.caption2 == null) value.caption2 = "";
+
 							if(value.type_card_front == "image") {
-								if(value.front_card == "") value.front_card = "../img/no-img.jpg";
+								if(value.front_card == null) value.front_card = "../img/no-img.jpg";
 								html_trivia += '<div class="trivia_main_front" data-id="'+i+'"><img class="image-card" style="position:absolute;" src="temp/'+value.front_card+'" />';
 								html_trivia += '<div class="trivia_main_caption">'+value.caption1+'</div></div>';
 							} else {
@@ -265,7 +238,7 @@ $(document).ready(function () {
 							}
 							
 							if(value.type_card_back == "image") {
-								if(value.back_card == "") value.back_card = "../img/no-img.jpg";
+								if(value.back_card == null) value.back_card = "../img/no-img.jpg";
 								html_trivia += '<div class="trivia_main_back" data-id="'+i+'"><img class="image-card" style="position:absolute;" src="temp/'+value.back_card+'" />';
 								html_trivia += '<div class="trivia_main_caption">'+value.caption2+'</div></div>';
 							} else {
@@ -279,8 +252,8 @@ $(document).ready(function () {
 							html_trivia += '</div>';
 							$(".trivia_main_footer").before(html_trivia);
 							
-							if(value.answer1 == "") value.answer1 = 'button #1';
-							if(value.answer2 == "") value.answer2 = 'button #2';
+							if(value.answer1 == null) value.answer1 = 'button #1';
+							if(value.answer2 == null) value.answer2 = 'button #2';
 							
 							if(value.answers_type == "multi" ) {
 								
@@ -583,11 +556,6 @@ $(document).ready(function () {
 			$('.button-type2[data-id="'+current_question+'"]').addClass('answer-button-inactive');
 			answer++;
 			score++;
-			// if(answer == questions) {
-				// $('#score').html('Congratulations! You got: '+score+'/'+questions);
-				// $('#score').css('display', 'block');
-				// location.href = "#score";
-			// }
 		} else {
 			$('.button-type1[data-id="'+current_question+'"]').prop( 'disabled', true );
 			$('.button-type2[data-id="'+current_question+'"]').prop( 'disabled', true );
@@ -600,11 +568,6 @@ $(document).ready(function () {
 				$('.button-type2[data-id="'+current_question+'"]').css({'opacity': '0.3'});
 			} else $('.button-type2[data-id="'+current_question+'"]').addClass('answer-button-inactive');
 			answer++;
-			// if(answer == questions) {
-				// $('#score').html('Congratulations! You got: '+score+'/'+questions);
-				// $('#score').css('display', 'block');
-				// location.href = "#score";
-			// }
 		}
 		if(answer == questions) {
 						

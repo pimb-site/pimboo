@@ -40,6 +40,22 @@ class TriviaController extends Controller
 		
 		if(isset($input['isDraft'])) {
 			if($input['isDraft'] == 'save') {
+
+				$validator = \Validator::make(
+		            array(
+		                'Trivia Title' => $input['form_flip']['form_flip_cards_title'],
+		                'Trivia Description' => $input['form_flip']['form_description'],
+		                'Trivia Footer' => $input['form_flip']['form_footer']
+		            ),
+		            array(
+		                'Trivia Title' => 'required',
+		                'Trivia Description' => 'required',
+		                'Trivia Footer' => 'required'
+		            )
+		        );
+		
+
+        		if ($validator->fails()) return \Response::json(['success' => false, 'errors' => $validator->errors()]);
 				
 				// TAGS
 				$tags = [];
@@ -151,46 +167,46 @@ class TriviaController extends Controller
 						'result_photo_img' => $uniqid_result_photo,
 						'result_photo_title' => $result_photo_title
                     ];
+                }
 					
-					$options = [];
-					if(isset($input['question_order'])) {
-						if($input['question_order'] == 'random') $question_order = 'random';
-						else $question_order = 'norandom';
-					} else $question_order = 'random';
+				$options = [];
+				if(isset($input['question_order'])) {
+					if($input['question_order'] == 'random') $question_order = 'random';
+					else $question_order = 'norandom';
+				} else $question_order = 'random';
 					
-					if(isset($input['answer_order'])) {
-						if($input['answer_order'] == 'random') $answer_order = 'random';
-						else $answer_order = 'norandom';
-					} else $answer_order = 'random';
+				if(isset($input['answer_order'])) {
+					if($input['answer_order'] == 'random') $answer_order = 'random';
+					else $answer_order = 'norandom';
+				} else $answer_order = 'random';
 					
-					$options = ['question_order' => $question_order, 'answer_order' => $answer_order];
-					$options = serialize($options);
+				$options = ['question_order' => $question_order, 'answer_order' => $answer_order];
+				$options = serialize($options);
 					
-					if(isset($input['postID'])) {
-						$postID = (int)$input['postID'];
-						if(is_int($postID) && $postID > 0) {
-							$current_owner = \DB::select('select user_id from posts where id = ? and type = ?', [$postID, 'trivia']);
-							if(count($current_owner != 0)) {
-								if($current_owner[0]->user_id == \Auth::user()->id) {
-									\DB::table('posts')
-										->where('id', $postID)
-										->update(['description_title' => $input['form_flip']['form_flip_cards_title'], 'description_text' => $input['form_flip']['form_description'],
-												'description_footer' => $input['form_flip']['form_footer'], 'content' => serialize($content), 'description_image' => $photo, 'image_facebook' => $photo_fb,
-												'type' => 'trivia', 'isDraft' => 'save', 'tags' => $tags, 'permission' => 'public', 'options' => $options
-											]);
-									return \Response::json(['success' => true, 'id' => $postID]);
-								}
+				if(isset($input['postID'])) {
+					$postID = (int)$input['postID'];
+					if(is_int($postID) && $postID > 0) {
+						$current_owner = \DB::select('select user_id from posts where id = ? and type = ?', [$postID, 'trivia']);
+						if(count($current_owner != 0)) {
+							if($current_owner[0]->user_id == \Auth::user()->id) {
+								\DB::table('posts')
+									->where('id', $postID)
+									->update(['description_title' => $input['form_flip']['form_flip_cards_title'], 'description_text' => $input['form_flip']['form_description'],
+											'description_footer' => $input['form_flip']['form_footer'], 'content' => serialize($content), 'description_image' => $photo, 'image_facebook' => $photo_fb,
+											'type' => 'trivia', 'isDraft' => 'save', 'tags' => $tags, 'permission' => 'public', 'options' => $options
+								]);
+								return \Response::json(['success' => true, 'id' => $postID]);
 							}
 						}
 					}
-					
-					$id = \DB::table('posts')->insertGetId(
-						['user_id' => \Auth::user()->id, 'description_title' => $input['form_flip']['form_flip_cards_title'], 'description_text' => $input['form_flip']['form_description'],
-						'description_footer' => $input['form_flip']['form_footer'], 'content' => serialize($content), 'description_image' => $photo, 'image_facebook' => $photo_fb,
-						'type' => 'trivia', 'isDraft' => 'save', 'tags' => $tags, 'permission' => 'public', 'options' => $options]
-					);
-					return \Response::json(['success' => true, 'id' => $id]);
 				}
+					
+				$id = \DB::table('posts')->insertGetId(
+					['user_id' => \Auth::user()->id, 'description_title' => $input['form_flip']['form_flip_cards_title'], 'description_text' => $input['form_flip']['form_description'],
+					'description_footer' => $input['form_flip']['form_footer'], 'content' => serialize($content), 'description_image' => $photo, 'image_facebook' => $photo_fb,
+					'type' => 'trivia', 'isDraft' => 'save', 'tags' => $tags, 'permission' => 'public', 'options' => $options]
+				);
+				return \Response::json(['success' => true, 'id' => $id]);
 				
 			} else if($input['isDraft'] == 'preview') {
 				
