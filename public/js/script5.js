@@ -130,13 +130,17 @@ $(document).ready(function () {
 						
 						$.each(data.cards, function (i, value) {
 							
+							if(value.post_title == null) value.post_title = "";
+
 							var html_trivia = '<div class="trivia_main_cards" data-id="'+i+'">';
 							html_trivia += '<div class="vote"><div class="vote-button"></div><b>+0</b></div>';
 							html_trivia += '<div class="trivia_item_title">'+value.post_title+'</div>';
 							html_trivia += '<div class="trivia_main_wrap" data-id="'+i+'">';
 							
+							if(value.caption1 == null) value.caption1 = "";
+
 							if(value.type_card_front == "image") {
-								if(value.front_card == "") value.front_card = "../img/no-img.jpg";
+								if(value.front_card == null) value.front_card = "../img/no-img.jpg";
 								html_trivia += '<div class="trivia_main_front" data-id="'+i+'"><img class="image-card" style="position:absolute;" src="temp/'+value.front_card+'" />';
 								html_trivia += '<div class="trivia_main_caption">'+value.caption1+'</div></div>';
 							} else {
@@ -165,49 +169,20 @@ $(document).ready(function () {
 					var alertHtml = '<div class="success-save"><center>Ranked list successfully saved!</center></div>';
 						$('.modal-alert').html(alertHtml);
 						$('.modal-alert').modal().open();
-				}
-			}
-		});
-	});
-	
-	$('#save_draft').click(function() {
-		$('.isDraft').val('save');
-		
-		$('#form_upload_cards').ajaxSubmit({
-			dataType: "json",
-			success: function (data) {
-				if (data.success == true) {
-					$('.postID').val(data.id);
-					var alertHtml = '<div class="success-save"><center>Ranked list successfully saved!</center></div>';
-						$('.modal-alert').html(alertHtml);
-						$('.modal-alert').modal().open();
-				}
-			}
-		});
-	});
-	
-	$('.btn-publish').click(function() {
-		$('.isDraft').val('publish');
-		var alertHtml = '<div class="warning-text"><b>Warning!</b></div> <ul>';
-        $('#form_upload_cards').ajaxSubmit({
-            dataType: "json",
-            success: function (data) {
-                if (data.success == true) {
-					url = "/success/"+data.id;
-					$( location ).attr("href", url);
-                } else {
+				} else {
+					alertHtml = '<div class="warning-text"><b>Warning!</b></div> <ul>';
                     $.each(data.errors, function (i, value) {
                         alertHtml += '<li>' + value + '</li>';
                     });
                     alertHtml += '</ul>';
 					$('.modal-alert').html(alertHtml);
 					$('.modal-alert').modal().open();
-                }
-            }
-        });
+				}
+			}
+		});
 	});
 	
-	$('#publish').click(function() {
+	$('.btn-publish').click(function() {
 		$('.isDraft').val('publish');
 		var alertHtml = '<div class="warning-text"><b>Warning!</b></div> <ul>';
         $('#form_upload_cards').ajaxSubmit({

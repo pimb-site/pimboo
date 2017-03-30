@@ -65,6 +65,22 @@ class RankedlistController extends Controller
 		if(isset($input['isDraft'])) {
 			if($input['isDraft'] == 'save') {
 				
+
+				$validator = \Validator::make(
+		            array(
+		                'Ranked list Title' => $input['form_flip']['form_flip_cards_title'],
+		                'Ranked list Description' => $input['form_flip']['form_description'],
+		                'Ranked list Footer' => $input['form_flip']['form_footer']
+		            ),
+		            array(
+		                'Ranked list Title' => 'required',
+		                'Ranked list Description' => 'required',
+		                'Ranked list Footer' => 'required'
+					)
+		        );
+				
+				if ($validator->fails()) return \Response::json(['success' => false, 'errors' => $validator->errors()]);
+
 				// TAGS
 				$tags = [];
 				if(isset($input['tags'])) {
