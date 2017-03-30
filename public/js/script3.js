@@ -226,7 +226,9 @@ $(document).ready(function () {
 	$('#publish').click(function() {
 		$('.isDraft').val('publish');
 		var alertHtml = '<div class="warning-text"><b>Warning!</b></div> <ul>';
-		tinyMCE.get("content_textarea").save();
+		if (tinymce_init == 1) {
+			tinyMCE.get("content_textarea").save();
+		}
         $('#form_upload_cards').ajaxSubmit({
             dataType: "json",
             success: function (data) {
@@ -247,8 +249,15 @@ $(document).ready(function () {
 	
 	$('.btn-publish').click(function() {
 		$('.isDraft').val('publish');
+<<<<<<< HEAD
 		alertHtml = '<div class="warning-text"><b>Warning!</b></div> <ul>';
 		//tinyMCE.get("content_textarea").save();
+=======
+		var alertHtml = '<div class="warning-text"><b>Warning!</b></div> <ul>';
+		if (tinymce_init == 1) {
+			tinyMCE.get("content_textarea").save();
+		}
+>>>>>>> origin/master
         $('#form_upload_cards').ajaxSubmit({
             dataType: "json",
             success: function (data) {
