@@ -68,6 +68,7 @@ $(document).ready(function () {
 						$('.flipcard_main_tags b').append(data.tags.join());
 						
 						$.each(data.cards, function (i, value) {
+							if(value.item_title == null) value.item_title = "";
 							$(".flipcard_main_footer").before('<div class="flipcard_main_cards">'
 								+'<div class="flipcard_item_title">'+value.item_title+'</div>'
 								+'<div class="flipcard_main_wrap" data-id="'+i+'">'
@@ -75,7 +76,7 @@ $(document).ready(function () {
 								+'<div class="flipcard_main_back" data-id="'+i+'"></div>'
 								+'</div></div></div>');
 							if(value.type_front == "image") {
-								if(value.front_card == '') value.front_card = "../img/no-img.jpg";
+								if(value.front_card == null) value.front_card = "../img/no-img.jpg";
 								$('.flipcard_main_front[data-id="'+i+'"]').append('<img class="image-card" src="temp/'+value.front_card+'" />');
 							} else {
 								switch(value.theme_front) {
@@ -105,7 +106,7 @@ $(document).ready(function () {
 							}
 							
 							if(value.type_back == "image") {
-								if(value.back_card == '') value.back_card = "../img/no-img.jpg";
+								if(value.back_card == null) value.back_card = "../img/no-img.jpg";
 								$('.flipcard_main_back[data-id="'+i+'"]').append('<img class="image-card" src="temp/'+value.back_card+'" />');
 								
 							} else {
@@ -249,15 +250,11 @@ $(document).ready(function () {
 	
 	$('.btn-publish').click(function() {
 		$('.isDraft').val('publish');
-<<<<<<< HEAD
-		alertHtml = '<div class="warning-text"><b>Warning!</b></div> <ul>';
-		//tinyMCE.get("content_textarea").save();
-=======
+
 		var alertHtml = '<div class="warning-text"><b>Warning!</b></div> <ul>';
 		if (tinymce_init == 1) {
 			tinyMCE.get("content_textarea").save();
 		}
->>>>>>> origin/master
         $('#form_upload_cards').ajaxSubmit({
             dataType: "json",
             success: function (data) {
