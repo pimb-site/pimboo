@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -49,9 +48,9 @@ Route::post('auth/register', 'Auth\AuthController@postRegister');
 Route::get('auth/activate','Auth\AuthController@activate');
 
 // Video to GIF
+Route::post('upload_yb_gif', 'VideoGifController@youtubeGIF');
 Route::post('upload_end_gif', 'VideoGifController@uploadEndGIF');
 Route::post('upload_gif', 'VideoGifController@uploadGIF');
-//Route::get('video_to_gif_test', 'VideoGifController@getPage');
 Route::get('video_to_gif', 'VideoGifController@addGIF');
 
 

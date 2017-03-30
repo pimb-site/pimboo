@@ -179,6 +179,21 @@ class FlipcardsController extends Controller
 				return \Response::json(['content' => $content_main, 'cards' => $content_other, 'tags' => $tags]);
 			} else if($input['isDraft'] == 'save') {
 				
+				$validator = \Validator::make(
+		            array(
+		                'Flip Cards Title' => $input['form_flip']['form_flip_cards_title'],
+		                'Flip Cards Description' => $input['form_flip']['form_description'],
+		                'Flip Cards Footer' => $input['form_flip']['form_footer']
+		            ),
+		            array(
+		                'Flip Cards Title' => 'required',
+		                'Flip Cards Description' => 'required',
+		                'Flip Cards Footer' => 'required'
+		            )
+		        );
+
+				if ($validator->fails()) return \Response::json(['success' => false, 'errors' => $validator->errors()]);
+
 				$tags = [];
 				if(isset($input['tags'])) {
 					if(count($input['tags']) > 0) {
@@ -440,6 +455,8 @@ class FlipcardsController extends Controller
 							}
 						}
 					}
+					
+					
 					
 					$id = \DB::table('posts')->insertGetId(
 						['user_id' => \Auth::user()->id, 'description_title' => $input['form_flip']['form_flip_cards_title'], 'description_text' => $input['form_flip']['form_description'],

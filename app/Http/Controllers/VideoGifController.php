@@ -15,6 +15,50 @@ class VideoGifController extends Controller
         else return view('video_to_gif');
 	}
 	
+
+	public function youtubeGIF() {
+	if(\Auth::guest()) return view('auth/login');
+
+	$input = \Input::all();
+
+	$url = $input['video_url'];
+	$main_gif = $input['gif_main'];
+	$start_time = $input['start_time'];
+
+	if (!filter_var($url, FILTER_VALIDATE_URL) === false) {
+		$content = @file_get_contents('https://www.youtube.com/oembed?url='.$url.'&format=json');
+		$array_information = json_decode($content, true);
+		if(is_array($array_information)) {
+			
+			if($start_time < 0) $start_time = 0;
+			
+			if(!file_exists("temp/".\Session::getId())) {
+            			mkdir("temp/".\Session::getId());
+        		}
+			
+			$uniq_name = uniqid();
+			$command_line_download = 'youtube-dl -f 134 -o "/var/www/pimboobeta.com/public/uploads/'.$uniq_name.'.%(ext)s" '.$url;
+			shell_exec($command_line_download);
+			$uniqid = uniqid();
+			$command_line_create   = 'ffmpeg -t 2 -ss 00:00:'.$start_time.' -i /var/www/pimboobeta.com/public/uploads/'.$uniq_name.'.mp4 /var/www/pimboobeta.com/public/temp/'.\Session::getId().'/'.$uniqid.'.gif';
+			shell_exec($command_line_create);
+
+			$temp_file =  \Session::getId()."/".$uniqid . '.gif';
+
+			if($main_gif != "" && file_exists('temp/'.$main_gif)) {
+				$main_path = "/var/www/pimboobeta.com/public/temp/";
+				$path_gif = \Session::getId()."/".uniqid() . '.gif';
+				$command_line = "convert -loop 0 ".$main_path.$main_gif." ".$main_path.\Session::getId()."/".$uniqid.".gif ".$main_path.$path_gif;
+				shell_exec($command_line);
+
+				$temp_file = $path_gif;
+			}
+
+			return \Response::json(['success' => true, 'file' => $temp_file]);
+		}
+	}
+	}
+
 	public function uploadGIF() {
 		if(\Auth::guest()) return view('auth/login');
 		$base64 = \Input::get('gif');
@@ -37,9 +81,10 @@ class VideoGifController extends Controller
 			$path_gif = \Session::getId()."/".uniqid() . '.gif';
 			$command_line = "convert -loop 0 ".$main_path.$main_gif." ".$main_path.$temp_file." ".$main_path.$path_gif;
 
-			$success = shell_exec($command_line);
+			shell_exec($command_line);
 
-			if($success) $temp_file = $path_gif;
+			
+			$temp_file = $path_gif;
 		}
 		
 		if($success) {

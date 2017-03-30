@@ -35,10 +35,10 @@
 					<input type="range" style="display: none;" id="speed" min="30" max="1000" step="1" value="100">
 				</div>
 				<canvas id="c" style="display:none;"></canvas>
-				<!--<div class="youtube-clip-block">
+				<div class="youtube-clip-block">
 					<input type="text" placeholder="OR enter URL Youtube clip" class="url-youtube-clip" autocomplete="off">
 					<button type="button" class="url-youtube-button">OK</button>
-				</div>-->
+				</div>
 				<div class="status"> STATUS: <div id="output">Video not uploaded</div></div>
 				<video id="v" controls="" loop="" autoplay="" muted ></video>
 				<div class="editor" data-id="1">
@@ -140,6 +140,18 @@
 			<div class="img-credentials">
 				<input type="text" placeholder="Image credentials">
 				<div class="js-upload btn btn_browse btn_browse_small">DONE</div>
+			</div>
+		</div>
+
+		<div id="add-youtube-gif" class="add-youtube-gif" style="display: none;">
+			<div class="popup__body"><div class="js-img"></div></div>
+			<div style="margin: 0 0 5px; text-align: center;">
+				<div class="modal-text-photo">ADD GIF FROM YOUTUBE CLIP</div>
+
+				<div class="youtube-iframe"> </div>
+				<div>Start Time(length gif 2 seconds): <input type="number" value="0" class="start-time-yb"></div>
+				<div><button type="button" class="create-yb-gif">Create GIF</button></div>
+
 			</div>
 		</div>
 		

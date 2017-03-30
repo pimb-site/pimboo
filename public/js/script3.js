@@ -247,8 +247,8 @@ $(document).ready(function () {
 	
 	$('.btn-publish').click(function() {
 		$('.isDraft').val('publish');
-		var alertHtml = '<div class="warning-text"><b>Warning!</b></div> <ul>';
-		tinyMCE.get("content_textarea").save();
+		alertHtml = '<div class="warning-text"><b>Warning!</b></div> <ul>';
+		//tinyMCE.get("content_textarea").save();
         $('#form_upload_cards').ajaxSubmit({
             dataType: "json",
             success: function (data) {
@@ -269,15 +269,22 @@ $(document).ready(function () {
 	
 	$('.btn-save').click(function() {
 		$('.isDraft').val('save');
-		
 		$('#form_upload_cards').ajaxSubmit({
 			dataType: "json",
 			success: function (data) {
 				if (data.success == true) {
 					$('.postID').val(data.id);
-					var alertHtml = '<div class="success-save">Flip cards successfully saved!</div>';
+					alertHtml = '<div class="success-save">Flip cards successfully saved!</div>';
 						$('.modal-alert').html(alertHtml);
 						$('.modal-alert').modal().open();
+				} else {
+					alertHtml = '<div class="warning-text"><b>Warning!</b></div> <ul>';
+                    $.each(data.errors, function (i, value) {
+                        alertHtml += '<li>' + value + '</li>';
+                    });
+                    alertHtml += '</ul>';
+					$('.modal-alert').html(alertHtml);
+					$('.modal-alert').modal().open();
 				}
 			}
 		});

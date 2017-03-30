@@ -13,7 +13,7 @@ class TriviaController extends Controller
 			$content = @file_get_contents('https://www.youtube.com/oembed?url='.$url.'&format=json');
 			$array_information = json_decode($content, true);
 			if(is_array($array_information)) {
-				return \Response::json(['success' => true, 'thumbnail_url' => $array_information['thumbnail_url']]);
+				return \Response::json(['success' => true, 'thumbnail_url' => $array_information['thumbnail_url'], 'html' => $array_information['html']]);
 			}
 		}
 	

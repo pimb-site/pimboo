@@ -1,4 +1,52 @@
-$(document).ready(function () {	
+$(document).ready(function () {
+
+	$('.url-youtube-button').click(function() {
+		var value_yb = $('.url-youtube-clip').val();
+
+		if(value_yb == "") return false;
+
+
+		$.ajax({
+		  url: 'upload/valid_url',
+		  dataType: "json",
+		  type: "POST",
+		  data: {
+		  	video_url: value_yb,
+		  	_token: token
+		  },
+		  success: function(response){
+		    if(response.success == true) {
+		    	$(".youtube-iframe").html(response.html);
+		    	$(".add-youtube-gif").modal().open();
+		    }
+		  }
+		});
+	});
+
+	$(".create-yb-gif").click(function() {
+		clip_yb    = $('.url-youtube-clip').val();
+		gif_main   = $('.gif-input').val();
+		start_time = $('.start-time-yb').val();
+
+		$.ajax({
+		  url: 'upload_yb_gif',
+		  dataType: "json",
+		  type: "POST",
+		  data: {
+		  	gif_main: gif_main,
+		  	video_url: clip_yb,
+		  	start_time: start_time,
+		  	_token: token
+		  },
+		  success: function(response){
+		  	if(response.success == true) {
+		  		$('.gif-input').val(response.file);
+				$('#image').attr('src', '/temp/'+response.file);
+		  	}
+		  }
+		});
+	});
+
 	$('.upl-image-valid').click(function() {
 		value_url = $('.upl-input-image-url').val();
 		$.modal().close();
