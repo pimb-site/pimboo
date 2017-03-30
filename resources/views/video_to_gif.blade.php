@@ -40,7 +40,7 @@
 					<button type="button" class="url-youtube-button">OK</button>
 				</div>
 				<div class="status"> STATUS: <div id="output">Video not uploaded</div></div>
-				<video src="http://r1---sn-5uaezn6k.googlevideo.com/videoplayback?mm=31&mn=sn-5uaezn6k&key=yt6&id=o-AEjskpi54JYUa0AqiYYHck4Fxt-W0LpGV2VmfcZxbd_o&signature=6950DC6E57B1AD85518C4B1ED06AE171F747F313.AE3AFDF9887E41523ED809D2B451B0438BD437A3&lmt=1490574304422687&ip=173.208.91.154&ratebypass=yes&dur=0.000&expire=1490611199&source=youtube&upn=Kzwxb7245cM&sparams=dur%2Cid%2Cip%2Cipbits%2Citag%2Clmt%2Cmime%2Cmm%2Cmn%2Cms%2Cmv%2Cpl%2Cratebypass%2Csource%2Cupn%2Cexpire&ipbits=0&mt=1490589520&itag=43&pl=24&mime=video%2Fwebm&mv=u&ms=au&title=%D0%93%D1%80%D1%83%D0%BF%D0%BF%D1%8B+%D1%81%D0%BC%D0%B5%D1%80%D1%82%D0%B8+-+%D0%9A%D0%BB%D0%B0%D1%81%D1%81+%D0%BD%D0%B0%D1%80%D0%BE%D0%B4%D0%B0" id="v" controls="" loop="" autoplay="" muted ></video>
+				<video id="v" controls="" loop="" autoplay="" muted ></video>
 				<div class="editor" data-id="1">
 					<div class="front-card" data-id="1">
 						<img class="result-gif" id="image" src="" alt="" width="100%" height="100%" >

@@ -84,6 +84,14 @@ $(document).ready(function () {
 					var alertHtml = '<div class="success-save"><center>GIF successfully saved!</center></div>';
 						$('.modal-alert').html(alertHtml);
 						$('.modal-alert').modal().open();
+				} else {
+					alertHtml = '<div class="warning-text"><b>Warning!</b></div> <ul>';
+                    $.each(data.errors, function (i, value) {
+                        alertHtml += '<li>' + value + '</li>';
+                    });
+                    alertHtml += '</ul>';
+					$('.modal-alert').html(alertHtml);
+					$('.modal-alert').modal().open();
 				}
 			}
 		});

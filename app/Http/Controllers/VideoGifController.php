@@ -100,9 +100,18 @@ class VideoGifController extends Controller
 		if(isset($input['isDraft'])) {
 			if($input['isDraft'] == 'save') {
 				
-				
-				if($input['form_flip']['form_flip_cards_title'] == null) $input['form_flip']['form_flip_cards_title'] = "";
-				if($input['form_flip']['form_description'] == null) $input['form_flip']['form_description'] = "";
+				$validator = \Validator::make(
+		            array(
+		                'Title' => $input['form_flip']['form_flip_cards_title'],
+		                'Description' => $input['form_flip']['form_description']
+		            ),
+		            array(
+		                'Title' => 'required',
+		                'Description' => 'required'
+		            )
+		        );
+		
+				if ($validator->fails()) return \Response::json(['success' => false, 'errors' => $validator->errors()]);
 				
 				$tags = [];
 				if(isset($input['tags'])) {
