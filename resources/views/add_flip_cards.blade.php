@@ -204,6 +204,7 @@
 		</div>
 	<script>
 	var token = '{!! csrf_token() !!}';
+	tinymce_init = 0;
 	</script>
 	<script src="/js/footer.min.js"></script>
 	<script src="/js/script3.js"></script>
