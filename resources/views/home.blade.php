@@ -4,42 +4,26 @@ Home
 @endsection
 @section('content')
         <div class="body">
-            <div id="carousel-example-generic" class="carousel carousel-fade slide slider" data-ride="carousel">
-                <div class="carousel-inner" role="listbox">
-                    <div class="item main active" style='background-image: url("/img/slider_pimboo_1.gif");'>
-                        <div class="wrap">
-                            <div class="text">With the help of Pimboo you can be<br>in the hottest regions of the country just one click away</div>
-                            @if (Auth::guest())
-                                <a class="join_now" data-toggle="modal" data-target="#register-modal">JOIN NOW</a>
-                            @else
-                                <a class="join_now" href="/create">JOIN NOW</a>
-                            @endif
+            @if (Auth::guest())
+                <div id="carousel-example-generic" class="carousel slide slider-in" data-ride="carousel">
+                    <div class="carousel-inner" role="listbox">
+                        <div class="item active" style='background-image: url("/img/home_logged_slider_1.png");'>
+                            <div class="wrap">
+                                <div class="text-1">Check Out The Trending Content on Pimboo Below.</div>
+                                <div class="text-2">Post It, Share It, and Profit!</div>
+                                <img src="/img/home_logged_slider_arrow.png">
+                            </div>
                         </div>
-                    </div>
-                    <div class="item flipcard" style='background-image: url("/img/slider_pimboo_2.jpg");'>
-                        <div class="wrap">
-                            <div class="text1">Create Fun Flip cards</div>
-                            <div class="text2">SHARE & PROFIT!</div>
-                            @if (Auth::guest())
-                                <a class="join_now" data-toggle="modal" data-target="#register-modal">JOIN NOW</a>
-                            @else
-                                <a class="join_now" href="/add_flip_cards">JOIN NOW</a>
-                            @endif
-                        </div>
-                    </div>
-                    <div class="item trivia" style='background-image: url("/img/slider_pimboo_3.jpg");'>
-                        <div class="wrap">
-                            <div class="text1">Stump Your Friends With</div>
-                            <div class="text2">Our Trivia Tool & Profit!</div>
-                            @if (Auth::guest())
-                                <a class="join_now" data-toggle="modal" data-target="#register-modal">JOIN NOW</a>
-                            @else
-                                <a class="join_now" href="/add_trivia_quiz">JOIN NOW</a>
-                            @endif
+                        <div class="item" style='background-image: url("/img/home_logged_slider_2.png");'>
+                            <div class="wrap">
+                                <div class="text-1">Check Out The Trending Content on Pimboo Below.</div>
+                                <div class="text-2">Post It, Share It, and Profit!</div>
+                                <img src="/img/home_logged_slider_arrow.png">
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            @endif
             
             <div class="posts-color">
                 <div class="wrap">
@@ -58,34 +42,146 @@ Home
                             <div class="post">
                                 <a class="post_name" href="#">Daniel Dodarrio</a>
                                 <a class="post_text" href="#">Arnold Schwarzenegger Is Lucky The Apprentice Ratings Are So Bad</a>
+                                <div class="posting">
+                                    <span class="removing">
+                                        <span class="sharing">SHARE &<br>PROFIT:</span>
+                                        <a class="facebook" href=""></a>
+                                        <a class="twitter" href=""></a>
+                                        <a class="linkedin" href=""></a>
+                                        <a class="code" href=""></a>
+                                        <button class="get_link">GET LINK</button>
+                                    </span>
+                                    <span class="link">
+                                        <span class="link_in">COPIED TO YOUR<br>CLIPBOARD</span>
+                                        <input type="" name="" value="" />
+                                    </span>
+                                </div>
                             </div>
                             <div class="post">
                                 <a class="post_name" href="#">Tavis Smiley</a>
                                 <a class="post_text" href="#">Review: I Am Not Your Negro Shows How Far We Only Think We’ve Come</a>
+                                <div class="posting">
+                                    <span class="removing">
+                                        <span class="sharing">SHARE &<br>PROFIT:</span>
+                                        <a class="facebook" href=""></a>
+                                        <a class="twitter" href=""></a>
+                                        <a class="linkedin" href=""></a>
+                                        <a class="code" href=""></a>
+                                        <button class="get_link">GET LINK</button>
+                                    </span>
+                                    <span class="link">
+                                        <span class="link_in">COPIED TO YOUR<br>CLIPBOARD</span>
+                                        <input type="" name="" value="" />
+                                    </span>
+                                </div>
                             </div>
                             <div class="post">
                                 <a class="post_name" href="#">Alan Levinovitz</a>
                                 <a class="post_text" href="#">Donald Trump Got Black History Month All Wrong</a>
+                                <div class="posting">
+                                    <span class="removing">
+                                        <span class="sharing">SHARE &<br>PROFIT:</span>
+                                        <a class="facebook" href=""></a>
+                                        <a class="twitter" href=""></a>
+                                        <a class="linkedin" href=""></a>
+                                        <a class="code" href=""></a>
+                                        <button class="get_link">GET LINK</button>
+                                    </span>
+                                    <span class="link">
+                                        <span class="link_in">COPIED TO YOUR<br>CLIPBOARD</span>
+                                        <input type="" name="" value="" />
+                                    </span>
+                                </div>
                             </div>
                             <div class="post">
                                 <a class="post_name" href="#">Daniel Dodarrio</a>
                                 <a class="post_text" href="#">The Myth That Christianity Provides Ethical Guidance</a>
+                                <div class="posting">
+                                    <span class="removing">
+                                        <span class="sharing">SHARE &<br>PROFIT:</span>
+                                        <a class="facebook" href=""></a>
+                                        <a class="twitter" href=""></a>
+                                        <a class="linkedin" href=""></a>
+                                        <a class="code" href=""></a>
+                                        <button class="get_link">GET LINK</button>
+                                    </span>
+                                    <span class="link">
+                                        <span class="link_in">COPIED TO YOUR<br>CLIPBOARD</span>
+                                        <input type="" name="" value="" />
+                                    </span>
+                                </div>
                             </div>
                             <div class="post">
                                 <a class="post_name" href="#">Daniel Dodarrio</a>
                                 <a class="post_text" href="#">Arnold Schwarzenegger Is Lucky The Apprentice Ratings Are So Bad</a>
+                                <div class="posting">
+                                    <span class="removing">
+                                        <span class="sharing">SHARE &<br>PROFIT:</span>
+                                        <a class="facebook" href=""></a>
+                                        <a class="twitter" href=""></a>
+                                        <a class="linkedin" href=""></a>
+                                        <a class="code" href=""></a>
+                                        <button class="get_link">GET LINK</button>
+                                    </span>
+                                    <span class="link">
+                                        <span class="link_in">COPIED TO YOUR<br>CLIPBOARD</span>
+                                        <input type="" name="" value="" />
+                                    </span>
+                                </div>
                             </div>
                             <div class="post">
                                 <a class="post_name" href="#">Tavis Smiley</a>
                                 <a class="post_text" href="#">Review: I Am Not Your Negro Shows How Far We Only Think We’ve Come</a>
+                                <div class="posting">
+                                    <span class="removing">
+                                        <span class="sharing">SHARE &<br>PROFIT:</span>
+                                        <a class="facebook" href=""></a>
+                                        <a class="twitter" href=""></a>
+                                        <a class="linkedin" href=""></a>
+                                        <a class="code" href=""></a>
+                                        <button class="get_link">GET LINK</button>
+                                    </span>
+                                    <span class="link">
+                                        <span class="link_in">COPIED TO YOUR<br>CLIPBOARD</span>
+                                        <input type="" name="" value="" />
+                                    </span>
+                                </div>
                             </div>
                             <div class="post">
                                 <a class="post_name" href="#">Alan Levinovitz</a>
                                 <a class="post_text" href="#">Donald Trump Got Black History Month All Wrong</a>
+                                <div class="posting">
+                                    <span class="removing">
+                                        <span class="sharing">SHARE &<br>PROFIT:</span>
+                                        <a class="facebook" href=""></a>
+                                        <a class="twitter" href=""></a>
+                                        <a class="linkedin" href=""></a>
+                                        <a class="code" href=""></a>
+                                        <button class="get_link">GET LINK</button>
+                                    </span>
+                                    <span class="link">
+                                        <span class="link_in">COPIED TO YOUR<br>CLIPBOARD</span>
+                                        <input type="" name="" value="" />
+                                    </span>
+                                </div>
                             </div>
                             <div class="post">
                                 <a class="post_name" href="#">Daniel Dodarrio</a>
                                 <a class="post_text" href="#">The Myth That Christianity Provides Ethical Guidance</a>
+                                <div class="posting">
+                                    <span class="removing">
+                                        <span class="sharing">SHARE &<br>PROFIT:</span>
+                                        <a class="facebook" href=""></a>
+                                        <a class="twitter" href=""></a>
+                                        <a class="linkedin" href=""></a>
+                                        <a class="code" href=""></a>
+                                        <button class="get_link">GET LINK</button>
+                                    </span>
+                                    <span class="link">
+                                        <span class="link_in">COPIED TO YOUR<br>CLIPBOARD</span>
+                                        <input type="" name="" value="" />
+                                    </span>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -94,32 +94,6 @@
                         <div class="name">Poligraphy Trends 2017</div>
                     </a>
                 </div>
-                <div class="bott">
-                    <div class="left">
-                        <div class="title">RECENT BLOG POSTS</div>
-                        <div class="post">
-                            <a class="name">12 Cool Social Media Companies</a>
-                            <div class="date">January 17, 2017</div>
-                        </div>
-                        <div class="post">
-                            <a class="name">A Breakdown of the Top 4 Social Media Companies</a>
-                            <div class="date">January 17, 2017</div>
-                        </div>
-                        <div class="post">
-                            <a class="name">12 Cool Social Media Companies</a>
-                            <div class="date">January 17, 2017</div>
-                        </div>
-                    </div>
-                    <div class="middle">
-                        <div class="title">PIMBOO UNIVERSITY</div>
-                        <div class="text">All qualified members of Pimboo will receive special training and software tools to help them get more eyeballs on their Pimboo pages- and this is what Pimboo university is all about.</div>
-                    </div>
-                    <div class="right">
-                        <div class="title">WEBINARS</div>
-                        <a class="watch_now">WATCH NOW</a>
-                        <a>INTO TO PIMBOO</a>
-                    </div>
-                </div>
             </div>
         </div>
 @endsection
