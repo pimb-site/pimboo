@@ -71,6 +71,10 @@ Route::get('ref/{id}', 'ReferralController@index');
 
 Route::get('/home', 'HomeController@index');
 
+// channel
+Route::post('/channel-filter', 'ChannelController@filterChannel');
+Route::get('/channel/{id}', 'ChannelController@viewChannel');
+
 // Auth
 Auth::routes();
 
