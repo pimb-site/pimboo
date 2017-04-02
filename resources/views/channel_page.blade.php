@@ -7,7 +7,6 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Pimboo </title>
 	<link href="/css/style.min.css" rel="stylesheet">
-	<link href="/css/channel.css" rel="stylesheet">
 		</head>
 	<body class="channel-page">
 		<header>
