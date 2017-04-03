@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Pimboo - Create a new Flip Cards</title>
+	<title>Pimboo - Create a new STORY</title>
 	<link href="css/style.min.css" rel="stylesheet">
 	<link href="css/flip_new.css" rel="stylesheet">
 	<link href="test/jcrop/jquery.Jcrop.min.css" rel="stylesheet" type="text/css"/>
@@ -21,8 +21,8 @@
 					<div class="top">
 						<div class="photo">CLICK<br>TO ADD PHOTO</div>
 						<div class="text_info">
-							<input type="text" name="form_story[form_story_cards_title]" placeholder="Flip cards title" autocomplete="off">
-							<input type="text" name="form_story[form_description]" placeholder="Flip cards description" autocomplete="off">
+							<input type="text" name="form_story[form_story_cards_title]" placeholder="Story title" autocomplete="off">
+							<input type="text" name="form_story[form_description]" placeholder="Story description" autocomplete="off">
 						</div>
 					</div>
 				</div>
@@ -136,7 +136,7 @@
 		
 		<div id="preview-modal" class="preview-modal" style="display: none;">
 			<div class="main-preview">
-				<div class="title">FLIP CARD PREVIEW</div>
+				<div class="title">STORY PREVIEW</div>
 				<div class="flipcard_main">
 					<div class="flipcard_main_all">
 						<div class="flipcard_main_title"></div>
