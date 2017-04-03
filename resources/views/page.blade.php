@@ -23,7 +23,7 @@
 						Laki tn 30 PK 302-3<br>
 						Tallinn, Estonia 12915<br>
 					</div>
-					<div class="center">@ Pimboo.com. Allrights Reserved.</div>
+					<div class="center">© Copyright Pimboo.com All Rights Reserved.</div>
 					<div class="right">
 						<a class="icon" id="fb_icon_footer"></a>
 						<a class="icon" id="twitter_icon_footer"></a>
