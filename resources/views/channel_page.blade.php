@@ -98,8 +98,8 @@
 						<div class="post"><h1> User has no entries </h1> </div>
 					@endif
 					@foreach($channel_content as $post)
-					<?php 
-					$post_date    = new DateTime($post->date);
+					<?php
+					$post_date    = new DateTime($post->created_at);
 					$current_date = new DateTime();
 					$days = $current_date->format("d") - $post_date->format("d");
 					$month = $current_date->format("m") - $post_date->format("m");
@@ -120,7 +120,7 @@
 							</div>
 						</div>
 						<div class="post-right">
-							<div class="title">{{ $post->description_title }}</div>
+							<div class="title"><a href="/viewID/{{ $post->id }}">{{ $post->description_title }}</a></div>
 							<div class="description">{{ $post->description_text }}</div>
 							<div class="share">Share this <a href="#">{{ $aType[$post->type] }}</a></div>
 							<div class="share-buttons">
@@ -208,8 +208,8 @@
 			<div class="down">
 				<div>
 					<a class="privacy_policy" href="/privacy-policy">Privacy Policy</a>
-					<a class="terms_of_service" href="/privacy-policy">Terms of Service</a>
-					<a class="disclamer" href="/privacy-policy">Disclamer</a>
+					<a class="terms_of_service" href="/terms-of-service">Terms of Service</a>
+					<a class="disclamer" href="/disclaimer">Disclamer</a>
 				</div>
 			</div>
 		</footer>

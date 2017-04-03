@@ -8,7 +8,7 @@
 			<div class="creations">
 				<div class="creation story">
 					<div class="left">
-						<div class="name">STORY</div>
+						<div class="name">Pimboo Story</div>
 						<div class="text">Create Stories That Everyone Loves to Read & Share!</div>
 					</div>
 					<div class="right">
@@ -18,7 +18,7 @@
 				</div>
 				<div class="creation story">
 					<div class="left">
-						<div class="name">GIF Maker</div>
+						<div class="name">Pimboo GIF Maker</div>
 						<div class="text">Create Your Own Fun GIF's & Share!</div>
 					</div>
 					<div class="right">
@@ -28,7 +28,7 @@
 				</div>
 				<div class="creation story">
 					<div class="left">
-						<div class="name">RANKED LIST</div>
+						<div class="name">Pimboo Ranked List</div>
 						<div class="text">Create Fun "Top Ten" Lists That Everyone Loves to Read & Share!</div>
 					</div>
 					<div class="right">
@@ -38,7 +38,7 @@
 				</div>
 				<div class="creation flip_cards">
 					<div class="left">
-						<div class="name">FLIP CARDS</div>
+						<div class="name">Pimboo Flip Cards</div>
 						<div class="text">What is hiding on the other side? Click to reveal.</div>
 					</div>
 					<div class="right">
@@ -48,7 +48,7 @@
 				</div>
 				<div class="creation trivia">
 					<div class="left">
-						<div class="name">TRIVIA CARDS</div>
+						<div class="name">Pimboo Trivia</div>
 						<div class="text">What is hiding on the other side? Click to reveal.</div>
 					</div>
 					<div class="right">

@@ -113,8 +113,8 @@
 			<div class="down">
 				<div>
 					<a class="privacy_policy" href="/privacy-policy">Privacy Policy</a>
-					<a class="terms_of_service" href="/privacy-policy">Terms of Service</a>
-					<a class="disclamer" href="/privacy-policy">Disclamer</a>
+					<a class="terms_of_service" href="/terms-of-service">Terms of Service</a>
+					<a class="disclamer" href="/disclaimer">Disclamer</a>
 				</div>
 			</div>
 		</footer>
