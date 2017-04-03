@@ -23,7 +23,7 @@
 						Pimboo - YOU are the social network!
 					</div>
 				</div>
-				<div class="bott">
+				<!--<div class="bott">
 					<div class="left">
 						<div class="title">RECENT BLOG POSTS</div>
 						<div class="post">
@@ -49,6 +49,7 @@
 						<a>INTO TO PIMBOO</a>
 					</div>
 				</div>
+				-->
             </div>
         </div>
 @endsection
