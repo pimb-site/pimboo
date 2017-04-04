@@ -46,7 +46,7 @@
 						<img class="result-gif" id="image" src="" alt="" width="100%" height="100%" >
 					</div>
 				</div>
-				<div class="down_butts">
+				<div class="down_butts" style="margin-top:20px;">
 					<button type="button" id="save_draft">SAVE DRAFT</button>
 					<button type="button" id="publish">PUBLISH</button>
 				</div>

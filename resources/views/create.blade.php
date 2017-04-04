@@ -16,7 +16,7 @@
 						<a class="butt more_info">MORE INFO</a>
 					</div>
 				</div>
-				<div class="creation story">
+				<div class="creation gifmaker">
 					<div class="left">
 						<div class="name">Pimboo GIF Maker</div>
 						<div class="text">Create Your Own Fun GIF's & Share!</div>
@@ -26,7 +26,7 @@
 						<a class="butt more_info">MORE INFO</a>
 					</div>
 				</div>
-				<div class="creation story">
+				<div class="creation rankedlist">
 					<div class="left">
 						<div class="name">Pimboo Ranked List</div>
 						<div class="text">Create Fun "Top Ten" Lists That Everyone Loves to Read & Share!</div>
