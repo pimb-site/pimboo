@@ -9,7 +9,7 @@
 				<div class="center">
 					<div class="left">
 						<img src="/img/charity.jpg">
-						<button>JOIN PIMBOO YOU NOW!</button>
+						<button type="button" data-toggle="modal" data-target="#register-modal">JOIN PIMBOO YOU NOW!</button>
 					</div>
 					<div class="right">
 						Want to donate a portion or all of your Pimboo revenue to a social cause you believe in? Well, we have a solution for you. With Pimboo Charity, you can donate a portion or even all of your revenues from your social media posts to one of our approved charities.<br>
@@ -23,7 +23,7 @@
 						Pimboo - YOU are the social network!
 					</div>
 				</div>
-				<div class="bott">
+				<!--<div class="bott">
 					<div class="left">
 						<div class="title">RECENT BLOG POSTS</div>
 						<div class="post">
@@ -49,6 +49,7 @@
 						<a>INTO TO PIMBOO</a>
 					</div>
 				</div>
+				-->
             </div>
         </div>
 @endsection

@@ -46,7 +46,7 @@
 						<img class="result-gif" id="image" src="" alt="" width="100%" height="100%" >
 					</div>
 				</div>
-				<div class="down_butts">
+				<div class="down_butts" style="margin-top:20px;">
 					<button type="button" id="save_draft">SAVE DRAFT</button>
 					<button type="button" id="publish">PUBLISH</button>
 				</div>
@@ -109,23 +109,25 @@
 			<div class="up">
 				<div class="wrap">
 					<div class="left">
-						Pimboo OU<br>
-						Stureplan 4C, 4th floor<br>
-						Stockholm, Sweden 114 35<br>
+						Pimboo OÜ<br>
+						Laki tn 30 PK 302-3<br>
+						Tallinn, Estonia 12915<br>
 					</div>
-					<div class="center">@ Pimboo.com. Allrights Reserved.</div>
+					<div class="center">© Copyright Pimboo.com All Rights Reserved.</div>
 					<div class="right">
-						<a class="icon" id="fb_icon_footer"></a>
-						<a class="icon" id="twitter_icon_footer"></a>
-						<a class="icon" id="instagram_icon_footer"></a>
-						<a class="icon" id="youtube_icon_footer"></a>
+						<a class="icon" target="_blank" href="https://www.facebook.com/pimboosocial" id="fb_icon_footer"></a>
+						<a class="icon" target="_blank" href="https://twitter.com/pimboosocial" id="twitter_icon_footer"></a>
+						<a class="icon" target="_blank" href="https://www.instagram.com/pimboosocial/" id="instagram_icon_footer"></a>
+						<a class="icon" target="_blank" href="https://www.youtube.com/channel/UC6mXWfi-sXptlqRJ8Nr7qoQ" id="youtube_icon_footer"></a>
 					</div>
 				</div>
 			</div>
 			<div class="down">
-				<a class="privacy_policy" href="#">Privacy Policy</a>
-				<a class="terms_of_service" href="#">Terms of Service</a>
-				<a class="disclamer" href="#">Disclamer</a>
+				<div>
+					<a class="privacy_policy" href="/privacy-policy">Privacy Policy</a>
+					<a class="terms_of_service" href="/terms-of-service">Terms of Service</a>
+					<a class="disclamer" href="/disclaimer">Disclamer</a>
+				</div>
 			</div>
 		</footer>
 		<div id="modal-alert" class="modal-alert" style="display:none;">

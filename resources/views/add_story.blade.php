@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Pimboo - Create a new Flip Cards</title>
+	<title>Pimboo - Create a new STORY</title>
 	<link href="css/style.min.css" rel="stylesheet">
 	<link href="css/flip_new.css" rel="stylesheet">
 	<link href="test/jcrop/jquery.Jcrop.min.css" rel="stylesheet" type="text/css"/>
@@ -28,7 +28,7 @@
 				</div>
 				<textarea id="content_textarea" name="form_story[content]"></textarea>
 
-				<div class="down_butts">
+				<div class="down_butts" style="margin-top:20px;">
 					<button type="button" id="save_draft" class="btn-save">SAVE DRAFT</button>
 					<button type="button" id="publish">PUBLISH</button>
 				</div>
@@ -97,23 +97,25 @@
 			<div class="up">
 				<div class="wrap">
 					<div class="left">
-						Pimboo OU<br>
-						Stureplan 4C, 4th floor<br>
-						Stockholm, Sweden 114 35<br>
+						Pimboo OÜ<br>
+						Laki tn 30 PK 302-3<br>
+						Tallinn, Estonia 12915<br>
 					</div>
-					<div class="center">@ Pimboo.com. Allrights Reserved.</div>
+					<div class="center">© Copyright Pimboo.com All Rights Reserved.</div>
 					<div class="right">
-						<a class="icon" href="https://www.facebook.com/pimboosocial" id="fb_icon_footer"></a>
-						<a class="icon" href="https://twitter.com/pimboosocial" id="twitter_icon_footer"></a>
-						<a class="icon" href="https://www.instagram.com/pimboosocial/" id="instagram_icon_footer"></a>
-						<a class="icon" href="https://www.youtube.com/channel/UC6mXWfi-sXptlqRJ8Nr7qoQ" id="youtube_icon_footer"></a>
+						<a class="icon" target="_blank" href="https://www.facebook.com/pimboosocial" id="fb_icon_footer"></a>
+						<a class="icon" target="_blank" href="https://twitter.com/pimboosocial" id="twitter_icon_footer"></a>
+						<a class="icon" target="_blank" href="https://www.instagram.com/pimboosocial/" id="instagram_icon_footer"></a>
+						<a class="icon" target="_blank" href="https://www.youtube.com/channel/UC6mXWfi-sXptlqRJ8Nr7qoQ" id="youtube_icon_footer"></a>
 					</div>
 				</div>
 			</div>
 			<div class="down">
-				<a class="privacy_policy" href="/privacy-policy">Privacy Policy</a>
-				<a class="terms_of_service" href="/terms-of-service">Terms of Service</a>
-				<a class="disclamer" href="/disclaimer">Disclamer</a>
+				<div>
+					<a class="privacy_policy" href="/privacy-policy">Privacy Policy</a>
+					<a class="terms_of_service" href="/terms-of-service">Terms of Service</a>
+					<a class="disclamer" href="/disclaimer">Disclamer</a>
+				</div>
 			</div>
 		</footer>
 		<div id="modal-alert" class="modal-alert" style="display:none;">
@@ -134,7 +136,7 @@
 		
 		<div id="preview-modal" class="preview-modal" style="display: none;">
 			<div class="main-preview">
-				<div class="title">FLIP CARD PREVIEW</div>
+				<div class="title">STORY PREVIEW</div>
 				<div class="flipcard_main">
 					<div class="flipcard_main_all">
 						<div class="flipcard_main_title"></div>

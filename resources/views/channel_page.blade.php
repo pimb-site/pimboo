@@ -88,15 +88,17 @@
 				'rankedlist' => 'RANKED LIST',
 				'flipcards'  => 'FLIP CARD',
 				'trivia'     => 'TRIVIA CARD',
-				'story'      => 'STORY',
-				'gif'      => 'GIF'
+				'story'      => 'STORY'
 			];
 			?>
 			<div class="cover-bg"></div>
 			<div class="wrap">
 				<div class="channel-posts">
+					@if(count($channel_content) == 0)
+						<div class="post"><h1> User has no entries </h1> </div>
+					@endif
 					@foreach($channel_content as $post)
-					<?php 
+					<?php
 					$post_date    = new DateTime($post->created_at);
 					$current_date = new DateTime();
 					$days = $current_date->format("d") - $post_date->format("d");

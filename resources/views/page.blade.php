@@ -25,18 +25,18 @@
 					</div>
 					<div class="center">© Copyright Pimboo.com All Rights Reserved.</div>
 					<div class="right">
-						<a class="icon" id="fb_icon_footer"></a>
-						<a class="icon" id="twitter_icon_footer"></a>
-						<a class="icon" id="instagram_icon_footer"></a>
-						<a class="icon" id="youtube_icon_footer"></a>
+						<a class="icon" target="_blank" href="https://www.facebook.com/pimboosocial" id="fb_icon_footer"></a>
+						<a class="icon" target="_blank" href="https://twitter.com/pimboosocial" id="twitter_icon_footer"></a>
+						<a class="icon" target="_blank" href="https://www.instagram.com/pimboosocial/" id="instagram_icon_footer"></a>
+						<a class="icon" target="_blank" href="https://www.youtube.com/channel/UC6mXWfi-sXptlqRJ8Nr7qoQ" id="youtube_icon_footer"></a>
 					</div>
 				</div>
 			</div>
 			<div class="down">
 				<div>
-					<a class="privacy_policy" href="#">Privacy Policy</a>
-					<a class="terms_of_service" href="#">Terms of Service</a>
-					<a class="disclamer" href="#">Disclamer</a>
+					<a class="privacy_policy" href="/privacy-policy">Privacy Policy</a>
+					<a class="terms_of_service" href="/terms-of-service">Terms of Service</a>
+					<a class="disclamer" href="/disclaimer">Disclamer</a>
 				</div>
 			</div>
 		</footer>
