@@ -17,45 +17,43 @@
 @endsection
 
 @section('tool_content')
-
-<?php
-$current_id = 1;
-$flipcards  = unserialize($content->content);
-$themes = [
-	'green' => '#8dc63f',
-	'purple' => '#605ca8',
-	'blue'  => '#009cff',
-	'turquoise' => '#00a99d'
-];
-?>
-<div class="content">
-	<div class="content-flipcard">
-		<div class="description">{{ $content->description_text }} </div>
-		@foreach($flipcards as $key => $value)
-		<div class="card">
-			<div class="info-card">
-				<div class="id-card">{{ $current_id++ }}</div>
-				<div class="title-card">{{ $value['item_title'] }}</div>
-			</div>
-			<div class="flipcard">
-				<div class="sides">
-					@if ($value['text_front'] == "")
-						<div class="front"><img src="/uploads/{{ $value['front_card'] }}"/></div>
-					@else
-
+	
+		<?php $uncontent = unserialize($content->content) ?>
+		<div class="post">
+			<?php $data_id = 1 ?>
+			@foreach($uncontent as $key => $value)
+				<div class="set-number">{!! $data_id !!}</div>
+				<div class="item_title"> {{ $value['item_title'] }} </div>
+				<div class="wraper" data-id="{!! $data_id !!}">
+				
+					@if($value['theme_front'] == 'green') <?php $theme_front = '#8dc63f'; ?>
+					@elseif($value['theme_front'] == 'blue') <?php $theme_front = '#009cff';?>
+					@elseif($value['theme_front'] == 'purple') <?php $theme_front = '#605ca8';?>
+					@elseif($value['theme_front'] == 'turquoise') <?php $theme_front = '#00a99d';?>
 					@endif
-					@if ($value['text_back'] == "")
-						<div class="back"><img src="/uploads/{{ $value['back_card'] }}"/></div>
-					@else
 					
+					@if($value['theme_back'] == 'green') <?php $theme_back = '#8dc63f';?>
+					@elseif($value['theme_back'] == 'blue') <?php $theme_back = '#009cff';?>
+					@elseif($value['theme_back'] == 'purple') <?php $theme_back = '#605ca8';?>
+					@elseif($value['theme_back'] == 'turquoise') <?php $theme_back = '#00a99d'; ?>
 					@endif
+					
+					@if ($value['text_front'] != "")
+						<div class="front" data-id="{!! $data_id !!}" > <div style="width: 640px; height: 480px; color: #fff; background: {!! $theme_front !!}; text-align:center; font-size: 35px; padding-top: 150px;" class="wrap-text">{{ $value['text_front'] }}</div> </div>
+					@else
+						<div class="front" data-id="{!! $data_id !!}" > <img data-id='{!! $data_id !!}' src='/uploads/{!! $value['front_card'] !!}' width='640' height='480' /></div>
+					@endif
+					@if ($value['text_back'] != "")
+						<div class="back" data-id="{!! $data_id !!}"> <div style="width: 640px; height: 480px; color: #fff; background: {!! $theme_back !!}; text-align:center; font-size: 35px; padding-top: 150px;" class="wrap-text">{{ $value['text_back'] }}</div></div>
+					@else
+						<div class="back" data-id="{!! $data_id !!}"> <img data-id='{!! $data_id !!}' src='/uploads/{!! $value['back_card'] !!}' width='640' height='480' /> </div>
+					@endif
+					<?php $data_id++ ?>
 				</div>
-				<div class="click-text">Click to flip</div>
-			</div>
+			@endforeach
+			{{ $content->description_footer }}
 		</div>
-		@endforeach
-	</div>
-</div>
+	
 @endsection
 
 @section('script')

@@ -8,12 +8,13 @@
 @section('content')
         <div class="body">
             <div class="wrap">
-                <div class="title">{{ $content->description_title }}</div>
+                <div class="title">Bostadsbristen skapar affärsmöjligheter skapar</div>
                 <div class="center">
                     <div class="left">
                         <div class="border">
                             <div class="top">
                                 <div class="info">
+                                    <div class="published">Published on February 16, 2016 by <a href="/channel/{{ $content->user_id }}">{{ $user_name }}</a></div>
                                 </div>
                                 <div class="buttons">
                                     <a href="" class="facebook"></a>
