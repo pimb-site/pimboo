@@ -3,6 +3,7 @@ use Illuminate\View\View;
 use App\PostView;
 use Auth;
 use Illuminate\Http\Request;
+use App\User;
 
 class ToolsController extends Controller
 {
@@ -32,7 +33,13 @@ class ToolsController extends Controller
 
         $content = \DB::select('select * from posts where id = ? and isDraft = ?', [$id, 'publish']);
         $content = $content[0];
-        return view('tools.'.$content->type, ['body_class' => 'view', 'content' => $content, 'name' => $content->type]);
+        $user_model = User::where([ ['id', '=', $content->user_id] ])->first();
+        if (isset($user_model->id)) {
+            $user_name = $user_model->name;
+        } else {
+            $user_name = 'Unknown';
+        }
+        return view('tools.'.$content->type, ['body_class' => 'view '.$content->type, 'content' => $content, 'name' => $content->type, 'user_name' => $user_name, 'source_link' => '']);
     }
 	
 	public function successID($id) {

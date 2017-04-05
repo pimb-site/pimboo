@@ -18,7 +18,6 @@
 @endsection
 
 @section('tool_content')
-<div class="wrap">
 	<?php $uncontent = unserialize($content->content) ?>
 		@foreach($uncontent as $key=>$value)
 		<div class="post">
@@ -29,6 +28,4 @@
 			</div>
 		</div>
 		@endforeach
-	</div>
-</div>
 @endsection

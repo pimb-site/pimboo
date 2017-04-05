@@ -34,19 +34,15 @@ $themes = [
 				<div class="title-card">{{ $value['item_title'] }}</div>
 			</div>
 			<div class="flipcard">
-				<div class="sides" data-id="{{ $current_id }}">
+				<div class="sides" data-id="{{ $current_id++ }}">
 					@if ($value['text_front'] == "")
 						<div class="front"><img src="/uploads/{{ $value['front_card'] }}"/></div>
 					@else
 						<div class="front" style="background-color: {{ $themes[$value['theme_front']] }}">{{ $value['text_front'] }}</div>
-					@endif
 					@if ($value['text_back'] == "")
-						<div class="back"><img src="/uploads/{{ $value['back_card'] }}"/></div>
-					@else
 						<div class="back" style="background-color: {{ $themes[$value['theme_back']] }}">{{ $value['text_back'] }}</div>
 					@endif
 				</div>
-				<div class="click-text">Click to flip</div>
 			</div>
 		</div>
 		@endforeach

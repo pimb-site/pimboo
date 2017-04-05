@@ -14,7 +14,7 @@
                         <div class="border">
                             <div class="top">
                                 <div class="info">
-                                    <div class="published">Published on February 16, 2016 by <a href="">Karl Mozart</a></div>
+                                    <div class="published">Published on February 16, 2016 by <a href="/channel/{{ $content->user_id }}">{{ $user_name }}</a></div>
                                 </div>
                                 <div class="buttons">
                                     <a href="" class="facebook"></a>
