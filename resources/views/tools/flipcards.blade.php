@@ -17,7 +17,7 @@
 @endsection
 
 @section('tool_content')
-	<div class="wrap">
+	
 		<?php $uncontent = unserialize($content->content) ?>
 		<div class="post">
 			<?php $data_id = 1 ?>
@@ -53,7 +53,7 @@
 			@endforeach
 			{{ $content->description_footer }}
 		</div>
-	</div>
+	
 @endsection
 
 @section('script')

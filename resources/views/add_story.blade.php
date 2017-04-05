@@ -21,8 +21,8 @@
 					<div class="top">
 						<div class="photo">CLICK<br>TO ADD PHOTO</div>
 						<div class="text_info">
-							<input type="text" name="form_story[form_story_cards_title]" placeholder="Flip cards title" autocomplete="off">
-							<input type="text" name="form_story[form_description]" placeholder="Flip cards description" autocomplete="off">
+							<input type="text" name="form_story[form_story_cards_title]" placeholder="Story title" autocomplete="off">
+							<input type="text" name="form_story[form_description]" placeholder="Story description" autocomplete="off">
 						</div>
 					</div>
 				</div>

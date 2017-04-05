@@ -17,9 +17,9 @@ class ChannelController extends Controller
 				$channel_content = DB::table('posts')
 									->where('user_id', $channel_id)
 									->where('isDraft', 'publish')
-									->orderBy('date', 'desc')
+									->orderBy('created_at', 'desc')
 									->skip(0)->take(10)
-									->get(['description_title', 'description_text', 'description_image', 'type', 'date']);
+									->get(['description_title', 'description_text', 'description_image', 'type', 'created_at', 'id']);
 
 				$show_more = (count($channel_content) == 10) ? true : false;
 
@@ -59,9 +59,9 @@ class ChannelController extends Controller
 							->where('user_id', $channel_id)
 							->where('isDraft', 'publish')
 							->whereIn('type', $types)
-							->orderBy('date', 'desc')
+							->orderBy('created_at', 'desc')
 							->skip($skip)->take(10)
-							->get(['description_title', 'description_text', 'description_image', 'type', 'date']);
+							->get(['description_title', 'description_text', 'description_image', 'type', 'created_at']);
 				
 				if(count($records) != 0) {
 

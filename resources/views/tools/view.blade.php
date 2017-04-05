@@ -8,14 +8,16 @@
 @section('content')
         <div class="body">
             <div class="wrap">
-                <div class="title">Bostadsbristen skapar affärsmöjligheter skapar</div>
+                <div class="title">{{ $content->description_title }}</div>
                 <div class="center">
                     <div class="left">
                         <div class="border">
                             <div class="top">
                                 <div class="info">
-                                    <div class="published">Published on February 16, 2016 by <a href="">Karl Mozart</a></div>
-                                    <a class="source_link">Link to source</a>
+                                    <div class="published">Published on February 16, 2016 by <a href="/channel/{{ $content->user_id }}">{{ $user_name }}</a></div>
+                                    @if ($source_link)
+                                        <a class="source_link" href="{{ $source_link }}">Link to source</a>
+                                    @endif
                                 </div>
                                 <div class="buttons">
                                     <a href="" class="facebook"></a>

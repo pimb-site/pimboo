@@ -88,98 +88,101 @@
 				'rankedlist' => 'RANKED LIST',
 				'flipcards'  => 'FLIP CARD',
 				'trivia'     => 'TRIVIA CARD',
-				'story'      => 'STORY'
+				'story'      => 'STORY',
+				'gif'      => 'GIF'
 			];
 			?>
 			<div class="cover-bg"></div>
-			<div class="channel-posts">
-				@foreach($channel_content as $post)
-				<?php 
-				$post_date    = new DateTime($post->date);
-				$current_date = new DateTime();
-				$days = $current_date->format("d") - $post_date->format("d");
-				$month = $current_date->format("m") - $post_date->format("m");
-				?>
-				<div class="post">
-					<div class="post-left">
-						<div class="photo"> <img src="/uploads/{{ $post->description_image }}"></div>
-						<div class="date">
-						@if($month == 0)
-							@if($days == 0)
-								Posted Today
-							@else 
-								Posted {{ $days }} days ago
+			<div class="wrap">
+				<div class="channel-posts">
+					@foreach($channel_content as $post)
+					<?php 
+					$post_date    = new DateTime($post->created_at);
+					$current_date = new DateTime();
+					$days = $current_date->format("d") - $post_date->format("d");
+					$month = $current_date->format("m") - $post_date->format("m");
+					?>
+					<div class="post">
+						<div class="post-left">
+							<div class="photo"> <img src="/uploads/{{ $post->description_image }}"></div>
+							<div class="date">
+							@if($month == 0)
+								@if($days == 0)
+									Posted Today
+								@else 
+									Posted {{ $days }} days ago
+								@endif
+							@else
+								Posted {{ $month }} month ago
 							@endif
-						@else
-							Posted {{ $month }} month ago
-						@endif
+							</div>
+						</div>
+						<div class="post-right">
+							<div class="title"><a href="/viewID/{{ $post->id }}">{{ $post->description_title }}</a></div>
+							<div class="description">{{ $post->description_text }}</div>
+							<div class="share">Share this <a href="#">{{ $aType[$post->type] }}</a></div>
+							<div class="share-buttons">
+								<button><img src="/img/view_fb.png"></button>
+								<button><img src="/img/view_twitter.png"></button>
+								<button><img src="/img/view_linkedin.png"></button>
+								<button><img src="/img/view_link.png"></button>
+								<button class="get-link">GET LINK</button>
+							</div>
 						</div>
 					</div>
-					<div class="post-right">
-						<div class="title">{{ $post->description_title }}</div>
-						<div class="description">{{ $post->description_text }}</div>
-						<div class="share">Share this <a href="#">{{ $aType[$post->type] }}</a></div>
-						<div class="share-buttons">
-							<button><img src="/img/view_fb.png"></button>
-							<button><img src="/img/view_twitter.png"></button>
-							<button><img src="/img/view_linkedin.png"></button>
-							<button><img src="/img/view_link.png"></button>
-							<button class="get-link">GET LINK</button>
-						</div>
-					</div>
+					@endforeach
+					@if($show_more == true)
+						<button class="show-more">SHOW MORE</button>
+					@else
+						<button class="show-more" style="display: none;">SHOW MORE</button>
+					@endif
 				</div>
-				@endforeach
-				@if($show_more == true)
-					<button class="show-more">SHOW MORE</button>
-				@else
-					<button class="show-more" style="display: none;">SHOW MORE</button>
-				@endif
-			</div>
-			<div class="right-block">
-				<div class="profile">
-					<div class="information">
-						<div class="avatar"><img src="{{ $user_photo }}"></div>
-						<div class="name">{{ $user_info->name }}</div>
-						<div class="subscribers"><b>0</b> SUBSCRIBERS</div>
-						<div class="description"> {{ $user_info->public_info}} </div>
-						<div class="social-subscribe">
-							<button><img src="/img/profile_website_icon.png"></button>
-							<button><img src="/img/profile_fb_icon.png"></button>
-							<button><img src="/img/profile_twitter_icon.png"></button>
-							<button><img src="/img/profile_google_plus_icon.png"></button>
+				<div class="right-block">
+					<div class="profile">
+						<div class="information">
+							<div class="avatar"><img src="{{ $user_photo }}"></div>
+							<div class="name">{{ $user_info->name }}</div>
+							<div class="subscribers"><b>0</b> SUBSCRIBERS</div>
+							<div class="description"> {{ $user_info->public_info}} </div>
+							<div class="social-subscribe">
+								<button><img src="/img/profile_website_icon.png"></button>
+								<button><img src="/img/profile_fb_icon.png"></button>
+								<button><img src="/img/profile_twitter_icon.png"></button>
+								<button><img src="/img/profile_google_plus_icon.png"></button>
+							</div>
+							<button class="subscribe-me">SUBSCRIBE</button>
 						</div>
-						<button class="subscribe-me">SUBSCRIBE</button>
 					</div>
-				</div>
-				<div class="filter">
-					<div class="title">FILTER</div>
-					<div class="text">Choose cards</div>
-					<form action="/channel-filter" method="post" id="channel-filter">
-					<input type="hidden" name="_token" value="{{ csrf_token() }}">
-					<input type="hidden" name="channel_id" value="{{ $user_info->id }}" />
-					<input type="hidden" name="multiplier" value="1" />
-					<div class="cards-left">
-						<div class="item">
-							<input type="checkbox" id="test1" value="trivia" name="types[]" checked autocomplete="off" />
-	    					<label for="test1">Trivia card</label>
-    					</div>
-    					<div class="item">
-							<input type="checkbox" id="test2" value="flipcards" name="types[]" checked autocomplete="off"/>
-	    					<label for="test2">Flip Card</label>
-    					</div>
-    				</div>
-    				<div class="cards-right">
-    					<div class="item">
-							<input type="checkbox" id="test3" value="story" name="types[]" checked autocomplete="off"/>
-	    					<label for="test3">Story</label>
-    					</div>
-    					<div class="item">
-							<input type="checkbox" id="test4" value="rankedlist" name="types[]" checked autocomplete="off"/>
-	    					<label for="test4">Ranked list</label>
-    					</div>
+					<div class="filter">
+						<div class="title">FILTER</div>
+						<div class="text">Choose cards</div>
+						<form action="/channel-filter" method="post" id="channel-filter">
+						<input type="hidden" name="_token" value="{{ csrf_token() }}">
+						<input type="hidden" name="channel_id" value="{{ $user_info->id }}" />
+						<input type="hidden" name="multiplier" value="1" />
+						<div class="cards-left">
+							<div class="item">
+								<input type="checkbox" id="test1" value="trivia" name="types[]" checked autocomplete="off" />
+		    					<label for="test1">Trivia card</label>
+	    					</div>
+	    					<div class="item">
+								<input type="checkbox" id="test2" value="flipcards" name="types[]" checked autocomplete="off"/>
+		    					<label for="test2">Flip Card</label>
+	    					</div>
+	    				</div>
+	    				<div class="cards-right">
+	    					<div class="item">
+								<input type="checkbox" id="test3" value="story" name="types[]" checked autocomplete="off"/>
+		    					<label for="test3">Story</label>
+	    					</div>
+	    					<div class="item">
+								<input type="checkbox" id="test4" value="rankedlist" name="types[]" checked autocomplete="off"/>
+		    					<label for="test4">Ranked list</label>
+	    					</div>
+						</div>
+						</form>
+						<button class="run-filter">FILTER</button>
 					</div>
-					</form>
-					<button class="run-filter">FILTER</button>
 				</div>
 			</div>
 		</div>
