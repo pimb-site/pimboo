@@ -12,8 +12,8 @@
 		<header>
 			<div class="left">
 				<a href="/" class="logo"></a>
-				<a href="/" class="text">HOME</a>
-				<a href="/charity" class="text">PIMBOO CHARITY</a>
+				<a href="#" class="text" id="header_home">HOME</a>
+				<a href="#" class="text" id="header_charity">PIMBOO CHARITY</a>
 			</div>
 			@if (Auth::guest())
 			<div class="right">
