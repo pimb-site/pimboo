@@ -12,7 +12,7 @@ $(document).ready(function() {
 						html_post += '<div class="post"><div class="post-left">';
 						html_post += '<div class="photo"> <img src="/uploads/'+value.description_image+'"></div>';
 						html_post += '<div class="date">'+value.posted+'</div> </div>';
-						html_post += '<div class="post-right"><div class="title"><a href="/viewID/'+value.id+'"'+value.description_title+'</a></div>';
+						html_post += '<div class="post-right"><div class="title"><a href="/viewID/'+value.id+'">'+value.description_title+'</a></div>';
 						html_post += '<div class="description">'+value.description_text+'</div>';
 						html_post += '<div class="share">Share this <a href="#">'+value.type+'</a></div>';
 						html_post += '<div class="share-buttons">';
@@ -50,7 +50,7 @@ $(document).ready(function() {
 						html_post += '<div class="post"><div class="post-left">';
 						html_post += '<div class="photo"> <img src="/uploads/'+value.description_image+'"></div>';
 						html_post += '<div class="date">'+value.posted+'</div> </div>';
-						html_post += '<div class="post-right"><div class="title"><a href="/viewID/'+value.id+'"'+value.description_title+'</a></div>';
+						html_post += '<div class="post-right"><div class="title"><a href="/viewID/'+value.id+'">'+value.description_title+'</a></div>';
 						html_post += '<div class="description">'+value.description_text+'</div>';
 						html_post += '<div class="share">Share this <a href="#">'+value.type+'</a></div>';
 						html_post += '<div class="share-buttons"><button class="btn-share"><img src="/img/view_fb.png"></button>';

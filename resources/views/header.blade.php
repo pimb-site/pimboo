@@ -1,8 +1,8 @@
 		<header>
 			<div class="left">
 				<a href="/" class="logo"></a>
-				<a href="/" class="text">HOME</a>
-				<a href="/charity" class="text">PIMBOO CHARITY</a>
+				<a href="/" class="text" id="header_home">HOME</a>
+				<a href="/charity" class="text" id="header_charity">PIMBOO CHARITY</a>
 			</div>
 			<div class="right">
 				@if (Auth::guest())
@@ -56,7 +56,7 @@
 						</a>
 						<ul class="dropdown-menu" aria-labelledby="dLabel">
 							<li class="channels"><a>Channels</a></li>
-							<li class="channel"><a>{{ Auth::user()->name }}</a></li>
+							<li class="channel"><a href="/channel/{{ Auth::user()->id }}">{{ Auth::user()->name }}</a></li>
 							<li class="divider" role="separator"></li>
 							<li class="hrefs"><a href="/user/profile">Profile Settings</a></li>
 							<li class="hrefs"><a href="/user/account">Stats</a></li>

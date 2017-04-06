@@ -20,16 +20,20 @@
 										@if (empty($user->photo))
 											<img src="/img/header_default_photo.png">
 										@else 
-											<img src="{{ $user->photo }}}">
+											<img src="/uploads/{{ $user->photo }}">
 										@endif
 									</div>
-									<a>Delete Image</a>
+									<a class="delete-user-photo">Delete Image</a>
 								</div>
 							</div>
+							@if(empty($user->cover_photo))
 							<div class="middle">
 								<div class="sub_title">ADD COVER PHOTO</div>
 								<div class="plus"></div>
 							</div>
+							@else
+							<div class="middle isset-cover" style="background-image: url(/uploads/{{ $user->cover_photo }}"> </div>
+							@endif
 							<div class="bottom">
 								<div class="sub_title">Social links</div>
 								<div class="input"><img src="/img/profile_website_icon.png"><input value="{{ $user->website_link }}" type="text" name="website_link" placeholder="http://www.MyWebsite.com"></div>
@@ -80,6 +84,35 @@
 						</div>
 					</div>
 				</form>
+			</div>
+			<div id="popup" class="popup" style="display: none;">
+			<div class="modal-text-photo">ADD PHOTO</div>
+				<div class="modal-upload-column-img">
+					<div class="popup__body"><div class="js-img"></div></div>
+				</div>
+				<div class="js-upload btn btn_browse btn_browse_small">SAVE</div>
+			</div>
+			
+			
+			<div id="modal-upload-photo" class="modal-upload-photo" data-type="cover" style="display: none;">
+				<div class="popup__body"><div class="js-img"></div></div>
+				<div style="margin: 0 0 5px; text-align: center;">
+					<div class="modal-text-photo">ADD PHOTO</div>
+					<div class="modal-upload-column">
+						<p> UPLOAD IMAGE </p>
+						<div class="select-file-for-cover"> <div class="modal-file-icon"></div><input type="file" name="filedata"></div>
+					</div>
+				</div>
+			</div>
+			<div id="modal-upload-photo" class="modal-upload-photo" data-type="photo" style="display: none;">
+				<div class="popup__body"><div class="js-img"></div></div>
+				<div style="margin: 0 0 5px; text-align: center;">
+					<div class="modal-text-photo">ADD PHOTO</div>
+					<div class="modal-upload-column">
+						<p> UPLOAD IMAGE </p>
+						<div class="select-file-for-photo"> <div class="modal-file-icon"></div><input type="file" name="filedata"></div>
+					</div>
+				</div>
 			</div>
 		</div>
 @endsection

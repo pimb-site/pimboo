@@ -103,11 +103,13 @@ $(document).ready(function () {
 	 }).open();
 	});
 	
+
+	token = $('input[name="_token"]').val();
 	$('.select-file').fileapi({
 	   url: 'test_upload_end',
 	   autoUpload: false,
 	   accept: 'image/*',
-	   data: {'_token': token},
+	   data: {'_token': {{ csrf_token() }} },
 	   onFileComplete: function (evt, uiEvt){
 		   var result = uiEvt.result; // server response
 		   if(check == 1) {

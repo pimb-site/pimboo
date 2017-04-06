@@ -8,7 +8,7 @@
 @section('content')
         <div class="body">
             <div class="wrap">
-                <div class="title">Bostadsbristen skapar affärsmöjligheter skapar</div>
+                <div class="title">{{ $content->description_title }}</div>
                 <div class="center">
                     <div class="left">
                         <div class="border">
