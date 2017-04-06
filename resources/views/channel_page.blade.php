@@ -83,7 +83,7 @@
 		</header>
 		<div class="body-channel">
 			<?php
-			$user_photo = ($user_info->photo == "") ? "/img/no_ava.png" : "/uploads/".$user_info->photo;
+			$user_photo = ($user_info->photo == "") ? "/img/header_default_photo.png" : "/uploads/".$user_info->photo;
 			$aType = [
 				'rankedlist' => 'RANKED LIST',
 				'flipcards'  => 'FLIP CARD',
@@ -91,7 +91,11 @@
 				'story'      => 'STORY'
 			];
 			?>
-			<div class="cover-bg"></div>
+			@if(empty($user_info->cover_photo))
+				<div class="cover-bg"></div>
+			@else
+				<div class="cover-bg" style="background-image: url(/uploads/{{ $user_info->cover_photo }})"></div>
+			@endif
 			<div class="wrap">
 				<div class="channel-posts">
 					@if(count($channel_content) == 0)

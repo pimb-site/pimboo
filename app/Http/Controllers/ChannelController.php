@@ -12,7 +12,7 @@ class ChannelController extends Controller
 		$channel_id = (int)$channel_id;
 
 		if($channel_id != null && $channel_id > 0) {
-			$user_info = DB::select('select id, name, photo, public_info from users where id = ?', [$channel_id]);
+			$user_info = DB::select('select id, name, photo, cover_photo, public_info from users where id = ?', [$channel_id]);
 			if(count($user_info) != 0) {
 				$types = ['trivia', 'story', 'flipcards', 'rankedlist'];
 				$channel_content = DB::table('posts')

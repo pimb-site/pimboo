@@ -1,6 +1,8 @@
 <?php namespace App\Http\Controllers;
 
 use Auth;
+use DB;
+use Response;
 use Input;
 use App\PostView;
 use App\Post;
@@ -13,6 +15,41 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+
+	public function setPhoto() {
+		if(Auth::guest()) return view('auth/login');
+
+		if (Input::file('filedata')->isValid()) {
+			$filename = uniqid().".jpeg";
+			Input::file('filedata')->move("uploads/", $filename);
+			$user_name = Auth::user()->name;
+
+			$type = Input::get('photo_type');
+			if($type == "photo") {
+				DB::table('users')
+			            ->where('name', $user_name)
+			            ->update(['photo' => $filename]);
+			}
+			else if($type == "cover") {
+				DB::table('users')
+			            ->where('name', $user_name)
+			            ->update(['cover_photo' => $filename]);
+			}
+			return Response::json(['success' => true, 'file' => $filename]);
+		}
+	}
+
+	public function deleteAvatar() {
+		if(!Auth::guest()) {
+
+			$user_name = Auth::user()->name;
+
+			DB::table('users')
+			        ->where('name', $user_name)
+			        ->update(['photo' => '']);
+			return Response::json(['success' => true]);
+		}
+	}
 
 	public function getAccount() {
 		$my_all_posts = Post::where('user_id', Auth::user()->id)->get();

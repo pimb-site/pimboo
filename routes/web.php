@@ -54,6 +54,10 @@ Route::post('upload_gif', 'VideoGifController@uploadGIF');
 Route::get('video_to_gif', 'VideoGifController@addGIF');
 
 
+// user photo / cover photo
+Route::post('user/setPhoto', 'UserController@setPhoto');
+Route::post('user/deleteAvatar', 'UserController@deleteAvatar');
+
 //user pages
 Route::get('user/account', 'UserController@getAccount');
 Route::post('user/account', 'UserController@getViewsInfo');
