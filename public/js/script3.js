@@ -414,7 +414,9 @@ $(document).ready(function () {
 			}
 	   }).open();
 	});
-	
+
+
+	token = $('input[name="_token"]').val();
 	$('.select-file').fileapi({
 	   url: 'test_upload_end',
 	   autoUpload: false,

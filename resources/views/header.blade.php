@@ -56,7 +56,7 @@
 						</a>
 						<ul class="dropdown-menu" aria-labelledby="dLabel">
 							<li class="channels"><a>Channels</a></li>
-							<li class="channel"><a>{{ Auth::user()->name }}</a></li>
+							<li class="channel"><a href="/channel/{{ Auth::user()->id }}">{{ Auth::user()->name }}</a></li>
 							<li class="divider" role="separator"></li>
 							<li class="hrefs"><a href="/user/profile">Profile Settings</a></li>
 							<li class="hrefs"><a href="/user/account">Stats</a></li>

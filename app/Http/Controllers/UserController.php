@@ -22,17 +22,17 @@ class UserController extends Controller
 		if (Input::file('filedata')->isValid()) {
 			$filename = uniqid().".jpeg";
 			Input::file('filedata')->move("uploads/", $filename);
-			$user_name = Auth::user()->name;
+			$user_id = Auth::user()->id;
 
 			$type = Input::get('photo_type');
 			if($type == "photo") {
 				DB::table('users')
-			            ->where('name', $user_name)
+			            ->where('id', $user_id)
 			            ->update(['photo' => $filename]);
 			}
 			else if($type == "cover") {
 				DB::table('users')
-			            ->where('name', $user_name)
+			            ->where('id', $user_id)
 			            ->update(['cover_photo' => $filename]);
 			}
 			return Response::json(['success' => true, 'file' => $filename]);
@@ -42,10 +42,10 @@ class UserController extends Controller
 	public function deleteAvatar() {
 		if(!Auth::guest()) {
 
-			$user_name = Auth::user()->name;
+			$user_id = Auth::user()->id;
 
 			DB::table('users')
-			        ->where('name', $user_name)
+			        ->where('id', $user_id)
 			        ->update(['photo' => '']);
 			return Response::json(['success' => true]);
 		}
