@@ -40,8 +40,8 @@
 					<div class="row">Well done! You've successfully posted to Pimboo!</div>
 					<div class="row2">Now <span>Share</span> It With The World & <span>Profit</span>!</div>
 					<div class="group">
-						<div class="item item-share"></div>
-						<div class="item item-tweet"></div>
+						<div class="item butt-for-sharing item-share" data-title="asd12" data-url="http://pimboo.local/success/20" data-type="fb"></div>
+						<div class="item butt-for-sharing item-tweet" data-type="tw"></div>
 						<div class="item item-embed"></div>
 						<div class="item item-more"></div>
 					</div>
@@ -76,12 +76,5 @@
 			</div>
 		</footer>
 		<script src="js/footer.min.js"></script>
-					  <script type="text/javascript">
-  $(document).ready(function(){
-$('[id*="user-"]').popover({delay: { show: 500, hide: 500 }});
-$('[id*="user-"]').popover('show');
-$('[id*="user-"]').popover('hide');
-});
-</script>
 	</body>
 </html>

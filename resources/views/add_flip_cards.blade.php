@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Pimboo - Create a new Flip Cards</title>
+	<title>Pimboo Flip Cards</title>
 	<link href="css/style.min.css" rel="stylesheet">
 	<link href="css/flip_new.css" rel="stylesheet">
 	<link href="test/jcrop/jquery.Jcrop.min.css" rel="stylesheet" type="text/css"/>
