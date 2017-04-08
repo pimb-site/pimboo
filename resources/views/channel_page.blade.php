@@ -124,13 +124,13 @@
 							</div>
 						</div>
 						<div class="post-right">
-							<div class="title"><a href="/viewID/{{ $post->id }}">{{ $post->description_title }}</a></div>
+							<div class="title"><a href="{{ url('/viewID/'.$post->id) }}">{{ $post->description_title }}</a></div>
 							<div class="description">{{ $post->description_text }}</div>
 							<div class="share">Share this <a href="#">{{ $aType[$post->type] }}</a></div>
 							<div class="share-buttons">
-								<button><img src="/img/view_fb.png"></button>
-								<button><img src="/img/view_twitter.png"></button>
-								<button><img src="/img/view_linkedin.png"></button>
+								<button data-title="{{ $post->description_title }}" data-url="{{ url('/viewID/'.$post->id) }}" data-type="fb" class="butt-for-sharing"><img src="/img/view_fb.png"></button>
+								<button data-title="{{ $post->description_title }}" data-url="{{ url('/viewID/'.$post->id) }}" data-type="tw" class="butt-for-sharing"><img src="/img/view_twitter.png"></button>
+								<button data-title="{{ $post->description_title }}" data-url="{{ url('/viewID/'.$post->id) }}" data-type="li" class="butt-for-sharing"><img src="/img/view_linkedin.png"></button>
 								<button><img src="/img/view_link.png"></button>
 								<button class="get-link">GET LINK</button>
 							</div>

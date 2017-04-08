@@ -17,10 +17,10 @@
                                     <div class="published">Published on February 16, 2016 by <a href="/channel/{{ $content->user_id }}">{{ $user_name }}</a></div>
                                 </div>
                                 <div class="buttons">
-                                    <a href="" class="facebook"></a>
-                                    <a href="" class="twitter"></a>
-                                    <a href="" class="google_plus"></a>
-                                    <a href="" class="linked_in"></a>
+                                    <button class="butt-for-sharing facebook"></button>
+                                    <button class="butt-for-sharing twitter"></button>
+                                    <button class="butt-for-sharing google_plus"></button>
+                                    <button class="butt-for-sharing linked_in"></button>
                                     <button>GET LINK</button>
                                 </div>
                             </div>
