@@ -5,8 +5,8 @@ $(document).ready(function () {
 	$('.add-to-this').click(function() {
 		if(count_video_gifs == 5) return false;
 		count_video_gifs++;
-		$('.add-to-this').before('<div>Start Time(seconds) <input type="number" value="'+(count_video_gifs*2)+'" class="start-time-yb">'
-								+' End Time(seconds)   <input type="number" value="'+(count_video_gifs*2 + 2)+'" class="end-time-yb"></div>');
+		$('.add-to-this').before('<div>Start Time(seconds) <input name="options['+(count_video_gifs - 1)+'][start_time]" type="number" value="'+(count_video_gifs*2)+'" class="start-time-yb">'
+								+' End Time(seconds)   <input name="options['+(count_video_gifs - 1)+'][end_time]" type="number" value="'+(count_video_gifs*2 + 2)+'" class="end-time-yb"></div>');
 
 		if(count_video_gifs == 5) $('.add-to-this').css({'display' : 'none'});
 	});
@@ -27,6 +27,7 @@ $(document).ready(function () {
 		  },
 		  success: function(response){
 		    if(response.success == true) {
+		    	$('.url-youtube').val(value_yb);
 		    	$(".youtube-iframe").html(response.html);
 		    	$(".add-youtube-gif").modal().open();
 		    }
@@ -35,28 +36,39 @@ $(document).ready(function () {
 	});
 
 	$(".create-yb-gif").click(function() {
-		clip_yb    = $('.url-youtube-clip').val();
-		gif_main   = $('.gif-input').val();
-		start_time = $('.start-time-yb').val();
-
-		$.ajax({
-		  url: 'upload_yb_gif',
-		  dataType: "json",
-		  type: "POST",
-		  data: {
-		  	gif_main: gif_main,
-		  	video_url: clip_yb,
-		  	start_time: start_time,
-		  	_token: token
-		  },
-		  success: function(response){
-		  	if(response.success == true) {
-		  		$('.gif-input').val(response.file);
+		$('#create-gif-youtube').ajaxSubmit({
+			dataType: "json",
+			success: function (data) {
+				$('.gif-input').val(data.file);
+				$('.gif-input-yb').val(data.file);
 				$('#image').attr('src', '/temp/'+response.file);
-		  	}
-		  }
+			}
 		});
 	});
+
+	// $(".create-yb-gif").click(function() {
+	// 	clip_yb    = $('.url-youtube-clip').val();
+	// 	gif_main   = $('.gif-input').val();
+	// 	start_time = $('.start-time-yb').val();
+
+	// 	$.ajax({
+	// 	  url: 'upload_yb_gif',
+	// 	  dataType: "json",
+	// 	  type: "POST",
+	// 	  data: {
+	// 	  	gif_main: gif_main,
+	// 	  	video_url: clip_yb,
+	// 	  	start_time: start_time,
+	// 	  	_token: token
+	// 	  },
+	// 	  success: function(response){
+	// 	  	if(response.success == true) {
+	// 	  		$('.gif-input').val(response.file);
+	// 			$('#image').attr('src', '/temp/'+response.file);
+	// 	  	}
+	// 	  }
+	// 	});
+	// });
 
 	$('.upl-image-valid').click(function() {
 		value_url = $('.upl-input-image-url').val();

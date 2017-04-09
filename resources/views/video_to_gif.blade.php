@@ -149,11 +149,15 @@
 			<div class="popup__body"><div class="js-img"></div></div>
 			<div style="margin: 0 0 5px; text-align: center;">
 				<div class="modal-text-photo">ADD GIF FROM YOUTUBE CLIP</div>
-
-				<div class="youtube-iframe"> </div>
-				<div>Start Time(seconds) <input type="number" value="0" class="start-time-yb"> End Time(seconds)   <input type="number" value="2" class="end-time-yb"></div>
-				<div><button type="button" class="add-to-this">Add to this...</button></div>
-				<div><button type="button" class="create-yb-gif">Create GIF</button></div>
+				<form id="create-gif-youtube" action="/upload_yb_gif" method="POST">
+					<input name="gif_main" type="hidden" value="" class="gif-input-yb" autocomplete="off">
+					<input type="hidden" name="_token" value="{{ csrf_token() }}">
+					<input type="hidden" name="video_url" class="url-youtube" autocomplete="off">
+					<div class="youtube-iframe"> </div>
+					<div>Start Time(seconds) <input name="options[0][start_time]" type="number" value="0" class="start-time-yb"> End Time(seconds)   <input name="options[0][end_time]" type="number" value="2" class="end-time-yb"></div>
+					<div><button type="button" class="add-to-this">Add to this...</button></div>
+					<div><button type="button" class="create-yb-gif">Create GIF</button></div>
+				</form>
 
 			</div>
 		</div>

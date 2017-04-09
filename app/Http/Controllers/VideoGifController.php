@@ -23,27 +23,52 @@ class VideoGifController extends Controller
 
 	$url = $input['video_url'];
 	$main_gif = $input['gif_main'];
-	$start_time = $input['start_time'];
-
+	
 	if (!filter_var($url, FILTER_VALIDATE_URL) === false) {
 		$content = @file_get_contents('https://www.youtube.com/oembed?url='.$url.'&format=json');
 		$array_information = json_decode($content, true);
 		if(is_array($array_information)) {
 			
-			if($start_time < 0) $start_time = 0;
-			
+
+			// If directory does not exist
 			if(!file_exists("temp/".\Session::getId())) {
-            			mkdir("temp/".\Session::getId());
-        		}
+            	mkdir("temp/".\Session::getId());
+        	}
 			
+
+			// upload youtube video
 			$uniq_name = uniqid();
 			$command_line_download = 'youtube-dl -f 134 -o "/var/www/pimboobeta.com/public/uploads/'.$uniq_name.'.%(ext)s" '.$url;
 			shell_exec($command_line_download);
-			$uniqid = uniqid();
-			$command_line_create   = 'ffmpeg -t 2 -ss 00:00:'.$start_time.' -i /var/www/pimboobeta.com/public/uploads/'.$uniq_name.'.mp4 /var/www/pimboobeta.com/public/temp/'.\Session::getId().'/'.$uniqid.'.gif';
-			shell_exec($command_line_create);
 
-			$temp_file =  \Session::getId()."/".$uniqid . '.gif';
+
+			// Create gifs from video/ And their gluing
+			foreach ($input['options'] as $key => $value) {
+				$start_time = (int)abs($options['start_time']);
+				$end_time   = (int)abs($options['end_time']);
+
+				$length = $end_time - $start_time;
+
+				if($length <= 0) continue;
+
+				$uniqid = uniqid();
+				$command_line_create   = 'ffmpeg -t '.$length.' -ss 00:00:'.$start_time.' -i /var/www/pimboobeta.com/public/uploads/'.$uniq_name.'.mp4 /var/www/pimboobeta.com/public/temp/'.\Session::getId().'/'.$uniqid.'.gif';
+				shell_exec($command_line_create);
+
+				if($cycle_gif != "") {
+					$new_gif = uniqid().".gif";
+					$path_gif = $new_gif = \Session::getId().$new_gif;
+					$main_path = "/var/www/pimboobeta.com/public/temp/";
+					$command_line = "convert -loop 0 ".$main_path.$cycle_gif." ".$main_path.\Session::getId()."/".$uniqid.".gif ".$main_path.$path_gif;
+					shell_exec($command_line);
+					$cycle_gif = $path_gif;
+				}
+				else {
+					$cycle_gif = \Session::getId()."/".$uniqid . '.gif';
+				}
+			}
+
+			$temp_file =  $cycle_gif;
 
 			if($main_gif != "" && file_exists('temp/'.$main_gif)) {
 				$main_path = "/var/www/pimboobeta.com/public/temp/";
