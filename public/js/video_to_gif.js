@@ -1,5 +1,16 @@
 $(document).ready(function () {
 
+	count_video_gifs = 1;
+
+	$('.add-to-this').click(function() {
+		if(count_video_gifs == 5) return false;
+		count_video_gifs++;
+		$('.add-to-this').before('<div>Start Time(seconds) <input type="number" value="'+(count_video_gifs*2)+'" class="start-time-yb">'
+								+' End Time(seconds)   <input type="number" value="'+(count_video_gifs*2 + 2)+'" class="end-time-yb"></div>');
+
+		if(count_video_gifs == 5) $('.add-to-this').css({'display' : 'none'});
+	});
+
 	$('.url-youtube-button').click(function() {
 		var value_yb = $('.url-youtube-clip').val();
 

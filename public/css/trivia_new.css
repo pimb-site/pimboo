@@ -1177,6 +1177,16 @@ video {
 	border-radius: 5px;
 	margin-top: 10px;
 }
+
+.add-youtube-gif .add-to-this {
+	background-color: #99afd9;
+	color: #fff;
+	width: 120px;
+	height: 25px;
+	border: 0 none;
+	border-radius: 5px;
+	margin-top: 10px;
+}
 .add_plus{border:0;background-image:url(/img/plus-icon.png);background-repeat:no-repeat;width:90px;height:90px;margin-left:329px;margin-top:21px;float:left; cursor:pointer; }
 .front_card_question{background-image:url(/img/question-icon.png);background-position:159px 14px;text-align:left;padding-left:41px;padding-top:5px;letter-spacing:-.5px}
 .back_card_question{background-image:url(/img/result-icon.png);background-position:159px 14px;text-align:left;padding-left:41px;padding-top:5px;letter-spacing:-.5px}

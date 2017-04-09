@@ -151,7 +151,8 @@
 				<div class="modal-text-photo">ADD GIF FROM YOUTUBE CLIP</div>
 
 				<div class="youtube-iframe"> </div>
-				<div>Start Time(length gif 2 seconds): <input type="number" value="0" class="start-time-yb"></div>
+				<div>Start Time(seconds) <input type="number" value="0" class="start-time-yb"> End Time(seconds)   <input type="number" value="2" class="end-time-yb"></div>
+				<div><button type="button" class="add-to-this">Add to this...</button></div>
 				<div><button type="button" class="create-yb-gif">Create GIF</button></div>
 
 			</div>
@@ -166,7 +167,7 @@
 					<div class="select-file"> <div class="modal-file-icon"></div><input type="file" name="filedata"></div>
 					<div class="modal-upload-url">
 						<p>or</p>
-						<input type="text" class="upload-img-url upl-input-image-url" placeholder="Enter URL">	
+						<input type="text" class="upload-img-url upl-input-image-url" placeholder="Enter URL">
 						<button type="button" class="upload-img-url-btn upl-image-valid">GO</button>
 					</div>
 				</div>
