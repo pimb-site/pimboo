@@ -16,8 +16,7 @@
 	<![endif]-->
 @endsection
 
-@section('content')
-	<div class="wrap">
+@section('tool_content')
 		<?php $options = unserialize($content->options) ?>
 		<div class="panel-heading">View ranked list</div>
 		<?php $data_id = 1 ?>
@@ -65,7 +64,6 @@
 		@endforeach
 		@endforeach
 		{!! $content->description_footer !!}
-	</div>
 	</div>
 @endsection
 

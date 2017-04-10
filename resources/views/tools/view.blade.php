@@ -21,7 +21,7 @@
                                     <button class="butt-for-sharing twitter"></button>
                                     <button class="butt-for-sharing google_plus"></button>
                                     <button class="butt-for-sharing linked_in"></button>
-                                    <button>GET LINK</button>
+                                    <button class="get_link">GET LINK</button>
                                 </div>
                             </div>
                             <div class="content">
