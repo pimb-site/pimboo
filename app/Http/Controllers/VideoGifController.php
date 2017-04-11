@@ -44,8 +44,8 @@ class VideoGifController extends Controller
 
 			// Create gifs from video/ And their gluing
 			foreach ($input['options'] as $key => $value) {
-				$start_time = (int)abs($options['start_time']);
-				$end_time   = (int)abs($options['end_time']);
+				$start_time = (int)abs($value['start_time']);
+				$end_time   = (int)abs($value['end_time']);
 
 				$length = $end_time - $start_time;
 
@@ -55,9 +55,9 @@ class VideoGifController extends Controller
 				$command_line_create   = 'ffmpeg -t '.$length.' -ss 00:00:'.$start_time.' -i /var/www/pimboobeta.com/public/uploads/'.$uniq_name.'.mp4 /var/www/pimboobeta.com/public/temp/'.\Session::getId().'/'.$uniqid.'.gif';
 				shell_exec($command_line_create);
 
-				if($cycle_gif != "") {
+				if(isset($cycle_gif) && $cycle_gif != "") {
 					$new_gif = uniqid().".gif";
-					$path_gif = $new_gif = \Session::getId().$new_gif;
+					$path_gif = $new_gif = \Session::getId()."/".$new_gif;
 					$main_path = "/var/www/pimboobeta.com/public/temp/";
 					$command_line = "convert -loop 0 ".$main_path.$cycle_gif." ".$main_path.\Session::getId()."/".$uniqid.".gif ".$main_path.$path_gif;
 					shell_exec($command_line);
@@ -79,7 +79,7 @@ class VideoGifController extends Controller
 				$temp_file = $path_gif;
 			}
 
-			return \Response::json(['success' => true, 'file' => $temp_file]);
+			return \Response::json(['success' => true, 'file' => $temp_file, 'length' => $length]);
 		}
 	}
 	}

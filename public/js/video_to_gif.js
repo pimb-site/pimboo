@@ -41,7 +41,8 @@ $(document).ready(function () {
 			success: function (data) {
 				$('.gif-input').val(data.file);
 				$('.gif-input-yb').val(data.file);
-				$('#image').attr('src', '/temp/'+response.file);
+				$('#image').attr('src', '/temp/'+data.file);
+				$(".add-youtube-gif").modal().close();
 			}
 		});
 	});
