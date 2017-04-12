@@ -3,9 +3,9 @@
 @section('tool_content')
 <div class="content-story">
 	<div class="description">{{ $content->description_text }}</div>
-	{!! $content->content !!}
+	<div class="main-content-story"> {!! $content->content !!} </div>
 	<div class="footer">{{ $content->description_footer }}</div>
-{{ $content->description_footer }}
+</div>
 @endsection
 
 @section('script')
