@@ -5,16 +5,32 @@ Home
 @section('content')
         <div class="body">
             @if (Auth::guest())
+                <div id="carousel-example-generic" class="carousel slide slider" data-ride="carousel">
+                    <div class="carousel-inner" role="listbox">
+                        <div class="item flipcard active" style='background-image: url("/img/home-flipcard-banner.jpg");'>
+                            <div class="wrap">
+                                <div class="miniwrap">
+                                    <div class="text1">Create Fun Flip cards</div>
+                                    <div class="text2">SHARE & PROFIT!</div>
+                                    <a class="join_now">JOIN NOW</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item story" style='background-image: url("/img/home-story-banner.jpg");'>
+                            <div class="wrap">
+                                <div class="miniwrap">
+                                    <div class="text1">Create Ineterstimg Stories</div>
+                                    <div class="text2">SHARE & PROFIT!</div>
+                                    <a class="join_now">JOIN NOW</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @else     
                 <div id="carousel-example-generic" class="carousel slide slider-in" data-ride="carousel">
                     <div class="carousel-inner" role="listbox">
                         <div class="item active" style='background-image: url("/img/home_logged_slider_1.png");'>
-                            <div class="wrap">
-                                <div class="text-1">Check Out The Trending Content on Pimboo Below.</div>
-                                <div class="text-2">Post It, Share It, and Profit!</div>
-                                <img src="/img/home_logged_slider_arrow.png">
-                            </div>
-                        </div>
-                        <div class="item" style='background-image: url("/img/home_logged_slider_2.png");'>
                             <div class="wrap">
                                 <div class="text-1">Check Out The Trending Content on Pimboo Below.</div>
                                 <div class="text-2">Post It, Share It, and Profit!</div>
