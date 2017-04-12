@@ -9,7 +9,7 @@
 	<link href="css/trivia_new.css" rel="stylesheet">
 	<link href="test/jcrop/jquery.Jcrop.min.css" rel="stylesheet" type="text/css"/>
 </head>
-	<body class="add_flip_cards">
+	<body class="tools_create_page">
 		@include('header')
 		<div class="body">
 		<form id="form_upload_cards" action="/upload_end_gif" method="POST">
@@ -26,26 +26,38 @@
 						</div>
 					</div>
 				</div>
-				<div class="buttons-video">
-					<button type="button" class="file-video" onclick="document.querySelector('.video-file').click()">SELECT VIDEO</button>
-					<input accept="video/mp4" style="display: none; width: 0px;" type="file" class="video-file" onchange="upload(this.files[0])">
-					<button type="button" id="start-button">start GIF frames</button>
-					<button type="button" id="end-button">End GIF frames</button>
-					<button style="display:none;" type="button" id="sample-button">Try Sample File</button>
-					<input type="range" style="display: none;" id="speed" min="30" max="1000" step="1" value="100">
-				</div>
-				<canvas id="c" style="display:none;"></canvas>
-				<div class="youtube-clip-block">
-					<input type="text" placeholder="OR enter URL Youtube clip" class="url-youtube-clip" autocomplete="off">
-					<button type="button" class="url-youtube-button">OK</button>
-				</div>
-				<div class="status"> STATUS: <div id="output">Video not uploaded</div></div>
-				<video id="v" controls="" loop="" autoplay="" muted ></video>
-				<div class="editor" data-id="1">
-					<div class="front-card" data-id="1">
-						<img class="result-gif" id="image" src="" alt="" width="100%" height="100%" >
+
+				<div class="block-for-select-video">
+					<div class="title">ADD VIDEO TO CREATE NEW GIF</div>
+					<div class="block-inputs">
+						<button class="select-video">SELECT VIDEO</button>
+						OR
+						<input placeholder="Enter YouTube clip URL">
+						<button class="youtube-btn-upload">UPLOAD</button>
 					</div>
 				</div>
+				<div class="block-video-duration">
+					<div class="title">CHOOSE TIME DURATION</div>
+				</div>
+
+				<div class="status-gif">CREATED GIF: <span>Someone...</span></div>
+
+				<div class="editor" data-id="1">
+					<div class="front-card" data-id="1">
+					</div>
+				</div>
+
+				<div class="block-for-giftext">
+					<div class="title">ADD TEXT AND EFFECTS TO YOUR GIF</div>
+					<div class="caption-gif">CAPTION<input placeholder="Please enter your text here"></div>
+					<div class="style-gif">
+						STYLE
+						<button>DEFAULT</button>
+						<button>MEME</button>
+						<button>SUBTITLE</button>
+					</div>
+				</div>
+
 				<div class="down_butts" style="margin-top:20px;">
 					<button type="button" id="save_draft">SAVE DRAFT</button>
 					<button type="button" id="publish">PUBLISH</button>

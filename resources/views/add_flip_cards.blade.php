@@ -6,10 +6,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Pimboo Flip Cards</title>
 	<link href="css/style.min.css" rel="stylesheet">
-	<link href="css/flip_new.css" rel="stylesheet">
 	<link href="test/jcrop/jquery.Jcrop.min.css" rel="stylesheet" type="text/css"/>
 </head>
-	<body class="add_flip_cards">
+	<body class="tools_create_page">
 		@include('header')
 		<div class="body">
 		<form action="/upload_end" method="post" id="form_upload_cards">

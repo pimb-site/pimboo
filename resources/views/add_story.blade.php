@@ -8,7 +8,7 @@
 	<link href="css/style.min.css" rel="stylesheet">
 	<link href="css/flip_new.css" rel="stylesheet">
 </head>
-	<body class="add_flip_cards">
+	<body class="tools_create_page">
 		@include('header')
 		<div class="body">
 		<form action="/save_story" method="post" id="form_upload_cards">

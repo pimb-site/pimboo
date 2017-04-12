@@ -1190,3 +1190,114 @@ video {
 .add_plus{border:0;background-image:url(/img/plus-icon.png);background-repeat:no-repeat;width:90px;height:90px;margin-left:329px;margin-top:21px;float:left; cursor:pointer; }
 .front_card_question{background-image:url(/img/question-icon.png);background-position:159px 14px;text-align:left;padding-left:41px;padding-top:5px;letter-spacing:-.5px}
 .back_card_question{background-image:url(/img/result-icon.png);background-position:159px 14px;text-align:left;padding-left:41px;padding-top:5px;letter-spacing:-.5px}
+
+.block-for-select-video {
+	width: 750px;
+	height: 121px;
+	background-color: #f1f4fa;
+	border-radius: 8px;
+	border: 1px solid #d3ddef;
+	margin-top: 10px;
+	padding: 20px;
+}
+
+.block-for-select-video .title {
+	color: #6e8dc9;
+	font-size: 16px;
+}
+
+.block-for-select-video .block-inputs {
+	margin-top: 16px;
+	color: #6e8dc9;
+	font-size: 16px;
+	font-weight: 600;
+	position: relative;
+}
+
+.block-for-select-video .block-inputs .select-video{
+	color: #fff;
+	background-color: #123880;
+	font-size: 16px;
+	font-weight: 600;
+	width: 200px;
+	height: 46px;
+	border: 0;
+	border-radius: 5px;
+	float: left;
+	margin-right: 15px;
+}
+
+.block-for-select-video .block-inputs input {
+	margin-left: 12px;
+	width: 450px;
+	height: 46px;
+	border: 2px solid #afc0e1;
+	border-radius: 5px;
+	padding-left: 17px;
+}
+
+.block-for-select-video .block-inputs .youtube-btn-upload {
+	width: 100px;
+	height: 46px;
+	color: #fff;
+	background-color: #123880;
+	border-radius: 0 5px 5px 0;
+	position: absolute;
+	right: 5px;
+	border: 0;
+}
+
+.block-video-duration {
+	width: 750px;
+	height: 172px;
+	margin-top: 10px;
+	background-color: #f1f4fa;
+	border-radius: 8px;
+	border: 1px solid #d3ddef;
+	padding: 10px;
+}
+
+.block-video-duration .title {
+	color: #6e8dc9;
+	font-size: 16px;
+}
+
+.status-gif {
+	font-size: 20px;
+	font-weight: 600;
+	margin-top: 37px;
+	margin-bottom: 17px;	
+	text-align: center;
+}
+
+.status-gif span {
+	color: #00c200;
+}
+
+.block-for-giftext {
+	margin-top: 10px;
+	background-color: #f1f4fa;
+	border-radius: 8px;
+	border: 1px solid #d3ddef;
+	padding: 10px;
+	width: 750px;
+	height: 273px;
+}
+
+.block-for-giftext .title {
+	color: #6e8dc9;
+	font-size: 16px;
+}
+
+.block-for-giftext .caption-gif input {
+	width: 619px;
+	height: 40px;
+	border: 1px solid #afc0e1;
+	border-radius: 5px;
+}
+
+.block-for-giftext .style-gif{
+	width: 194px;
+	height: 40px;
+	background-color: #fff;
+}

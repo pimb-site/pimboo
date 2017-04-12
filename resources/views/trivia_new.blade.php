@@ -9,7 +9,7 @@
 	<link href="css/trivia_new.css" rel="stylesheet">
 	<link href="test/jcrop/jquery.Jcrop.min.css" rel="stylesheet" type="text/css"/>
 </head>
-	<body class="add_flip_cards">
+	<body class="tools_create_page">
 		@include('header')
 		<div class="body">
 		<form action="/save_trivia_quiz" method="post" id="form_upload_cards">
