@@ -9,5 +9,4 @@
 @endsection
 
 @section('script')
-	
 @endsection
