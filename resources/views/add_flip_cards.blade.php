@@ -117,6 +117,11 @@
 						<label><input class="checkbox" type="radio" name="display_item_numbers" value="no" checked><span class="checkbox-custom"></span><span class="label">No</span></label>
 					</div>
 				</div>
+				<div class="down_butts">
+					<button id="preview">PREVIEW</button>
+					<button id="save_draft">SAVE DRAFT</button>
+					<button id="publish">PUBLISH</button>
+				</div>
 			</div>
 		</form>
 		</div>
