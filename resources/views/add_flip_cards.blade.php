@@ -118,9 +118,9 @@
 					</div>
 				</div>
 				<div class="down_butts">
-					<button id="preview">PREVIEW</button>
-					<button id="save_draft">SAVE DRAFT</button>
-					<button id="publish">PUBLISH</button>
+					<button type="button" id="preview">PREVIEW</button>
+					<button type="button" id="save_draft">SAVE DRAFT</button>
+					<button type="button" id="publish">PUBLISH</button>
 				</div>
 			</div>
 		</form>

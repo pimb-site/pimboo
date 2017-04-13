@@ -101,6 +101,11 @@
 						</select>
 					</div>
 				</div>
+				<div class="down_butts">
+					<button type="button" id="preview">PREVIEW</button>
+					<button type="button" id="save_draft">SAVE DRAFT</button>
+					<button type="button" id="publish">PUBLISH</button>
+				</div>
 			</div>
 			</form>
 		</div>
