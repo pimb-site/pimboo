@@ -2,17 +2,17 @@ $(document).ready(function () {
 
 	count_video_gifs = 1;
 
-	$('.add-to-this').click(function() {
-		if(count_video_gifs == 5) return false;
-		count_video_gifs++;
-		$('.add-to-this').before('<div>Start Time(seconds) <input name="options['+(count_video_gifs - 1)+'][start_time]" type="number" value="'+(count_video_gifs*2)+'" class="start-time-yb">'
-								+' End Time(seconds)   <input name="options['+(count_video_gifs - 1)+'][end_time]" type="number" value="'+(count_video_gifs*2 + 2)+'" class="end-time-yb"></div>');
+	// $('.add-to-this').click(function() {
+	// 	if(count_video_gifs == 5) return false;
+	// 	count_video_gifs++;
+	// 	$('.add-to-this').before('<div>Start Time(seconds) <input name="options['+(count_video_gifs - 1)+'][start_time]" type="number" value="'+(count_video_gifs*2)+'" class="start-time-yb">'
+	// 							+' End Time(seconds)   <input name="options['+(count_video_gifs - 1)+'][end_time]" type="number" value="'+(count_video_gifs*2 + 2)+'" class="end-time-yb"></div>');
 
-		if(count_video_gifs == 5) $('.add-to-this').css({'display' : 'none'});
-	});
+	// 	if(count_video_gifs == 5) $('.add-to-this').css({'display' : 'none'});
+	// });
 
-	$('.url-youtube-button').click(function() {
-		var value_yb = $('.url-youtube-clip').val();
+	$('.youtube-btn-upload').click(function() {
+		var value_yb = $('.block-inputs input').val();
 
 		if(value_yb == "") return false;
 
@@ -27,49 +27,37 @@ $(document).ready(function () {
 		  },
 		  success: function(response){
 		    if(response.success == true) {
-		    	$('.url-youtube').val(value_yb);
-		    	$(".youtube-iframe").html(response.html);
-		    	$(".add-youtube-gif").modal().open();
+		    	$('.iframe-youtube').html(response.html);
+		    	$('.btn-create-gif').css({'display': 'block'});
+		    	$('.un_video_url').val(value_yb);
 		    }
 		  }
 		});
 	});
 
-	$(".create-yb-gif").click(function() {
-		$('#create-gif-youtube').ajaxSubmit({
+	$('.color-text-gif button').click(function() {
+		last_color = $('.un_color').val();
+		color = $(this).data('color');
+		$('.color-text-gif button[data-color="'+last_color+'"]').css({'border-radius': '0px'});
+		$(this).css({'border-radius': '50%'});
+		$('.un_color').val(color);
+	});
+
+
+	$(".btn-create-gif button").click(function() {
+
+		caption = $('.caption-gif input').val();
+		$('.un_caption').val(caption);
+
+		$('#create-gif-from-yb').ajaxSubmit({
 			dataType: "json",
 			success: function (data) {
-				$('.gif-input').val(data.file);
-				$('.gif-input-yb').val(data.file);
-				$('#image').attr('src', '/temp/'+data.file);
-				$(".add-youtube-gif").modal().close();
+				$('.un_gif_main').val(data.file);
+				$('.front-card').html("<img src='/temp/"+data.file+"' />");
+				$('.status-gif span').text('DONE! LOOK BELOW');
 			}
 		});
 	});
-
-	// $(".create-yb-gif").click(function() {
-	// 	clip_yb    = $('.url-youtube-clip').val();
-	// 	gif_main   = $('.gif-input').val();
-	// 	start_time = $('.start-time-yb').val();
-
-	// 	$.ajax({
-	// 	  url: 'upload_yb_gif',
-	// 	  dataType: "json",
-	// 	  type: "POST",
-	// 	  data: {
-	// 	  	gif_main: gif_main,
-	// 	  	video_url: clip_yb,
-	// 	  	start_time: start_time,
-	// 	  	_token: token
-	// 	  },
-	// 	  success: function(response){
-	// 	  	if(response.success == true) {
-	// 	  		$('.gif-input').val(response.file);
-	// 			$('#image').attr('src', '/temp/'+response.file);
-	// 	  	}
-	// 	  }
-	// 	});
-	// });
 
 	$('.upl-image-valid').click(function() {
 		value_url = $('.upl-input-image-url').val();
@@ -233,143 +221,3 @@ $(document).ready(function () {
 	    },
     });
 });
-	
-	
-	
-	
-	var worker = new Worker('/js/mainGIF.js');
-
-	var URL = window.URL || window.webkitURL;
-	if (!URL) {
-		document.getElementById("output").innerHTML = 'Your browser is not <a href="http://caniuse.com/bloburls">supported</a>!';
-	} else {
-
-
-
-	worker.addEventListener('message', function(e) {
-		document.getElementById("output").innerHTML = "Done. Look below.";
-	
-		//image.src = e.data;
-		
-		gif_main = $('.gif-input').val();
-		
-		$.post(
-		  "/upload_gif",
-		  {
-			gif: e.data,
-			gif_main: gif_main,
-			_token: token
-		  },
-		  onSuccessUploadGIF
-		);
-	}, false);
-	
-	function onSuccessUploadGIF(data) {
-		if(data.success == true) {
-			
-			$('.gif-input').val(data.file);
-			$('#image').attr('src', '/temp/'+data.file);
-		}
-	}
-
-	var start = document.getElementById("start-button");
-	var end = document.getElementById("end-button");
-	var sample = document.getElementById("sample-button");
-	var image = document.getElementById('image');
-	var speed = document.getElementById("speed");
-	var speedrate = document.getElementById("speedrate");
-
-	var flag = false;
-	var delay = 100; //default speed
-
-	//control play speed
-	speed.addEventListener('change', function(){
-		var s = this.value;
-		delay = s;
-		speedrate.innerHTML = s;
-	}, false);
-
-
-	var v = document.getElementById("v");
-	var canvas = document.getElementById('c');
-	var context = canvas.getContext('2d');
-	var cw,ch;
-
-	v.addEventListener('play', function(){
-		cw = v.clientWidth;
-		ch = v.clientHeight;
-		canvas.width = cw;
-		canvas.height = ch;
-		draw(v,context,cw,ch);
-	},false);
-
-	function draw(v,c,w,h) {
-		if(v.paused || v.ended)	return false;
-		c.drawImage(v,0,0,w,h);
-		if(flag == true){
-			var imdata = c.getImageData(0,0,w,h);
-			worker.postMessage({frame: imdata});
-		}
-		setTimeout(draw,delay,v,c,w,h);
-	}
-
-	sample.addEventListener('click', function(){
-		v.src = 'small.webm';
-	},false);
-
-	start.addEventListener('click', function(){
-		flag = true;
-		worker.postMessage({delay:delay,w:cw,h:ch});
-		document.getElementById("output").innerHTML = "Capturing video frames.";
-	},false);
-
-	end.addEventListener('click', function(){
-		flag = false;
-		worker.postMessage({});
-		document.getElementById("output").innerHTML = "Processing the GIF.";
-	},false);
-
-
-		/* Drag drop stuff */
-		window.ondragover = function(e) {e.preventDefault()}
-		window.ondrop = function(e) {
-			e.preventDefault();
-			document.getElementById("output").innerHTML = "Reading...";
-			var length = e.dataTransfer.items.length;
-			if(length > 1){
-				document.getElementById("output").innerHTML = "Please only drop 1 file.";
-			} else {
-				upload(e.dataTransfer.files[0]);
-			}
-		}
-
-		/* main upload function */
-		function upload(file) {
-
-			//check if its a video file
-			if(file.type.match(/video\/*/)){
-				/*
-				oFReader = new FileReader();
-				oFReader.onloadend = function() {
-
-					document.getElementById("output").innerHTML = "";
-
-					var blob = new Blob([this.result], {type: file.type});
-					var url = URL.createObjectURL(blob);
-
-					v.src = url;
-				};
-				//oFReader.readAsBinaryString(file);
-				oFReader.readAsArrayBuffer(file);
-				*/
-
-				//why read the whole video into memory when you can stream!!
-				document.getElementById("output").innerHTML = "";
-				var url = URL.createObjectURL(file);
-				v.src = url;
-
-			} else {
-				document.getElementById("output").innerHTML = "This file does not seem to be a video.";
-			}
-		}
-	}

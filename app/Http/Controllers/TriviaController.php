@@ -8,12 +8,21 @@ class TriviaController extends Controller
 	public function validURL() {
 		
 		$url = \Input::get('video_url');
+
+		$api_key = "AIzaSyCxldnrnpZKFHg64lO5vum9OaLJfS7ikiM";
 		
 		if (!filter_var($url, FILTER_VALIDATE_URL) === false) {
 			$content = @file_get_contents('https://www.youtube.com/oembed?url='.$url.'&format=json');
 			$array_information = json_decode($content, true);
 			if(is_array($array_information)) {
-				return \Response::json(['success' => true, 'thumbnail_url' => $array_information['thumbnail_url'], 'html' => $array_information['html']]);
+
+				preg_match("/^(?:http(?:s)?:\/\/)?(?:www\.)?(?:m\.)?(?:youtu\.be\/|youtube\.com\/(?:(?:watch)?\?(?:.*&)?v(?:i)?=|(?:embed|v|vi|user)\/))([^\?&\"'>]+)/", $url, $matches);
+				$video_id = $matches[1];
+				$duration = file_get_contents("https://www.googleapis.com/youtube/v3/videos?part=contentDetails&id=$video_id&key=$api_key");
+				$duration = json_decode($duration, true);
+				$duration = $duration['items'][0]['contentDetails']['duration'];
+
+				return \Response::json(['success' => true, 'thumbnail_url' => $array_information['thumbnail_url'], 'html' => $array_information['html'], 'duration' => $duration]);
 			}
 		}
 	

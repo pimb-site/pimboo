@@ -8,6 +8,7 @@
 	<link href="css/style.min.css" rel="stylesheet">
 	<link href="css/trivia_new.css" rel="stylesheet">
 	<link href="test/jcrop/jquery.Jcrop.min.css" rel="stylesheet" type="text/css"/>
+	<link type="text/css" rel="stylesheet" href="css/jquery.nstSlider.min.css">
 </head>
 	<body class="tools_create_page">
 		@include('header')
@@ -30,17 +31,38 @@
 				<div class="block-for-select-video">
 					<div class="title">ADD VIDEO TO CREATE NEW GIF</div>
 					<div class="block-inputs">
-						<button class="select-video">SELECT VIDEO</button>
+						<button type="button" class="select-video">SELECT VIDEO</button>
 						OR
 						<input placeholder="Enter YouTube clip URL">
-						<button class="youtube-btn-upload">UPLOAD</button>
+						<button type="button" class="youtube-btn-upload">UPLOAD</button>
 					</div>
 				</div>
 				<div class="block-video-duration">
 					<div class="title">CHOOSE TIME DURATION</div>
+					<div class="iframe-youtube"> </div>
+					<div class="duration-text">
+						<div class="text1">START</div>
+						<div class="text2">DURATION</div>
+						<div class="text3">END</div>
+					</div>
+					<div class="nstSlider" data-range_min="0" data-range_max="1800" data-cur_min="0" data-cur_max="60">
+					    <div class="bar"></div>
+					    <div class="leftGrip"></div>
+					    <div class="rightGrip"></div>
+					</div>
+					<!--<div class="leftLabel" > </div>
+					<div class="rightLabel" > </div>-->
+					<div class="duration-inputs">
+						<div class="duration-input-div1"><input type="text" class="input-start-time" disabled=""></div>
+						<div class="duration-input-div2"><input type="text" class="input-duration-time" disabled=""></div>
+						<div class="duration-input-div3"><input type="text" class="input-end-time" disabled=""></div>
+					</div>
+					<div class="btn-create-gif">
+						<button type="button">CREATE</button>
+					</div>
 				</div>
 
-				<div class="status-gif">CREATED GIF: <span>Someone...</span></div>
+				<div class="status-gif">CREATED GIF: <span>Not created</span></div>
 
 				<div class="editor" data-id="1">
 					<div class="front-card" data-id="1">
@@ -49,12 +71,43 @@
 
 				<div class="block-for-giftext">
 					<div class="title">ADD TEXT AND EFFECTS TO YOUR GIF</div>
-					<div class="caption-gif">CAPTION<input placeholder="Please enter your text here"></div>
+					<div class="caption-gif">
+						<div class="type-title">Caption</div> 
+						<input placeholder="Please enter your text here">
+					</div>
 					<div class="style-gif">
-						STYLE
-						<button>DEFAULT</button>
-						<button>MEME</button>
-						<button>SUBTITLE</button>
+						<div class="type-title">Style</div>
+						<button type="button">DEFAULT</button>
+						<button type="button">MEME</button>
+						<button type="button">SUBTITLE</button>
+					</div>
+					<div class="color-text-gif">
+						<div class="type-title">Color</div>
+						<div class="btn-color-left">
+							<button type="button" class="white"  data-color="0"></button>
+							<button type="button" class="black"  data-color="1"></button>
+							<button type="button" class="red"    data-color="2"></button>
+							<button type="button" class="yellow" data-color="3"></button>
+						</div>
+						<div class="btn-color-right">
+							<button type="button" class="purple" data-color="4"> </button>
+							<button type="button" class="green" data-color="5"> </button>
+							<button type="button" class="pink" data-color="6"> </button>
+							<button type="button" class="blue" data-color="7"> </button>
+						</div>
+					</div>
+					<div class="text-style-gif">
+						<div class="type-title">Text style</div>
+						<div class="select">
+							<select>
+								<option>Font</option>
+							</select>
+						</div>
+						<div class="select">
+							<select>
+								<option>Size</option>
+							</select>
+						</div>
 					</div>
 				</div>
 
@@ -116,6 +169,20 @@
 				</div>
 			</div>
 			</form>
+
+
+			<form id="create-gif-from-yb" action="/upload_yb_gif" method="POST">
+				<input type="hidden" name="_token" value="{{ csrf_token() }}">
+				<input type="hidden" name="gif_main" value="" class="un_gif_main">
+				<input type="hidden" name="video_url" value="" class="un_video_url">
+				<input type="hidden" name="options[0][start_time]" class="un_start_time" value="0">
+				<input type="hidden" name="options[0][end_time]" class="un_end_time" value="1">
+				<input type="hidden" name="color" class="un_color" value="0">
+				<input type="hidden" name="caption" class="un_caption" value="">
+			</form>
+
+
+
 		</div>
 		<footer>
 			<div class="up">
@@ -192,5 +259,25 @@
 	</script>
 	<script src="/js/main.js"></script>
 	<script src="/js/video_to_gif.js"></script>
+	<script src="/js/jquery.nstSlider.min.js"></script>
+	<script>
+		$('.nstSlider').nstSlider({
+		    "crossable_handles": false,
+		    "left_grip_selector": ".leftGrip",
+		    "right_grip_selector": ".rightGrip",
+		    "value_bar_selector": ".bar",
+		    "value_changed_callback": function(cause, leftValue, rightValue) {
+		    	$('.un_start_time').val(leftValue);
+		    	$('.un_end_time').val(rightValue);
+		    	duration = rightValue - leftValue;
+		    	duration =  Math.floor(duration / 60) + ':' + duration % 60;
+		    	leftValue = Math.floor(leftValue / 60) + ':' + leftValue % 60;
+		    	rightValue = Math.floor(rightValue / 60) + ':' + rightValue % 60;
+		        $('.input-start-time').val(leftValue);
+		        $('.input-end-time').val(rightValue);
+		        $('.input-duration-time').val(duration);
+		    }
+		});
+	</script>
 	</body>
 </html>
