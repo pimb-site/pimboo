@@ -1,6 +1,8 @@
 <?php namespace App\Http\Controllers;
 
 use Illuminate\View\View;
+use Imagick;
+use ImagickDraw;
 
 class VideoGifController extends Controller
 {
@@ -17,71 +19,115 @@ class VideoGifController extends Controller
 	
 
 	public function youtubeGIF() {
-	if(\Auth::guest()) return view('auth/login');
 
-	$input = \Input::all();
+		if(\Auth::guest()) return view('auth/login');
 
-	$url = $input['video_url'];
-	$main_gif = $input['gif_main'];
-	
-	if (!filter_var($url, FILTER_VALIDATE_URL) === false) {
-		$content = @file_get_contents('https://www.youtube.com/oembed?url='.$url.'&format=json');
-		$array_information = json_decode($content, true);
-		if(is_array($array_information)) {
-			
+		$input = \Input::all();
 
-			// If directory does not exist
-			if(!file_exists("temp/".\Session::getId())) {
-            	mkdir("temp/".\Session::getId());
-        	}
-			
-
-			// upload youtube video
-			$uniq_name = uniqid();
-			$command_line_download = 'youtube-dl -f 134 -o "/var/www/pimboobeta.com/public/uploads/'.$uniq_name.'.%(ext)s" '.$url;
-			shell_exec($command_line_download);
+		$url = $input['video_url'];
+		$main_gif = $input['gif_main'];
+		$caption  = $input['caption'];
 
 
-			// Create gifs from video/ And their gluing
-			foreach ($input['options'] as $key => $value) {
-				$start_time = (int)abs($value['start_time']);
-				$end_time   = (int)abs($value['end_time']);
+		// Color
+		$available_colors = [
+			0 => '#fff',
+			1 => '#000000',
+			2 => '#ff6666',
+			3 => '#fff35c',
+			4 => '#9933ff',
+			5 => '#00ff99',
+			6 => '#e646b6',
+			7 => '#00ccff'
+		];
+		$color = $input['color'];
+		$color = (isset($available_colors[$color])) ? $available_colors[$color] : '#fff';
 
-				$length = $end_time - $start_time;
+		// Font
+		$font_size = 40;
+		$font_path = "/var/www/pimboobeta.com/public/fonts/Action_Man.ttf";
+		//
+		
+		if (!filter_var($url, FILTER_VALIDATE_URL) === false) {
+			$content = @file_get_contents('https://www.youtube.com/oembed?url='.$url.'&format=json');
+			$array_information = json_decode($content, true);
+			if(is_array($array_information)) {
+				
 
-				if($length <= 0) continue;
+				// If directory does not exist
+				if(!file_exists("temp/".\Session::getId())) {
+	            	mkdir("temp/".\Session::getId());
+	        	}
 
-				$uniqid = uniqid();
-				$command_line_create   = 'ffmpeg -t '.$length.' -ss 00:00:'.$start_time.' -i /var/www/pimboobeta.com/public/uploads/'.$uniq_name.'.mp4 /var/www/pimboobeta.com/public/temp/'.\Session::getId().'/'.$uniqid.'.gif';
-				shell_exec($command_line_create);
 
-				if(isset($cycle_gif) && $cycle_gif != "") {
-					$new_gif = uniqid().".gif";
-					$path_gif = $new_gif = \Session::getId()."/".$new_gif;
+				// upload youtube video
+				$uniq_name = uniqid();
+				$command_line_download = 'youtube-dl -f 134 -o "/var/www/pimboobeta.com/public/uploads/'.$uniq_name.'.%(ext)s" '.$url;
+				shell_exec($command_line_download);
+
+
+				// Create gifs from video/ And their gluing
+				foreach ($input['options'] as $key => $value) {
+					$start_time = (int)abs($value['start_time']);
+					$end_time   = (int)abs($value['end_time']);
+
+					$start_time = date("H:i:s", mktime(0, 0, $start_time));
+
+					$length = $end_time - $start_time;
+
+					if($length <= 0) continue;
+
+					$uniqid = uniqid();
+					$command_line_create   = 'ffmpeg -t '.$length.' -ss '.$start_time.' -r 15 -y -i /var/www/pimboobeta.com/public/uploads/'.$uniq_name.'.mp4 -s 410x240 /var/www/pimboobeta.com/public/temp/'.\Session::getId().'/'.$uniqid.'.gif';
+					shell_exec($command_line_create);
+
+
+					$path_filename = '/var/www/pimboobeta.com/public/temp/'.\Session::getId().'/'.$uniqid.'.gif';
+
+					if($caption != "") {
+						$im = new Imagick($path_filename); // Берем исходный файл
+						$draw = new ImagickDraw();
+						$draw->setFont($font_path); // выбираем шрифт
+						$draw->setFontSize($font_size);
+						$draw->setFillColor($color);
+						$draw->setGravity(Imagick::GRAVITY_CENTER);
+						 
+						foreach ($im as $frame) {
+						    $frame->annotateImage( $draw, 0, 50, 0, $caption ); // Наносим текст
+						}
+
+						$filehandle = fopen('temp/'.\Session::getId().'/'.$uniqid.'.gif', 'w');
+						$im->writeImagesFile($filehandle); // Сохраняем анимацию
+						fclose($filehandle);
+					}
+
+					if(isset($cycle_gif) && $cycle_gif != "") {
+						$new_gif = uniqid().".gif";
+						$path_gif = $new_gif = \Session::getId()."/".$new_gif;
+						$main_path = "/var/www/pimboobeta.com/public/temp/";
+						$command_line = "convert -loop 0 ".$main_path.$cycle_gif." ".$main_path.\Session::getId()."/".$uniqid.".gif ".$main_path.$path_gif;
+						shell_exec($command_line);
+						$cycle_gif = $path_gif;
+					}
+					else {
+						$cycle_gif = \Session::getId()."/".$uniqid . '.gif';
+					}
+				}
+
+				$temp_file =  $cycle_gif;
+
+				if($main_gif != "" && file_exists('temp/'.$main_gif)) {
 					$main_path = "/var/www/pimboobeta.com/public/temp/";
-					$command_line = "convert -loop 0 ".$main_path.$cycle_gif." ".$main_path.\Session::getId()."/".$uniqid.".gif ".$main_path.$path_gif;
+					$path_gif = \Session::getId()."/".uniqid() . '.gif';
+					$command_line = "convert -loop 0 ".$main_path.$main_gif." ".$main_path.\Session::getId()."/".$uniqid.".gif ".$main_path.$path_gif;
 					shell_exec($command_line);
-					$cycle_gif = $path_gif;
+
+					$temp_file = $path_gif;
 				}
-				else {
-					$cycle_gif = \Session::getId()."/".$uniqid . '.gif';
-				}
+
+				return \Response::json(['success' => true, 'file' => $temp_file, 'length' => $length]);
 			}
-
-			$temp_file =  $cycle_gif;
-
-			if($main_gif != "" && file_exists('temp/'.$main_gif)) {
-				$main_path = "/var/www/pimboobeta.com/public/temp/";
-				$path_gif = \Session::getId()."/".uniqid() . '.gif';
-				$command_line = "convert -loop 0 ".$main_path.$main_gif." ".$main_path.\Session::getId()."/".$uniqid.".gif ".$main_path.$path_gif;
-				shell_exec($command_line);
-
-				$temp_file = $path_gif;
-			}
-
-			return \Response::json(['success' => true, 'file' => $temp_file, 'length' => $length]);
 		}
-	}
 	}
 
 	public function uploadGIF() {

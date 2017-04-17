@@ -11,6 +11,18 @@ $(document).ready(function () {
 	// 	if(count_video_gifs == 5) $('.add-to-this').css({'display' : 'none'});
 	// });
 
+
+	$('.style-gif button').click(function() {
+		last_style = $('.un_style').val();
+		style = $(this).data('style');
+
+
+		$('.style-gif button[data-style="'+last_style+'"]').removeClass('current-style');
+		$(this).addClass('current-style');
+		$('.un_style').val(style);
+	});
+
+
 	$('.youtube-btn-upload').click(function() {
 		var value_yb = $('.block-inputs input').val();
 
@@ -53,7 +65,7 @@ $(document).ready(function () {
 			dataType: "json",
 			success: function (data) {
 				$('.un_gif_main').val(data.file);
-				$('.front-card').html("<img src='/temp/"+data.file+"' />");
+				$('.front-card').html("<img class='picture-gif' src='/temp/"+data.file+"' />");
 				$('.status-gif span').text('DONE! LOOK BELOW');
 			}
 		});
