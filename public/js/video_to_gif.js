@@ -12,6 +12,12 @@ $(document).ready(function () {
 	// });
 
 
+
+	$('.text-style-gif .select option').click(function() {
+		size = $(this).data('size');
+		$('.un_size').val(size);
+	});
+
 	$('.style-gif button').click(function() {
 		last_style = $('.un_style').val();
 		style = $(this).data('style');
@@ -41,6 +47,7 @@ $(document).ready(function () {
 		    if(response.success == true) {
 		    	$('.iframe-youtube').html(response.html);
 		    	$('.btn-create-gif').css({'display': 'block'});
+		    	$('.block-for-giftext').css({'height': '330px'});
 		    	$('.un_video_url').val(value_yb);
 		    }
 		  }

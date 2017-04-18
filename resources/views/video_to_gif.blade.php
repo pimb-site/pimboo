@@ -77,9 +77,9 @@
 					</div>
 					<div class="style-gif">
 						<div class="type-title">Style</div>
-						<button type="button" class="current-style" data-style="0">DEFAULT</button>
-						<button type="button" data-style="1">MEME</button>
-						<button type="button" data-style="2">SUBTITLE</button>
+						<button type="button" class="default current-style" data-style="0">DEFAULT</button>
+						<button type="button" class="meme" data-style="1">MEME</button>
+						<button type="button" class="subtitle" data-style="2">SUBTITLE</button>
 					</div>
 					<div class="color-text-gif">
 						<div class="type-title">Color</div>
@@ -100,9 +100,9 @@
 						<div class="type-title">Text size</div>
 						<div class="select">
 							<select>
-								<option>40 pixels</option>
-								<option>60 pixels</option>
-								<option>80 pixels</option>
+								<option data-size="0">40 pixels</option>
+								<option data-size="1">60 pixels</option>
+								<option data-size="2">80 pixels</option>
 							</select>
 						</div>
 					</div>
@@ -183,7 +183,8 @@
 				<input type="hidden" name="options[0][start_time]" class="un_start_time" value="0">
 				<input type="hidden" name="options[0][end_time]" class="un_end_time" value="1">
 				<input type="hidden" name="color" class="un_color" value="0">
-				<input type="hidden" name="style" class="un_style" value="0">
+				<input type="hidden" name="font_family" class="un_style" value="0">
+				<input type="hidden" name="font_size" class="un_size" value="0">
 				<input type="hidden" name="caption" class="un_caption" value="">
 			</form>
 

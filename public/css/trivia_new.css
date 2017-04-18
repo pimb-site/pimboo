@@ -1290,7 +1290,8 @@ video {
 	padding-top: 20px;
 	padding-left: 20px;
 	width: 750px;
-	height: 273px;
+	height: 280px;
+	padding-bottom: 10px;
 }
 
 .block-for-giftext .title {
@@ -1342,6 +1343,18 @@ video {
 	font-size: 16px;
 	margin-right: 16px;
 	outline: none;
+}
+
+.block-for-giftext .style-gif > .default {
+	font-family: 'nexablack',sans-serif;
+}
+
+.block-for-giftext .style-gif > .meme {
+	font-family: Impact,sans-serif;
+}
+
+.block-for-giftext .style-gif > .subtitle {
+	font-family: Arial,sans-serif;
 }
 
 .block-for-giftext .style-gif > .current-style {
@@ -1440,7 +1453,7 @@ video {
 }
 
 .block-for-giftext .text-style-gif .select{
-	margin-right: 19px;
+	margin-left: 5px;
 	float: left;
 	border-radius: 3px;
 	width: 194px;
@@ -1452,6 +1465,7 @@ video {
 	background-position: 289px;
 	overflow: hidden;
 	margin-top: 10px;
+
 }
 
 .block-for-giftext .text-style-gif .select select {

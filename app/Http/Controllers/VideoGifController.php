@@ -43,10 +43,24 @@ class VideoGifController extends Controller
 		$color = $input['color'];
 		$color = (isset($available_colors[$color])) ? $available_colors[$color] : '#fff';
 
-		// Font
-		$font_size = 40;
-		$font_path = "/var/www/pimboobeta.com/public/fonts/Action_Man.ttf";
-		//
+		// Font size
+		$avaible_font_sizes = [
+			'0' => 40,
+			'1' => 60,
+			'2' => 80
+		];
+		$font_size = $input['font_size'];
+		$font_size = (isset($avaible_font_sizes[$font_size])) ? $avaible_font_sizes[$font_size] : 40;
+
+		// Font path
+		$avaible_font_path = [
+			'0' => '/var/www/pimboobeta.com/public/fonts/nexablack.ttf',
+			'1' => '/var/www/pimboobeta.com/public/fonts/impact.ttf',
+			'2' => '/var/www/pimboobeta.com/public/fonts/arial.ttf'
+		];
+		$font_family = $input['font_family'];
+		$font_path = (isset($avaible_font_path[$font_family])) ? $avaible_font_path[$font_family] : '/var/www/pimboobeta.com/public/fonts/nexablack.ttf';
+		// ...
 		
 		if (!filter_var($url, FILTER_VALIDATE_URL) === false) {
 			$content = @file_get_contents('https://www.youtube.com/oembed?url='.$url.'&format=json');
