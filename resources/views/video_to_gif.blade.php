@@ -57,9 +57,6 @@
 						<div class="duration-input-div2"><input type="text" class="input-duration-time" disabled=""></div>
 						<div class="duration-input-div3"><input type="text" class="input-end-time" disabled=""></div>
 					</div>
-					<div class="btn-create-gif">
-						<button type="button">CREATE</button>
-					</div>
 				</div>
 
 				<div class="status-gif">CREATED GIF: <span>Not created</span></div>
