@@ -24,12 +24,11 @@ class VideoGifController extends Controller
 		
 		if( ($video->getMimeType() == "video/mp4") && ($video->getClientSize() <= 10000000) ) {
 
-			$directory = \Session::getId()."/";
 			$filename = uniqid().".mp4";
 
-			$video->move("temp/".$directory, $filename);
+			$video->move("uploads/", $filename);
 
-			return \Response::json(['success' => true, 'file' => $directory.$filename]);
+			return \Response::json(['success' => true, 'file' => $filename]);
 		}
 	}
 
@@ -39,7 +38,8 @@ class VideoGifController extends Controller
 
 		$input = \Input::all();
 
-		$url = $input['video_url'];
+		$video_youtube = $input['video_youtube'];
+		$video_site    = $input['video_site'];
 		$main_gif = $input['gif_main'];
 		$caption  = $input['caption'];
 
@@ -76,13 +76,12 @@ class VideoGifController extends Controller
 		$font_family = $input['font_family'];
 		$font_path = (isset($avaible_font_path[$font_family])) ? $avaible_font_path[$font_family] : '/var/www/pimboobeta.com/public/fonts/nexablack.ttf';
 		// ...
-		
-		if (!filter_var($url, FILTER_VALIDATE_URL) === false) {
-			$content = @file_get_contents('https://www.youtube.com/oembed?url='.$url.'&format=json');
+
+		if (!filter_var($video_youtube, FILTER_VALIDATE_URL) === false) {
+
+			$content = @file_get_contents('https://www.youtube.com/oembed?url='.$video_youtube.'&format=json');
 			$array_information = json_decode($content, true);
 			if(is_array($array_information)) {
-				
-
 				// If directory does not exist
 				if(!file_exists("temp/".\Session::getId())) {
 	            	mkdir("temp/".\Session::getId());
@@ -91,7 +90,7 @@ class VideoGifController extends Controller
 
 				// upload youtube video
 				$uniq_name = uniqid();
-				$command_line_download = 'youtube-dl -f 134 -o "/var/www/pimboobeta.com/public/uploads/'.$uniq_name.'.%(ext)s" '.$url;
+				$command_line_download = 'youtube-dl -f 134 -o "/var/www/pimboobeta.com/public/uploads/'.$uniq_name.'.%(ext)s" '.$video_youtube;
 				shell_exec($command_line_download);
 
 
@@ -160,6 +159,75 @@ class VideoGifController extends Controller
 
 				return \Response::json(['success' => true, 'file' => \Session::getId()."/".$thumbnail_name]);
 			}
+		} else if ($video_site != "" && file_exists("uploads/".$video_site)) { 
+
+			if(!file_exists("temp/".\Session::getId())) {
+	           	mkdir("temp/".\Session::getId());
+	        }
+
+			foreach ($input['options'] as $key => $value) {
+				$start_time = (int)abs($value['start_time']);
+				$end_time   = (int)abs($value['end_time']);
+
+				$start_time = date("H:i:s", mktime(0, 0, $start_time));
+
+				$length = $end_time - $start_time;
+
+				if($length <= 0) continue;
+
+				$uniqid = uniqid();
+				$command_line_create   = 'ffmpeg -t '.$length.' -ss '.$start_time.' -r 15 -y -i /var/www/pimboobeta.com/public/uploads/'.$video_site.' -s 410x240 /var/www/pimboobeta.com/public/temp/'.\Session::getId().'/'.$uniqid.'.gif';
+				shell_exec($command_line_create);
+
+
+				$path_filename = '/var/www/pimboobeta.com/public/temp/'.\Session::getId().'/'.$uniqid.'.gif';
+
+				if($caption != "") {
+					$im = new Imagick($path_filename); // Берем исходный файл
+					$draw = new ImagickDraw();
+					$draw->setFont($font_path); // выбираем шрифт
+					$draw->setFontSize($font_size);
+					$draw->setFillColor($color);
+					$draw->setGravity(Imagick::GRAVITY_CENTER);
+					 
+					foreach ($im as $frame) {
+					    $frame->annotateImage( $draw, 0, 50, 0, $caption ); // Наносим текст
+					}
+
+					$filehandle = fopen('temp/'.\Session::getId().'/'.$uniqid.'.gif', 'w');
+					$im->writeImagesFile($filehandle); // Сохраняем анимацию
+					fclose($filehandle);
+				}
+
+				if(isset($cycle_gif) && $cycle_gif != "") {
+					$new_gif = uniqid().".gif";
+					$path_gif = $new_gif = \Session::getId()."/".$new_gif;
+					$main_path = "/var/www/pimboobeta.com/public/temp/";
+					$command_line = "convert -loop 0 ".$main_path.$cycle_gif." ".$main_path.\Session::getId()."/".$uniqid.".gif ".$main_path.$path_gif;
+					shell_exec($command_line);
+					$cycle_gif = $path_gif;
+				}
+				else {
+					$cycle_gif = \Session::getId()."/".$uniqid . '.gif';
+				}
+			}
+
+			$temp_file =  $cycle_gif;
+
+			if($main_gif != "" && file_exists('temp/'.$main_gif)) {
+				$main_path = "/var/www/pimboobeta.com/public/temp/";
+				$path_gif = \Session::getId()."/".uniqid() . '.gif';
+				$command_line = "convert -loop 0 ".$main_path.$main_gif." ".$main_path.\Session::getId()."/".$uniqid.".gif ".$main_path.$path_gif;
+				shell_exec($command_line);
+
+				$temp_file = $path_gif;
+			}
+
+			$thumbnail_name = uniqid().".png";
+			$thumbnail = imagecreatefromgif("temp/".$temp_file);
+			$thumbnail = imagegif($thumbnail, "temp/".\Session::getId()."/".$thumbnail_name);
+
+			return \Response::json(['success' => true, 'file' => \Session::getId()."/".$thumbnail_name]);
 		}
 	}
 

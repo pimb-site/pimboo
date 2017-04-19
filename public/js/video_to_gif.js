@@ -28,7 +28,10 @@ $(document).ready(function () {
 	        contentType: false,
 	        success: function( response, textStatus, jqXHR ){
 	            if( typeof response.error === 'undefined' ){
-	            	$('.iframe-youtube').html("<video src='/temp/"+response.file+"'></video>");
+	            	$('.iframe-youtube').html("<video src='/uploads/"+response.file+"' controls autoplay muted></video>");
+	            	$('.un_video').val(response.file);
+	            	$('.btn-create-gif').css({'display': 'block'});
+	            	$('.block-for-giftext').css({'height': '330px'});
 	            }
 	        },
 	        error: function( jqXHR, textStatus, errorThrown ){
@@ -105,7 +108,6 @@ $(document).ready(function () {
 	    $("#loadImg").hide();
 	    $('body').css({'opacity': '1', 'overflow': 'auto'});
 	}
-
 
 	$(".btn-create-gif button").click(function() {
 		startLoadingAnimation();

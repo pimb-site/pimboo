@@ -178,13 +178,14 @@
 			<form id="create-gif-from-yb" action="/upload_yb_gif" method="POST">
 				<input type="hidden" name="_token" value="{{ csrf_token() }}">
 				<input type="hidden" name="gif_main" value="" class="un_gif_main">
-				<input type="hidden" name="video_url" value="" class="un_video_url">
+				<input type="hidden" name="video_youtube" value="" class="un_video_url">
 				<input type="hidden" name="options[0][start_time]" class="un_start_time" value="0">
 				<input type="hidden" name="options[0][end_time]" class="un_end_time" value="1">
 				<input type="hidden" name="color" class="un_color" value="0">
 				<input type="hidden" name="font_family" class="un_style" value="0">
 				<input type="hidden" name="font_size" class="un_size" value="0">
 				<input type="hidden" name="caption" class="un_caption" value="">
+				<input type="hidden" name="video_site" class="un_video" value="">
 			</form>
 
 
@@ -239,7 +240,6 @@
 				<div>Start Time(seconds) <input type="number" value="0" class="start-time-yb"> End Time(seconds)   <input type="number" value="2" class="end-time-yb"></div>
 				<div><button type="button" class="add-to-this">Add to this...</button></div>
 				<div><button type="button" class="create-yb-gif">Create GIF</button></div>
-
 			</div>
 		</div>
 		
