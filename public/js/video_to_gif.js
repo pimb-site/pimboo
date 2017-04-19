@@ -11,7 +11,9 @@ $(document).ready(function () {
 	// 	if(count_video_gifs == 5) $('.add-to-this').css({'display' : 'none'});
 	// });
 
-
+	$('.select-video').click(function() {
+		$('#input-video').trigger( 'click' );
+	});
 
 	$('.text-style-gif .select option').click(function() {
 		size = $(this).data('size');
@@ -63,17 +65,36 @@ $(document).ready(function () {
 	});
 
 
-	$(".btn-create-gif button").click(function() {
+  function startLoadingAnimation()
+  {
+    var imgObj = $("#loadImg");
+    imgObj.show();
+    
+    var centerY = $(window).scrollTop() + ($(window).height() + imgObj.height())/2;
+    var centerX = $(window).scrollLeft() + ($(window).width() + imgObj.width())/2;
+    
+    imgObj.offset({top:centerY, left:centerX});
+    $('body').css({'opacity': '0.3', 'overflow': 'hidden'});
+  }
+	  
+	function stopLoadingAnimation() {
+	    $("#loadImg").hide();
+	    $('body').css({'opacity': '1', 'overflow': 'auto'});
+	}
 
+
+	$(".btn-create-gif button").click(function() {
+		startLoadingAnimation();
 		caption = $('.caption-gif input').val();
 		$('.un_caption').val(caption);
-
 		$('#create-gif-from-yb').ajaxSubmit({
 			dataType: "json",
 			success: function (data) {
 				$('.un_gif_main').val(data.file);
 				$('.front-card').html("<img class='picture-gif' src='/temp/"+data.file+"' />");
+				$('.editor').css({'display': 'block'});
 				$('.status-gif span').text('DONE! LOOK BELOW');
+				stopLoadingAnimation();
 			}
 		});
 	});
@@ -164,6 +185,8 @@ $(document).ready(function () {
 	});
 	
 	
+
+
 	$('.add_fb_img').click(function() {
 		image_type_fc = 2;
 		min_sizeh_fc = 10;

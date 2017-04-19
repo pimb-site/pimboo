@@ -1271,6 +1271,8 @@ video {
 }
 
 .status-gif {
+	float: left;
+	width: 100%;
 	font-size: 20px;
 	font-weight: 600;
 	margin-top: 37px;
@@ -1283,6 +1285,7 @@ video {
 }
 
 .block-for-giftext {
+	float: left;
 	margin-top: 10px;
 	background-color: #f1f4fa;
 	border-radius: 8px;
@@ -1555,6 +1558,7 @@ video {
 	display: block;
 	margin-right: auto;
 	margin-left: auto;
+	border-radius: 8px;
 }
 
 .btn-create-gif {
@@ -1582,3 +1586,19 @@ video {
 	height: 100%;
 	border-radius: 8px;
 }
+
+#loadImg{
+	position:absolute;
+	z-index:1000;
+	display:none;
+}
+
+.editor {
+	float: left;
+	display: none;
+}
+
+.down_butts {
+	float: left;
+}
+

@@ -139,7 +139,11 @@ class VideoGifController extends Controller
 					$temp_file = $path_gif;
 				}
 
-				return \Response::json(['success' => true, 'file' => $temp_file, 'length' => $length]);
+				$thumbnail_name = uniqid().".png";
+				$thumbnail = imagecreatefromgif("/temp/".$temp_file);
+				$thumbnail = imagegif($thumbnail, $thumbnail_name);
+
+				return \Response::json(['success' => true, 'file' => $thumbnail_name]);
 			}
 		}
 	}

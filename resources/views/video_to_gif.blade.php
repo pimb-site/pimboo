@@ -11,6 +11,7 @@
 	<link type="text/css" rel="stylesheet" href="css/jquery.nstSlider.min.css">
 </head>
 	<body class="tools_create_page">
+	<img id="loadImg" src="img/ajax-loader.gif" />
 		@include('header')
 		<div class="body">
 		<form id="form_upload_cards" action="/upload_end_gif" method="POST">
@@ -36,6 +37,7 @@
 						<input placeholder="Enter YouTube clip URL">
 						<button type="button" class="youtube-btn-upload">UPLOAD</button>
 					</div>
+					<input type="file" name="video" id="input-video" accept="video/mp4" style="display: none;" />
 				</div>
 				<div class="block-video-duration">
 					<div class="title">CHOOSE TIME DURATION</div>
