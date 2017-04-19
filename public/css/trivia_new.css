@@ -1561,6 +1561,14 @@ video {
 	border-radius: 8px;
 }
 
+.iframe-youtube video {
+	display: block;
+	margin-right: auto;
+	margin-left: auto;
+	border-radius: 8px;
+	border: none;
+}
+
 .btn-create-gif {
 	float: left;
 	width: 100%;
@@ -1602,3 +1610,9 @@ video {
 	float: left;
 }
 
+.testcreate {
+	position: absolute;
+	top: 120px;
+	left: 250px;
+	opacity: 0.7;
+}

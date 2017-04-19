@@ -11,6 +11,31 @@ $(document).ready(function () {
 	// 	if(count_video_gifs == 5) $('.add-to-this').css({'display' : 'none'});
 	// });
 
+	$('#input-video').on("change", function() {
+		files = this.files[0];
+	    var data = new FormData();
+
+	    data.append('_token', token);
+	    data.append('file', files);
+
+	    $.ajax({
+	        url: '/upload/video',
+	        type: 'POST',
+	        data: data,
+	        cache: false,
+	        dataType: 'json',
+	        processData: false,
+	        contentType: false,
+	        success: function( response, textStatus, jqXHR ){
+	            if( typeof response.error === 'undefined' ){
+	            	$('.iframe-youtube').html("<video src='/temp/"+response.file+"'></video>");
+	            }
+	        },
+	        error: function( jqXHR, textStatus, errorThrown ){
+	        }
+	    });
+	});
+
 	$('.select-video').click(function() {
 		$('#input-video').trigger( 'click' );
 	});
@@ -23,7 +48,6 @@ $(document).ready(function () {
 	$('.style-gif button').click(function() {
 		last_style = $('.un_style').val();
 		style = $(this).data('style');
-
 
 		$('.style-gif button[data-style="'+last_style+'"]').removeClass('current-style');
 		$(this).addClass('current-style');
@@ -91,9 +115,10 @@ $(document).ready(function () {
 			dataType: "json",
 			success: function (data) {
 				$('.un_gif_main').val(data.file);
-				$('.front-card').html("<img class='picture-gif' src='/temp/"+data.file+"' />");
+				$('.front-card').html("<img class='picture-gif' src='/temp/"+data.file+"' /> <img class='testcreate' src='/img/gif-icon.png' />");
 				$('.editor').css({'display': 'block'});
 				$('.status-gif span').text('DONE! LOOK BELOW');
+
 				stopLoadingAnimation();
 			}
 		});

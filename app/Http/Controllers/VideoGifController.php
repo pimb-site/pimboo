@@ -3,6 +3,7 @@
 use Illuminate\View\View;
 use Imagick;
 use ImagickDraw;
+use Input;
 
 class VideoGifController extends Controller
 {
@@ -17,6 +18,20 @@ class VideoGifController extends Controller
         else return view('video_to_gif');
 	}
 	
+
+	public function uploadVideo() {
+		$video = Input::file('file');
+		
+		if( ($video->getMimeType() == "video/mp4") && ($video->getClientSize() <= 10000000) ) {
+
+			$directory = \Session::getId()."/";
+			$filename = uniqid().".mp4";
+
+			$video->move("temp/".$directory, $filename);
+
+			return \Response::json(['success' => true, 'file' => $directory.$filename]);
+		}
+	}
 
 	public function youtubeGIF() {
 
@@ -140,10 +155,10 @@ class VideoGifController extends Controller
 				}
 
 				$thumbnail_name = uniqid().".png";
-				$thumbnail = imagecreatefromgif("/temp/".$temp_file);
-				$thumbnail = imagegif($thumbnail, $thumbnail_name);
+				$thumbnail = imagecreatefromgif("temp/".$temp_file);
+				$thumbnail = imagegif($thumbnail, "temp/".\Session::getId()."/".$thumbnail_name);
 
-				return \Response::json(['success' => true, 'file' => $thumbnail_name]);
+				return \Response::json(['success' => true, 'file' => \Session::getId()."/".$thumbnail_name]);
 			}
 		}
 	}

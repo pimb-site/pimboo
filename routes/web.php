@@ -53,6 +53,7 @@ Route::post('upload_end_gif', 'VideoGifController@uploadEndGIF');
 Route::post('upload_gif', 'VideoGifController@uploadGIF');
 Route::get('video_to_gif', 'VideoGifController@addGIF');
 
+Route::post('/upload/video', 'VideoGifController@uploadVideo');
 
 // user photo / cover photo
 Route::post('user/setPhoto', 'UserController@setPhoto');
