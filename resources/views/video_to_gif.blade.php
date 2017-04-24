@@ -276,7 +276,9 @@
 		    	$('.un_start_time').val(leftValue);
 		    	$('.un_end_time').val(rightValue);
 		    	duration = rightValue - leftValue;
+		    	if(duration > 5) duration = 5;
 		    	duration =  Math.floor(duration / 60) + ':' + duration % 60;
+		    	if((rightValue - leftValue) > 5) rightValue = leftValue + 5;
 		    	leftValue = Math.floor(leftValue / 60) + ':' + leftValue % 60;
 		    	rightValue = Math.floor(rightValue / 60) + ':' + rightValue % 60;
 		        $('.input-start-time').val(leftValue);

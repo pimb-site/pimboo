@@ -48,7 +48,7 @@ $(document).ready(function () {
 		}
 	});
 	
-	$('#preview').click(function() {
+	$('.btn-preview').click(function() {
 		$('.isDraft').val('preview');
 		$('.flipcard_main_tags b').empty();
 		$('.flipcard_main_cards').remove();
