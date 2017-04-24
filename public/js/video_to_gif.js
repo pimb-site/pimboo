@@ -2,15 +2,6 @@ $(document).ready(function () {
 
 	count_video_gifs = 1;
 
-	// $('.add-to-this').click(function() {
-	// 	if(count_video_gifs == 5) return false;
-	// 	count_video_gifs++;
-	// 	$('.add-to-this').before('<div>Start Time(seconds) <input name="options['+(count_video_gifs - 1)+'][start_time]" type="number" value="'+(count_video_gifs*2)+'" class="start-time-yb">'
-	// 							+' End Time(seconds)   <input name="options['+(count_video_gifs - 1)+'][end_time]" type="number" value="'+(count_video_gifs*2 + 2)+'" class="end-time-yb"></div>');
-
-	// 	if(count_video_gifs == 5) $('.add-to-this').css({'display' : 'none'});
-	// });
-
 	$('#input-video').on("change", function() {
 		files = this.files[0];
 	    var data = new FormData();
@@ -32,6 +23,12 @@ $(document).ready(function () {
 	            	$('.un_video').val(response.file);
 	            	$('.btn-create-gif').css({'display': 'block'});
 	            	$('.block-for-giftext').css({'height': '330px'});
+
+					$('.input-form-photo').val(response.file); 
+					$('.add_fb_img').empty();
+					$('.add_fb_img').css({'padding-top': '0px'});
+					$('.add_fb_img').prepend("<img class='facebook-photo' src='temp/" + response.file + "'  />");
+					$('.input-form-photo-facebook').val(response.file);
 	            }
 	        },
 	        error: function( jqXHR, textStatus, errorThrown ){
@@ -195,37 +192,6 @@ $(document).ready(function () {
                 }
             }
         });
-	});
-	
-	$('.photo').click(function() {
-		image_type_fc = 1;
-		min_sizeh_fc = 10;
-		min_sizew_fc = 10;
-		$('#modal-test').modal({
-			closeOnEsc: true,
-			closeOnOverlayClick: true,
-			onOpen: function (overlay){
-				$(overlay).on('click', '.js-upload', function (){
-				});
-			}
-	   }).open();
-	});
-	
-	
-
-
-	$('.add_fb_img').click(function() {
-		image_type_fc = 2;
-		min_sizeh_fc = 10;
-		min_sizew_fc = 10;
-		$('#modal-test').modal({
-			closeOnEsc: true,
-			closeOnOverlayClick: true,
-			onOpen: function (overlay){
-				$(overlay).on('click', '.js-upload', function (){
-				});
-			}
-	   }).open();
 	});
 
 	token = $('input[name="_token"]').val();

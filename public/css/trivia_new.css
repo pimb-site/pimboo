@@ -1198,7 +1198,8 @@ video {
 	border-radius: 8px;
 	border: 1px solid #d3ddef;
 	margin-top: 10px;
-	padding: 20px;
+	padding-left: 20px;
+	padding-top: 20px;
 }
 
 .block-for-select-video .title {
@@ -1212,6 +1213,7 @@ video {
 	font-size: 16px;
 	font-weight: 600;
 	position: relative;
+	float: left;
 }
 
 .block-for-select-video .block-inputs .select-video{
@@ -1247,7 +1249,7 @@ video {
 	border-radius: 0 5px 5px 0;
 	position: absolute;
 	border: 0;
-	right: 9px;
+	right: 0px;
 }
 
 .block-video-duration {
@@ -1276,6 +1278,8 @@ video {
 	margin-top: 37px;
 	margin-bottom: 17px;	
 	text-align: center;
+	width: 100%;
+	float: left;
 }
 
 .status-gif span {

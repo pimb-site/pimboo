@@ -21,10 +21,9 @@
 				<div class="sub_title">Add all necessary information to create a new GIF image</div>
 				<div class="card_info">
 					<div class="top">
-						<div class="photo">CLICK<br>TO ADD PHOTO</div>
-						<div class="text_info">
-							<input type="text" name="form_flip[form_flip_cards_title]" placeholder="Title" autocomplete="off" style="color:#6e8dc9;">
-							<textarea name="form_flip[form_description]" style="height:102px; margin-bottom: 0px; margin-top:0px; margin-left:0px; width:490px; resize: none; color:#6e8dc9;" placeholder="Description" autocomplete="off"></textarea>
+						<div class="text_info" style="width: 100%;">
+							<input type="text" name="form_flip[form_flip_cards_title]" placeholder="GIF Title" autocomplete="off" style="color:#6e8dc9; width: 710px;">
+							<textarea name="form_flip[form_description]" style="height:102px; margin-bottom: 0px; margin-top:0px; margin-left:0px; width:710px; resize: none; color:#6e8dc9; margin-bottom: 19px;" placeholder="GIF Description" autocomplete="off"></textarea>
 						</div>
 					</div>
 				</div>
@@ -49,7 +48,7 @@
 						<div class="text2">DURATION</div>
 						<div class="text3">END</div>
 					</div>
-					<div class="nstSlider" data-range_min="0" data-range_max="1800" data-cur_min="0" data-cur_max="60">
+					<div class="nstSlider" data-range_min="0" data-range_max="900" data-cur_min="0" data-cur_max="5">
 					    <div class="bar"></div>
 					    <div class="leftGrip"></div>
 					    <div class="rightGrip"></div>
@@ -127,9 +126,9 @@
 				<div class="title">SOCIAL APPEARANCE</div>
 				<div class="sub_title">How your content will appear on social media</div>
 				<div class="facebok_block">
-					<div class="add_fb_img">CLICK<br>TO ADD PHOTO</div>
+					<div class="add_fb_img" style="padding-top: 40px; font-weight: 600;">CREATED GIF</div>
 					<div class="edit_image_text">
-						Facebook<br>Edit Image
+						Your GIF will be<br>in Facebook
 					</div>
 				</div>
 				<div class="tags_block">
@@ -157,15 +156,6 @@
 						<div class="tag"><label><input class="checkbox" type="checkbox" name="tags[]" value="Arts"><span class="checkbox-custom"></span><span class="label">Arts</span></label></div>
 						<div class="tag"><label><input class="checkbox" type="checkbox" name="tags[]" value="Games"><span class="checkbox-custom"></span><span class="label">Games</span></label></div>
 						<div class="tag"><label><input class="checkbox" type="checkbox" name="tags[]" value="News"><span class="checkbox-custom"></span><span class="label">News</span></label></div>
-					</div>
-				</div>
-				<div class="permissions">
-					<div class="title">PERMISSIONS</div>
-					<div class="sub_title">Who will be able to view your item</div>
-					<div class="select">
-						<select>
-							<option>Public (recommended)</option>
-						</select>
 					</div>
 				</div>
 				<div class="down_butts">
@@ -275,12 +265,11 @@
 		    "right_grip_selector": ".rightGrip",
 		    "value_bar_selector": ".bar",
 		    "value_changed_callback": function(cause, leftValue, rightValue) {
+		    	if((rightValue - leftValue) > 5) rightValue = leftValue + 5;
 		    	$('.un_start_time').val(leftValue);
 		    	$('.un_end_time').val(rightValue);
 		    	duration = rightValue - leftValue;
-		    	if(duration > 5) duration = 5;
 		    	duration =  Math.floor(duration / 60) + ':' + duration % 60;
-		    	if((rightValue - leftValue) > 5) rightValue = leftValue + 5;
 		    	leftValue = Math.floor(leftValue / 60) + ':' + leftValue % 60;
 		    	rightValue = Math.floor(rightValue / 60) + ':' + rightValue % 60;
 		        $('.input-start-time').val(leftValue);
