@@ -37,6 +37,7 @@ Route::post('save_trivia_quiz', 'TriviaController@saveTriviaQuiz');
 Route::get('add_story', 'StoryController@addStory');
 Route::get('view_story/{id}', 'StoryController@viewID');
 Route::get('view_stories', 'StoryController@viewStories');
+Route::post('report', 'ReportsController@Add');
 Route::post('save_story', 'StoryController@postUploadEnd');
 
 
@@ -69,6 +70,12 @@ Route::post('user/profile', 'UserController@saveProfile');
 Route::get('user/organization', 'UserController@getOrganization');
 
 Route::get('user/referrals', 'UserController@getReferrals');
+
+Route::get('admin', 'AdminController@getHome');
+Route::get('admin/reports', 'AdminController@getReports');
+Route::get('admin/ads', 'AdminController@getAds');
+Route::get('admin/home', 'AdminController@getHome');
+
 
 //Referrals
 Route::get('ref/{id}', 'ReferralController@index');

@@ -46,159 +46,35 @@ Home
                     <div class="posts">
                         <div class="head">FEATURED POSTS</div>
                         <div class="left">
-                            <div class="img"><img src="/img/home_post.jpg" /></div>
-                            <div class="title">White House Defends Yemen Raid</div>
-                            <div class="text">Pellentesque egestas neque ac consequat finibus. Curabitur vel aliquet risus. Vivamus aliquam aliquam mauris quis hendrerit. Aliquam volutpat, eros eu consequat mollis.  Aliquam volutpat, eros eu consequat mollis. </div>
+                            <div class="img"><img width="750px" height="445px" src="/uploads/{{ $main_post->description_image }}" /></div>
+                            <div class="title">{{ $main_post->description_title }}</div>
+                            <div class="text">{{ $main_post->description_text }}</div>
                             <div class="info distab">
-                                <div class="time">January 23, 2017</div>
-                                <a class="readmore">Read More >></a>
+                                <div class="time"><?php echo date("F j, Y", strtotime($main_post->created_at));  ?></div>
+                                <a href="/viewID/{{ $main_post->id }}" class="readmore">Read More >></a>
                             </div>
                         </div>
                         <div class="right">
-                            <div class="post">
-                                <a class="post_name" href="#">Daniel Dodarrio</a>
-                                <a class="post_text" href="#">Arnold Schwarzenegger Is Lucky The Apprentice Ratings Are So Bad</a>
-                                <div class="posting">
-                                    <span class="removing">
-                                        <span class="sharing">SHARE &<br>PROFIT:</span>
-                                        <a class="facebook" href=""></a>
-                                        <a class="twitter" href=""></a>
-                                        <a class="linkedin" href=""></a>
-                                        <a class="code" href=""></a>
-                                        <button class="get_link">GET LINK</button>
-                                    </span>
-                                    <span class="link">
-                                        <span class="link_in">COPIED TO YOUR<br>CLIPBOARD</span>
-                                        <input type="" name="" value="" />
-                                    </span>
+                            @foreach ($posts as $post)
+                                <div class="post">
+                                    <a class="post_name" href="/viewID/{{ $post->id }}">{{ $post->description_title }}</a>
+                                    <a class="post_text" href="/viewID/{{ $post->id }}">{{ $post->description_text }}</a>
+                                    <div class="posting">
+                                        <span class="removing">
+                                            <span class="sharing">SHARE &<br>PROFIT:</span>
+                                            <a class="facebook" href=""></a>
+                                            <a class="twitter" href=""></a>
+                                            <a class="linkedin" href=""></a>
+                                            <a class="code" href=""></a>
+                                            <button class="get_link">GET LINK</button>
+                                        </span>
+                                        <span class="link">
+                                            <span class="link_in">COPIED TO YOUR<br>CLIPBOARD</span>
+                                            <input type="" name="" value="" />
+                                        </span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="post">
-                                <a class="post_name" href="#">Tavis Smiley</a>
-                                <a class="post_text" href="#">Review: I Am Not Your Negro Shows How Far We Only Think We’ve Come</a>
-                                <div class="posting">
-                                    <span class="removing">
-                                        <span class="sharing">SHARE &<br>PROFIT:</span>
-                                        <a class="facebook" href=""></a>
-                                        <a class="twitter" href=""></a>
-                                        <a class="linkedin" href=""></a>
-                                        <a class="code" href=""></a>
-                                        <button class="get_link">GET LINK</button>
-                                    </span>
-                                    <span class="link">
-                                        <span class="link_in">COPIED TO YOUR<br>CLIPBOARD</span>
-                                        <input type="" name="" value="" />
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="post">
-                                <a class="post_name" href="#">Alan Levinovitz</a>
-                                <a class="post_text" href="#">Donald Trump Got Black History Month All Wrong</a>
-                                <div class="posting">
-                                    <span class="removing">
-                                        <span class="sharing">SHARE &<br>PROFIT:</span>
-                                        <a class="facebook" href=""></a>
-                                        <a class="twitter" href=""></a>
-                                        <a class="linkedin" href=""></a>
-                                        <a class="code" href=""></a>
-                                        <button class="get_link">GET LINK</button>
-                                    </span>
-                                    <span class="link">
-                                        <span class="link_in">COPIED TO YOUR<br>CLIPBOARD</span>
-                                        <input type="" name="" value="" />
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="post">
-                                <a class="post_name" href="#">Daniel Dodarrio</a>
-                                <a class="post_text" href="#">The Myth That Christianity Provides Ethical Guidance</a>
-                                <div class="posting">
-                                    <span class="removing">
-                                        <span class="sharing">SHARE &<br>PROFIT:</span>
-                                        <a class="facebook" href=""></a>
-                                        <a class="twitter" href=""></a>
-                                        <a class="linkedin" href=""></a>
-                                        <a class="code" href=""></a>
-                                        <button class="get_link">GET LINK</button>
-                                    </span>
-                                    <span class="link">
-                                        <span class="link_in">COPIED TO YOUR<br>CLIPBOARD</span>
-                                        <input type="" name="" value="" />
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="post">
-                                <a class="post_name" href="#">Daniel Dodarrio</a>
-                                <a class="post_text" href="#">Arnold Schwarzenegger Is Lucky The Apprentice Ratings Are So Bad</a>
-                                <div class="posting">
-                                    <span class="removing">
-                                        <span class="sharing">SHARE &<br>PROFIT:</span>
-                                        <a class="facebook" href=""></a>
-                                        <a class="twitter" href=""></a>
-                                        <a class="linkedin" href=""></a>
-                                        <a class="code" href=""></a>
-                                        <button class="get_link">GET LINK</button>
-                                    </span>
-                                    <span class="link">
-                                        <span class="link_in">COPIED TO YOUR<br>CLIPBOARD</span>
-                                        <input type="" name="" value="" />
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="post">
-                                <a class="post_name" href="#">Tavis Smiley</a>
-                                <a class="post_text" href="#">Review: I Am Not Your Negro Shows How Far We Only Think We’ve Come</a>
-                                <div class="posting">
-                                    <span class="removing">
-                                        <span class="sharing">SHARE &<br>PROFIT:</span>
-                                        <a class="facebook" href=""></a>
-                                        <a class="twitter" href=""></a>
-                                        <a class="linkedin" href=""></a>
-                                        <a class="code" href=""></a>
-                                        <button class="get_link">GET LINK</button>
-                                    </span>
-                                    <span class="link">
-                                        <span class="link_in">COPIED TO YOUR<br>CLIPBOARD</span>
-                                        <input type="" name="" value="" />
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="post">
-                                <a class="post_name" href="#">Alan Levinovitz</a>
-                                <a class="post_text" href="#">Donald Trump Got Black History Month All Wrong</a>
-                                <div class="posting">
-                                    <span class="removing">
-                                        <span class="sharing">SHARE &<br>PROFIT:</span>
-                                        <a class="facebook" href=""></a>
-                                        <a class="twitter" href=""></a>
-                                        <a class="linkedin" href=""></a>
-                                        <a class="code" href=""></a>
-                                        <button class="get_link">GET LINK</button>
-                                    </span>
-                                    <span class="link">
-                                        <span class="link_in">COPIED TO YOUR<br>CLIPBOARD</span>
-                                        <input type="" name="" value="" />
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="post">
-                                <a class="post_name" href="#">Daniel Dodarrio</a>
-                                <a class="post_text" href="#">The Myth That Christianity Provides Ethical Guidance</a>
-                                <div class="posting">
-                                    <span class="removing">
-                                        <span class="sharing">SHARE &<br>PROFIT:</span>
-                                        <a class="facebook" href=""></a>
-                                        <a class="twitter" href=""></a>
-                                        <a class="linkedin" href=""></a>
-                                        <a class="code" href=""></a>
-                                        <button class="get_link">GET LINK</button>
-                                    </span>
-                                    <span class="link">
-                                        <span class="link_in">COPIED TO YOUR<br>CLIPBOARD</span>
-                                        <input type="" name="" value="" />
-                                    </span>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -206,30 +82,12 @@ Home
             <div class="wrap" style="position: relative;">
                 <div class="headlines-title">LATEST HEADLINES</div>
                 <div class="headlines">
+                    @foreach ($latest as $post)
                     <div class="headline">
-                        <a class="img"><img src="/img/home_headline_1.jpg" /></a>
-                        <a class="text">Jared Kushner Wouldn’t Be the First Powerful Son-in-Law in Presidential History</a>
+                        <a href="/viewID/{{ $post->id }}" class="img"><img width="360px" height="309px" src="/uploads/{{ $post->description_image }}" /></a>
+                        <a href="/viewID/{{ $post->id }}" class="text">{{ $post->description_title }}</a>
                     </div>
-                    <div class="headline">
-                        <a class="img"><img src="/img/home_headline_2.jpg" /></a>
-                        <a class="text">James Comey Cannot Be Trusted With a Trump-Russia Investigation</a>
-                    </div>
-                    <div class="headline">
-                        <a class="img"><img src="/img/home_headline_3.jpg" /></a>
-                        <a class="text">Reject False Prophets. Protect Our Allies</a>
-                    </div>
-                    <div class="headline">
-                        <a class="img"><img src="/img/home_headline_4.jpg" /></a>
-                        <a class="text">Obama Says Goodbye and Returns to His Roots</a>
-                    </div>
-                    <div class="headline">
-                        <a class="img"><img src="/img/home_headline_5.jpg" /></a>
-                        <a class="text">Pay Women More If You Want a Stronger Economy</a>
-                    </div>
-                    <div class="headline">
-                        <a class="img"><img src="/img/home_headline_6.jpg" /></a>
-                        <a class="text">Amazon Is Already Winning the Next Big Arms Race in Tech</a>
-                    </div>
+                    @endforeach
                 </div>
                 <a href="#" class="headlines_show_more">SHOW MORE</a>
             </div>
