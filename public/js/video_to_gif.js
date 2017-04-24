@@ -23,12 +23,6 @@ $(document).ready(function () {
 	            	$('.un_video').val(response.file);
 	            	$('.btn-create-gif').css({'display': 'block'});
 	            	$('.block-for-giftext').css({'height': '330px'});
-
-					$('.input-form-photo').val(response.file); 
-					$('.add_fb_img').empty();
-					$('.add_fb_img').css({'padding-top': '0px'});
-					$('.add_fb_img').prepend("<img class='facebook-photo' src='temp/" + response.file + "'  />");
-					$('.input-form-photo-facebook').val(response.file);
 	            }
 	        },
 	        error: function( jqXHR, textStatus, errorThrown ){
@@ -117,6 +111,11 @@ $(document).ready(function () {
 				$('.front-card').html("<img class='picture-gif' src='/temp/"+data.file+"' /> <img class='testcreate' src='/img/gif-icon.png' />");
 				$('.editor').css({'display': 'block'});
 				$('.status-gif span').text('DONE! LOOK BELOW');
+				$('.input-form-photo').val(data.file); 
+				$('.add_fb_img').empty();
+				$('.add_fb_img').css({'padding-top': '0px'});
+				$('.add_fb_img').prepend("<img class='facebook-photo' src='temp/" + data.file + "'  />");
+				$('.input-form-photo-facebook').val(data.file);
 
 				stopLoadingAnimation();
 			}
