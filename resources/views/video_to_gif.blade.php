@@ -33,9 +33,11 @@
 					<div class="title">ADD VIDEO TO CREATE NEW GIF</div>
 					<div class="block-inputs">
 						<button type="button" class="select-video">SELECT VIDEO</button>
-						OR
-						<input placeholder="Enter YouTube clip URL">
-						<button type="button" class="youtube-btn-upload">UPLOAD</button>
+						<div class="txt-or"> OR </div>
+						<div class="yb-clip-upl">
+							<input placeholder="Enter YouTube clip URL">
+							<button type="button" class="youtube-btn-upload">UPLOAD</button>
+						</div>
 					</div>
 					<input type="file" name="video" id="input-video" accept="video/mp4" style="display: none;" />
 				</div>

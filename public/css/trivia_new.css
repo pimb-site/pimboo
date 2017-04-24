@@ -1229,6 +1229,7 @@ video {
 }
 
 .block-for-select-video .block-inputs input {
+	float: left;
 	margin-left: 12px;
 	width: 450px;
 	height: 46px;
@@ -1246,8 +1247,8 @@ video {
 	background-color: #123880;
 	border-radius: 0 5px 5px 0;
 	position: absolute;
-	right: 5px;
 	border: 0;
+	right: 0;
 }
 
 .block-video-duration {
@@ -1604,4 +1605,15 @@ video {
 	top: 120px;
 	left: 250px;
 	opacity: 0.7;
+}
+
+.txt-or {
+	float: left;
+	line-height: 45px;
+}
+
+.yb-clip-upl {
+	width: 450px;
+	height: 46px;
+	float: left;
 }
