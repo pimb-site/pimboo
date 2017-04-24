@@ -1,4 +1,6 @@
 <?php namespace App\Http\Controllers;
+use App\Post;
+use Illuminate\Http\Request;
 
 class HomeController extends Controller {
 
@@ -18,9 +20,7 @@ class HomeController extends Controller {
      *
      * @return void
      */
-    public function __construct()
-    {
-    }
+    public function __construct() {}
 
     /**
      * Show the application dashboard to the user.
@@ -29,7 +29,15 @@ class HomeController extends Controller {
      */
     public function index()
     {
-        return view('home', ['body_class' => 'home']);
+        $home_main_post = Post::where([ ['status', '=', 'home_main'] ])->first();
+        $home_top_posts = Post::where([ ['status', '=', 'home_post'] ])->get();
+        $latest = Post::latest()->take(6)->get();
+        return view('home', [
+            'body_class' => 'home', 
+            'main_post' => $home_main_post, 
+            'posts' => $home_top_posts,
+            'latest' => $latest,
+        ]);
     }
 
     public function create()

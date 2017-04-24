@@ -28,7 +28,54 @@
                                 @yield('tool_content')
                             </div>
                         </div>
-                        <button class="report_button">REPORT POST</button>
+                        <button class="report_button" data-toggle="modal" data-target="#myModal">REPORT POST</button>
+                        <div class="modal reports" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h4 class="modal-title" id="myModalLabel">Report Post</h4>
+                              </div>
+                              <div class="modal-body">
+                                <input type="radio" id="report_type1" name="report_type" value="It's rude, vulgar or uses bad language" checked><label for="report_type1"><span></span>It's rude, vulgar or uses bad language</label><br>
+                                <input type="radio" id="report_type2" name="report_type" value="It's sexually explicit"><label for="report_type2"><span></span>It's sexually explicit</label><br>
+                                <input type="radio" id="report_type3" name="report_type" value="It's harassment or hate speech"><label for="report_type3"><span></span>It's harassment or hate speech</label><br>
+                                <input type="radio" id="report_type4" name="report_type" value="It's threatening, violent or suicidal"><label for="report_type4"><span></span>It's threatening, violent or suicidal</label><br>
+                                <input type="radio" id="report_type5" name="report_type" value="File a DMCA Request/Copyright Violation"><label for="report_type5"><span></span>File a DMCA Request/Copyright Violation</label><br>
+                                <input type="radio" id="report_type6" name="report_type" value="Something else"><label for="report_type6"><span></span>Something else</label><br>
+                              </div>
+                              <div class="modal-footer">
+                                <button id="report-submit-btn" type="button" class="btn btn-primary" data-dismiss="modal">SUBMIT</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">CANCEL</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="modal reports" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                              </div>
+                              <div class="modal-body">
+                                <div class="head">Thank You!</div>
+                                <div class="sub-head">Thank you for reporting your data!</div>
+                                <div class="text">If you want to include your email address so as to have direct contact with administrators of Pimboo.com please enter it in below and click the green arrow. Otherwise click "cancel" to close.</div>
+                                <input type="hidden" id="report_id" name="report_id">
+                                <div class="mailer">
+                                    <input placeholder="Email Address" id="report_mail" name="report_mail">
+                                    <button id="mail-submit"><img src="/wp-content/themes/PricerrTheme/images/report-mail-arrow.png"></button><span class="optional">(optional)</span>
+                                </div>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" data-dismiss="modal">CANCEL</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <script type="text/javascript">
+                            post_id = '{{ $content->id }}';
+                            _token = '{{ csrf_token() }}';
+                        </script>
                     </div>
                     <div class="right">
                         <div class="start-creating">
