@@ -14,6 +14,7 @@
 	<img id="loadImg" src="img/ajax-loader.gif" />
 		@include('header')
 		<div class="body">
+		<input type="file" name="video" id="input-video" accept="video/mp4" style="display: none;" />
 		<form id="form_upload_cards" action="/upload_end_gif" method="POST">
 			<input type="hidden" name="_token" value="{{ csrf_token() }}">
 			<div class="left">
@@ -38,7 +39,6 @@
 							<button type="button" class="youtube-btn-upload">UPLOAD</button>
 						</div>
 					</div>
-					<input type="file" name="video" id="input-video" accept="video/mp4" style="display: none;" />
 				</div>
 				<div class="block-video-duration">
 					<div class="title">CHOOSE TIME DURATION</div>

@@ -236,11 +236,12 @@ class VideoGifController extends Controller
 				$temp_file = $path_gif;
 			}
 
+			$main_path = "/var/www/pimboobeta.com/public/temp/";
+
 			$thumbnail_name = uniqid().".png";
 			$thumbnail = imagecreatefromgif("temp/".$temp_file);
 			$thumbnail = imagegif($thumbnail, "temp/".\Session::getId()."/".$thumbnail_name);
 
-			// Open the original image
 			$image = new Imagick();
 			$image->readImage($main_path.\Session::getId()."/".$thumbnail_name);
 
@@ -249,10 +250,10 @@ class VideoGifController extends Controller
 			$watermark->readImage("/var/www/pimboobeta.com/public/img/watermark.png");
 
 			// Overlay the watermark on the original image
-			$image->compositeImage($watermark, imagick::COMPOSITE_OVER, 0, 0);
+			$image->compositeImage($watermark, imagick::COMPOSITE_OVER, 300, 0);
 			$image->writeImage($main_path.\Session::getId()."/".$thumbnail_name);
 
-			return \Response::json(['success' => true, 'file' => \Session::getId()."/".$thumbnail_name]);
+			return \Response::json(['success' => true, 'thumbnail' => \Session::getId()."/".$thumbnail_name, 'gif' => $temp_file]);
 		}
 	}
 
@@ -382,8 +383,8 @@ class VideoGifController extends Controller
                 if(!file_exists('temp/'.$input['form_flip']['form_photo'])) $errors_array[] = 'Wrong photo link';
 				if(!file_exists('temp/'.$input['form_flip']['form_photo_facebook'])) $errors_array[] = 'Wrong Facebook photo link';
 				
-				if($input['form_flip']['gif'] == "") $errors_array[] = 'Wrong front image link';
-				if(!file_exists('temp/'.$input['form_flip']['gif'])) $errors_array[] = 'Wrong front image link';
+				if($input['form_flip']['gif'] == "") $errors_array[] = 'GIF NOT CREATED';
+				if(!file_exists('temp/'.$input['form_flip']['gif'])) $errors_array[] = 'GIF NOT CREATED';
 				if(count($errors_array) > 0) return \Response::json(['success' => false, 'errors' => $errors_array]);
 				
 				if(count($errors_array) == 0) {
@@ -396,7 +397,6 @@ class VideoGifController extends Controller
                     copy('temp/'.$input['form_flip']['form_photo'], 'uploads/'.$uniqid2.'.jpeg');
 					copy('temp/'.$input['form_flip']['form_photo_facebook'], 'uploads/'.$uniqid3.'.jpeg');
                     unlink('temp/'.$input['form_flip']['form_photo']);
-					unlink('temp/'.$input['form_flip']['form_photo_facebook']);
 					
 					copy('temp/'.$input['form_flip']['gif'], 'uploads/'.$uniqid1.'.gif');
 					unlink('temp/'.$input['form_flip']['gif']);

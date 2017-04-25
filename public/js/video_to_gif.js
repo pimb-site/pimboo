@@ -52,6 +52,7 @@ $(document).ready(function () {
 	            if( typeof response.error === 'undefined' ){
 	            	$('.iframe-youtube').html("<video id='player-user' src='/uploads/"+response.file+"'  autoplay muted loop></video>");
 	            	$('.un_video').val(response.file);
+	            	$('.btn-create-gif button').css({'display': 'block'});
 
 					video = document.getElementById('player-user');
 
@@ -161,7 +162,7 @@ $(document).ready(function () {
 				$('.progressbar').css({'display': 'none'});
 				$('.successfully-create').css({'display': 'block'});
 
-				$('.un_gif_main').val(data.gif);
+				$('.gif-input').val(data.gif);
 				$('.iframe-youtube').html("<img class='picture-gif' src='/temp/"+data.gif+"' />");
 				$('.editor').css({'display': 'block'});
 				$('.input-form-photo').val(data.thumbnail); 
