@@ -2,13 +2,23 @@ $(document).ready(function () {
 
 	count_video_gifs = 1;
 
-
 	$('.start-time').on("change", function() {
-
+		var value = $(this).val();
+		var data  = value.split(":", 2);
+		var seconds = parseInt(data[0]) * 60 + parseInt(data[1]);
+		$(".nstSlider[data-id='1']").nstSlider("set_position", seconds);
 	});
 
-	$('.start-time').on("change", function() {
-		
+	$('.duration-time').on("change", function() {
+		var value = $(this).val();
+		var data  = value.split(":", 2);
+		var seconds  = parseInt(data[0]) * 60 + parseInt(data[1]);
+		if(seconds <= 0 || seconds > 5) {
+			$(this).val('0:1');
+			$(".nstSlider[data-id='2']").nstSlider("set_position", 1);
+		} else { 
+			$(".nstSlider[data-id='2']").nstSlider("set_position", seconds);
+		}
 	});
 
 	$('#input-video').on("change", function() {
@@ -28,8 +38,24 @@ $(document).ready(function () {
 	        contentType: false,
 	        success: function( response, textStatus, jqXHR ){
 	            if( typeof response.error === 'undefined' ){
-	            	$('.iframe-youtube').html("<video src='/uploads/"+response.file+"' controls autoplay muted></video>");
+	            	$('.iframe-youtube').html("<video id='player-user' src='/uploads/"+response.file+"'  autoplay muted loop></video>");
 	            	$('.un_video').val(response.file);
+
+					video = document.getElementById('player-user');
+
+					videoStartTime = 0;
+					durationTime = 1;
+
+					video.addEventListener('loadedmetadata', function() {
+					  this.currentTime = videoStartTime;
+					  $(".nstSlider[data-id='1']").nstSlider("set_range", 1, parseInt(video.duration));
+					}, false);
+
+					video.addEventListener('timeupdate', function() {
+					  if(this.currentTime > videoStartTime + durationTime){
+					    this.currentTime = videoStartTime;
+					  }
+					});
 	            }
 	        },
 	        error: function( jqXHR, textStatus, errorThrown ){

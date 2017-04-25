@@ -153,18 +153,22 @@ class VideoGifController extends Controller
 					$temp_file = $path_gif;
 				}
 
+				$main_path = "/var/www/pimboobeta.com/public/temp/";
+
 				$thumbnail_name = uniqid().".png";
 				$thumbnail = imagecreatefromgif("temp/".$temp_file);
-				$watermark = imagecreatefrompng("img/watermark.png");
-
-				$marge_right = 10;
-				$marge_bottom = 10;
-				$sx = imagesx($watermark);
-				$sy = imagesy($watermark);
-
-				imagecopy($thumbnail, $watermark, imagesx($thumbnail) - $sx - $marge_right, imagesy($thumbnail) - $sy - $marge_bottom, 0, 0, imagesx($watermark), imagesy($watermark));
-
 				$thumbnail = imagegif($thumbnail, "temp/".\Session::getId()."/".$thumbnail_name);
+
+				$image = new Imagick();
+				$image->readImage($main_path.\Session::getId()."/".$thumbnail_name);
+
+				// Open the watermark
+				$watermark = new Imagick();
+				$watermark->readImage("/var/www/pimboobeta.com/public/img/watermark.png");
+
+				// Overlay the watermark on the original image
+				$image->compositeImage($watermark, imagick::COMPOSITE_OVER, 300, 0);
+				$image->writeImage($main_path.\Session::getId()."/".$thumbnail_name);
 
 				return \Response::json(['success' => true, 'thumbnail' => \Session::getId()."/".$thumbnail_name, 'gif' => $temp_file]);
 			}

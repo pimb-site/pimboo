@@ -51,7 +51,6 @@
 					    <div class="bar"></div>
 					    <div class="leftGrip"></div>
 					</div>
-					<div class="leftLabel"> </div>
 
 					<div class="choose-time">DURATION <input class="duration-time"></div>
 					<div class="nstSlider" data-id="2" data-range_min="1" data-range_max="5"
@@ -60,7 +59,6 @@
 					    <div class="bar"></div>
 					    <div class="leftGrip"></div>
 					</div>
-					<div class="leftLabel"> </div>
 					<div class="btn-create-gif">
 						<button type="button" style="display: none;">CREATE</button>
 					</div>
@@ -274,6 +272,7 @@
         event.target.playVideo();
         player.seekTo(startt);
         player.mute();
+        $(".nstSlider[data-id='1']").nstSlider("set_range", 1, player.getDuration());
         setTimeout(loopy, secs);
       }
 
@@ -308,11 +307,16 @@
 
 	    	if(id == 1) {
 	    		startt = leftValue;
+	    		videoStartTime = leftValue;
+	    		if(typeof video != "undefined") {
+	    			video.currentTime = videoStartTime;
+	    		}
 	    		$('.un_start_time').val(leftValue);
 	    		leftValue = Math.floor(leftValue / 60) + ':' + leftValue % 60;
 	    		$('.choose-time .start-time').val(leftValue);
 
 	    	} else if (id == 2) {
+	    		durationTime = leftValue;
 	    		secs = leftValue + '000';
 	    		$('.un_end_time').val(leftValue + 1);
 	    		leftValue = Math.floor(leftValue / 60) + ':' + leftValue % 60;
