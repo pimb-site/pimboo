@@ -166,7 +166,7 @@ class VideoGifController extends Controller
 
 				$thumbnail = imagegif($thumbnail, "temp/".\Session::getId()."/".$thumbnail_name);
 
-				return \Response::json(['success' => true, 'thumbnail' => \Session::getId()."/".$thumbnail_name, 'gif' => \Session::getId()."/".$temp_file]);
+				return \Response::json(['success' => true, 'thumbnail' => \Session::getId()."/".$thumbnail_name, 'gif' => $temp_file]);
 			}
 		} else if ($video_site != "" && file_exists("uploads/".$video_site)) { 
 
@@ -235,6 +235,18 @@ class VideoGifController extends Controller
 			$thumbnail_name = uniqid().".png";
 			$thumbnail = imagecreatefromgif("temp/".$temp_file);
 			$thumbnail = imagegif($thumbnail, "temp/".\Session::getId()."/".$thumbnail_name);
+
+			// Open the original image
+			$image = new Imagick();
+			$image->readImage($main_path.\Session::getId()."/".$thumbnail_name);
+
+			// Open the watermark
+			$watermark = new Imagick();
+			$watermark->readImage("/var/www/pimboobeta.com/public/img/watermark.png");
+
+			// Overlay the watermark on the original image
+			$image->compositeImage($watermark, imagick::COMPOSITE_OVER, 0, 0);
+			$image->writeImage($main_path.\Session::getId()."/".$thumbnail_name);
 
 			return \Response::json(['success' => true, 'file' => \Session::getId()."/".$thumbnail_name]);
 		}
