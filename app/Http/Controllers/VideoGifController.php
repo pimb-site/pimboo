@@ -155,9 +155,18 @@ class VideoGifController extends Controller
 
 				$thumbnail_name = uniqid().".png";
 				$thumbnail = imagecreatefromgif("temp/".$temp_file);
+				$watermark = imagecreatefrompng("img/watermark.png");
+
+				$marge_right = 10;
+				$marge_bottom = 10;
+				$sx = imagesx($watermark);
+				$sy = imagesy($watermark);
+
+				imagecopy($thumbnail, $watermark, imagesx($thumbnail) - $sx - $marge_right, imagesy($thumbnail) - $sy - $marge_bottom, 0, 0, imagesx($watermark), imagesy($watermark));
+
 				$thumbnail = imagegif($thumbnail, "temp/".\Session::getId()."/".$thumbnail_name);
 
-				return \Response::json(['success' => true, 'file' => \Session::getId()."/".$thumbnail_name]);
+				return \Response::json(['success' => true, 'thumbnail' => \Session::getId()."/".$thumbnail_name, 'gif' => \Session::getId()."/".$temp_file]);
 			}
 		} else if ($video_site != "" && file_exists("uploads/".$video_site)) { 
 

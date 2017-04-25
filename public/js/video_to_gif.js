@@ -118,21 +118,19 @@ $(document).ready(function () {
 		$('#create-gif-from-yb').ajaxSubmit({
 			dataType: "json",
 			success: function (data) {
-				$('.un_gif_main').val(data.file);
-				$('.iframe-youtube').html("<img class='picture-gif' src='/temp/"+data.file+"' />");
-				$('.editor').css({'display': 'block'});
-				$('.input-form-photo').val(data.file); 
-				$('.add_fb_img').empty();
-				$('.add_fb_img').css({'padding-top': '0px'});
-				$('.add_fb_img').prepend("<img class='facebook-photo' src='temp/" + data.file + "'  />");
-				$('.input-form-photo-facebook').val(data.file);
-
 				clearInterval(id);
 				var id = setInterval(frame3, 10);
-
 				$('.progressbar').css({'display': 'none'});
-
 				$('.successfully-create').css({'display': 'block'});
+
+				$('.un_gif_main').val(data.gif);
+				$('.iframe-youtube').html("<img class='picture-gif' src='/temp/"+data.gif+"' />");
+				$('.editor').css({'display': 'block'});
+				$('.input-form-photo').val(data.thumbnail); 
+				$('.add_fb_img').empty();
+				$('.add_fb_img').css({'padding-top': '0px'});
+				$('.add_fb_img').prepend("<img class='facebook-photo' src='temp/" + data.thumbnail + "'  />");
+				$('.input-form-photo-facebook').val(data.thumbnail);
 			}
 		});
 	});
