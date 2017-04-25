@@ -1489,35 +1489,6 @@ video {
 	margin-left: 8px;
 }
 
-.duration-text {
-	float: left;
-	width: 100%;
-	margin-top: 25px;
-	font-weight: 600;
-}
-
-.duration-text .text1{
-	width: 100px;
-	float: left;
-	text-align: left;
-}
-
-.duration-text .text2{
-	width: 528px;
-	float: left;
-	text-align: center;
-}
-
-.duration-text .text3{
-	width: 100px;
-	float: left;
-	text-align: right;
-}
-
-.duration-inputs {
-	margin-top: 20px;
-	float: left;
-}
 
 .duration-inputs input{
 	width: 54px;
@@ -1560,26 +1531,32 @@ video {
 	display: block;
 	margin-right: auto;
 	margin-left: auto;
+	width: 710px;
+	height: 415px;
+	border: 1px solid #99afd9;
 }
 
 .btn-create-gif {
 	float: left;
 	width: 100%;
 	margin-top:10px;
-	display: none;
+	margin-bottom: 10px;
 }
 
 .btn-create-gif button {
+	margin-top: 30px;
 	margin-right: auto;
 	margin-left: auto;
 	display: block;
 	color: #fff;
-	background-color: #123880;
-	width: 120px;
-	height: 40px;
+	background-color: #00c200;
+	width: 206px;
+	height: 46px;
 	border: 0;
 	outline: none;
 	border-radius: 5px;
+	font-size: 16px;
+	font-weight: 700;
 }
 
 .picture-gif {
@@ -1620,4 +1597,77 @@ video {
 	height: 46px;
 	float: left;
 	margin-left: 12px;
+}
+
+.choose-time {
+	font-size: 12px;
+	font-weight: 700;
+	margin-top: 19px;
+	float:left;
+	margin-left: 8px;
+}
+
+.choose-time input {
+	background-color: #fff;
+	width: 54px;
+	height: 30px;
+	border: 1px solid #c9d5eb;
+	border-radius: 3px;
+	text-align: center;
+}
+
+.choose-time .start-time {
+	margin-left: 20px;
+}
+
+.choose-time .duration-time {
+	margin-left: 25px;
+}
+#myProgress {
+	float: left;
+	width: 250px;
+	height: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+#myBar {
+    width: 1%;
+    height: 20px;
+    background-color: #00c201;
+    border-radius: 10px;
+}
+
+.progressbar {
+	width: 100%;
+	margin-bottom: 17px;
+	margin-top: 34px;
+	float: left;
+}
+
+.progressbar .percent-bar { 
+	float: left;
+	font-weight: 700;
+	font-size: 12px;
+	margin-left: 20px;
+}
+
+.progressbar .txt-gif-creating {
+	font-size: 12px;
+	font-weight: 700;
+	float: left;
+	margin-left: 150px;
+	margin-right: 20px;
+}
+
+.successfully-create {
+	float: left;
+	font-size: 20px;
+	font-weight: 700;
+	text-align: center;
+	width: 100%;
+	color: #00c200;
+	margin-bottom: 27px;
+	margin-top: 25px;
+	display: none;
 }

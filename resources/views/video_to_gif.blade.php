@@ -42,32 +42,40 @@
 				</div>
 				<div class="block-video-duration">
 					<div class="title">CHOOSE TIME DURATION</div>
-					<div class="iframe-youtube"> </div>
-					<div class="duration-text">
-						<div class="text1">START</div>
-						<div class="text2">DURATION</div>
-						<div class="text3">END</div>
-					</div>
-					<div class="nstSlider" data-range_min="0" data-range_max="900" data-cur_min="0" data-cur_max="5">
+					<div class="iframe-youtube"><div id="player"></div></div>
+
+					<div class="choose-time">START TIME <input class="start-time"></div>
+					<div class="nstSlider" data-id="1" data-range_min="0" data-range_max="900"
+					                       data-cur_min="1"     data-cur_max="900">
+
 					    <div class="bar"></div>
 					    <div class="leftGrip"></div>
-					    <div class="rightGrip"></div>
 					</div>
-					<!--<div class="leftLabel" > </div>
-					<div class="rightLabel" > </div>-->
-					<div class="duration-inputs">
-						<div class="duration-input-div1"><input type="text" class="input-start-time" disabled=""></div>
-						<div class="duration-input-div2"><input type="text" class="input-duration-time" disabled=""></div>
-						<div class="duration-input-div3"><input type="text" class="input-end-time" disabled=""></div>
+					<div class="leftLabel"> </div>
+
+					<div class="choose-time">DURATION <input class="duration-time"></div>
+					<div class="nstSlider" data-id="2" data-range_min="1" data-range_max="5"
+					                       data-cur_min="1"     data-cur_max="0">
+
+					    <div class="bar"></div>
+					    <div class="leftGrip"></div>
 					</div>
+					<div class="leftLabel"> </div>
+					<div class="btn-create-gif">
+						<button type="button" style="display: none;">CREATE</button>
+					</div>
+
+
+					<div class="progressbar" style="display: none;">
+						<div class="txt-gif-creating"> GIF IS CREATING </div>
+						<div id="myProgress" >
+						  <div id="myBar"></div>
+						</div>
+						<div class="percent-bar">1%</div>
+					</div>
+					<div class="successfully-create">GIF WAS CREATED!</div>
 				</div>
 
-				<div class="status-gif">CREATED GIF: <span>Not created</span></div>
-
-				<div class="editor" data-id="1">
-					<div class="front-card" data-id="1">
-					</div>
-				</div>
 
 				<div class="block-for-giftext">
 					<div class="title">ADD TEXT AND EFFECTS TO YOUR GIF</div>
@@ -105,9 +113,6 @@
 								<option data-size="2">80 pixels</option>
 							</select>
 						</div>
-					</div>
-					<div class="btn-create-gif">
-						<button type="button">CREATE</button>
 					</div>
 				</div>
 
@@ -223,17 +228,6 @@
 			</div>
 		</div>
 
-		<div id="add-youtube-gif" class="add-youtube-gif" style="display: none;">
-			<div class="popup__body"><div class="js-img"></div></div>
-			<div style="margin: 0 0 5px; text-align: center;">
-				<div class="modal-text-photo">ADD GIF FROM YOUTUBE CLIP</div>
-
-				<div class="youtube-iframe"> </div>
-				<div>Start Time(seconds) <input type="number" value="0" class="start-time-yb"> End Time(seconds)   <input type="number" value="2" class="end-time-yb"></div>
-				<div><button type="button" class="add-to-this">Add to this...</button></div>
-				<div><button type="button" class="create-yb-gif">Create GIF</button></div>
-			</div>
-		</div>
 		
 		<div id="modal-test" class="modal-test" style="display: none;">
 			<div class="popup__body"><div class="js-img"></div></div>
@@ -251,7 +245,54 @@
 			</div>
 		</div>
 		
-		
+	
+
+    <script>
+      // 2. This code loads the IFrame Player API code asynchronously.
+    function getYouTubeIdFromURL(url) 
+	{
+	    var match = url.match(/^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/);
+	    return (match&&match[7].length==11)? match[7]:false;
+	}
+
+
+	function loadYbVideoById(id_vid) {
+      var tag = document.createElement('script');
+      startt = 0;
+      secs = 1000;
+      tag.src = "https://www.youtube.com/iframe_api";
+      var firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+      // 3. This function creates an <iframe> (and YouTube player)
+      //    after the API code downloads.
+      var player;
+      id_video = id_vid;
+    }
+
+    function onPlayerReady(event) {
+        event.target.playVideo();
+        player.seekTo(startt);
+        player.mute();
+        setTimeout(loopy, secs);
+      }
+
+      function loopy(event) {
+        player.seekTo(startt);
+        setTimeout(loopy, secs);
+      }
+
+      function onYouTubeIframeAPIReady() {
+        player = new YT.Player('player', {
+          videoId: id_video,
+          playerVars: { 'autoplay': 1, 'controls': 0, 'disablekb': 1, 'fs': 0, 'modestbranding': 1, 'showinfo': 0},
+          events: {
+            'onReady': onPlayerReady,
+          }
+        });
+      }
+    </script>
+
 	<script>
 	var token = '{!! csrf_token() !!}';
 	</script>
@@ -259,24 +300,27 @@
 	<script src="/js/video_to_gif.js"></script>
 	<script src="/js/jquery.nstSlider.min.js"></script>
 	<script>
-		$('.nstSlider').nstSlider({
-		    "crossable_handles": false,
-		    "left_grip_selector": ".leftGrip",
-		    "right_grip_selector": ".rightGrip",
-		    "value_bar_selector": ".bar",
-		    "value_changed_callback": function(cause, leftValue, rightValue) {
-		    	if((rightValue - leftValue) > 5) rightValue = leftValue + 5;
-		    	$('.un_start_time').val(leftValue);
-		    	$('.un_end_time').val(rightValue);
-		    	duration = rightValue - leftValue;
-		    	duration =  Math.floor(duration / 60) + ':' + duration % 60;
-		    	leftValue = Math.floor(leftValue / 60) + ':' + leftValue % 60;
-		    	rightValue = Math.floor(rightValue / 60) + ':' + rightValue % 60;
-		        $('.input-start-time').val(leftValue);
-		        $('.input-end-time').val(rightValue);
-		        $('.input-duration-time').val(duration);
-		    }
-		});
+	$('.nstSlider').nstSlider({
+	    "left_grip_selector": ".leftGrip",
+	    "value_bar_selector": ".bar",
+	    "value_changed_callback": function(cause, leftValue, rightValue) {
+	    	id = $(this).data('id');
+
+	    	if(id == 1) {
+	    		startt = leftValue;
+	    		$('.un_start_time').val(leftValue);
+	    		leftValue = Math.floor(leftValue / 60) + ':' + leftValue % 60;
+	    		$('.choose-time .start-time').val(leftValue);
+
+	    	} else if (id == 2) {
+	    		secs = leftValue + '000';
+	    		$('.un_end_time').val(leftValue + 1);
+	    		leftValue = Math.floor(leftValue / 60) + ':' + leftValue % 60;
+	    		$('.choose-time .duration-time').val(leftValue);
+	    	}
+	    }
+	});
 	</script>
+
 	</body>
 </html>

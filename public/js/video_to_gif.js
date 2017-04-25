@@ -2,6 +2,15 @@ $(document).ready(function () {
 
 	count_video_gifs = 1;
 
+
+	$('.start-time').on("change", function() {
+
+	});
+
+	$('.start-time').on("change", function() {
+		
+	});
+
 	$('#input-video').on("change", function() {
 		files = this.files[0];
 	    var data = new FormData();
@@ -21,8 +30,6 @@ $(document).ready(function () {
 	            if( typeof response.error === 'undefined' ){
 	            	$('.iframe-youtube').html("<video src='/uploads/"+response.file+"' controls autoplay muted></video>");
 	            	$('.un_video').val(response.file);
-	            	$('.btn-create-gif').css({'display': 'block'});
-	            	$('.block-for-giftext').css({'height': '330px'});
 	            }
 	        },
 	        error: function( jqXHR, textStatus, errorThrown ){
@@ -54,24 +61,11 @@ $(document).ready(function () {
 
 		if(value_yb == "") return false;
 
-
-		$.ajax({
-		  url: 'upload/valid_url',
-		  dataType: "json",
-		  type: "POST",
-		  data: {
-		  	video_url: value_yb,
-		  	_token: token
-		  },
-		  success: function(response){
-		    if(response.success == true) {
-		    	$('.iframe-youtube').html(response.html);
-		    	$('.btn-create-gif').css({'display': 'block'});
-		    	$('.block-for-giftext').css({'height': '330px'});
-		    	$('.un_video_url').val(value_yb);
-		    }
-		  }
-		});
+		if(getYouTubeIdFromURL(value_yb) != "") {
+			loadYbVideoById(getYouTubeIdFromURL(value_yb));
+			$('.btn-create-gif button').css({'display': 'block'});
+			$('.un_video_url').val(value_yb);
+		}
 	});
 
 	$('.color-text-gif button').click(function() {
@@ -82,42 +76,63 @@ $(document).ready(function () {
 		$('.un_color').val(color);
 	});
 
-
-  function startLoadingAnimation()
-  {
-    var imgObj = $("#loadImg");
-    imgObj.show();
-    
-    var centerY = $(window).scrollTop() + ($(window).height() + imgObj.height())/2;
-    var centerX = $(window).scrollLeft() + ($(window).width() + imgObj.width())/2;
-    
-    imgObj.offset({top:centerY, left:centerX});
-    $('body').css({'opacity': '0.3', 'overflow': 'hidden'});
-  }
-	  
-	function stopLoadingAnimation() {
-	    $("#loadImg").hide();
-	    $('body').css({'opacity': '1', 'overflow': 'auto'});
-	}
-
 	$(".btn-create-gif button").click(function() {
-		startLoadingAnimation();
+		$('.btn-create-gif button').css({'display': 'none'});
+
+		// Progress bar
+		$('.progressbar').css({'display': 'block'});
+	    var elem = document.getElementById("myBar"); 
+	    var width = 1;
+	    var id = setInterval(frame, 200);
+	    function frame() {
+	        if (width >= 90) {
+	            clearInterval(id);
+	            var id = setInterval(frame2, 10000);
+	        } else {
+	            width++; 
+	            $('.percent-bar').html(width + '%');
+	            elem.style.width = width + '%'; 
+	        }
+	    }
+
+
+	    function frame2() {
+	        if (width >= 97) {
+	        	clearInterval(id);
+	        } else {
+	            width++; 
+	            $('.percent-bar').html(width + '%');
+	            elem.style.width = width + '%'; 
+	        }
+	    }
+
+	    function frame3() {
+	    	if(width > 99) clearInterval(id);
+	        width++; 
+	        $('.percent-bar').html(width + '%');
+	        elem.style.width = width + '%'; 
+	    }
+
 		caption = $('.caption-gif input').val();
 		$('.un_caption').val(caption);
 		$('#create-gif-from-yb').ajaxSubmit({
 			dataType: "json",
 			success: function (data) {
 				$('.un_gif_main').val(data.file);
-				$('.front-card').html("<img class='picture-gif' src='/temp/"+data.file+"' /> <img class='testcreate' src='/img/gif-icon.png' />");
+				$('.iframe-youtube').html("<img class='picture-gif' src='/temp/"+data.file+"' />");
 				$('.editor').css({'display': 'block'});
-				$('.status-gif span').text('DONE! LOOK BELOW');
 				$('.input-form-photo').val(data.file); 
 				$('.add_fb_img').empty();
 				$('.add_fb_img').css({'padding-top': '0px'});
 				$('.add_fb_img').prepend("<img class='facebook-photo' src='temp/" + data.file + "'  />");
 				$('.input-form-photo-facebook').val(data.file);
 
-				stopLoadingAnimation();
+				clearInterval(id);
+				var id = setInterval(frame3, 10);
+
+				$('.progressbar').css({'display': 'none'});
+
+				$('.successfully-create').css({'display': 'block'});
 			}
 		});
 	});
