@@ -17,7 +17,8 @@
 				'rankedlist' => 'RANKED LIST',
 				'flipcards'  => 'FLIP CARD',
 				'trivia'     => 'TRIVIA CARD',
-				'story'      => 'STORY'
+				'story'      => 'STORY',
+				'gif'        => 'GIF'
 			];
 			?>
 			@if(empty($user_info->cover_photo))
@@ -104,15 +105,19 @@
 								<input type="checkbox" id="test2" value="flipcards" name="types[]" checked autocomplete="off"/>
 		    					<label for="test2">Flip Card</label>
 	    					</div>
+	    					<div class="item">
+								<input type="checkbox" id="test3" value="gif" name="types[]" checked autocomplete="off"/>
+		    					<label for="test3">GIF</label>
+	    					</div>
 	    				</div>
 	    				<div class="cards-right">
 	    					<div class="item">
-								<input type="checkbox" id="test3" value="story" name="types[]" checked autocomplete="off"/>
-		    					<label for="test3">Story</label>
+								<input type="checkbox" id="test4" value="story" name="types[]" checked autocomplete="off"/>
+		    					<label for="test4">Story</label>
 	    					</div>
 	    					<div class="item">
-								<input type="checkbox" id="test4" value="rankedlist" name="types[]" checked autocomplete="off"/>
-		    					<label for="test4">Ranked list</label>
+								<input type="checkbox" id="test5" value="rankedlist" name="types[]" checked autocomplete="off"/>
+		    					<label for="test5">Ranked list</label>
 	    					</div>
 						</div>
 						</form>

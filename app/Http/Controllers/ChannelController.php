@@ -14,7 +14,7 @@ class ChannelController extends Controller
 		if($channel_id != null && $channel_id > 0) {
 			$user_info = DB::select('select id, name, photo, cover_photo, public_info from users where id = ?', [$channel_id]);
 			if(count($user_info) != 0) {
-				$types = ['trivia', 'story', 'flipcards', 'rankedlist'];
+				$types = ['trivia', 'story', 'flipcards', 'rankedlist', 'gif'];
 				$channel_content = DB::table('posts')
 									->where('user_id', $channel_id)
 									->where('isDraft', 'publish')
@@ -46,7 +46,7 @@ class ChannelController extends Controller
 
 		$skip = ($multiplier == 1) ? 0 : $multiplier * 10 - 10;
 
-		$correct_names = ['flipcards', 'trivia', 'rankedlist', 'story']; 
+		$correct_names = ['flipcards', 'trivia', 'rankedlist', 'story', 'gif']; 
 
 		if(is_array($types) && count($types) != 0) {
 			foreach ($types as $key => $value) {
@@ -72,7 +72,8 @@ class ChannelController extends Controller
 						'rankedlist' => 'RANKED LIST',
 						'story'      => 'STORY',
 						'flipcards'  => 'FLIP CARD',
-						'trivia'     => 'TRIVIA CARD'
+						'trivia'     => 'TRIVIA CARD',
+						'gif'        => 'GIF'
 					];
 
 					$current_date = new DateTime();
