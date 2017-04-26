@@ -1,9 +1,6 @@
 @extends('tools.view')
 
 @section('css')
-	<link href="/css/viewID.css" rel="stylesheet">
-
-
 	<!-- Fonts -->
 	<link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
 	
@@ -18,14 +15,15 @@
 @endsection
 
 @section('tool_content')
-	<?php $uncontent = unserialize($content->content) ?>
-		@foreach($uncontent as $key=>$value)
-		<div class="post">
-			<div class="wraper">
-				<div class="front">
-					<img src="/uploads/{!! $value['gif'] !!}" style="width: 100%; height: 100%; position:absolute;" />
-				</div>
-			</div>
-		</div>
-		@endforeach
+
+<?php
+$gif = unserialize($content->content);
+?>
+<div class="content-gif">
+
+	<div class="description">{{ $content->description_text }}</div>
+	<div class="gif">
+		<img src="/uploads/{{ $gif[0]['gif'] }}"/>
+	</div>
+</div>
 @endsection
