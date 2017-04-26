@@ -95,10 +95,10 @@ Home
                 <div class="wrap">
                     <div class="header">JOIN US</div>
                     <div class="distab">
-                        <div class="iframe-youtube"><iframe id="player" frameborder="0" allowfullscreen="1" title="YouTube video player" width="750" height="422" src="https://www.youtube.com/embed/j8nZh-aTXIg?autoplay=1&amp;controls=0&amp;disablekb=1&amp;fs=0&amp;modestbranding=1&amp;showinfo=0&amp;enablejsapi=1&amp;origin=http%3A%2F%2Fpimboobeta.com&amp;widgetid=1"></iframe></div>
+                        <div class="left"><div class="iframe-youtube"><iframe id="player" frameborder="0" allowfullscreen="1" title="YouTube video player" width="720" height="406" src="https://www.youtube.com/embed/j8nZh-aTXIg?autoplay=0&amp;controls=0&amp;disablekb=1&amp;fs=0&amp;modestbranding=1&amp;showinfo=0&amp;enablejsapi=1&amp;origin=http%3A%2F%2Fpimboobeta.com&amp;widgetid=1&amp;rel=0"></iframe></div></div>
                         <div class="right">
                             <div class="title">Why join us? </div>
-                            <div class="text">Pellentesque egestas neque ac consequat finibus. Curabitur vel aliquet risus. Vivamus aliquam aliquam mauris quis hendrerit. Aliquam volutpat, eros eu<br><br>consequat mollis, Pellentesque egestas neque ac consequat finibus. Curabitur vel aliquet risus. Vivamus aliquam aliquam</div>
+                            <div class="text">You built your tribe. Likes. Views.<br>Google and Facebook made billions from your efforts. Did they send you a royalty check for your hard work in delivering value?<br>We never got ours. Until now.<br>Likes, views and followers have VALUE! YouTube, Facebook, etc would not exist without them.<br>It's time to take the power back- and it's 100% free.<br>This changes everything. Join Pimboo today.</div>
                             
                             @if (Auth::guest())
                                 <a data-toggle="modal" data-target="#register-modal">JOIN NOW</a>
