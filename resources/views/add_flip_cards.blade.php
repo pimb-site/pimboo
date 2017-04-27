@@ -117,7 +117,7 @@
 						<label><input class="checkbox" type="radio" name="display_item_numbers" value="no" checked><span class="checkbox-custom"></span><span class="label">No</span></label>
 					</div>
 				</div>
-				<div class="down_butts">
+				<div class="down_butts add_flip_cards_butts">
 					<button type="button" id="preview" class="btn-preview">PREVIEW</button>
 					<button type="button" id="save_draft" class="btn-save">SAVE DRAFT</button>
 					<button type="button" id="publish" class="btn-publish">PUBLISH</button>
