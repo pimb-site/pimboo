@@ -79,7 +79,7 @@
 					<div class="title">ADD TEXT AND EFFECTS TO YOUR GIF</div>
 					<div class="caption-gif">
 						<div class="type-title">Caption</div> 
-						<input placeholder="Please enter your text here">
+						<input placeholder="Please enter your text here" maxlength="12">
 					</div>
 					<div class="style-gif">
 						<div class="type-title">Style</div>
@@ -243,6 +243,9 @@
 		
 	
 
+	<script>
+		var token = '{!! csrf_token() !!}';
+	</script>
     <script>
       // 2. This code loads the IFrame Player API code asynchronously.
     function getYouTubeIdFromURL(url) 
@@ -255,7 +258,7 @@
 	function loadYbVideoById(id_vid) {
       var tag = document.createElement('script');
       startt = 0;
-      secs = 1000;
+      secs = 600;
       tag.src = "https://www.youtube.com/iframe_api";
       var firstScriptTag = document.getElementsByTagName('script')[0];
       firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
@@ -273,7 +276,7 @@
         player.mute();
         $('.txt-caption').css({'display': 'block'});
         $(".nstSlider[data-id='1']").nstSlider("set_range", 1, player.getDuration());
-        setTimeout(loopy, secs);
+        timeout_id = setTimeout(loopy, secs);
       }
 
       function loopy(event) {
@@ -284,17 +287,13 @@
       function onYouTubeIframeAPIReady() {
         player = new YT.Player('player', {
           videoId: id_video,
-          playerVars: { 'autoplay': 1, 'controls': 0, 'disablekb': 1, 'fs': 0, 'modestbranding': 1, 'showinfo': 0},
+          playerVars: { 'autoplay': 1, 'controls': 0, 'disablekb': 1, 'fs': 0, 'modestbranding': 1, 'showinfo': 0, 'rel': 0},
           events: {
             'onReady': onPlayerReady,
           }
         });
       }
     </script>
-
-	<script>
-	var token = '{!! csrf_token() !!}';
-	</script>
 	<script src="/js/main.js"></script>
 	<script src="/js/video_to_gif.js"></script>
 	<script src="/js/jquery.nstSlider.min.js"></script>
@@ -303,22 +302,30 @@
 	    "left_grip_selector": ".leftGrip",
 	    "value_bar_selector": ".bar",
 	    "value_changed_callback": function(cause, leftValue, rightValue) {
-	    	id = $(this).data('id');
+	    	var id = $(this).data('id');
 
 	    	if(id == 1) {
 	    		startt = leftValue;
-	    		videoStartTime = leftValue;
+
 	    		if(typeof video != "undefined") {
+	    			videoStartTime = leftValue;
 	    			video.currentTime = videoStartTime;
 	    		}
+
 	    		$('.un_start_time').val(leftValue);
 	    		leftValue = Math.floor(leftValue / 60) + ':' + leftValue % 60;
 	    		$('.choose-time .start-time').val(leftValue);
 
 	    	} else if (id == 2) {
 	    		durationTime = leftValue;
-	    		secs = leftValue + '000';
-	    		$('.un_end_time').val(leftValue + 1);
+	    		secs = parseInt(leftValue + '000') - 400;
+
+	    		if(typeof video != "undefined") {
+	    			videoStartTime = startt;
+	    			video.currentTime = videoStartTime;
+	    		}
+
+	    		$('.un_end_time').val(leftValue);
 	    		leftValue = Math.floor(leftValue / 60) + ':' + leftValue % 60;
 	    		$('.choose-time .duration-time').val(leftValue);
 	    	}

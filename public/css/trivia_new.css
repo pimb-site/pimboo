@@ -1682,12 +1682,12 @@ video {
 	position: absolute;
 	width: 710px;
 	color: #fff;
-	bottom: 0;
+	bottom: 133px;
 	text-align: center;
 	font-family: 'nexablack',sans-serif;
 	font-size: 40px;
 	margin-left: 9px;
     -webkit-user-select: none;
     -moz-user-select: none;
-
+    font-weight: 800;
 }

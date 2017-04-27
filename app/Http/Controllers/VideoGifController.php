@@ -29,6 +29,8 @@ class VideoGifController extends Controller
 			$video->move("uploads/", $filename);
 
 			return \Response::json(['success' => true, 'file' => $filename]);
+		} else {
+			return \Response::json(['success' => false, 'text' => 'The file size is too large. Not more than 10 MB.']);
 		}
 	}
 
@@ -102,12 +104,12 @@ class VideoGifController extends Controller
 
 					$start_time = date("H:i:s", mktime(0, 0, $start_time));
 
-					$length = $end_time - $start_time;
+					$length = $end_time;
 
 					if($length <= 0) continue;
 
 					$uniqid = uniqid();
-					$command_line_create   = 'ffmpeg -t '.$length.' -ss '.$start_time.' -r 15 -y -i /var/www/pimboobeta.com/public/uploads/'.$uniq_name.'.mp4 -s 708x400 /var/www/pimboobeta.com/public/temp/'.\Session::getId().'/'.$uniqid.'.gif';
+					$command_line_create   = 'ffmpeg -t '.$length.' -ss '.$start_time.' -r 20 -y -i /var/www/pimboobeta.com/public/uploads/'.$uniq_name.'.mp4 -s 708x400 /var/www/pimboobeta.com/public/temp/'.\Session::getId().'/'.$uniqid.'.gif';
 					shell_exec($command_line_create);
 
 
@@ -185,12 +187,12 @@ class VideoGifController extends Controller
 
 				$start_time = date("H:i:s", mktime(0, 0, $start_time));
 
-				$length = $end_time - $start_time;
+				$length = $end_time;
 
 				if($length <= 0) continue;
 
 				$uniqid = uniqid();
-				$command_line_create   = 'ffmpeg -t '.$length.' -ss '.$start_time.' -r 15 -y -i /var/www/pimboobeta.com/public/uploads/'.$video_site.' -s 410x240 /var/www/pimboobeta.com/public/temp/'.\Session::getId().'/'.$uniqid.'.gif';
+				$command_line_create   = 'ffmpeg -t '.$length.' -ss '.$start_time.' -r 20 -y -i /var/www/pimboobeta.com/public/uploads/'.$video_site.' -s 708x400 /var/www/pimboobeta.com/public/temp/'.\Session::getId().'/'.$uniqid.'.gif';
 				shell_exec($command_line_create);
 
 

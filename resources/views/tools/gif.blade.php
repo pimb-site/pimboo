@@ -20,10 +20,9 @@
 $gif = unserialize($content->content);
 ?>
 <div class="content-gif">
-
-	<div class="description">{{ $content->description_text }}</div>
 	<div class="gif">
 		<img src="/uploads/{{ $gif[0]['gif'] }}"/>
 	</div>
+	<div class="description">{{ $content->description_text }}</div>
 </div>
 @endsection
