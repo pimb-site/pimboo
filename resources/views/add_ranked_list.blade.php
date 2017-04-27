@@ -101,10 +101,10 @@
 						</select>
 					</div>
 				</div>
-				<div class="down_butts">
+				<div class="down_butts add_ranked_list_butts">
 					<button type="button" id="preview">PREVIEW</button>
-					<button type="button" id="save_draft">SAVE DRAFT</button>
-					<button type="button" id="publish">PUBLISH</button>
+					<button type="button" id="save_draft" class="btn-save">SAVE DRAFT</button>
+					<button type="button" id="publish" class="btn-publish">PUBLISH</button>
 				</div>
 			</div>
 			</form>

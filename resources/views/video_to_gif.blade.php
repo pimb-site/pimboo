@@ -161,9 +161,8 @@
 						<div class="tag"><label><input class="checkbox" type="checkbox" name="tags[]" value="News"><span class="checkbox-custom"></span><span class="label">News</span></label></div>
 					</div>
 				</div>
-				<div class="down_butts">
-					<button type="button" id="preview">PREVIEW</button>
-					<button type="button" id="save_draft" class="btn-save">SAVE DRAFT</button>
+				<div class="down_butts video_to_gif_butts">
+					<button type="button" id="save_draft">SAVE DRAFT</button>
 					<button type="button" id="publish">PUBLISH</button>
 				</div>
 			</div>

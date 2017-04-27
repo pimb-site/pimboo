@@ -184,6 +184,11 @@
 						<label><input class="checkbox" type="radio" name="answer_order" value="norandom" checked><span class="checkbox-custom"></span><span class="label">User defined</span></label>
 					</div>
 				</div>
+				<div class="down_butts add_trivia_quiz_butts">
+					<button type="button" id="preview">PREVIEW</button>
+					<button type="button" id="save_draft" class="btn-save">SAVE DRAFT</button>
+					<button type="button" id="publish" class="btn-publish">PUBLISH</button>
+				</div>
 			</div>
 			</form>
 		</div>
