@@ -1,6 +1,19 @@
 $(document).ready(function () {
 
-	count_video_gifs = 1;
+	video_loaded = false;
+
+	$('.caption-gif input').on("change", function(){
+		var text = $(this).val();
+
+		if(text.length != 0) {
+			$('.txt-caption').text(text);
+			if(video_loaded == true) {
+				$('.txt-caption').css({'display': 'block'});
+			}
+		} else {
+			$('.txt-caption').css({'display': 'none'});
+		}
+	});
 
 	$('.start-time').on("change", function() {
 		var value = $(this).val();
@@ -50,7 +63,7 @@ $(document).ready(function () {
 	        contentType: false,
 	        success: function( response, textStatus, jqXHR ){
 	            if( typeof response.error === 'undefined' ){
-	            	$('.iframe-youtube').html("<video id='player-user' src='/uploads/"+response.file+"'  autoplay muted loop></video>");
+	            	$('.iframe-youtube').html("<video id='player-user' src='/uploads/"+response.file+"'  autoplay muted loop></video><div class='txt-caption'> </div>");
 	            	$('.un_video').val(response.file);
 	            	$('.btn-create-gif button').css({'display': 'block'});
 
@@ -62,6 +75,8 @@ $(document).ready(function () {
 					video.addEventListener('loadedmetadata', function() {
 					  this.currentTime = videoStartTime;
 					  $(".nstSlider[data-id='1']").nstSlider("set_range", 1, parseInt(video.duration));
+					  $('.txt-caption').css({'display': 'block'});
+					  video_loaded = true;
 					}, false);
 
 					video.addEventListener('timeupdate', function() {
@@ -80,14 +95,52 @@ $(document).ready(function () {
 		$('#input-video').trigger( 'click' );
 	});
 
-	$('.text-style-gif .select option').click(function() {
-		size = $(this).data('size');
+	$('.select select option').click(function() {
+		var size = $('.select select option:selected').data('size');
 		$('.un_size').val(size);
+
+		switch(size) {
+			case 0:
+				$('.txt-caption').css({"font-size": '40px'});
+				break;
+
+			case 1:
+				$('.txt-caption').css({"font-size": '60px'});
+				break;
+			
+			case 2:
+				$('.txt-caption').css({"font-size": '80px'});
+				break;
+
+			default:
+				$('.txt-caption').css({"font-size": '40px'});
+				break;
+		}
+
 	});
 
 	$('.style-gif button').click(function() {
 		last_style = $('.un_style').val();
 		style = $(this).data('style');
+
+		switch(style) {
+			case 0:
+				$('.txt-caption').css({"font-family": "'nexablack',sans-serif", "font-style": "normal"});
+				break;
+
+			case 1:
+				$('.txt-caption').css({"font-family": "Impact,sans-serif", "font-style": "normal"});
+				break;
+			
+			case 2:
+				$('.txt-caption').css({"font-family": "Arial,sans-serif", "font-style": "italic"});
+				break;
+
+			default:
+				$('.txt-caption').css({"font-family": "'nexablack',sans-serif", "font-style": "normal"});
+				break;
+		}
+
 
 		$('.style-gif button[data-style="'+last_style+'"]').removeClass('current-style');
 		$(this).addClass('current-style');
@@ -104,12 +157,52 @@ $(document).ready(function () {
 			loadYbVideoById(getYouTubeIdFromURL(value_yb));
 			$('.btn-create-gif button').css({'display': 'block'});
 			$('.un_video_url').val(value_yb);
+			video_loaded = true;
 		}
 	});
 
 	$('.color-text-gif button').click(function() {
 		last_color = $('.un_color').val();
 		color = $(this).data('color');
+
+		switch(color) {
+			case 0:
+				$('.txt-caption').css({"color": "#fff"});
+				break;
+
+			case 1:
+				$('.txt-caption').css({"color": "#000000"});
+				break;
+			
+			case 2:
+				$('.txt-caption').css({"color": "#ff6666"});
+				break;
+
+			case 3:
+				$('.txt-caption').css({"color": "#fff35c"});
+				break;
+
+			case 4:
+				$('.txt-caption').css({"color": "#9933ff"});
+				break;
+
+			case 5:
+				$('.txt-caption').css({"color": "#00ff99"});
+				break;
+
+			case 6:
+				$('.txt-caption').css({"color": "#e646b6"});
+				break;
+
+			case 7:
+				$('.txt-caption').css({"color": "#00ccff"});
+				break;
+
+			default:
+				$('.txt-caption').css({"color": "#fff"});
+				break;
+		}
+
 		$('.color-text-gif button[data-color="'+last_color+'"]').css({'border-radius': '0px'});
 		$(this).css({'border-radius': '50%'});
 		$('.un_color').val(color);

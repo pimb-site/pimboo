@@ -1110,7 +1110,7 @@ video {
 	display:block;
 	margin-left:auto;
 	margin-right:auto;
-	width: 728px;
+	width: 708px;
 	height: 101%;
 	border: 1px solid #99afd9;
 	margin-top:5px;
@@ -1361,6 +1361,7 @@ video {
 
 .block-for-giftext .style-gif > .subtitle {
 	font-family: Arial,sans-serif;
+	font-style: italic;
 }
 
 .block-for-giftext .style-gif > .current-style {
@@ -1521,6 +1522,7 @@ video {
 
 .block-video-duration .iframe-youtube {
 	float: left;
+	position: relative;
 }
 
 .iframe-youtube {
@@ -1671,4 +1673,21 @@ video {
 	margin-bottom: 27px;
 	margin-top: 25px;
 	display: none;
+}
+
+
+
+.txt-caption {
+	display: none;
+	position: absolute;
+	width: 710px;
+	color: #fff;
+	bottom: 0;
+	text-align: center;
+	font-family: 'nexablack',sans-serif;
+	font-size: 40px;
+	margin-left: 9px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+
 }

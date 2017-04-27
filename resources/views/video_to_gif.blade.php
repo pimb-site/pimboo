@@ -42,11 +42,11 @@
 				</div>
 				<div class="block-video-duration">
 					<div class="title">CHOOSE TIME DURATION</div>
-					<div class="iframe-youtube"><div id="player"></div></div>
+					<div class="iframe-youtube"><div id="player"></div> <div class="txt-caption"> </div></div>
 
 					<div class="choose-time">START TIME <input class="start-time"></div>
-					<div class="nstSlider" data-id="1" data-range_min="0" data-range_max="900"
-					                       data-cur_min="1"     data-cur_max="900">
+					<div class="nstSlider" data-id="1" data-range_min="0" data-range_max="3600"
+					                       data-cur_min="1"     data-cur_max="3600">
 
 					    <div class="bar"></div>
 					    <div class="leftGrip"></div>
@@ -172,7 +172,6 @@
 
 			<form id="create-gif-from-yb" action="/upload_yb_gif" method="POST">
 				<input type="hidden" name="_token" value="{{ csrf_token() }}">
-				<input type="hidden" name="gif_main" value="" class="un_gif_main">
 				<input type="hidden" name="video_youtube" value="" class="un_video_url">
 				<input type="hidden" name="options[0][start_time]" class="un_start_time" value="0">
 				<input type="hidden" name="options[0][end_time]" class="un_end_time" value="1">
@@ -266,12 +265,14 @@
       //    after the API code downloads.
       var player;
       id_video = id_vid;
+      video_loaded = true;
     }
 
     function onPlayerReady(event) {
         event.target.playVideo();
         player.seekTo(startt);
         player.mute();
+        $('.txt-caption').css({'display': 'block'});
         $(".nstSlider[data-id='1']").nstSlider("set_range", 1, player.getDuration());
         setTimeout(loopy, secs);
       }

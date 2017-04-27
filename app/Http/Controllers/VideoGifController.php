@@ -40,7 +40,8 @@ class VideoGifController extends Controller
 
 		$video_youtube = $input['video_youtube'];
 		$video_site    = $input['video_site'];
-		$main_gif = $input['gif_main'];
+		//$main_gif = $input['gif_main'];
+		$main_gif = "";
 		$caption  = $input['caption'];
 
 
@@ -106,7 +107,7 @@ class VideoGifController extends Controller
 					if($length <= 0) continue;
 
 					$uniqid = uniqid();
-					$command_line_create   = 'ffmpeg -t '.$length.' -ss '.$start_time.' -r 15 -y -i /var/www/pimboobeta.com/public/uploads/'.$uniq_name.'.mp4 -s 410x240 /var/www/pimboobeta.com/public/temp/'.\Session::getId().'/'.$uniqid.'.gif';
+					$command_line_create   = 'ffmpeg -t '.$length.' -ss '.$start_time.' -r 15 -y -i /var/www/pimboobeta.com/public/uploads/'.$uniq_name.'.mp4 -s 708x400 /var/www/pimboobeta.com/public/temp/'.\Session::getId().'/'.$uniqid.'.gif';
 					shell_exec($command_line_create);
 
 
@@ -255,39 +256,6 @@ class VideoGifController extends Controller
 
 			return \Response::json(['success' => true, 'thumbnail' => \Session::getId()."/".$thumbnail_name, 'gif' => $temp_file]);
 		}
-	}
-
-	public function uploadGIF() {
-		if(\Auth::guest()) return view('auth/login');
-		$base64 = \Input::get('gif');
-		
-		$data = str_replace('data:image/gif;base64,', '', $base64);
-		$data = str_replace(' ', '+', $data);
-
-		$data = base64_decode($data); // base64 decoded image data
-		$source_img = imagecreatefromstring($data);
-		if(!file_exists("temp/".\Session::getId())) {
-            mkdir("temp/".\Session::getId());
-        }
-        $temp_file = \Session::getId()."/".uniqid() . '.gif';
-        $gif_path = "temp/".$temp_file;
-		$success = file_put_contents($gif_path, $data);
-		
-		$main_gif = \Input::get('gif_main');
-		if($main_gif != "" && file_exists('temp/'.$main_gif)) {
-			$main_path = "/var/www/pimboobeta.com/public/temp/";
-			$path_gif = \Session::getId()."/".uniqid() . '.gif';
-			$command_line = "convert -loop 0 ".$main_path.$main_gif." ".$main_path.$temp_file." ".$main_path.$path_gif;
-
-			shell_exec($command_line);
-
-			
-			$temp_file = $path_gif;
-		}
-		
-		if($success) {
-            return \Response::json(['success' => true, 'file' => $temp_file]);
-        }
 	}
 	
 	public function uploadEndGIF() {
