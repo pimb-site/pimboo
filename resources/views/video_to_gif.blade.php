@@ -46,7 +46,7 @@
 
 					<div class="choose-time">START TIME <input class="start-time"></div>
 					<div class="nstSlider" data-id="1" data-range_min="0" data-range_max="3600"
-					                       data-cur_min="1"     data-cur_max="3600">
+					                       data-cur_min="0"     data-cur_max="3600">
 
 					    <div class="bar"></div>
 					    <div class="leftGrip"></div>
@@ -258,7 +258,7 @@
 	function loadYbVideoById(id_vid) {
       var tag = document.createElement('script');
       startt = 0;
-      secs = 600;
+      secs = 1000;
       tag.src = "https://www.youtube.com/iframe_api";
       var firstScriptTag = document.getElementsByTagName('script')[0];
       firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
@@ -318,7 +318,7 @@
 
 	    	} else if (id == 2) {
 	    		durationTime = leftValue;
-	    		secs = parseInt(leftValue + '000') - 400;
+	    		secs = parseInt(leftValue + '000');
 
 	    		if(typeof video != "undefined") {
 	    			videoStartTime = startt;

@@ -21,8 +21,8 @@ $(document).ready(function () {
 		var seconds = parseInt(data[0]) * 60 + parseInt(data[1]);
 
 		if(isNaN(seconds)) {
-			$(".nstSlider[data-id='1']").nstSlider("set_position", 1);
-			$(this).val('0:1');
+			$(".nstSlider[data-id='1']").nstSlider("set_position", 0);
+			$(this).val('0:0');
 		} else {
 			$(".nstSlider[data-id='1']").nstSlider("set_position", seconds);
 		}
