@@ -23,8 +23,8 @@
 				<div class="card_info">
 					<div class="top">
 						<div class="text_info" style="width: 100%;">
-							<input type="text" name="form_flip[form_flip_cards_title]" placeholder="GIF Title" autocomplete="off" style="color:#6e8dc9; width: 710px;">
-							<textarea name="form_flip[form_description]" style="height:102px; margin-bottom: 0px; margin-top:0px; margin-left:0px; width:710px; resize: none; color:#6e8dc9; margin-bottom: 19px;" placeholder="GIF Description" autocomplete="off"></textarea>
+							<input class="top-input-video" type="text" name="form_flip[form_flip_cards_title]" placeholder="GIF Title" autocomplete="off" >
+							<textarea class="top-textarea-video" name="form_flip[form_description]"  placeholder="GIF Description" autocomplete="off"></textarea>
 						</div>
 					</div>
 				</div>
