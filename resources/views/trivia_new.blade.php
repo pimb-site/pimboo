@@ -68,14 +68,14 @@
 						<div class="answer-photo" data-id="1" data-side="1"><b>CLICK<br/> TO ADD PHOTO</b></div>
 						<div class="answer-text"> <textarea placeholder="Enter text" name="flip_cards[1][answer1]"></textarea></div>
 						<div class="answer-checkbox">
-							<label> <input type="checkbox" name="flip_cards[1][answer_check1]">Correct answer</label>
+							<div class="tag"><label><input class="checkbox" type="checkbox" name="flip_cards[1][answer_check2]" value="Celebrities"><span class="checkbox-custom"></span><span class="label">Correct answer</span></label></div>
 						</div>
 					</div>
 					<div class="add-answer">
 						<div class="answer-photo" data-id="1" data-side="2" ><b>CLICK<br/> TO ADD PHOTO</b></div>
 						<div class="answer-text"> <textarea placeholder="Enter text" name="flip_cards[1][answer2]"></textarea></div>
 						<div class="answer-checkbox">
-							<label> <input type="checkbox" name="flip_cards[1][answer_check2]">Correct answer</label>
+							<div class="tag"><label><input class="checkbox" type="checkbox" name="flip_cards[1][answer_check2]" value="Celebrities"><span class="checkbox-custom"></span><span class="label">Correct answer</span></label></div>
 						</div>
 					</div>
 				</div>
