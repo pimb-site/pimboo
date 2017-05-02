@@ -22,7 +22,7 @@
 				<div class="sub_title">Add all necessary information to create a new GIF image</div>
 				<div class="card_info">
 					<div class="top">
-						<div class="text_info" style="width: 100%;">
+						<div class="text_info">
 							<input class="top-input-video" type="text" name="form_flip[form_flip_cards_title]" placeholder="GIF Title" autocomplete="off" >
 							<textarea class="top-textarea-video" name="form_flip[form_description]"  placeholder="GIF Description" autocomplete="off"></textarea>
 						</div>
