@@ -89,9 +89,8 @@
 						<label><input class="checkbox" type="radio" name="display_item_numbers" value="no" checked><span class="checkbox-custom"></span><span class="label">No</span></label>
 					</div>
 				</div>
-				<div class="down_butts">
-					<button type="button" id="preview">PREVIEW</button>
-					<button type="button" id="save_draft">SAVE DRAFT</button>
+				<div class="down_butts story_butts">
+					<button type="button" id="save_draft" class="btn-save">SAVE DRAFT</button>
 					<button type="button" id="publish">PUBLISH</button>
 				</div>
 			</div>
