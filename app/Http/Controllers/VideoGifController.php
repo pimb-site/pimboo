@@ -109,7 +109,7 @@ class VideoGifController extends Controller
 					if($length <= 0) continue;
 
 					$uniqid = uniqid();
-					$command_line_create   = 'ffmpeg -t '.$length.' -ss '.$start_time.' -r 20 -y -i /var/www/pimboobeta.com/public/uploads/'.$uniq_name.'.mp4 -s 708x400 /var/www/pimboobeta.com/public/temp/'.\Session::getId().'/'.$uniqid.'.gif';
+					$command_line_create   = 'ffmpeg -t '.$length.' -ss '.$start_time.' -r 40 -y -i /var/www/pimboobeta.com/public/uploads/'.$uniq_name.'.mp4 -b 4096k -s 708x400 /var/www/pimboobeta.com/public/temp/'.\Session::getId().'/'.$uniqid.'.gif';
 					shell_exec($command_line_create);
 
 
@@ -170,7 +170,7 @@ class VideoGifController extends Controller
 				$watermark->readImage("/var/www/pimboobeta.com/public/img/watermark.png");
 
 				// Overlay the watermark on the original image
-				$image->compositeImage($watermark, imagick::COMPOSITE_OVER, 300, 0);
+				$image->compositeImage($watermark, imagick::COMPOSITE_OVER, 20, 20);
 				$image->writeImage($main_path.\Session::getId()."/".$thumbnail_name);
 
 				return \Response::json(['success' => true, 'thumbnail' => \Session::getId()."/".$thumbnail_name, 'gif' => $temp_file]);
@@ -192,7 +192,7 @@ class VideoGifController extends Controller
 				if($length <= 0) continue;
 
 				$uniqid = uniqid();
-				$command_line_create   = 'ffmpeg -t '.$length.' -ss '.$start_time.' -r 20 -y -i /var/www/pimboobeta.com/public/uploads/'.$video_site.' -s 708x400 /var/www/pimboobeta.com/public/temp/'.\Session::getId().'/'.$uniqid.'.gif';
+				$command_line_create   = 'ffmpeg -t '.$length.' -ss '.$start_time.' -r 40 -y -i /var/www/pimboobeta.com/public/uploads/'.$video_site.' -b 4096k -s 708x400 /var/www/pimboobeta.com/public/temp/'.\Session::getId().'/'.$uniqid.'.gif';
 				shell_exec($command_line_create);
 
 
@@ -253,7 +253,7 @@ class VideoGifController extends Controller
 			$watermark->readImage("/var/www/pimboobeta.com/public/img/watermark.png");
 
 			// Overlay the watermark on the original image
-			$image->compositeImage($watermark, imagick::COMPOSITE_OVER, 300, 0);
+			$image->compositeImage($watermark, imagick::COMPOSITE_OVER, 20, 20);
 			$image->writeImage($main_path.\Session::getId()."/".$thumbnail_name);
 
 			return \Response::json(['success' => true, 'thumbnail' => \Session::getId()."/".$thumbnail_name, 'gif' => $temp_file]);

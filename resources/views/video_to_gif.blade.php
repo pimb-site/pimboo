@@ -258,7 +258,7 @@
 	function loadYbVideoById(id_vid) {
       var tag = document.createElement('script');
       startt = 0;
-      secs = 1000;
+      secs = 900;
       tag.src = "https://www.youtube.com/iframe_api";
       var firstScriptTag = document.getElementsByTagName('script')[0];
       firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
@@ -275,7 +275,7 @@
         player.seekTo(startt);
         player.mute();
         $('.txt-caption').css({'display': 'block'});
-        $(".nstSlider[data-id='1']").nstSlider("set_range", 1, player.getDuration());
+        $(".nstSlider[data-id='1']").nstSlider("set_range", 0, player.getDuration());
         timeout_id = setTimeout(loopy, secs);
       }
 
@@ -305,7 +305,9 @@
 	    	var id = $(this).data('id');
 
 	    	if(id == 1) {
-	    		startt = leftValue;
+
+	    		if(leftValue > 1) startt = leftValue - 1;
+	    		else startt = leftValue;
 
 	    		if(typeof video != "undefined") {
 	    			videoStartTime = leftValue;
@@ -318,7 +320,7 @@
 
 	    	} else if (id == 2) {
 	    		durationTime = leftValue;
-	    		secs = parseInt(leftValue + '000');
+	    		secs = parseInt(leftValue + '000') - 100;
 
 	    		if(typeof video != "undefined") {
 	    			videoStartTime = startt;
