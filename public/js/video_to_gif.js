@@ -36,12 +36,12 @@ $(document).ready(function () {
 		if(!isNaN(seconds)) {
 			if(seconds <= 0 || seconds > 5) {
 				$(this).val('0:1');
-				$(".nstSlider[data-id='2']").nstSlider("set_position", 1);
+				$(".nstSlider[data-id='2']").nstSlider("set_position", 0);
 			} else { 
 				$(".nstSlider[data-id='2']").nstSlider("set_position", seconds);
 			}
 		} else {
-			$(".nstSlider[data-id='2']").nstSlider("set_position", 1);
+			$(".nstSlider[data-id='2']").nstSlider("set_position", 0);
 			$(this).val('0:1');
 		}
 	});
@@ -74,7 +74,7 @@ $(document).ready(function () {
 
 					video.addEventListener('loadedmetadata', function() {
 					  this.currentTime = videoStartTime;
-					  $(".nstSlider[data-id='1']").nstSlider("set_range", 1, parseInt(video.duration));
+					  $(".nstSlider[data-id='1']").nstSlider("set_range", 0, parseInt(video.duration));
 					  $('.txt-caption').css({'display': 'block'});
 					  video_loaded = true;
 					}, false);

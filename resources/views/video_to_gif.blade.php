@@ -305,9 +305,7 @@
 	    	var id = $(this).data('id');
 
 	    	if(id == 1) {
-
-	    		if(leftValue > 1) startt = leftValue - 1;
-	    		else startt = leftValue;
+	    		startt = leftValue;
 
 	    		if(typeof video != "undefined") {
 	    			videoStartTime = leftValue;
@@ -320,7 +318,7 @@
 
 	    	} else if (id == 2) {
 	    		durationTime = leftValue;
-	    		secs = parseInt(leftValue + '000') - 100;
+	    		secs = parseInt(leftValue + '000');
 
 	    		if(typeof video != "undefined") {
 	    			videoStartTime = startt;

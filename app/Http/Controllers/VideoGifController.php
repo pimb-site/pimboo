@@ -109,7 +109,7 @@ class VideoGifController extends Controller
 					if($length <= 0) continue;
 
 					$uniqid = uniqid();
-					$command_line_create   = 'ffmpeg -t '.$length.' -ss '.$start_time.' -r 40 -y -i /var/www/pimboobeta.com/public/uploads/'.$uniq_name.'.mp4 -b 4096k -s 708x400 /var/www/pimboobeta.com/public/temp/'.\Session::getId().'/'.$uniqid.'.gif';
+					$command_line_create   = 'ffmpeg -ss '.$start_time.' -i /var/www/pimboobeta.com/public/uploads/'.$uniq_name.'.mp4 -to 1 -r 10 -s 708x400 /var/www/pimboobeta.com/public/temp/'.\Session::getId().'/'.$uniqid.'.gif';
 					shell_exec($command_line_create);
 
 
@@ -175,7 +175,7 @@ class VideoGifController extends Controller
 
 				return \Response::json(['success' => true, 'thumbnail' => \Session::getId()."/".$thumbnail_name, 'gif' => $temp_file]);
 			}
-		} else if ($video_site != "" && file_exists("uploads/".$video_site)) { 
+		} else if ($video_site != "" && file_exists("uploads/".$video_site)) {
 
 			if(!file_exists("temp/".\Session::getId())) {
 	           	mkdir("temp/".\Session::getId());
@@ -192,7 +192,7 @@ class VideoGifController extends Controller
 				if($length <= 0) continue;
 
 				$uniqid = uniqid();
-				$command_line_create   = 'ffmpeg -t '.$length.' -ss '.$start_time.' -r 40 -y -i /var/www/pimboobeta.com/public/uploads/'.$video_site.' -b 4096k -s 708x400 /var/www/pimboobeta.com/public/temp/'.\Session::getId().'/'.$uniqid.'.gif';
+				$command_line_create   = 'ffmpeg -ss '.$start_time.' -i /var/www/pimboobeta.com/public/uploads/'.$video_site.' -to 1 -r 10 -s 708x400 /var/www/pimboobeta.com/public/temp/'.\Session::getId().'/'.$uniqid.'.gif';
 				shell_exec($command_line_create);
 
 
