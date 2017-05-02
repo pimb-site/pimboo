@@ -8,12 +8,19 @@ Admin
 			@include('user.admin.header')
 			<div class="top_title">Ads</div>
 			<form action="/admin/ads/save" method="post">
-				<label class="col-xs-12">1st <input class="form-control" type="text" class="ads" name="links[1]"></label>
-				<label class="col-xs-12">2nd <input class="form-control" type="text" class="ads" name="links[2]"></label>
-				<label class="col-xs-12">3rd <input class="form-control" type="text" class="ads" name="links[3]"></label>
-				<label class="col-xs-12">4th <input class="form-control" type="text" class="ads" name="links[4]"></label>
-				<label class="col-xs-12">5th <input class="form-control" type="text" class="ads" name="links[5]"></label>
-				<label class="col-xs-12">6th <input class="form-control" type="text" class="ads" name="links[6]"></label>
+				<input type="hidden" id="register_token" name="_token" value="{{ csrf_token() }}">
+				<label class="col-xs-12">1st href <input class="form-control" value="{{ $links['1']['href'] }}" type="text" class="ads" name="links[1][href]"></label>
+				<label class="col-xs-12">1st name <input class="form-control" value="{{ $links['1']['name'] }}" type="text" class="ads" name="links[1][name]"></label>
+				<label class="col-xs-12">2nd href <input class="form-control" value="{{ $links['2']['href'] }}" type="text" class="ads" name="links[2][href]"></label>
+				<label class="col-xs-12">2nd name <input class="form-control" value="{{ $links['2']['name'] }}" type="text" class="ads" name="links[2][name]"></label>
+				<label class="col-xs-12">3rd href <input class="form-control" value="{{ $links['3']['href'] }}" type="text" class="ads" name="links[3][href]"></label>
+				<label class="col-xs-12">3rd name <input class="form-control" value="{{ $links['3']['name'] }}" type="text" class="ads" name="links[3][name]"></label>
+				<label class="col-xs-12">4th href <input class="form-control" value="{{ $links['4']['href'] }}" type="text" class="ads" name="links[4][href]"></label>
+				<label class="col-xs-12">4th name <input class="form-control" value="{{ $links['4']['name'] }}" type="text" class="ads" name="links[4][name]"></label>
+				<label class="col-xs-12">5th href <input class="form-control" value="{{ $links['5']['href'] }}" type="text" class="ads" name="links[5][href]"></label>
+				<label class="col-xs-12">5th name <input class="form-control" value="{{ $links['5']['name'] }}" type="text" class="ads" name="links[5][name]"></label>
+				<label class="col-xs-12">6th href <input class="form-control" value="{{ $links['6']['href'] }}" type="text" class="ads" name="links[6][href]"></label>
+				<label class="col-xs-12">6th name <input class="form-control" value="{{ $links['6']['name'] }}" type="text" class="ads" name="links[6][name]"></label>
 				<button class="btn btn-default" type="submit">Save</button>
 			</form>
 		</div>

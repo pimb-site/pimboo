@@ -30,10 +30,10 @@ Admin
 							<td>{{ $report->status }}</td>
 							<td>
 								<div class="buttons">
-									<button data-toggle="modal" data-target="#AdminModalReports" onclick="modal_on('/admin/reports/delete_user/?post_id={{ $report->post_id }}&user_id={{ $report->post->user->id }}','Delete user and all posts pass to admin?');" title="Delete user, all posts passed to admin"><span class="glyphicon glyphicon-remove-circle"></span></button>
-									<button data-toggle="modal" data-target="#AdminModalReports" onclick="modal_on('/admin/reports/delete_posts_and_user/?user_id={{ $report->post->user->id }}','Delete user and all his posts?');" title="Delete user and all his posts"><span class="glyphicon glyphicon-ban-circle"></span></button>
-									<button data-toggle="modal" data-target="#AdminModalReports" onclick="modal_on('/admin/reports/delete_post/?post_id={{ $report->post_id }}','Delete post?');" title="Delete post"><span class="glyphicon glyphicon-remove"></span></button>
-									<button data-toggle="modal" data-target="#AdminModalReports" onclick="modal_on('/admin/reports/reject/?post_id={{ $report->post_id }}','Reject report?');" title="Reject report" class=""><span class="glyphicon glyphicon-ok-circle"></span></button>
+									<button data-toggle="modal" data-target="#AdminModalReports" onclick="modal_on('/admin/reports/update?action=delete_user&post_id={{ $report->post_id }}&user_id={{ $report->post->user->id }}&report_id={{ $report->id }}','Delete user and all posts pass to admin?');" title="Delete user, all posts passed to admin"><span class="glyphicon glyphicon-remove-circle"></span></button>
+									<button data-toggle="modal" data-target="#AdminModalReports" onclick="modal_on('/admin/reports/update?action=delete_posts_and_user&user_id={{ $report->post->user->id }}&report_id={{ $report->id }}','Delete user and all his posts?');" title="Delete user and all his posts"><span class="glyphicon glyphicon-ban-circle"></span></button>
+									<button data-toggle="modal" data-target="#AdminModalReports" onclick="modal_on('/admin/reports/update?action=delete_post&post_id={{ $report->post_id }}&report_id={{ $report->id }}','Delete post?');" title="Delete post"><span class="glyphicon glyphicon-remove"></span></button>
+									<button data-toggle="modal" data-target="#AdminModalReports" onclick="modal_on('/admin/reports/update?action=reject&post_id={{ $report->post_id }}&report_id={{ $report->id }}','Reject report?');" title="Reject report" class=""><span class="glyphicon glyphicon-ok-circle"></span></button>
 								</div>
 							</td>
 						</tr>
