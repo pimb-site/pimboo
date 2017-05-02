@@ -17,10 +17,10 @@
                                     <div class="published">Published on February 16, 2016 by <a href="/channel/{{ $content->user_id }}">{{ $user_name }}</a></div>
                                 </div>
                                 <div class="buttons">
-                                    <button class="butt-for-sharing facebook"></button>
-                                    <button class="butt-for-sharing twitter"></button>
-                                    <button class="butt-for-sharing google_plus"></button>
-                                    <button class="butt-for-sharing linked_in"></button>
+                                    <button data-title="{{ $content->description_title }}" data-url="{{ url('/viewID/'.$content->id) }}" data-type="fb" class="butt-for-sharing facebook"></button>
+                                    <button data-title="{{ $content->description_title }}" data-url="{{ url('/viewID/'.$content->id) }}" data-type="tw" class="butt-for-sharing twitter"></button>
+                                    <button data-title="{{ $content->description_title }}" data-url="{{ url('/viewID/'.$content->id) }}" data-type="gg" class="butt-for-sharing google_plus"></button>
+                                    <button data-title="{{ $content->description_title }}" data-url="{{ url('/viewID/'.$content->id) }}" data-type="li" class="butt-for-sharing linked_in"></button>
                                     <button class="get_link">GET LINK</button>
                                 </div>
                             </div>
