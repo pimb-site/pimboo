@@ -44,7 +44,7 @@
 				
 				<button type="button" class="add-question">ADD QUESTION</button>
 				<div class="down_butts">
-					<button type="button" id="preview">PREVIEW</button>
+					<button type="button" id="preview" class="btn-preview">PREVIEW</button>
 					<button type="button" id="save_draft" class="btn-save">SAVE DRAFT</button>
 					<button type="button" id="publish" class="btn-publish">PUBLISH</button>
 				</div>
@@ -102,7 +102,7 @@
 					</div>
 				</div>
 				<div class="down_butts add_ranked_list_butts">
-					<button type="button" id="preview">PREVIEW</button>
+					<button type="button" id="preview" class="btn-preview">PREVIEW</button>
 					<button type="button" id="save_draft" class="btn-save">SAVE DRAFT</button>
 					<button type="button" id="publish" class="btn-publish">PUBLISH</button>
 				</div>

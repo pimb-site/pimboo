@@ -114,9 +114,9 @@
 					</div>
 				</div>
 
-				<div class="down_butts" style="margin-top:20px;">
-					<button type="button" id="save_draft">SAVE DRAFT</button>
-					<button type="button" id="publish">PUBLISH</button>
+				<div class="down_butts">
+					<button type="button" id="save_draft" class="btn-save">SAVE DRAFT</button>
+					<button type="button" id="publish" class="btn-publish">PUBLISH</button>
 				</div>
 				<input name="isDraft" type="hidden" value="publish" class="isDraft" autocomplete="off">
 				<input name="postID" type="hidden" value="" class="postID" autocomplete="off">
@@ -129,7 +129,7 @@
 				<div class="title">SOCIAL APPEARANCE</div>
 				<div class="sub_title">How your content will appear on social media</div>
 				<div class="facebok_block">
-					<div class="add_fb_img" style="padding-top: 40px; font-weight: 600;">CREATED GIF</div>
+					<div class="add_fb_img">CREATED GIF</div>
 					<div class="edit_image_text">
 						Your GIF will be<br>in Facebook
 					</div>
@@ -162,8 +162,8 @@
 					</div>
 				</div>
 				<div class="down_butts video_to_gif_butts">
-					<button type="button" id="save_draft">SAVE DRAFT</button>
-					<button type="button" id="publish">PUBLISH</button>
+					<button type="button" id="save_draft" class="btn-save">SAVE DRAFT</button>
+					<button type="button" id="publish" class="btn-publish">PUBLISH</button>
 				</div>
 			</div>
 			</form>
