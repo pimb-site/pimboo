@@ -93,7 +93,7 @@ class VideoGifController extends Controller
 
 				// upload youtube video
 				$uniq_name = uniqid();
-				$command_line_download = 'youtube-dl -f 134 -o "/var/www/pimboobeta.com/public/uploads/'.$uniq_name.'.%(ext)s" '.$video_youtube;
+				$command_line_download = 'youtube-dl -f 135 -o "/var/www/pimboobeta.com/public/uploads/'.$uniq_name.'.%(ext)s" '.$video_youtube;
 				shell_exec($command_line_download);
 
 
@@ -109,7 +109,7 @@ class VideoGifController extends Controller
 					if($length <= 0) continue;
 
 					$uniqid = uniqid();
-					$command_line_create   = 'ffmpeg -ss '.$start_time.' -i /var/www/pimboobeta.com/public/uploads/'.$uniq_name.'.mp4 -to 1 -r 10 -s 708x400 /var/www/pimboobeta.com/public/temp/'.\Session::getId().'/'.$uniqid.'.gif';
+					$command_line_create   = 'ffmpeg -ss '.$start_time.' -i /var/www/pimboobeta.com/public/uploads/'.$uniq_name.'.mp4 -to '.$length.' -r 20 -s 708x400 /var/www/pimboobeta.com/public/temp/'.\Session::getId().'/'.$uniqid.'.gif';
 					shell_exec($command_line_create);
 
 
@@ -156,6 +156,9 @@ class VideoGifController extends Controller
 					$temp_file = $path_gif;
 				}
 
+				//delete video
+				unlink("uploads/".$uniq_name.".mp4");
+
 				$main_path = "/var/www/pimboobeta.com/public/temp/";
 
 				$thumbnail_name = uniqid().".png";
@@ -192,7 +195,7 @@ class VideoGifController extends Controller
 				if($length <= 0) continue;
 
 				$uniqid = uniqid();
-				$command_line_create   = 'ffmpeg -ss '.$start_time.' -i /var/www/pimboobeta.com/public/uploads/'.$video_site.' -to 1 -r 10 -s 708x400 /var/www/pimboobeta.com/public/temp/'.\Session::getId().'/'.$uniqid.'.gif';
+				$command_line_create   = 'ffmpeg -ss '.$start_time.' -i /var/www/pimboobeta.com/public/uploads/'.$video_site.' -to '.$length.' -r 20 -s 708x400 /var/www/pimboobeta.com/public/temp/'.\Session::getId().'/'.$uniqid.'.gif';
 				shell_exec($command_line_create);
 
 
