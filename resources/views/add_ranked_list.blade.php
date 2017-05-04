@@ -191,27 +191,27 @@
 			<div class="modal-upload-column">
 				<div class="title"> UPLOAD </div>
 				<div class="buttons-img">
-					<div class="modal-file-icon" style="float:left;"><div class="select-file" style="margin-left:0px; height:0px; margin-top:0px;"><input type="file" name="filedata" style="top:0px;"><div class="modal-text-upl">From File</div></div></div>
-					<div class="modal-file-upl"><div class="modal-url-icon"></div><div class="modal-text-upl" style="margin-top:108px;">From URL</div></div>
-					<div class="modal-file-upl"><div class="modal-youtube-icon"></div><div class="modal-text-upl" style="margin-top:108px;">YouTube Clip</div></div>
+					<div class="modal-file-icon" style="float:left;"><div class="select-file"><input type="file" name="filedata" ><div class="modal-text-upl">From File</div></div></div>
+					<div class="modal-file-upl"><div class="modal-url-icon"></div><div class="modal-text-upl">From URL</div></div>
+					<div class="modal-file-upl"><div class="modal-youtube-icon"></div><div class="modal-text-upl">YouTube Clip</div></div>
 				</div>
 				<div class="modal-video-url">
 					<input type="text" class="upl-input-video-url" placeholder="Enter clip URL">
 					<button type="button" class="upl-video-valid">UPLOAD</button>
 				</div>
-				<div class="size-img-alert" style="margin-top:64px;">Please make sure you upload an image at least of 200x160 for Landscape</div>
+				<div class="size-img-alert">Please make sure you upload an image at least of 200x160 for Landscape</div>
 			</div>
 		</div>
 		
 		<div id="modal-input-youtube" class="modal-input-youtube" style="display: none;">
-			<div class="modal-video-url" style="margin-left: 72px;">
+			<div class="modal-video-url">
 					<input type="text" class="upl-input-video-url" placeholder="Enter clip URL">
 					<button type="button" class="upl-video-valid">UPLOAD</button>
 			</div>
 		</div>
 		
 		<div id="modal-input-image" class="modal-input-image" style="display: none;">
-			<div class="modal-image-url" style="margin-left: 72px;">
+			<div class="modal-image-url">
 					<input type="text" class="upl-input-image-url" placeholder="Enter image URL">
 					<button type="button" class="upl-image-valid">UPLOAD</button>
 			</div>
