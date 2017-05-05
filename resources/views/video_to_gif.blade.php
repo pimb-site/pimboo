@@ -129,7 +129,7 @@
 				<div class="title">SOCIAL APPEARANCE</div>
 				<div class="sub_title">How your content will appear on social media</div>
 				<div class="facebok_block">
-					<div class="add_fb_img">CREATED GIF</div>
+					<div class="add_fb_img gif_img">CREATED GIF</div>
 					<div class="edit_image_text">
 						Your GIF will be<br>in Facebook
 					</div>

@@ -191,7 +191,7 @@
 			<div class="modal-upload-column">
 				<div class="title"> UPLOAD </div>
 				<div class="buttons-img">
-					<div class="modal-file-icon" style="float:left;"><div class="select-file"><input type="file" name="filedata" ><div class="modal-text-upl">From File</div></div></div>
+					<div class="modal-file-icon"><div class="select-file"><input type="file" name="filedata"></div><div class="modal-text-upl">From File</div></div>
 					<div class="modal-file-upl"><div class="modal-url-icon"></div><div class="modal-text-upl">From URL</div></div>
 					<div class="modal-file-upl"><div class="modal-youtube-icon"></div><div class="modal-text-upl">YouTube Clip</div></div>
 				</div>
