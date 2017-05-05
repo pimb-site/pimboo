@@ -11,8 +11,4 @@
 		<img src="/img/member_my_org.png" />
 		<div class="menu_text">Ads</div>
 	</a>
-	<a class="menu" href="/admin/home">
-		<img src="/img/member_referral_program.png" />
-		<div class="menu_text">Home</div>
-	</a>
 </div>
