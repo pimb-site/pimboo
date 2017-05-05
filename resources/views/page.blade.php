@@ -43,5 +43,8 @@
 		<script src="/js/footer.min.js" type="text/javascript"></script>
 		<script src="/js/register.js" type="text/javascript"></script>
 		@yield('script')
+		<script type="text/javascript">
+			_token = '{{ csrf_token() }}';
+		</script>
 	</body>
 </html>

@@ -30,8 +30,9 @@ class HomeController extends Controller {
     public function index()
     {
         $home_main_post = Post::where([ ['status', '=', 'home_main'] ])->first();
-        $home_top_posts = Post::where([ ['status', '=', 'home_post'] ])->get();
+        $home_top_posts = Post::where('status', 'LIKE', '%home_post%')->orderBy('status')->get();
         $latest = Post::latest()->take(6)->get();
+
         return view('home', [
             'body_class' => 'home', 
             'main_post' => $home_main_post, 
