@@ -71,6 +71,11 @@ Route::get('user/organization', 'UserController@getOrganization');
 
 Route::get('user/referrals', 'UserController@getReferrals');
 
+// create snip
+Route::get('user/create-snip', 'SnipController@createPage');
+Route::post('user/create-snip-link', 'SnipController@createLink');
+Route::get('snip/{link}', 'SnipController@viewLink');
+
 Route::get('admin', 'AdminController@getHome');
 Route::get('admin/reports', 'AdminController@getReports');
 Route::get('admin/reports/update', 'AdminController@updateReport');
