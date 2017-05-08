@@ -6,7 +6,12 @@ $(document).ready(function () {
 	image_type_fc = 1;
 	min_sizeh_fc  = 10;
 	min_sizew_fc  = 10;
-	
+	var ScreenWidth = screen.width;
+	if (ScreenWidth >= 768) {
+		ScreenWidth = '50%';
+	} else {
+		ScreenWidth = '25%';
+	}
 	
 	$('.upload-img-url-btn').click(function() {
 		value_url = $('.upload-img-url').val();
@@ -481,7 +486,7 @@ $(document).ready(function () {
 					  bgColor: '#fff',
 					  maxSize: [500, 500],
 					  minSize: [min_sizew_fc, min_sizeh_fc],
-					  selection: '50%',
+					  selection: ScreenWidth,
 					  onSelect: function (coords){
 						 $('.select-file').fileapi('crop', file, coords);
 					  }
