@@ -293,7 +293,7 @@ $(document).ready(function () {
 		}
 	});
 
-	$('#save_draft').click(function() {
+	$('.btn-save').click(function() {
 		$('.isDraft').val('save');
 		
 		$('#form_upload_cards').ajaxSubmit({
@@ -317,7 +317,7 @@ $(document).ready(function () {
 		});
 	});
 	
-	$('#publish').click(function() {
+	$('.btn-publish').click(function() {
 		$('.isDraft').val('publish');
 		var alertHtml = '<div class="warning-text"><b>Warning!</b></div> <ul>';
         $('#form_upload_cards').ajaxSubmit({
