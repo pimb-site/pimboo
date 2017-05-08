@@ -10,7 +10,7 @@ $(document).ready(function () {
 	if (ScreenWidth >= 768) {
 		ScreenWidth = '50%';
 	} else {
-		ScreenWidth = '25%';
+		ScreenWidth = '10%';
 	}
 	
 	$('.upload-img-url-btn').click(function() {
@@ -486,7 +486,7 @@ $(document).ready(function () {
 					  bgColor: '#fff',
 					  maxSize: [500, 500],
 					  minSize: [min_sizew_fc, min_sizeh_fc],
-					  selection: ScreenWidth,
+					  selection: '10%',
 					  onSelect: function (coords){
 						 $('.select-file').fileapi('crop', file, coords);
 					  }
