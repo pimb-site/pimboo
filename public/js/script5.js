@@ -109,7 +109,7 @@ $(document).ready(function () {
 	});
 	
 	
-	$('#preview').click(function() {
+	$('.btn-preview').click(function() {
 		$('.isDraft').val('preview');
 		$('.trivia_main_tags b').empty();
 		$('.trivia_main_cards').remove();
