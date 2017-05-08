@@ -188,7 +188,7 @@ $(document).ready(function () {
 		});
 	});
 	
-	$('#preview').click(function() {
+	$('.btn-preview').click(function() {
 		score = 0;
 		answer = 0;
 		questions = 0;
