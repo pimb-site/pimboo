@@ -93,44 +93,44 @@
                         </div>
                         <div class="content">
                             <div class="content-side">
-                                <div class="content-left">
+                                <a class="content-left" href="{{ $ads['1']['href'] }}">
                                     <div class="content-image"><img src="/img/view_back_3.jpg"/></div>
-                                    <div class="content-title">Can you help astronomers fint Planet</div>
-                                </div>
-                                <div class="content-right">
+                                    <div class="content-title">{{ $ads['1']['name'] }}</div>
+                                </a>
+                                <a class="content-right" href="{{ $ads['2']['href'] }}">
                                     <div class="content-image"><img src="/img/view_back_1.jpg"/></div>
-                                    <div class="content-title">Apple wins Chinese IPhone 6 patent now</div>
-                                </div>
+                                    <div class="content-title">{{ $ads['2']['name'] }}</div>
+                                </a>
                             </div>
                             <div class="content-side">
-                                <div class="content-left">
+                                <a class="content-left" href="{{ $ads['3']['href'] }}">
                                     <div class="content-image"><img src="/img/view_back_2.jpg"/></div>
-                                    <div class="content-title">Online Shopping for E-commerce</div>
-                                </div>
-                                <div class="content-right">
+                                    <div class="content-title">{{ $ads['3']['name'] }}</div>
+                                </a>
+                                <a class="content-right" href="{{ $ads['4']['href'] }}">
                                     <div class="content-image"><img src="/img/view_back_3.jpg"/></div>
-                                    <div class="content-title">How to Pay with Cards</div>
-                                </div>
+                                    <div class="content-title">{{ $ads['4']['name'] }}</div>
+                                </a>
                             </div>
                             <div class="content-side">
-                                <div class="content-left">
+                                <a class="content-left" href="{{ $ads['5']['href'] }}">
                                     <div class="content-image"><img src="/img/view_back_4.jpg"/></div>
-                                    <div class="content-title">How to make fast Delivery and do not Loose your Money?</div>
-                                </div>
-                                <div class="content-right">
+                                    <div class="content-title">{{ $ads['5']['name'] }}</div>
+                                </a>
+                                <a class="content-right" href="{{ $ads['6']['href'] }}">
                                     <div class="content-image"><img src="/img/view_back_2.jpg"/></div>
-                                    <div class="content-title">Poligraphy Trends 2017</div>
-                                </div>
+                                    <div class="content-title">{{ $ads['6']['name'] }}</div>
+                                </a>
                             </div>
                             <div class="content-side">
-                                <div class="content-left">
+                                <a class="content-left" href="{{ $ads['7']['href'] }}">
                                     <div class="content-image"><img src="/img/view_back_3.jpg"/></div>
-                                    <div class="content-title">Why are leggins so controversial?</div>
-                                </div>
-                                <div class="content-right">
+                                    <div class="content-title">{{ $ads['7']['name'] }}</div>
+                                </a>
+                                <a class="content-right" href="{{ $ads['8']['href'] }}">
                                     <div class="content-image"><img src="/img/view_back_1.jpg"/></div>
-                                    <div class="content-title">British scientists in world-first TB</div>
-                                </div>
+                                    <div class="content-title">{{ $ads['8']['name'] }}</div>
+                                </a>
                             </div>
                         </div>
                     </div>

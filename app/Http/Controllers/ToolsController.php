@@ -39,7 +39,10 @@ class ToolsController extends Controller
         } else {
             $user_name = 'Unknown';
         }
-        return view('tools.'.$content->type, ['body_class' => 'view '.$content->type, 'content' => $content, 'name' => $content->type, 'user_name' => $user_name, 'source_link' => '']);
+        $ads = \DB::select('select * from settings where setting = "ads"');
+        $ads = unserialize($ads[0]->value);
+        print_r($ads);
+        return view('tools.'.$content->type, ['body_class' => 'view '.$content->type, 'content' => $content, 'name' => $content->type, 'user_name' => $user_name, 'source_link' => '', 'ads' => $ads ]);
     }
 	
 	public function successID($id) {

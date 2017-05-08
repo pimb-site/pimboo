@@ -21,6 +21,10 @@ Admin
 				<label class="col-xs-12">5th name <input class="form-control" value="{{ $links['5']['name'] }}" type="text" class="ads" name="links[5][name]"></label>
 				<label class="col-xs-12">6th href <input class="form-control" value="{{ $links['6']['href'] }}" type="text" class="ads" name="links[6][href]"></label>
 				<label class="col-xs-12">6th name <input class="form-control" value="{{ $links['6']['name'] }}" type="text" class="ads" name="links[6][name]"></label>
+				<label class="col-xs-12">7th href <input class="form-control" value="{{ $links['7']['href'] }}" type="text" class="ads" name="links[7][href]"></label>
+				<label class="col-xs-12">7th name <input class="form-control" value="{{ $links['7']['name'] }}" type="text" class="ads" name="links[7][name]"></label>
+				<label class="col-xs-12">8th href <input class="form-control" value="{{ $links['8']['href'] }}" type="text" class="ads" name="links[8][href]"></label>
+				<label class="col-xs-12">8th name <input class="form-control" value="{{ $links['8']['name'] }}" type="text" class="ads" name="links[8][name]"></label>
 				<button class="btn btn-default" type="submit">Save</button>
 			</form>
 		</div>
