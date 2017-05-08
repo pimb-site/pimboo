@@ -5,6 +5,15 @@ $(document).ready(function () {
 	image_type_fc = 1;
 	min_sizeh_fc  = 10;
 	min_sizew_fc  = 10;
+	var ScreenWidth = screen.width;
+	var maxSizeW;
+	if (ScreenWidth >= 768) {
+		ScreenWidth = '50%';
+		maxSizeW    = 500;
+	} else {
+		ScreenWidth = '25%';
+		maxSizeW    = 250;
+	}
 	
 	$('.upl-image-valid').click(function() {
 		value_url = $('.upl-input-image-url').val();
@@ -324,9 +333,9 @@ $(document).ready(function () {
 				   $('.js-img', overlay).cropper({
 					  file: file,
 					  bgColor: '#fff',
-					  maxSize: [500, 500],
+					  maxSize: [maxSizeW, maxSizeW],
 					  minSize: [min_sizew_fc, min_sizeh_fc],
-					  selection: '50%',
+					  selection: ScreenWidth,
 					  onSelect: function (coords){
 						 $('.select-file').fileapi('crop', file, coords);
 					  }
