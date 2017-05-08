@@ -7,10 +7,13 @@ $(document).ready(function () {
 	min_sizeh_fc  = 10;
 	min_sizew_fc  = 10;
 	var ScreenWidth = screen.width;
+	var maxSizeW;
 	if (ScreenWidth >= 768) {
 		ScreenWidth = '50%';
+		maxSizeW    = 500;
 	} else {
-		ScreenWidth = '10%';
+		ScreenWidth = '25%';
+		maxSizeW    = 250;
 	}
 	
 	$('.upload-img-url-btn').click(function() {
@@ -484,9 +487,9 @@ $(document).ready(function () {
 				   $('.js-img', overlay).cropper({
 					  file: file,
 					  bgColor: '#fff',
-					  maxSize: [500, 500],
+					  maxSize: [maxSizeW, maxSizeW],
 					  minSize: [min_sizew_fc, min_sizeh_fc],
-					  selection: '10%',
+					  selection: ScreenWidth,
 					  onSelect: function (coords){
 						 $('.select-file').fileapi('crop', file, coords);
 					  }
