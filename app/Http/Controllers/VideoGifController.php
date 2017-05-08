@@ -96,6 +96,11 @@ class VideoGifController extends Controller
 				$command_line_download = 'youtube-dl -f 135 -o "/var/www/pimboobeta.com/public/uploads/'.$uniq_name.'.%(ext)s" '.$video_youtube;
 				shell_exec($command_line_download);
 
+				if(!file_exists("uploads/".$uniq_name.".mp4")) {
+					$command_line_download = 'youtube-dl -f 133 -o "/var/www/pimboobeta.com/public/uploads/'.$uniq_name.'.%(ext)s" '.$video_youtube;
+					shell_exec($command_line_download);
+				}
+
 
 				// Create gifs from video/ And their gluing
 				foreach ($input['options'] as $key => $value) {
