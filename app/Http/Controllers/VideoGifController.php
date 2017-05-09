@@ -178,7 +178,7 @@ class VideoGifController extends Controller
 				$watermark->readImage("/var/www/pimboobeta.com/public/img/watermark.png");
 
 				// Overlay the watermark on the original image
-				$image->compositeImage($watermark, imagick::COMPOSITE_OVER, 20, 20);
+				$image->compositeImage($watermark, imagick::COMPOSITE_OVER, 288, 134);
 				$image->writeImage($main_path.\Session::getId()."/".$thumbnail_name);
 
 				return \Response::json(['success' => true, 'thumbnail' => \Session::getId()."/".$thumbnail_name, 'gif' => $temp_file]);
@@ -261,7 +261,7 @@ class VideoGifController extends Controller
 			$watermark->readImage("/var/www/pimboobeta.com/public/img/watermark.png");
 
 			// Overlay the watermark on the original image
-			$image->compositeImage($watermark, imagick::COMPOSITE_OVER, 20, 20);
+			$image->compositeImage($watermark, imagick::COMPOSITE_OVER, 288, 134);
 			$image->writeImage($main_path.\Session::getId()."/".$thumbnail_name);
 
 			return \Response::json(['success' => true, 'thumbnail' => \Session::getId()."/".$thumbnail_name, 'gif' => $temp_file]);
