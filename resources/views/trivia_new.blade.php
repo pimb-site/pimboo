@@ -40,7 +40,7 @@
 							</div>
 						</div>
 						<div class="block-type-caption">
-							<textarea name="flip_cards[1][caption1]" class="type-caption" placeholder="Type your caption" style="position:relative;" data-id="1" data-side="1" maxlength="50"></textarea>
+							<textarea name="flip_cards[1][caption1]" class="type-caption" placeholder="Type your caption" data-id="1" data-side="1" maxlength="50"></textarea>
 						</div>
 					</div>
 					<div class="back-card" data-id="1">
@@ -51,7 +51,7 @@
 							</div>
 						</div>
 						<div class="block-type-caption">
-							<textarea name="flip_cards[1][caption2]" class="type-caption" placeholder="Type your caption" style="position:relative;" data-id="1" data-side="2" maxlength="50"></textarea>
+							<textarea name="flip_cards[1][caption2]" class="type-caption" placeholder="Type your caption" data-id="1" data-side="2" maxlength="50"></textarea>
 						</div>
 					</div>	
 				</div>
