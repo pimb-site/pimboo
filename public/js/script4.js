@@ -19,9 +19,13 @@ $(document).ready(function () {
 	if (ScreenWidth >= 768) {
 		ScreenWidth = '50%';
 		maxSizeW    = 500;
-	} else {
-		ScreenWidth = '25%';
-		maxSizeW    = 250;
+	} else if (ScreenWidth <= 320){
+		ScreenWidth = '50%';
+		maxSizeW    = 300;
+	}
+	else {
+		ScreenWidth = '50%';
+		maxSizeW    = 456;
 	}
 	
 	

@@ -1066,32 +1066,32 @@
 	margin-bottom:5px;
 }
 
-.vote {
-	float:left;
-	margin-right:20px;
-}
+// .vote {
+// 	float:left;
+// 	margin-right:20px;
+// }
 
-.vote b {
-	line-height:32px;
-}
+// .vote b {
+// 	line-height:32px;
+// }
 
-.vote .vote-button {
-	border: 0;
-    background-image: url(/img/arrow_up.png);
-    background-repeat: no-repeat;
-	background-size: 15px;
-	cursor:pointer;
-	float:left;
-	background-position:center;
-	border-radius:3px;
-	width:42px;
-	height:41px;
-	background-color:#c2d0e9;
-}
+// .vote .vote-button {
+// 	border: 0;
+//     background-image: url(/img/arrow_up.png);
+//     background-repeat: no-repeat;
+// 	background-size: 15px;
+// 	cursor:pointer;
+// 	float:left;
+// 	background-position:center;
+// 	border-radius:3px;
+// 	width:42px;
+// 	height:41px;
+// 	background-color:#c2d0e9;
+// }
 
-.vote .vote-button:hover {
-	background-color:#6e8dc9;
-}
+// .vote .vote-button:hover {
+// 	background-color:#6e8dc9;
+// }
 .buttons-video {
 	margin-left:140px;
 	margin-top:10px;
