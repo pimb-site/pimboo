@@ -258,11 +258,11 @@ $(document).ready(function () {
 				$('.gif-input').val(data.gif);
 				$('.iframe-youtube').html("<img class='picture-gif' src='/temp/"+data.gif+"' />");
 				$('.editor').css({'display': 'block'});
-				$('.input-form-photo').val(data.thumbnail); 
+				$('.input-form-photo').val(data.thumbnail_main); 
 				$('.add_fb_img').empty();
 				$('.add_fb_img').css({'padding-top': '0px'});
-				$('.add_fb_img').prepend("<img class='facebook-photo' src='temp/" + data.thumbnail + "'  />");
-				$('.input-form-photo-facebook').val(data.thumbnail);
+				$('.add_fb_img').prepend("<img class='facebook-photo' src='temp/" + data.thumbnail_fb + "'  />");
+				$('.input-form-photo-facebook').val(data.thumbnail_fb);
 			}
 		});
 	});

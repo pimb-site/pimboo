@@ -166,22 +166,40 @@ class VideoGifController extends Controller
 
 				$main_path = "/var/www/pimboobeta.com/public/temp/";
 
-				$thumbnail_name = uniqid().".png";
-				$thumbnail = imagecreatefromgif("temp/".$temp_file);
-				$thumbnail = imagegif($thumbnail, "temp/".\Session::getId()."/".$thumbnail_name);
+			$thumbnail_fb_name = uniqid().".png";
+			$thumbnail_main_name = uniqid().".png";
+			$thumbnail = imagecreatefromgif("temp/".$temp_file);
+			$thumbnail_fb = imagegif($thumbnail, "temp/".\Session::getId()."/".$thumbnail_fb_name);
+			$thumbnail_main = imagegif($thumbnail, "temp/".\Session::getId()."/".$thumbnail_main_name);
 
-				$image = new Imagick();
-				$image->readImage($main_path.\Session::getId()."/".$thumbnail_name);
+			// -----photo for facebook
+			$image = new Imagick();
+			$image->readImage($main_path.\Session::getId()."/".$thumbnail_fb_name);
 
-				// Open the watermark
-				$watermark = new Imagick();
-				$watermark->readImage("/var/www/pimboobeta.com/public/img/watermark.png");
+			// Open the watermark
+			$watermark = new Imagick();
+			$watermark->readImage("/var/www/pimboobeta.com/public/img/watermark.png");
 
-				// Overlay the watermark on the original image
-				$image->compositeImage($watermark, imagick::COMPOSITE_OVER, 288, 134);
-				$image->writeImage($main_path.\Session::getId()."/".$thumbnail_name);
+			// Overlay the watermark on the original image
+			$image->compositeImage($watermark, imagick::COMPOSITE_OVER, 288, 134);
+			$image->writeImage($main_path.\Session::getId()."/".$thumbnail_fb_name);
 
-				return \Response::json(['success' => true, 'thumbnail' => \Session::getId()."/".$thumbnail_name, 'gif' => $temp_file]);
+			// -----photo main
+			$image_main = new Imagick();
+			$image_main->readImage($main_path.\Session::getId()."/".$thumbnail_main_name);
+			$image_main->adaptiveResizeImage(360, 309);
+
+			// Open the watermark
+			$watermark_main = new Imagick();
+			$watermark_main->readImage("/var/www/pimboobeta.com/public/img/watermark.png");
+
+			// Overlay the watermark on the original image
+			$image_main->compositeImage($watermark_main, imagick::COMPOSITE_OVER, 114, 88);
+			$image_main->writeImage($main_path.\Session::getId()."/".$thumbnail_main_name);
+
+			// end
+
+			return \Response::json(['success' => true, 'thumbnail_main' => \Session::getId()."/".$thumbnail_main_name, 'thumbnail_fb' => \Session::getId()."/".$thumbnail_fb_name, 'gif' => $temp_file]);
 			}
 		} else if ($video_site != "" && file_exists("uploads/".$video_site)) {
 
@@ -249,12 +267,15 @@ class VideoGifController extends Controller
 
 			$main_path = "/var/www/pimboobeta.com/public/temp/";
 
-			$thumbnail_name = uniqid().".png";
+			$thumbnail_fb_name = uniqid().".png";
+			$thumbnail_main_name = uniqid().".png";
 			$thumbnail = imagecreatefromgif("temp/".$temp_file);
-			$thumbnail = imagegif($thumbnail, "temp/".\Session::getId()."/".$thumbnail_name);
+			$thumbnail_fb = imagegif($thumbnail, "temp/".\Session::getId()."/".$thumbnail_fb_name);
+			$thumbnail_main = imagegif($thumbnail, "temp/".\Session::getId()."/".$thumbnail_main_name);
 
+			// -----photo for facebook
 			$image = new Imagick();
-			$image->readImage($main_path.\Session::getId()."/".$thumbnail_name);
+			$image->readImage($main_path.\Session::getId()."/".$thumbnail_fb_name);
 
 			// Open the watermark
 			$watermark = new Imagick();
@@ -262,9 +283,24 @@ class VideoGifController extends Controller
 
 			// Overlay the watermark on the original image
 			$image->compositeImage($watermark, imagick::COMPOSITE_OVER, 288, 134);
-			$image->writeImage($main_path.\Session::getId()."/".$thumbnail_name);
+			$image->writeImage($main_path.\Session::getId()."/".$thumbnail_fb_name);
 
-			return \Response::json(['success' => true, 'thumbnail' => \Session::getId()."/".$thumbnail_name, 'gif' => $temp_file]);
+			// -----photo main
+			$image_main = new Imagick();
+			$image_main->readImage($main_path.\Session::getId()."/".$thumbnail_main_name);
+			$image_main->adaptiveResizeImage(360, 309);
+
+			// Open the watermark
+			$watermark_main = new Imagick();
+			$watermark_main->readImage("/var/www/pimboobeta.com/public/img/watermark.png");
+
+			// Overlay the watermark on the original image
+			$image_main->compositeImage($watermark_main, imagick::COMPOSITE_OVER, 114, 88);
+			$image_main->writeImage($main_path.\Session::getId()."/".$thumbnail_main_name);
+
+			// end
+
+			return \Response::json(['success' => true, 'thumbnail_main' => \Session::getId()."/".$thumbnail_main_name, 'thumbnail_fb' => \Session::getId()."/".$thumbnail_fb_name, 'gif' => $temp_file]);
 		}
 	}
 	
@@ -343,15 +379,11 @@ class VideoGifController extends Controller
 		$validator = \Validator::make(
             array(
                 'Title' => $input['form_flip']['form_flip_cards_title'],
-                'Description' => $input['form_flip']['form_description'],
-                'Photo' => $input['form_flip']['form_photo'],
-				'Facebook Photo' => $input['form_flip']['form_photo_facebook']
+                'Description' => $input['form_flip']['form_description']
             ),
             array(
                 'Title' => 'required',
-                'Description' => 'required',
-                'Photo' => 'required',
-				'Facebook Photo' => 'required'
+                'Description' => 'required'
             )
         );
 		
@@ -375,6 +407,7 @@ class VideoGifController extends Controller
                     copy('temp/'.$input['form_flip']['form_photo'], 'uploads/'.$uniqid2.'.jpeg');
 					copy('temp/'.$input['form_flip']['form_photo_facebook'], 'uploads/'.$uniqid3.'.jpeg');
                     unlink('temp/'.$input['form_flip']['form_photo']);
+                    unlink('temp/'.$input['form_flip']['form_photo_facebook']);
 					
 					copy('temp/'.$input['form_flip']['gif'], 'uploads/'.$uniqid1.'.gif');
 					unlink('temp/'.$input['form_flip']['gif']);
