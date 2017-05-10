@@ -11,14 +11,15 @@ $(document).ready(function () {
 	if (ScreenWidth >= 768) {
 		ScreenWidth = '50%';
 		maxSizeW    = 500;
-	} else if (ScreenWidth <= 320){
+	} else if (ScreenWidth <= 479){
 		ScreenWidth = '50%';
 		maxSizeW    = 300;
 	}
 	else {
 		ScreenWidth = '50%';
-		maxSizeW    = 456;
+		maxSizeW    = 400;
 	}
+
 	
 	$('.upload-img-url-btn').click(function() {
 		value_url = $('.upload-img-url').val();

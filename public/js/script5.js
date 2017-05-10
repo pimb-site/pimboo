@@ -10,14 +10,15 @@ $(document).ready(function () {
 	if (ScreenWidth >= 768) {
 		ScreenWidth = '50%';
 		maxSizeW    = 500;
-	} else if (ScreenWidth <= 320){
+	} else if (ScreenWidth <= 479){
 		ScreenWidth = '50%';
 		maxSizeW    = 300;
 	}
 	else {
 		ScreenWidth = '50%';
-		maxSizeW    = 456;
-	}	
+		maxSizeW    = 400;
+	}
+
 	$('.upl-image-valid').click(function() {
 		value_url = $('.upl-input-image-url').val();
 		$.modal().close();
