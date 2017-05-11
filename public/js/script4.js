@@ -13,6 +13,20 @@ $(document).ready(function () {
 	questions_result_title = [];
 	
 	active_elements = [false];
+
+	var ScreenWidth = screen.width;
+	var maxSizeW;
+	if (ScreenWidth >= 768) {
+		ScreenWidth = '50%';
+		maxSizeW    = 500;
+	} else if (ScreenWidth <= 479){
+		ScreenWidth = '50%';
+		maxSizeW    = 300;
+	}
+	else {
+		ScreenWidth = '50%';
+		maxSizeW    = 400;
+	}
 	
 	
 	$('.left').on('click', '.btn-img', function() {
@@ -55,13 +69,11 @@ $(document).ready(function () {
 					} else if(image_type_fc == 3) {
 						if(side_fc == 1) {
 							$('.main-remove-front[data-id="'+current_id+'"]').empty();
-							if(current_id == 1) $('.type-caption[data-id="'+current_id+'"][data-side="1"]').css({'margin-top': '317px'});
 							$('.front-card[data-id="'+current_id+'"]').prepend("<img style='position:absolute;' class='image-card' src='temp/" + result.file + "'  />");
 							$('.input-form-img1[data-id="'+current_id+'"]').val(result.file);
 							$('.input-type-card[data-id="'+current_id+'"][data-side="1"]').val('image');
 						} else {
 							$('.main-remove-back[data-id="'+current_id+'"]').empty();
-							if(current_id == 1) $('.type-caption[data-id="'+current_id+'"][data-side="2"]').css({'margin-top': '317px'});		
 							$('.back-card[data-id="'+current_id+'"]').prepend("<img style='position:absolute;' class='image-card' src='temp/" + result.file + "'  />");
 							$('.input-form-img2[data-id="'+current_id+'"]').val(result.file);
 							$('.input-type-card[data-id="'+current_id+'"][data-side="2"]').val('image');
@@ -484,13 +496,11 @@ $(document).ready(function () {
 		   } else if(image_type_fc == 3) {
 			   if(side_fc == 1) {
 				   $('.main-remove-front[data-id="'+current_id+'"]').empty();
-				   if(current_id == 1) $('.type-caption[data-id="'+current_id+'"][data-side="1"]').css({'margin-top': '317px'})
 				   $('.front-card[data-id="'+current_id+'"]').prepend("<img style='position:absolute;' class='image-card' src='temp/" + result.file + "'  />");
 				   $('.input-form-img1[data-id="'+current_id+'"]').val(result.file);
 				   $('.input-type-card[data-id="'+current_id+'"][data-side="1"]').val('image');
 			   } else {
 				   $('.main-remove-back[data-id="'+current_id+'"]').empty();
-				   if(current_id == 1) $('.type-caption[data-id="'+current_id+'"][data-side="2"]').css({'margin-top': '317px'})
 				   $('.back-card[data-id="'+current_id+'"]').prepend("<img style='position:absolute;' class='image-card' src='temp/" + result.file + "'  />");
 				   $('.input-form-img2[data-id="'+current_id+'"]').val(result.file);
 				   $('.input-type-card[data-id="'+current_id+'"][data-side="2"]').val('image');
@@ -534,9 +544,9 @@ $(document).ready(function () {
 				   $('.js-img', overlay).cropper({
 					  file: file,
 					  bgColor: '#fff',
-					  maxSize: [500, 500],
+					  maxSize: [maxSizeW, maxSizeW],
 					  minSize: [min_sizew_fc, min_sizeh_fc],
-					  selection: '50%',
+					  selection: ScreenWidth,
 					  onSelect: function (coords){
 						 $('.select-file').fileapi('crop', file, coords);
 					  }

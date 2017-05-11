@@ -5,6 +5,7 @@ use Auth;
 use Input;
 use Illuminate\Http\Request;
 use App\User;
+use DateTime;
 
 class ToolsController extends Controller
 {
@@ -35,6 +36,13 @@ class ToolsController extends Controller
 
         $content = \DB::select('select * from posts where id = ? and isDraft = ?', [$id, 'publish']);
         $content = $content[0];
+
+
+        // Date post
+        $format = "Y-m-d H:i:s";
+        $date   = DateTime::createFromFormat($format, $content->created_at);
+        $date   = $date->format('F d, Y');
+
         $user_model = User::where([ ['id', '=', $content->user_id] ])->first();
 
         if (isset($user_model->id)) {
@@ -49,6 +57,7 @@ class ToolsController extends Controller
         foreach ($ads as &$ad) {
             $ad['href'] = $ad['href'].'&s2='.$content->user_id.'_'.Input::get('sub');
         }
+
         return view('tools.'.$content->type, ['body_class' => 'view '.$content->type, 'content' => $content, 'name' => $content->type, 'user_name' => $user_name, 'source_link' => '', 'ads' => $ads, 'tags' => unserialize($content->tags) ]);
     }
 	

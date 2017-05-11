@@ -14,7 +14,7 @@
                         <div class="border">
                             <div class="top">
                                 <div class="info">
-                                    <div class="published">Published on February 16, 2016 by <a href="/channel/{{ $content->user_id }}">{{ $user_name }}</a></div>
+                                    <div class="published">Published on {{ $date }} by <a href="/channel/{{ $content->user_id }}">{{ $user_name }}</a></div>
                                 </div>
                                 <div class="buttons">
                                     <button data-title="{{ $content->description_title }}" data-url="{{ url('/viewID/'.$content->id) }}" data-type="fb" class="butt-for-sharing facebook"></button>
