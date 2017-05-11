@@ -1,7 +1,7 @@
 @extends('page')
 
 @section('css')
-	@yield('css')
+    @yield('css')
 @endsection
 
 
@@ -29,6 +29,15 @@
                             </div>
                         </div>
                         <button class="report_button" data-toggle="modal" data-target="#myModal">REPORT POST</button>
+                        <div id="fb-root"></div>
+                        <script>(function(d, s, id) {
+                          var js, fjs = d.getElementsByTagName(s)[0];
+                          if (d.getElementById(id)) return;
+                          js = d.createElement(s); js.id = id;
+                          js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.9&appId=708685579238305";
+                          fjs.parentNode.insertBefore(js, fjs);
+                        }(document, 'script', 'facebook-jssdk'));</script>
+                        <div class="fb-comments" data-href="{{ url('/viewID/'.$content->id) }}" data-width="708" data-numposts="5"></div>
                         <div class="modal reports" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                           <div class="modal-dialog">
                             <div class="modal-content">
@@ -162,20 +171,11 @@
                             <div class="content-title">Poligraphy Trends 2017</div>
                         </div>
                     </div>
-                    <div id="fb-root"></div>
-                    <script>(function(d, s, id) {
-                      var js, fjs = d.getElementsByTagName(s)[0];
-                      if (d.getElementById(id)) return;
-                      js = d.createElement(s); js.id = id;
-                      js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.9&appId=708685579238305";
-                      fjs.parentNode.insertBefore(js, fjs);
-                    }(document, 'script', 'facebook-jssdk'));</script>
-                    <div class="fb-comments" data-href="{{ url('/viewID/'.$content->id) }}" data-width="708" data-numposts="5"></div>
                 </div>
             </div>
         </div>
 @endsection
 
 @section('script')
-	@yield('script')
+    @yield('script')
 @endsection

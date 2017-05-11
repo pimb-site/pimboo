@@ -46,7 +46,7 @@ Home
                     <div class="posts">
                         <div class="head">FEATURED POSTS</div>
                         <div class="left">
-                            <div class="img"><img width="750px" height="445px" src="/uploads/{{ $main_post->description_image }}" /></div>
+                            <div class="img"><a href="/viewID/{{ $main_post->id }}"><img width="750px" height="445px" src="/uploads/{{ $main_post->description_image }}" /></a></div>
                             <div class="title">{{ $main_post->description_title }}</div>
                             <div class="text">{{ $main_post->description_text }}</div>
                             <div class="info distab">

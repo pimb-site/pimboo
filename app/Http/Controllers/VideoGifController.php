@@ -192,7 +192,7 @@ class VideoGifController extends Controller
 			// Open the watermark
 			$watermark_main = new Imagick();
 			$watermark_main->readImage("/var/www/pimboobeta.com/public/img/watermark.png");
-			$watermark_main->adaptiveResizeImage(66,66);
+			$watermark_main->adaptiveResizeImage(66, 66);
 
 			// Overlay the watermark on the original image
 			$image_main->compositeImage($watermark_main, imagick::COMPOSITE_OVER, 147, 121);
@@ -294,7 +294,7 @@ class VideoGifController extends Controller
 			// Open the watermark
 			$watermark_main = new Imagick();
 			$watermark_main->readImage("/var/www/pimboobeta.com/public/img/watermark.png");
-			$watermark_main->adaptiveResizeImage(66,66);
+			$watermark_main->adaptiveResizeImage(66, 66);
 
 			// Overlay the watermark on the original image
 			$image_main->compositeImage($watermark_main, imagick::COMPOSITE_OVER, 147, 121);
