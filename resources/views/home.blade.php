@@ -19,7 +19,7 @@ Home
                         <div class="item story" style='background-image: url("/img/home-story-banner.jpg");'>
                             <div class="wrap">
                                 <div class="miniwrap">
-                                    <div class="text1">Create Ineterstimg Stories</div>
+                                    <div class="text1">Create Interesting Stories</div>
                                     <div class="text2">SHARE & PROFIT!</div>
                                     <a class="join_now">JOIN NOW</a>
                                 </div>
