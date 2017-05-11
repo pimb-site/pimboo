@@ -21,7 +21,7 @@
                                     <button data-title="{{ $content->description_title }}" data-url="{{ url('/viewID/'.$content->id) }}" data-type="tw" class="butt-for-sharing twitter"></button>
                                     <button data-title="{{ $content->description_title }}" data-url="{{ url('/viewID/'.$content->id) }}" data-type="gg" class="butt-for-sharing google_plus"></button>
                                     <button data-title="{{ $content->description_title }}" data-url="{{ url('/viewID/'.$content->id) }}" data-type="li" class="butt-for-sharing linked_in"></button>
-                                    <button class="get_link">GET LINK</button>
+                                    <button class="get_link" data-href="{{ url('/viewID/'.$content->id) }}">GET LINK</button>
                                 </div>
                             </div>
                             <div class="content">
@@ -86,7 +86,9 @@
                         </div>
                         <div class="tags">
                             <h2> TAGS </h2>
-                            <a href="#">Arts</a>, <a href="#">Internet</a>, <a href="#">Tech</a>, <a href="#">Celebrities</a>
+                            @foreach($tags as $tag)
+                                <a href="#">{{ $tag }}</a><?php echo (end($tags) != $tag) ? ',' : '' ; ?>
+                            @endforeach
                         </div>
                         <div class="more-text">
                             MORE FROM PIMBOO
@@ -160,6 +162,15 @@
                             <div class="content-title">Poligraphy Trends 2017</div>
                         </div>
                     </div>
+                    <div id="fb-root"></div>
+                    <script>(function(d, s, id) {
+                      var js, fjs = d.getElementsByTagName(s)[0];
+                      if (d.getElementById(id)) return;
+                      js = d.createElement(s); js.id = id;
+                      js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.9&appId=708685579238305";
+                      fjs.parentNode.insertBefore(js, fjs);
+                    }(document, 'script', 'facebook-jssdk'));</script>
+                    <div class="fb-comments" data-href="{{ url('/viewID/'.$content->id) }}" data-width="708" data-numposts="5"></div>
                 </div>
             </div>
         </div>

@@ -19,7 +19,7 @@
 										@if (empty($user->photo))
 											<img width="84px" height="84px" src="/img/header_default_photo.png" />
 										@else
-											<img width="84px" height="84px" src="{{ $user->photo }}" />
+											<img width="84px" height="84px" src="/uploads/{{ $user->photo }}" />
 										@endif
 										<div class="hide">
 											<a>{{ $user->id }}</a>
@@ -47,15 +47,19 @@
 						if ($l == 0) {
 							$l = 1;
 						}
+						$i = $i*100-50*($f+$l);
+						if ($i == 0) {
+							$i = 1;
+						}
 						?>
-						height: <?=$i*100-50*($f+$l);?>px;
+						height: <?=$i;?>px;
 						margin-bottom: <?=50*$l?>px;
 						margin-top: <?=50*$f?>px;
 						"
 					"></div>
 					<div id="ref-tree-first">
 						<?php foreach($my_org_users_first_level as $user_f_l) : ?>
-						<?php $content = '<div class="user-pop"><div class="user-info"><div class="full-name">'.$user_f_l->name.'</div><div class="line"></div><div class="id"># '.str_pad($user_f_l->id, 10, "0", STR_PAD_LEFT).'</div><div class="birthday">'.$user_f_l->created_at.'</div><div class="line"></div><div class="balance-info">TOTAL BALANCE: <span>$0</span></div></div></div>'; ?>
+						<?php $content = '<div class="user-pop"><div class="user-info"><div class="full-name">'.$user_f_l->name.'</div><div class="line"></div><div class="birthday">'.$user_f_l->created_at.'</div><div class="line"></div></div></div>'; ?>
 							<table cellpadding="0" cellspacing="0" border="0" style="height: <?php  if(count($my_org_users_second_level[$user_f_l->id]) != 0) { echo count($my_org_users_second_level[$user_f_l->id])*100; } else { echo 100; } ?>px">
 								<tr>
 									<td style="width: 32px;">
@@ -66,7 +70,7 @@
 											@if (empty($user_f_l->photo))
 											<img width="84px" height="84px" src="/img/header_default_photo.png" />
 										@else
-											<img width="84px" height="84px" src="{{ $user_f_l->photo }}" />
+											<img width="84px" height="84px" src="/uploads/{{ $user_f_l->photo }}" />
 										@endif
 											<div class="hide">
 												<a ">{{ $user_f_l->user_nicename }}</a>
@@ -102,7 +106,7 @@
 									" ></div>
 								<table cellpadding="0" cellspacing="0" border="0" style="height: <?php  if(count($my_org_users_second_level[$user_f_l->id]) != 0) { echo count($my_org_users_second_level[$user_f_l->id])*100; } else { echo 100; } ?>px">
 									<?php foreach($my_org_users_second_level[$user_f_l->id] as $user_s_l) : ?>
-									<?php $content = '<div class="user-pop"><div class="user-info"><div class="full-name">'.$user_s_l->name.'</div><div class="line"></div><div class="id"># '.str_pad($user_s_l->id, 10, "0", STR_PAD_LEFT).'</div><div class="birthday">'.$user_s_l->created_at.'</div><div class="line"></div><div class="balance-info">TOTAL BALANCE: <span>$0</span></div></div></div>'; ?>
+									<?php $content = '<div class="user-pop"><div class="user-info"><div class="full-name">'.$user_s_l->name.'</div><div class="line"></div><div class="birthday">'.$user_s_l->created_at.'</div><div class="line"></div></div></div>'; ?>
 									<tr>
 										<td style="width: 32px;">
 											<div class="line" style="border-top: 1px solid black; width: 100%;"></div>
@@ -112,7 +116,7 @@
 												@if (empty($user_s_l->photo))
 													<img width="84px" height="84px" src="/img/header_default_photo.png" />
 												@else
-													<img width="84px" height="84px" src="{{ $user_f_l->photo }}" />
+													<img width="84px" height="84px" src="/uploads/{{ $user_f_l->photo }}" />
 												@endif
 												<div class="hide">
 													<a ">{{ $user_s_l->user_nicename }}</a>

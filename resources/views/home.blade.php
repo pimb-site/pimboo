@@ -62,11 +62,10 @@ Home
                                     <div class="posting">
                                         <span class="removing">
                                             <span class="sharing">SHARE &<br>PROFIT:</span>
-                                            <a class="facebook" href=""></a>
-                                            <a class="twitter" href=""></a>
-                                            <a class="linkedin" href=""></a>
-                                            <a class="code" href=""></a>
-                                            <button class="get_link">GET LINK</button>
+                                            <a data-title="{{ $post->description_title }}" data-url="{{ url('/viewID/'.$post->id) }}" data-type="fb"  class="butt-for-sharing facebook" href=""></a>
+                                            <a data-title="{{ $post->description_title }}" data-url="{{ url('/viewID/'.$post->id) }}" data-type="tw"  class="butt-for-sharing twitter" href=""></a>
+                                            <a data-title="{{ $post->description_title }}" data-url="{{ url('/viewID/'.$post->id) }}" data-type="li"  class="butt-for-sharing linkedin" href=""></a>
+                                            <button class="get_link" data-href="{{ url('/viewID/'.$post->id) }}">GET LINK</button>
                                         </span>
                                         <span class="link">
                                             <span class="link_in">COPIED TO YOUR<br>CLIPBOARD</span>
@@ -103,7 +102,7 @@ Home
                             @if (Auth::guest())
                                 <a data-toggle="modal" data-target="#register-modal">JOIN NOW</a>
                             @else
-                                <a href="/create">JOIN US!</a>
+                                <a href="/create">Create</a>
                             @endif
                         </div>
                     </div>

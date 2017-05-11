@@ -49,7 +49,7 @@ class ToolsController extends Controller
         foreach ($ads as &$ad) {
             $ad['href'] = $ad['href'].'&s2='.$content->user_id.'_'.Input::get('sub');
         }
-        return view('tools.'.$content->type, ['body_class' => 'view '.$content->type, 'content' => $content, 'name' => $content->type, 'user_name' => $user_name, 'source_link' => '', 'ads' => $ads ]);
+        return view('tools.'.$content->type, ['body_class' => 'view '.$content->type, 'content' => $content, 'name' => $content->type, 'user_name' => $user_name, 'source_link' => '', 'ads' => $ads, 'tags' => unserialize($content->tags) ]);
     }
 	
 	public function successID($id) {
