@@ -87,6 +87,7 @@ Route::post('admin/postposition', 'AdminController@updatePost');
 
 //Referrals
 Route::get('ref/{id}', 'ReferralController@index');
+Route::post('referrals/mass', 'ReferralController@MassMailing')
 
 
 Route::get('/home', 'HomeController@index');
