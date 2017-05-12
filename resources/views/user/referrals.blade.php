@@ -14,7 +14,7 @@
 							<input type="hidden" name="_token" value="{{ csrf_token() }}">
 							<div class="answer-checkbox"></div>
 							</form>
-							<button>SEND</button>
+							<button type="button">SEND</button>
 						</div>
 						<div class="mails" >
 							<div class="mail gmail" onclick="auth_google();"></div>
@@ -22,8 +22,11 @@
 							<div class="mail yahoo"></div>
 						</div>
 						<div class="input">
-							<input type="text" name="" placeholder="Enter friend’s email address">
-							<button></button>
+							<form action="/referrals/mass" method="post" id="noMassMails">
+							<input type="hidden" name="_token" value="{{ csrf_token() }}">
+							<input type="text" name="mails[]" placeholder="Enter friend’s email address">
+							<button type="button"></button>
+							</form>
 						</div>
 					</div>
 					<div class="invite_link">
@@ -79,6 +82,23 @@
 	    });
     }
 
+    $('.input button').click(function() {
+    	$('#noMassMails').ajaxSubmit({
+			dataType: "json",
+			success: function (data) {
+				if(data.success == true) {
+					var alertHtml = '<div class="warning-text"><b>Invitation sent!</b></div>';
+					$('.input').css({'display': 'none'});
+				} else {
+					var alertHtml = '<div class="warning-text"><b>An error has occurred, no invitation have been sent!</b></div>';
+				}
+				$('.mails').css({'display': 'none'});
+				$('.warning-text').remove();
+				$('.mails-center-block').before(alertHtml);
+				$('.mails-center-block').css({'display': 'none'});
+			}
+		});
+    });
 
     $('.mails-center-block button').click(function() {
 		$('#massMails').ajaxSubmit({
@@ -91,7 +111,6 @@
 				}
 				$('.mails-center-block').before(alertHtml);
 				$('.mails-center-block').css({'display': 'none'});
-
 			}
 		});
     });

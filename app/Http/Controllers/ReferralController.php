@@ -76,6 +76,8 @@ class ReferralController extends Controller
 				}
 
 				return Response::json(['success' => true]);
+			} else {
+				return Response::json(['success' => false]);
 			}
 		}
 	}
