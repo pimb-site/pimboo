@@ -10,9 +10,10 @@
 					<div class="address_book">
 						<div class="sub_title">Invite Your Contacts from Your Address Book</div>
 						<div class="mails-center-block" style="display: none;">
-							<div class="answer-checkbox">
-
-							</div>
+							<form action="/referrals/mass" method="post" id="massMails">
+							<input type="hidden" name="_token" value="{{ csrf_token() }}">
+							<div class="answer-checkbox"></div>
+							</form>
 							<button>SEND</button>
 						</div>
 						<div class="mails" >
@@ -67,7 +68,7 @@
 	            		console.log('count of last contacts : 0');
 	            		return false;
 	            	} else {
-	            		html_tags += '<div class="tag"><label><input class="checkbox" type="checkbox" name="flip_cards[1][answer_check1]" value="Celebrities"><span class="checkbox-custom"></span><span class="label">'+value.gd$email[0].address+'</span></label></div>';
+	            		html_tags += '<div class="tag"><label><input class="checkbox" type="checkbox" name="mails[]" value="'+value.gd$email[0].address+'"><span class="checkbox-custom"></span><span class="label">'+value.gd$email[0].address+'</span></label></div>';
 	            	}
 	            });
 	            $('.answer-checkbox').html(html_tags);
@@ -77,5 +78,22 @@
 	        }
 	    });
     }
+
+
+    $('.mails-center-block button').click(function() {
+		$('#massMails').ajaxSubmit({
+			dataType: "json",
+			success: function (data) {
+				if(data.success == true) {
+					var alertHtml = '<div class="warning-text"><b>Invitations sent!</b></div>';
+				} else {
+					var alertHtml = '<div class="warning-text"><b>An error has occurred, no invitations have been sent!</b></div>';
+				}
+				$('.mails-center-block').before(alertHtml);
+				$('.mails-center-block').css({'display': 'none'});
+
+			}
+		});
+    });
     </script>
 @endsection
