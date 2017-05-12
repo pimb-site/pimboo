@@ -50,7 +50,7 @@ Home
                             <div class="title"><a href="/viewID/{{ $main_post->id }}">{{ $main_post->description_title }}</a></div>
                             <div class="text">{{ $main_post->description_text }}</div>
                             <div class="info distab">
-                                <div class="time"><?php echo date("F j, Y", strtotime($main_post->created_at));  ?></div>
+                                <div class="time"><a href="/viewID/{{ $main_post->id }}"><?php echo date("F j, Y", strtotime($main_post->created_at));  ?></a></div>
                                 <a href="/viewID/{{ $main_post->id }}" class="readmore">Read More >></a>
                             </div>
                         </div>
