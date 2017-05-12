@@ -43,7 +43,50 @@
 @endsection
 @section('script')
 	<script src="https://apis.google.com/js/client.js"></script>
+	<script src="//js.live.net/v5.0/wl.js"></script>
+	<script type="text/javascript">
+	WL.init({
+	    client_id: '00000000441CF42B',
+	    redirect_uri: 'http://pimboobeta.com/user/referrals',
+	    scope: ["wl.basic", "wl.contacts_emails"],
+	    response_type: "token"
+	});
+	</script>
     <script>
+
+    $('.hotmail').click(function() {
+	    WL.login({
+	        scope: ["wl.basic", "wl.contacts_emails"]
+	    }).then(function (response) 
+	    {
+			WL.api({
+	            path: "me/contacts",
+	            method: "GET"
+	        }).then(
+	            function (response) {
+	            	if(response.data.length != 0) {
+	            		var html_tags = "";
+	            		$.each(response.data, function( index, value ) {
+	            			html_tags += '<div class="tag"><label><input class="checkbox" type="checkbox" name="mails[]" value="'+value.emails.preferred+'"><span class="checkbox-custom"></span><span class="label">'+value.emails.preferred+'</span></label></div>';
+	            		});
+	            		$('.address_book').css({'height': 'auto'});
+			            $('.answer-checkbox').html(html_tags);
+			            $('.mails').css({'display': 'none'});
+			            $('.input').css({'display': 'none'});
+			            $('.mails-center-block').css({'display': 'block'});
+	            	}
+	            },
+	            function (responseFailed) {
+	            	//console.log(responseFailed);
+	            }
+	        );
+	        
+	    },
+	    function (responseFailed) 
+	    {
+	        //console.log("Error signing in: " + responseFailed.error_description);
+	    });
+    });
 
     function auth_google() {
         var config = {
@@ -74,6 +117,7 @@
 	            		html_tags += '<div class="tag"><label><input class="checkbox" type="checkbox" name="mails[]" value="'+value.gd$email[0].address+'"><span class="checkbox-custom"></span><span class="label">'+value.gd$email[0].address+'</span></label></div>';
 	            	}
 	            });
+	            $('.address_book').css({'height': 'auto'});
 	            $('.answer-checkbox').html(html_tags);
 	            $('.mails').css({'display': 'none'});
 	            $('.input').css({'display': 'none'});
