@@ -96,6 +96,11 @@ Route::get('/home', 'HomeController@index');
 Route::post('/channel-filter', 'ChannelController@filterChannel');
 Route::get('/channel/{id}', 'ChannelController@viewChannel');
 
+// subscribe/unsubscribe
+
+Route::post('/channel/subscribe', 'ChannelController@subscribe');
+Route::post('/channel/unsubscribe', 'ChannelController@unsubscribe');
+
 // Auth
 Auth::routes();
 

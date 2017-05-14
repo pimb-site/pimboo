@@ -78,7 +78,7 @@
 						<div class="information">
 							<div class="avatar"><img src="{{ $user_photo }}"></div>
 							<div class="name">{{ $user_info->name }}</div>
-							<div class="subscribers"><b>0</b> SUBSCRIBERS</div>
+							<div class="subscribers"><b>{{ $subscribers }}</b> SUBSCRIBERS</div>
 							<div class="description"> {{ $user_info->public_info}} </div>
 							<div class="social-subscribe">
 								<button><img src="/img/profile_website_icon.png"></button>
@@ -86,7 +86,14 @@
 								<button><img src="/img/profile_twitter_icon.png"></button>
 								<button><img src="/img/profile_google_plus_icon.png"></button>
 							</div>
-							<button class="subscribe-me">SUBSCRIBE</button>
+							
+							@if($isSubscribe == true)
+								<button class="subscribes unsubscribe-me" style="display: block;">UNSUBSCRIBE</button>
+								<button class="subscribes subscribe-me" style="display: none;">SUBSCRIBE</button>
+							@else
+								<button class="subscribes subscribe-me">SUBSCRIBE</button>
+								<button class="subscribes unsubscribe-me">UNSUBSCRIBE</button>
+							@endif
 						</div>
 					</div>
 					<div class="filter">

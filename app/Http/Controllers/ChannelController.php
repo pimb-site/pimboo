@@ -5,6 +5,7 @@ use Input;
 use DB;
 use Response;
 use DateTime;
+use Auth;
 
 class ChannelController extends Controller
 {
@@ -25,7 +26,27 @@ class ChannelController extends Controller
 
 				$show_more = (count($channel_content) == 10) ? true : false;
 
-				return view('channel_page', ['user_info' => $user_info[0], 'channel_content' => $channel_content, 'show_more' => $show_more]);
+				$user_id = Auth::user()->id;
+
+				// is subscribe? 
+				if($channel_id != $user_id) {
+					$checkSubscribes = DB::table('subscribes')
+                     ->select('user_id', 'channel_id')
+                     ->where('user_id', '=', $user_id)
+                     ->where('channel_id', '=', $channel_id)
+                     ->get();
+
+                    $isSubscribe = (count($checkSubscribes) == 0) ? false : true;
+
+				} else {
+					$isSubscribe = false;
+				}
+
+				// count subscribers
+				$subscribers = DB::table('subscribes')->where('channel_id', '=', $channel_id)->count();
+
+				return view('channel_page', ['user_info' => $user_info[0], 'channel_content' => $channel_content, 'show_more' => $show_more, 
+											 'isSubscribe' => $isSubscribe, 'subscribers' => $subscribers]);
 			}
 			else {
 				return view('home');
@@ -107,5 +128,50 @@ class ChannelController extends Controller
 			}
 		}
 		return Response::json(['success' => false]);
+	}
+
+	public function subscribe() {
+		if(Auth::guest()) return Response::json(['success' => false, 'data' => 'You are not authorized']);
+
+		$user_id = Auth::user()->id;
+		$channel_id = (int)Input::get('channel_id');
+
+		if(($channel_id > 0) && ($channel_id != $user_id)) {
+
+			$isSubscribe = DB::table('subscribes')
+                     ->select('user_id', 'channel_id')
+                     ->where('user_id', '=', $user_id)
+                     ->where('channel_id', '=', $channel_id)
+                     ->get();
+
+            if(count($isSubscribe) == 0) { 
+            	DB::table('subscribes')->insert(
+				    ['user_id' => $user_id, 'channel_id' => $channel_id]
+				);
+				return Response::json(['success' => true, 'data' => 'You have successfully subscribed']);
+            } else {
+            	return Response::json(['success' => false, 'data' => 'You are already subscribed to this channel']);
+            }
+		} else {
+			return Response::json(['success' => false, 'data' => 'Invalid data']);
+		}
+	}
+
+	public function unsubscribe() {
+		if(Auth::guest()) return Response::json(['success' => false, 'data' => 'You are not authorized']);
+
+		$user_id = Auth::user()->id;
+		$channel_id = (int)Input::get('channel_id');
+
+		if(($channel_id > 0) && ($channel_id != $user_id)) {
+			DB::table('subscribes')
+				->where('user_id', '=', $user_id)
+				->where('channel_id', '=', $channel_id)
+				->delete();
+
+			return Response::json(['success' => true, 'data' => 'You have successfully unsubscribed from this channel']);
+		} else {
+			return Response::json(['success' => false, 'data' => 'Invalid data']);
+		}
 	}
 }

@@ -64,4 +64,53 @@ $(document).ready(function() {
 			}
 		});
 	});
+
+
+	$('.subscribe-me').click(function() {
+
+		var token      = $('input[name="_token"]').val();
+		var channel_id = $('input[name="channel_id"]').val();
+
+		$.ajax({
+	        url: "/channel/subscribe",
+	        type: "post",
+	        data: {'_token': token, 'channel_id': channel_id},
+	        success: function (response) {
+	        	if(response.success == true) {
+	        		$('.subscribe-me').css({'display': 'none'});
+	        		$('.unsubscribe-me').css({'display': 'block'});
+
+	        		var subscribers = $('.subscribers b').html();
+	        		$('.subscribers b').html(parseInt(subscribers) + 1);
+	        	}
+	        },
+	        error: function(jqXHR, textStatus, errorThrown) {
+	           console.log(textStatus, errorThrown);
+	        }
+	    });
+	});
+
+	$('.unsubscribe-me').click(function() {
+
+		var token      = $('input[name="_token"]').val();
+		var channel_id = $('input[name="channel_id"]').val();
+
+		$.ajax({
+	        url: "/channel/unsubscribe",
+	        type: "post",
+	        data: {'_token': token, 'channel_id': channel_id},
+	        success: function (response) {
+	        	if(response.success == true) {
+	        		$('.subscribe-me').css({'display': 'block'});
+	        		$('.unsubscribe-me').css({'display': 'none'});
+
+	        		var subscribers = $('.subscribers b').html();
+	        		$('.subscribers b').html(parseInt(subscribers) - 1);
+	        	}
+	        },
+	        error: function(jqXHR, textStatus, errorThrown) {
+	           console.log(textStatus, errorThrown);
+	        }
+	    });
+	});
 });
