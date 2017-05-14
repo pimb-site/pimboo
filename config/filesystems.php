@@ -57,10 +57,10 @@ return [
 
         's3' => [
             'driver' => 's3',
-            'key' => env('AWS_KEY'),
-            'secret' => env('AWS_SECRET'),
-            'region' => env('AWS_REGION'),
-            'bucket' => env('AWS_BUCKET'),
+            'key' => 'AKIAIJUMDLLRE7SQXTLA',
+            'secret' => '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',
+            'region' => 'us-east-2',
+            'bucket' => 'elasticbeanstalk-us-east-2-864146349261',
         ],
 
     ],
