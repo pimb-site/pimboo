@@ -22,3 +22,4 @@ public/upload/
 public/uploads/
 public/error_log
 *.jpeg
+/config/filesystems.php
