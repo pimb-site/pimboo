@@ -130,3 +130,5 @@ Route::get('/disclaimer', function () {
 Route::get('/terms-of-service', function () {
     return view('landings.tos');
 });
+
+Route::get('/{url}', 'HomeController@redirects');

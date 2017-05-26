@@ -18,7 +18,7 @@ class ReferralController extends Controller
 
 		$mails = Input::get('mails');
 		$mails_valid = [];
-		$invite = "Your invite: http://pimboobeta.com/ref/".Auth::user()->id;
+		$invite = "Your invite: http://pimboo.com/ref/".Auth::user()->id;
 
 		if(count($mails) != 0) {
 			foreach ($mails as $key => $value) {
@@ -35,11 +35,11 @@ class ReferralController extends Controller
 						    {
 						      "to": [
 						      ],
-						      "subject": "Invite to PimbooBeta.com!"
+						      "subject": "Invite to Pimboo.com!"
 						    }
 						  ],
 						  "from": {
-						    "email": "pimboo@pimboobeta.com"
+						    "email": "pimboo@pimboo.com"
 						  },
 						  "content": [
 						    {

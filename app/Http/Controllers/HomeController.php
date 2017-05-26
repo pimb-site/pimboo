@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 use App\Post;
+use App\Redirect;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller {
@@ -44,6 +45,17 @@ class HomeController extends Controller {
     public function create()
     {
         return view('create', ['body_class' => 'create-page']);
+    }
+
+    public function redirects()
+    {
+        
+        $redirect = Redirect::where([ ['from', '=', $_SERVER['REDIRECT_URL']] ])->first();
+        if ($redirect) {
+            return redirect($redirect->to, 301);
+        } else {
+            abort(404);
+        }
     }
 
 }
