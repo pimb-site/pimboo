@@ -31,7 +31,7 @@
 					</div>
 					<div class="invite_link">
 						<div class="sub_title">Your Invite Link</div>
-						<input type="text" name="" value="http://pimboobeta.com/ref/{{ $user->id }}" disabled="disabled">
+						<input type="text" name="" value="{!! url('/ref/') !!}/{{ $user->id }}" disabled="disabled">
 						<div class="shares">
 							<div class="fb share"></div>
 							<div class="twitter share"></div>
@@ -47,7 +47,7 @@
 	<script type="text/javascript">
 	WL.init({
 	    client_id: '00000000441CF42B',
-	    redirect_uri: 'http://pimboobeta.com/user/referrals',
+	    redirect_uri: '{!! url('') !!}/user/referrals',
 	    scope: ["wl.basic", "wl.contacts_emails"],
 	    response_type: "token"
 	});

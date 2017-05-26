@@ -10,7 +10,7 @@ Success
 					<div class="row">Well done! You've successfully posted to Pimboo!</div>
 					<div class="row2">Now <span>Share</span> It With The World & <span>Profit</span>!</div>
 					<div class="group">
-						<div class="item butt-for-sharing item-share" data-title="asd12" data-url="http://pimboo.local/success/20" data-type="fb"></div>
+						<div class="item butt-for-sharing item-share" data-title="asd12" data-url="{!! url('/viewID/') !!}/{{ $id }}" data-type="fb"></div>
 						<div class="item butt-for-sharing item-tweet" data-type="tw"></div>
 						<div class="item item-embed"></div>
 						<div class="item item-more"></div>
