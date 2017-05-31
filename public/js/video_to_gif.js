@@ -46,54 +46,54 @@ $(document).ready(function () {
 		}
 	});
 
-	$('#input-video').on("change", function() {
-		files = this.files[0];
-	    var data = new FormData();
+	// $('#input-video').on("change", function() {
+	// 	files = this.files[0];
+	//     var data = new FormData();
 
-	    data.append('_token', token);
-	    data.append('file', files);
+	//     data.append('_token', token);
+	//     data.append('file', files);
 
-	    $.ajax({
-	        url: '/upload/video',
-	        type: 'POST',
-	        data: data,
-	        cache: false,
-	        dataType: 'json',
-	        processData: false,
-	        contentType: false,
-	        success: function( response, textStatus, jqXHR ){
-	            if( typeof response.error === 'undefined' ){
-	            	$('.iframe-youtube').html("<video id='player-user' src='/uploads/"+response.file+"'  autoplay muted loop></video><div class='txt-caption'> </div>");
-	            	$('.un_video').val(response.file);
-	            	$('.btn-create-gif button').css({'display': 'block'});
+	//     $.ajax({
+	//         url: '/upload/video',
+	//         type: 'POST',
+	//         data: data,
+	//         cache: false,
+	//         dataType: 'json',
+	//         processData: false,
+	//         contentType: false,
+	//         success: function( response, textStatus, jqXHR ){
+	//             if( typeof response.error === 'undefined' ){
+	//             	$('.iframe-youtube').html("<video id='player-user' src='/uploads/"+response.file+"'  autoplay muted loop></video><div class='txt-caption'> </div>");
+	//             	$('.un_video').val(response.file);
+	//             	$('.btn-create-gif button').css({'display': 'block'});
 
-					video = document.getElementById('player-user');
+	// 				video = document.getElementById('player-user');
 
-					videoStartTime = 0;
-					durationTime = 1;
+	// 				videoStartTime = 0;
+	// 				durationTime = 1;
 
-					video.addEventListener('loadedmetadata', function() {
-					  this.currentTime = videoStartTime;
-					  $(".nstSlider[data-id='1']").nstSlider("set_range", 0, parseInt(video.duration));
-					  $('.txt-caption').css({'display': 'block'});
-					  video_loaded = true;
-					}, false);
+	// 				video.addEventListener('loadedmetadata', function() {
+	// 				  this.currentTime = videoStartTime;
+	// 				  $(".nstSlider[data-id='1']").nstSlider("set_range", 0, parseInt(video.duration));
+	// 				  $('.txt-caption').css({'display': 'block'});
+	// 				  video_loaded = true;
+	// 				}, false);
 
-					video.addEventListener('timeupdate', function() {
-					  if(this.currentTime > videoStartTime + durationTime){
-					    this.currentTime = videoStartTime;
-					  }
-					});
-	            }
-	        },
-	        error: function( jqXHR, textStatus, errorThrown ){
-	        }
-	    });
-	});
+	// 				video.addEventListener('timeupdate', function() {
+	// 				  if(this.currentTime > videoStartTime + durationTime){
+	// 				    this.currentTime = videoStartTime;
+	// 				  }
+	// 				});
+	//             }
+	//         },
+	//         error: function( jqXHR, textStatus, errorThrown ){
+	//         }
+	//     });
+	// });
 
-	$('.select-video').click(function() {
-		$('#input-video').trigger( 'click' );
-	});
+	// $('.select-video').click(function() {
+	// 	$('#input-video').trigger( 'click' );
+	// });
 
 	$('.select select option').click(function() {
 		var size = $('.select select option:selected').data('size');
@@ -247,24 +247,29 @@ $(document).ready(function () {
 
 		caption = $('.caption-gif input').val();
 		$('.un_caption').val(caption);
-		$('#create-gif-from-yb').ajaxSubmit({
-			dataType: "json",
-			success: function (data) {
-				clearInterval(id);
-				var id = setInterval(frame3, 10);
-				$('.progressbar').css({'display': 'none'});
-				$('.successfully-create').css({'display': 'block'});
 
-				$('.gif-input').val(data.gif);
-				$('.iframe-youtube').html("<img class='picture-gif' src='/temp/"+data.gif+"' />");
-				$('.editor').css({'display': 'block'});
-				$('.input-form-photo').val(data.thumbnail_main); 
-				$('.add_fb_img').empty();
-				$('.add_fb_img').css({'padding-top': '0px'});
-				$('.add_fb_img').prepend("<img class='facebook-photo' src='temp/" + data.thumbnail_fb + "'  />");
-				$('.input-form-photo-facebook').val(data.thumbnail_fb);
-			}
-		});
+
+		GrabzIt("ZTk5OGNhMzBlM2IxNGM0OThjMDU0MGNkNjY2MTkyN2U=").ConvertURL($('.un_video_url').val(), 
+{"format": "gif", "start": $(".un_start_time").val(), "duration": $(".un_end_time").val(), "onfinish": "gifloaded", "displayclass" : "complete-gif"}).Create();
+
+		// $('#create-gif-from-yb').ajaxSubmit({
+		// 	dataType: "json",
+		// 	success: function (data) {
+		// 		clearInterval(id);
+		// 		var id = setInterval(frame3, 10);
+		// 		$('.progressbar').css({'display': 'none'});
+		// 		$('.successfully-create').css({'display': 'block'});
+
+		// 		$('.gif-input').val(data.gif);
+		// 		$('.iframe-youtube').html("<img class='picture-gif' src='/temp/"+data.gif+"' />");
+		// 		$('.editor').css({'display': 'block'});
+		// 		$('.input-form-photo').val(data.thumbnail_main); 
+		// 		$('.add_fb_img').empty();
+		// 		$('.add_fb_img').css({'padding-top': '0px'});
+		// 		$('.add_fb_img').prepend("<img class='facebook-photo' src='temp/" + data.thumbnail_fb + "'  />");
+		// 		$('.input-form-photo-facebook').val(data.thumbnail_fb);
+		// 	}
+		// });
 	});
 
 	$('.upl-image-valid').click(function() {

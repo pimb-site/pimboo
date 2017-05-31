@@ -7,6 +7,32 @@ use Input;
 
 class VideoGifController extends Controller
 {
+
+	public function saveGifID() {
+		if(\Auth::guest()) return false;
+
+		$gif_id = Input::get('gif_id');
+
+
+		$main_url = "http://api.grabz.it/services/getjspicture.ashx?id=";
+
+		if($gif_id != "") {
+			$main_url = $main_url.$gif_id;
+			$content = file_get_contents($main_url);
+			$gif_name = uniqid().".gif";
+			$gif_path = \Session::getId()."/".$gif_name;
+			if(!empty($content)) { 
+				file_put_contents('temp/'.$gif_path, $content);
+				$thumbnail_fb_name = uniqid().".png";
+				$thumbnail_main_name = uniqid().".png";
+				$thumbnail = imagecreatefromgif("temp/".$gif_path);
+				$thumbnail_fb = imagegif($thumbnail, "temp/".\Session::getId()."/".$thumbnail_fb_name);
+				$thumbnail_main = imagegif($thumbnail, "temp/".\Session::getId()."/".$thumbnail_main_name);
+
+				return \Response::json(['success' => true, 'thumbnail_main' => \Session::getId()."/".$thumbnail_main_name, 'thumbnail_fb' => \Session::getId()."/".$thumbnail_fb_name, 'gif' => $gif_path]);
+			}
+		}
+	}
 	
 	public function getPage() {
 		if(\Auth::guest()) return view('auth/login');
