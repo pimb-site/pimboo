@@ -16,15 +16,7 @@
 		?>
 
 		<div class="snip">
-			<iframe src="{{ $snip->main_url }}"></iframe>
-			<div class="snip-block">
-				<div class="avatar"><img src="{{ $photo }}"/></div>
-				<div class="main">
-					<div class="author">{{ $user_info->name }}</div><br>
-					<div class="message">{{ $snip->message }}</div>
-					<a target="_blank" href="{{ $snip->btn_url }}" class="snip-button">{{ $snip->btn_text }}</a>
-				</div>
-			</div>
+			<iframe src="{{ $snip->iframe_url }}"></iframe>
 		</div>
 		
 		<footer>

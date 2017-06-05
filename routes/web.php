@@ -17,6 +17,8 @@ Route::get('create', 'HomeController@create');
 Route::get('viewID/{id}', 'ToolsController@viewID');
 // flipcards get
 Route::get('add_flip_cards', 'FlipcardsController@addFlipCards');
+
+Route::get('success/snip/{id}', 'SnipController@successID');
 Route::get('success/{id}', 'FlipcardsController@successID');
 Route::get('view_flip_cards', 'FlipcardsController@viewFlipCards');
 Route::post('upload/img_url', 'FlipcardsController@imageURL');
@@ -73,8 +75,8 @@ Route::get('user/organization', 'UserController@getOrganization');
 Route::get('user/referrals', 'UserController@getReferrals');
 
 // create snip
-Route::get('user/create-snip', 'SnipController@createPage');
-Route::post('user/create-snip-link', 'SnipController@createLink');
+Route::get('create-snip', 'SnipController@createPage');
+Route::post('create-snip-link', 'SnipController@createLink');
 Route::get('snip/{link}', 'SnipController@viewLink');
 
 Route::get('admin', 'AdminController@getHome');

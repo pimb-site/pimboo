@@ -5,34 +5,54 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Pimboo Snip</title>
-	<link href="/css/style.min.css" rel="stylesheet">
-	<link href="/css/snip.css" rel="stylesheet">
+	<link href="css/style.min.css" rel="stylesheet">
+	<link href="css/snip.css" rel="stylesheet">
 </head>
-	<body class="create_snip_page">
+	<body class="tools_create_page">
 		@include('header')
 		<div class="body">
-			<div class="create-snip">
-				<h4> Create a SNIP</h4>
-				<label>Enter a URL: <input class="create-main-url" value="http://example.com"></label><br>
-				<label>Message:       <input class="create-message" value="Add your message..." maxlength="50"></label><br>
-				<label>Button text:  <input class="create-btn-text" value="Click here" maxlength="50"></label><br>
-				<label>Button URL: <input class="create-btn-url" value="http://example.com"></label><br>
-
-				<button> SNIP</button>
+			<form id="form_create_snip" action="/create-snip-link" method="POST">
+			<input type="hidden" name="_token" value="{{ csrf_token() }}">
+			<div class="left">
+				<div class="create-snip">
+					<h3>CREATE A SNIP</h3>
+					<h4>Paste in your URL here:</h4>
+					<div class="input-snip"> <input name="url" type="text" placeholder="http://example.com"> <img src="/img/success-arrow.png"></div>
+					<div class="button-snip"> <button type="button" disabled>SNIP</button> </div>
+				</div>
 			</div>
-			<div class="preview-snip">
-				<iframe src="http://example.com"></iframe>
-				<div class="preview-snip-block">
-					<div class="avatar"><img src="/img/header_default_photo.png" /></div>
-					<div class="main">
-						<div class="author">{{ Auth::user()->name }}</div><br>
-						<div class="message">Add your message...</div>
-						<a target="_blank" href="http://example.com" class="preview-button">Click here</a>
+			
+			<div class="right" style="margin-top: 60px;">
+				<div class="tags_block">
+					<div class="title">TAGS</div>
+					<div class="tags">
+						<div class="tag"><label><input class="checkbox" type="checkbox" name="tags[]" value="Celebrities"><span class="checkbox-custom"></span><span class="label">Celebrities</span></label></div>
+						<div class="tag"><label><input class="checkbox" type="checkbox" name="tags[]" value="Love"><span class="checkbox-custom"></span><span class="label">Love</span></label></div>
+						<div class="tag"><label><input class="checkbox" type="checkbox" name="tags[]" value="TV"><span class="checkbox-custom"></span><span class="label">TV</span></label></div>
+						<div class="tag"><label><input class="checkbox" type="checkbox" name="tags[]" value="Holidays"><span class="checkbox-custom"></span><span class="label">Holidays</span></label></div>
+						<div class="tag"><label><input class="checkbox" type="checkbox" name="tags[]" value="Film"><span class="checkbox-custom"></span><span class="label">Film</span></label></div>
+						<div class="tag"><label><input class="checkbox" type="checkbox" name="tags[]" value="Retro"><span class="checkbox-custom"></span><span class="label">Retro</span></label></div>
+						<div class="tag"><label><input class="checkbox" type="checkbox" name="tags[]" value="Music"><span class="checkbox-custom"></span><span class="label">Music</span></label></div>
+						<div class="tag"><label><input class="checkbox" type="checkbox" name="tags[]" value="Tech"><span class="checkbox-custom"></span><span class="label">Tech</span></label></div>
+						<div class="tag"><label><input class="checkbox" type="checkbox" name="tags[]" value="Style"><span class="checkbox-custom"></span><span class="label">Style</span></label></div>
+						<div class="tag"><label><input class="checkbox" type="checkbox" name="tags[]" value="Politics"><span class="checkbox-custom"></span><span class="label">Politics</span></label></div>
+						<div class="tag"><label><input class="checkbox" type="checkbox" name="tags[]" value="Sexy"><span class="checkbox-custom"></span><span class="label">Sexy</span></label></div>
+						<div class="tag"><label><input class="checkbox" type="checkbox" name="tags[]" value="Internet"><span class="checkbox-custom"></span><span class="label">Internet</span></label></div>
+						<div class="tag"><label><input class="checkbox" type="checkbox" name="tags[]" value="Cute"><span class="checkbox-custom"></span><span class="label">Cute</span></label></div>
+						<div class="tag"><label><input class="checkbox" type="checkbox" name="tags[]" value="Books"><span class="checkbox-custom"></span><span class="label">Books</span></label></div>
+						<div class="tag"><label><input class="checkbox" type="checkbox" name="tags[]" value="Food"><span class="checkbox-custom"></span><span class="label">Food</span></label></div>
+						<div class="tag"><label><input class="checkbox" type="checkbox" name="tags[]" value="Sports"><span class="checkbox-custom"></span><span class="label">Sports</span></label></div>
+						<div class="tag"><label><input class="checkbox" type="checkbox" name="tags[]" value="Funny"><span class="checkbox-custom"></span><span class="label">Funny</span></label></div>
+						<div class="tag"><label><input class="checkbox" type="checkbox" name="tags[]" value="World"><span class="checkbox-custom"></span><span class="label">World</span></label></div>
+						<div class="tag"><label><input class="checkbox" type="checkbox" name="tags[]" value="Animals"><span class="checkbox-custom"></span><span class="label">Animals</span></label></div>
+						<div class="tag"><label><input class="checkbox" type="checkbox" name="tags[]" value="Arts"><span class="checkbox-custom"></span><span class="label">Arts</span></label></div>
+						<div class="tag"><label><input class="checkbox" type="checkbox" name="tags[]" value="Games"><span class="checkbox-custom"></span><span class="label">Games</span></label></div>
+						<div class="tag"><label><input class="checkbox" type="checkbox" name="tags[]" value="News"><span class="checkbox-custom"></span><span class="label">News</span></label></div>
 					</div>
 				</div>
 			</div>
+			</form>
 		</div>
-		
 		<footer>
 			<div class="up">
 				<div class="wrap">
@@ -59,62 +79,47 @@
 			</div>
 		</footer>
 
-	<script src="/js/footer.min.js"></script>
-	<script>
-		$('.create-message').on("change", function() {
-			var message = $(this).val();
-			$('.message').html(message);
-		});
-
-		$('.create-btn-text').on("change", function() {
-			var text = $(this).val();
-			$('.preview-button').html(text);
-		});
-
-		$('.create-btn-url').on("change", function() {
-			var url = $(this).val();
-			$('.preview-button').attr('href', url);
-		});
-
-
-		$('.create-main-url').on("change", function() {
-			var url = $(this).val();
-			if(isValidURL(url)) {
-				$('.preview-snip iframe').attr('src', url);
-				$('.create-main-url').css({'border': '1px solid green'});
-			} else {
-				$('.create-main-url').css({'border': '1px solid red'});
-			}
-		});
-
-		$('.create-snip button').click(function() {
-			var message = $('.create-message').val();
-			var btn_text = $('.create-btn-text').val();
-			var btn_url = $('.create-btn-url').val();
-			var main_url = $('.create-main-url').val();
-			var token = '{!! csrf_token() !!}';
-
-			$.post("/user/create-snip-link",
-			{
-			    _token: token,
-			    message: message,
-			    btn_text: btn_text,
-			    btn_url: btn_url,
-			    main_url: main_url
-			},
-			function(data){
-			    if(data.success == true) {
-			    	$('.create-snip').html('<h4> Successfully! <br> Link: <a href="'+data.link+'">SNIP</a></h4>');
-			    	$('.create-snip h4').css({'margin-top': '300px', 'line-height': '30px'});
-			    }
-			});
-		});
-
+		
+    <script src="/js/footer.min.js"></script>
+    <script>
 		function isValidURL(str) {
 		   var a  = document.createElement('a');
 		   a.href = str;
 		   return (a.host && a.host != window.location.host);
 		}
-	</script>
+
+    	$(".input-snip input").on("change", function() {
+    		var url = $(this).val();
+
+    		if(isValidURL(url)) {
+    			$('.create-snip .input-snip img').css({'display': 'block'});
+    			$('.create-snip .input-snip input').css({'border': '2px solid #b7c3d9'});
+    			$(".create-snip .button-snip button").removeAttr("disabled");
+    		} else {
+    			$('.create-snip .input-snip img').css({'display': 'none'});
+    			$('.create-snip .input-snip input').css({'border': '1px solid red'});
+    			$(".create-snip .button-snip button").attr("disabled");
+    		}
+    	});
+
+    	$(".button-snip button").click(function() {
+	        $('#form_create_snip').ajaxSubmit({
+	            dataType: "json",
+	            error: function(){
+			        alert('URL unanvaible');
+			    },
+	            success: function (data) {
+	            	if(data.success == true) {
+	            		url = "/success"+data.link;
+						$( location ).attr("href", url);
+	            	}
+	            	else {
+	            		alert(data.text);
+	            	}
+	            },
+	            timeout: 3000 // sets timeout to 3 seconds
+	        });
+    	});
+    </script>
 	</body>
 </html>

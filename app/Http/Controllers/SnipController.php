@@ -14,24 +14,43 @@ class SnipController extends Controller {
 	}
 
 	public function createLink() {
-		if (Auth::guest()) return false;
+		if (Auth::guest()) return Response::json(['success' => false, 'text' => 'auth']);
 
 		$input = Input::all();
+		$snip_id = uniqid();
 
-		$message  = ($input['message'] == '') ? 'Add your message...' : $input['message'];
-		$main_url = ($input['main_url'] == '') ? 'http://example.com' : $input['main_url'];
-		$btn_text = ($input['btn_text'] == '') ? 'Click here' : $input['btn_text'];
-		$btn_url  = ($input['btn_url'] == '') ? 'http://example.com' : $input['btn_url'];
+		$url = $input['url'];
 
-		$uniq_link = uniqid();
+		if (!filter_var($url, FILTER_VALIDATE_URL) === false) {
+			$header = @get_headers($url, 1);
+			if (!$header || !stripos($header[0], '200 ok') === false) {
+				return Response::json(['success' => false, 'text' => 'URL unavailable']);
+			}
+			elseif (isset($header['X-Frame-Options']) && (stripos($header['X-Frame-Options'], 'SAMEORIGIN') !== false || stripos($header['X-Frame-Options'], 'deny') !== false)) {
+				return Response::json(['success' => false, 'text' => 'URL unavailable']);
+			}
+		}
+		else {
+			return Response::json(['success' => false, 'text' => 'Incorrect URL']);
+		}
+
+		$tags = [];
+		if(isset($input['tags'])) {
+			if(count($input['tags']) > 0) {
+				foreach ($input['tags'] as $key => $value) {
+					$tags[] = $value;
+				}
+			}
+		}
+		
+		$tags = serialize($tags);
 
 		DB::table('snips')->insert(
-		    ['user_id' => Auth::user()->id, 'message' => $message, 'btn_text' => $btn_text, 
-		     'btn_url' => $btn_url, 'main_url' => $main_url, 'uniq_link' => $uniq_link]
+		    ['user_id' => Auth::user()->id, 'tags' => $tags, 'iframe_url' => $url, 'snip_id' => $snip_id]
 		);
 
 
-		$link = '/snip/'.$uniq_link;
+		$link = '/snip/'.$snip_id;
 
 		return Response::json(['success' => true, 'link' => $link]);
 	}
@@ -40,8 +59,8 @@ class SnipController extends Controller {
 		if($link == "") return redirect('/');
 
 		$snips = DB::table('snips')
-                    ->select('user_id', 'main_url', 'btn_text', 'btn_url', 'message')
-                    ->where('uniq_link', '=', $link)
+                    ->select('user_id', 'iframe_url', 'tags')
+                    ->where('snip_id', '=', $link)
                     ->get();
 
         if(count($snips) != 0) {
@@ -55,6 +74,10 @@ class SnipController extends Controller {
         } else {
         	return redirect('/');
         }
+	}
+
+	public function successID($id) {
+        return view('success_snip', ['id' => $id]);
 	}
 
 }
