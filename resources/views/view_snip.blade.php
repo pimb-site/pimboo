@@ -16,6 +16,14 @@
 		?>
 
 		<div class="snip">
+			<div class="adv">
+				<div class="adv-image">
+					<img src="/img/charity.jpg">
+				</div>
+				<div class="adv-href">
+					<a href="#"> text adv... </a>
+				</div>
+			</div>
 			<iframe src="{{ $snip->iframe_url }}"></iframe>
 		</div>
 		

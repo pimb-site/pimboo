@@ -67,3 +67,40 @@
 footer .up {
 	margin-top: 0px;
 }
+
+
+.view_snip_page .snip .adv {
+	width: 250px;
+	height: 100px;
+	position: absolute;
+	background-color: #f1f4fa;
+	border-radius: 0 0px 10px 0;
+	border: 1px solid #d3ddef;
+}
+
+.view_snip_page .snip .adv .adv-image {
+	width: 100px;
+	height: 100px;
+	float: left;
+}
+
+.view_snip_page .snip .adv .adv-image img {
+	border: 1px solid #d3ddef;
+	width: 100px;
+	height: 99px;
+}
+
+.view_snip_page .snip .adv .adv-href {
+	text-decoration: none;
+	width: 148px;
+	float: left;
+	font-size: 14px;
+	line-height: 6.5;
+	text-align: center;
+	font-weight: 700;
+	color: #6e8dc9;
+}
+
+.view_snip_page .snip .adv .adv-href a:hover {
+	color: #6e8dc9;
+}
