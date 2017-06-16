@@ -31,7 +31,8 @@ Route::post('upload/image', 'FlipcardsController@postUpload');
 Route::post('upload/valid_url', 'TriviaController@validURL');
 // trivia get
 Route::get('view_trivia_quiz', 'TriviaController@viewTriviaQuiz');
-Route::get('add_trivia_quiz', 'TriviaController@addTriviaQuiz');
+//Route::get('add_trivia_quiz', 'TriviaController@addTriviaQuiz');
+Route::get('add_trivia_quiz', 'HomeController@index');
 Route::get('save_trivia_quiz', 'TriviaController@saveTriviaQuiz');
 
 Route::post('save_trivia_quiz', 'TriviaController@saveTriviaQuiz');
@@ -51,7 +52,6 @@ Route::post('auth/register', 'Auth\AuthController@postRegister');
 Route::get('auth/activate','Auth\AuthController@activate');
 
 // Video to GIF
-Route::post('upload_gif_id', 'VideoGifController@saveGifID');
 Route::post('upload_yb_gif', 'VideoGifController@youtubeGIF');
 Route::post('upload_end_gif', 'VideoGifController@uploadEndGIF');
 Route::post('upload_gif', 'VideoGifController@uploadGIF');

@@ -6,12 +6,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Pimboo GIF Maker</title>
 	<link href="css/style.min.css" rel="stylesheet">
-	<link href="css/trivia_new.css" rel="stylesheet">
-	<link href="test/jcrop/jquery.Jcrop.min.css" rel="stylesheet" type="text/css"/>
 	<link type="text/css" rel="stylesheet" href="css/jquery.nstSlider.min.css">
 </head>
 	<body class="tools_create_page">
-	<img id="loadImg" src="img/ajax-loader.gif" />
 		@include('header')
 		<div class="body">
 		<input type="file" name="video" id="input-video" accept="video/mp4" style="display: none;" />
@@ -32,8 +29,8 @@
 				<div class="block-for-select-video">
 					<div class="title">ADD VIDEO TO CREATE NEW GIF</div>
 					<div class="block-inputs">
-						<!--<button type="button" class="select-video">SELECT VIDEO</button>
-						<div class="txt-or"> OR </div>-->
+						<button type="button" class="select-video">SELECT VIDEO</button>
+						<div class="txt-or"> OR </div>
 						<div class="yb-clip-upl">
 							<input placeholder="Enter YouTube clip URL">
 							<button type="button" class="youtube-btn-upload">UPLOAD</button>
@@ -173,13 +170,14 @@
 				<input type="hidden" name="_token" value="{{ csrf_token() }}">
 				<input type="hidden" name="video_youtube" value="" class="un_video_url">
 				<input type="hidden" name="id-gif" class="id-complete-gif">
-				<input type="hidden" name="options[0][start_time]" class="un_start_time" value="0">
-				<input type="hidden" name="options[0][end_time]" class="un_end_time" value="1">
+				<input type="hidden" name="start_time" class="un_start_time" value="0">
+				<input type="hidden" name="end_time" class="un_end_time" value="1">
 				<input type="hidden" name="color" class="un_color" value="0">
 				<input type="hidden" name="font_family" class="un_style" value="0">
 				<input type="hidden" name="font_size" class="un_size" value="0">
 				<input type="hidden" name="caption" class="un_caption" value="">
-				<input type="hidden" name="video_site" class="un_video" value="">
+				<input type="hidden" name="variant" class="un_variant" value="0">
+				<input type="hidden" name="filename_blob" class="un_filename" value="">
 			</form>
 
 
@@ -304,28 +302,6 @@
 	<script src="/js/jquery.nstSlider.min.js"></script>
 	<script src="/js/grabzit.min.js"></script>
 	<script>
-	function gifloaded(id) {
-		$('.id-complete-gif').val(id);
-		$('.progressbar').css({'display': 'none'});
-		$('.successfully-create').css({'display': 'block'});
-		$('.iframe-youtube').html("<img class='picture-gif' src='http://api.grabz.it/services/getjspicture.ashx?id="+id+"' />");
-		var token = $('input[name="_token"]').val();
-		$.ajax({
-		  type: "POST",
-		  url: "/upload_gif_id",
-		  data: {'gif_id': id, "_token": token}
-		}).done(function(data) {
-		  $('.gif-input').val(data.gif);
-		  $('.editor').css({'display': 'block'});
-		  $('.input-form-photo').val(data.thumbnail_main);
-		  $('.add_fb_img').empty();
-		  $('.add_fb_img').css({'padding-top': '0px'});
-		  $('.add_fb_img').prepend("<img class='facebook-photo' src='temp/" + data.thumbnail_fb + "'  />");
-		  $('.input-form-photo-facebook').val(data.thumbnail_fb);
-		});
-
-
-	}
 	$('.nstSlider').nstSlider({
 	    "left_grip_selector": ".leftGrip",
 	    "value_bar_selector": ".bar",

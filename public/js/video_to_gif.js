@@ -46,54 +46,25 @@ $(document).ready(function () {
 		}
 	});
 
-	// $('#input-video').on("change", function() {
-	// 	files = this.files[0];
-	//     var data = new FormData();
+	$('#input-video').on("change", function() {
+		var files = this.files[0];
 
-	//     data.append('_token', token);
-	//     data.append('file', files);
+		if(files.size/1024/1024 > 15) {
+			return false;
+		} else {
+			variant_upload_video = 2;
+			video_loaded = true;
+			$('.btn-create-gif button').css({'display': 'block'});
+		}
 
-	//     $.ajax({
-	//         url: '/upload/video',
-	//         type: 'POST',
-	//         data: data,
-	//         cache: false,
-	//         dataType: 'json',
-	//         processData: false,
-	//         contentType: false,
-	//         success: function( response, textStatus, jqXHR ){
-	//             if( typeof response.error === 'undefined' ){
-	//             	$('.iframe-youtube').html("<video id='player-user' src='/uploads/"+response.file+"'  autoplay muted loop></video><div class='txt-caption'> </div>");
-	//             	$('.un_video').val(response.file);
-	//             	$('.btn-create-gif button').css({'display': 'block'});
+		var url = URL.createObjectURL(files);
 
-	// 				video = document.getElementById('player-user');
+		$('.iframe-youtube').html("<video id='player-user' src='"+url+"'  autoplay muted loop></video><div class='txt-caption'> </div>");
+	});
 
-	// 				videoStartTime = 0;
-	// 				durationTime = 1;
-
-	// 				video.addEventListener('loadedmetadata', function() {
-	// 				  this.currentTime = videoStartTime;
-	// 				  $(".nstSlider[data-id='1']").nstSlider("set_range", 0, parseInt(video.duration));
-	// 				  $('.txt-caption').css({'display': 'block'});
-	// 				  video_loaded = true;
-	// 				}, false);
-
-	// 				video.addEventListener('timeupdate', function() {
-	// 				  if(this.currentTime > videoStartTime + durationTime){
-	// 				    this.currentTime = videoStartTime;
-	// 				  }
-	// 				});
-	//             }
-	//         },
-	//         error: function( jqXHR, textStatus, errorThrown ){
-	//         }
-	//     });
-	// });
-
-	// $('.select-video').click(function() {
-	// 	$('#input-video').trigger( 'click' );
-	// });
+	$('.select-video').click(function() {
+	 	$('#input-video').trigger( 'click' );
+	});
 
 	$('.select select option').click(function() {
 		var size = $('.select select option:selected').data('size');
@@ -158,12 +129,13 @@ $(document).ready(function () {
 			$('.btn-create-gif button').css({'display': 'block'});
 			$('.un_video_url').val(value_yb);
 			video_loaded = true;
+			variant_upload_video = 1;
 		}
 	});
 
 	$('.color-text-gif button').click(function() {
-		last_color = $('.un_color').val();
-		color = $(this).data('color');
+		var last_color = $('.un_color').val();
+		var color = $(this).data('color');
 
 		switch(color) {
 			case 0:
@@ -249,28 +221,75 @@ $(document).ready(function () {
 		$('.un_caption').val(caption);
 
 
-		GrabzIt("ZTk5OGNhMzBlM2IxNGM0OThjMDU0MGNkNjY2MTkyN2U=").ConvertURL($('.un_video_url').val(), 
-{"format": "gif", "start": $(".un_start_time").val(), "duration": $(".un_end_time").val(), "onfinish": "gifloaded", "displayclass" : "complete-gif"}).Create();
+		if(variant_upload_video == 1) {
+			$('.un_variant').val(1);
+			$('#create-gif-from-yb').ajaxSubmit({
+				dataType: "json",
+				success: function (data) {
+					clearInterval(id);
+					var id = setInterval(frame3, 10);
+					$('.progressbar').css({'display': 'none'});
+					$('.successfully-create').css({'display': 'block'});
 
-		// $('#create-gif-from-yb').ajaxSubmit({
-		// 	dataType: "json",
-		// 	success: function (data) {
-		// 		clearInterval(id);
-		// 		var id = setInterval(frame3, 10);
-		// 		$('.progressbar').css({'display': 'none'});
-		// 		$('.successfully-create').css({'display': 'block'});
+					$('.gif-input').val(data.gif);
+					$('.iframe-youtube').html("<img class='picture-gif' src='/temp/"+data.gif+"' />");
+					$('.editor').css({'display': 'block'});
+					$('.input-form-photo').val(data.thumbnail_main); 
+					$('.add_fb_img').empty();
+					$('.add_fb_img').css({'padding-top': '0px'});
+					$('.add_fb_img').prepend("<img class='facebook-photo' src='temp/" + data.thumbnail_fb + "'  />");
+					$('.input-form-photo-facebook').val(data.thumbnail_fb);
+					$('.block-for-giftext').css({'display': 'none'});
+				}
+			});
+		} else if(variant_upload_video == 2) {
+			$('.un_variant').val(2);
+			var document_file = document.getElementById("input-video");
+			var files = document_file.files[0];
+			var data = new FormData();
 
-		// 		$('.gif-input').val(data.gif);
-		// 		$('.iframe-youtube').html("<img class='picture-gif' src='/temp/"+data.gif+"' />");
-		// 		$('.editor').css({'display': 'block'});
-		// 		$('.input-form-photo').val(data.thumbnail_main); 
-		// 		$('.add_fb_img').empty();
-		// 		$('.add_fb_img').css({'padding-top': '0px'});
-		// 		$('.add_fb_img').prepend("<img class='facebook-photo' src='temp/" + data.thumbnail_fb + "'  />");
-		// 		$('.input-form-photo-facebook').val(data.thumbnail_fb);
-		// 	}
-		// });
+		    data.append('file', files);
+
+			$.ajax({
+			    url : 'http://146.185.164.150/blob.php',
+			    type : 'POST',
+			    data : data,
+			    processData: false,
+			    dataType: "json",
+			    contentType: false,
+			    success : function(data) {
+			    	if(data.status == true) {
+			    		$(".un_filename").val(data.filename);
+			    		myselfVideo();
+			    	}
+		        }
+			});
+
+
+		}
 	});
+
+	function myselfVideo() {
+		$('#create-gif-from-yb').ajaxSubmit({
+			dataType: "json",
+			success: function (data) {
+				clearInterval(id);
+				var id = setInterval(frame3, 10);
+				$('.progressbar').css({'display': 'none'});
+				$('.successfully-create').css({'display': 'block'});
+
+				$('.gif-input').val(data.gif);
+				$('.iframe-youtube').html("<img class='picture-gif' src='/temp/"+data.gif+"' />");
+				$('.editor').css({'display': 'block'});
+				$('.input-form-photo').val(data.thumbnail_main); 
+				$('.add_fb_img').empty();
+				$('.add_fb_img').css({'padding-top': '0px'});
+				$('.add_fb_img').prepend("<img class='facebook-photo' src='temp/" + data.thumbnail_fb + "'  />");
+				$('.input-form-photo-facebook').val(data.thumbnail_fb);
+				$('.block-for-giftext').css({'display': 'none'});
+			}
+		});
+	}
 
 	$('.upl-image-valid').click(function() {
 		value_url = $('.upl-input-image-url').val();

@@ -46,7 +46,7 @@
 						<a class="butt more_info">MORE INFO</a>
 					</div>
 				</div>
-				<div class="creation trivia">
+				<!--<div class="creation trivia">
 					<div class="left">
 						<div class="name">Pimboo Trivia</div>
 						<div class="text">What is hiding on the other side? Click to reveal.</div>
@@ -56,6 +56,7 @@
 						<a class="butt more_info">MORE INFO</a>
 					</div>
 				</div>
+				-->
 			</div>
 			<div class="side">
 				<img src="/img/create_step_1.png" />
