@@ -60,6 +60,22 @@ $(document).ready(function () {
 		var url = URL.createObjectURL(files);
 
 		$('.iframe-youtube').html("<video id='player-user' src='"+url+"'  autoplay muted loop></video><div class='txt-caption'> </div>");
+
+		video = document.getElementById('player-user');
+		videoStartTime = 0;
+		durationTime = 1;
+		video.addEventListener('loadedmetadata', function() {
+			this.currentTime = videoStartTime;
+			$(".nstSlider[data-id='1']").nstSlider("set_range", 0, parseInt(video.duration));
+			$('.txt-caption').css({'display': 'block'});
+			video_loaded = true;
+		}, false);
+
+		video.addEventListener('timeupdate', function() {
+			if(this.currentTime > videoStartTime + durationTime){
+				this.currentTime = videoStartTime;
+			}
+		});
 	});
 
 	$('.select-video').click(function() {
@@ -273,8 +289,6 @@ $(document).ready(function () {
 		$('#create-gif-from-yb').ajaxSubmit({
 			dataType: "json",
 			success: function (data) {
-				clearInterval(id);
-				var id = setInterval(frame3, 10);
 				$('.progressbar').css({'display': 'none'});
 				$('.successfully-create').css({'display': 'block'});
 
