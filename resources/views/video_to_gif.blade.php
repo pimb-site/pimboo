@@ -239,13 +239,6 @@
 				</div>
 			</div>
 		</div>
-		
-	
-	<style>
-	.complete-gif{
-	    display: none;
-	}
-	</style>
 	<script>
 		var token = '{!! csrf_token() !!}';
 	</script>
@@ -300,7 +293,6 @@
     <script src="/js/footer.min.js"></script>
 	<script src="/js/video_to_gif.js"></script>
 	<script src="/js/jquery.nstSlider.min.js"></script>
-	<script src="/js/grabzit.min.js"></script>
 	<script>
 	$('.nstSlider').nstSlider({
 	    "left_grip_selector": ".leftGrip",
