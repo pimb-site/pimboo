@@ -1,5 +1,10 @@
 $(document).ready(function () {
 
+	function lock_buttons() {
+		$(".block-for-select-video").hide(1000);
+		$('.block-for-giftext').hide(1000);
+	}
+
 	video_loaded = false;
 
 	$('.caption-gif input').on("change", function(){
@@ -255,7 +260,7 @@ $(document).ready(function () {
 					$('.add_fb_img').css({'padding-top': '0px'});
 					$('.add_fb_img').prepend("<img class='facebook-photo' src='temp/" + data.thumbnail_fb + "'  />");
 					$('.input-form-photo-facebook').val(data.thumbnail_fb);
-					$('.block-for-giftext').css({'display': 'none'});
+					lock_buttons();
 				}
 			});
 		} else if(variant_upload_video == 2) {
@@ -274,7 +279,7 @@ $(document).ready(function () {
 			    dataType: "json",
 			    contentType: false,
 			    success : function(data) {
-			    	if(data.status == true) {
+			    	if(data.success == true) {
 			    		$(".un_filename").val(data.filename);
 			    		myselfVideo();
 			    	}
@@ -300,7 +305,7 @@ $(document).ready(function () {
 				$('.add_fb_img').css({'padding-top': '0px'});
 				$('.add_fb_img').prepend("<img class='facebook-photo' src='temp/" + data.thumbnail_fb + "'  />");
 				$('.input-form-photo-facebook').val(data.thumbnail_fb);
-				$('.block-for-giftext').css({'display': 'none'});
+				lock_buttons();
 			}
 		});
 	}

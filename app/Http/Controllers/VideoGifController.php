@@ -1,47 +1,21 @@
 <?php namespace App\Http\Controllers;
 
 use Illuminate\View\View;
-use Imagick;
-use ImagickDraw;
 use Input;
 use Response;
 use Auth;
 use Session;
 
 class VideoGifController extends Controller {
-
-	public function getPage() {
-		if(\Auth::guest()) return view('auth/login');
-        else return view('video_to_gif_test');
-	}
 	
 	public function addGIF() {
-		if(\Auth::guest()) return view('auth/login');
+		if(Auth::guest()) return view('auth/login');
         else return view('video_to_gif');
-	}
-	
-
-	public function uploadVideo() {
-		$video = Input::file('file');
-		
-		if( ($video->getMimeType() == "video/mp4") && ($video->getClientSize() <= 10000000) ) {
-
-			$filename = uniqid().".mp4";
-
-			$video->move("uploads/", $filename);
-
-			return \Response::json(['success' => true, 'file' => $filename]);
-		} else {
-			return \Response::json(['success' => false, 'text' => 'The file size is too large. Not more than 10 MB.']);
-		}
 	}
 
 	public function youtubeGIF() {
-
-		if(Auth::guest()) return view('auth/login');
-
+		if(Auth::guest()) return Response::json(['success' => false, 'errorText' => 'You are not authorized.']);
 		$input = Input::all();
-
 		$youtube_url   = $input['video_youtube'];
 		$caption       = $input['caption'];
 		$color         = $input['color'];
@@ -55,34 +29,28 @@ class VideoGifController extends Controller {
 		$variant = ($variant >= 1 && $variant <= 2) ? $variant : 1;
 
 		if($length == "" || $start_time == "") {
-			return Response::json(['success' => false, 'errorText' => 'Important fields are missing']);
+			return Response::json(['success' => false, 'errorText' => 'Important fields are missing.']);
 		}
-
 		$set_url = "http://146.185.164.150/handle.php?youtube_url=".$youtube_url."&length=".$length."&start_time=".$start_time."&caption=".$caption."&color=".$color."&font_size=".$font_size."&font_family=".$font_family."&key=onlyforpimboo&variant=".$variant."&filename=".$filename;
 		$data = file_get_contents($set_url);
-
 		if(json_decode($data, true)) {
 			$response = json_decode($data, true);
-			if($response['status'] == true) {
-
+			if($response['success'] == true) {
 				$gif = Session::getId()."/".uniqid().".gif";
 				$thumbnail_fb_photo = Session::getId()."/".uniqid().".png";
 				$thumbnail_main_photo = Session::getId()."/".uniqid().".png";
-
 				if(!file_exists("temp/".Session::getId())) {
 	            	mkdir("temp/".Session::getId());
 	            }
-
 				file_put_contents("temp/".$gif, file_get_contents($response['gif']));
 				file_put_contents("temp/".$thumbnail_fb_photo, file_get_contents($response['facebook_photo']));
 				file_put_contents("temp/".$thumbnail_main_photo, file_get_contents($response['main_photo']));
-
 				return Response::json(['success' => true, 'thumbnail_main' => $thumbnail_main_photo, 'thumbnail_fb' => $thumbnail_fb_photo, 'gif' => $gif]);
 			} else {
-				print $response['errorText'];
+				return Response::json(['success' => false, 'errorText' => $response['errorText']]);
 			}
 		} else {
-			print json_encode(['status' => false, 'errorText' => 'no json']);
+			return Response::json(['success' => false, 'errorText' => 'Unknown error. Please reload the page and try again.']);
 		}
 	}
 	
