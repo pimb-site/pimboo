@@ -112,8 +112,8 @@
 				</div>
 
 				<div class="down_butts">
-					<button type="button" id="save_draft" class="btn-save">SAVE DRAFT</button>
-					<button type="button" id="publish" class="btn-publish">PUBLISH</button>
+					<button type="button" id="save_draft_story" class="btn-save">SAVE DRAFT</button>
+					<button type="button" id="publish_story" class="btn-publish">PUBLISH</button>
 				</div>
 				<input name="isDraft" type="hidden" value="publish" class="isDraft" autocomplete="off">
 				<input name="postID" type="hidden" value="" class="postID" autocomplete="off">
