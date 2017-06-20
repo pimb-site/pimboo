@@ -15,7 +15,7 @@
 				<div class="adv-image" style="background-image: url({{ $adv['href'] }})"><a href="{{ $adv['url'] }}" style="height: 87px;"></a></div>
 				<div class="adv-href">
 					<div class="close"><a href="{{ $snip->iframe_url }}"><img src="/img/close.png" /></a></div>
-					<div class="text"><a href="{{ $adv['url'] }}"><?php print $adv['text']; ?></a></div>
+					<div class="text"><a href="{{ $adv['url'] }}" target="_blank"><?php print $adv['text']; ?></a></div>
 					<div class="pimboo-logo"><a href="http://pimboo.com">Powered by <img src="/img/snip-pimboo-logo.png" /> </a></div>
 				</div>
 			</div>
