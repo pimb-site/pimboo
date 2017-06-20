@@ -83,12 +83,7 @@ class SnipController extends Controller {
 				'text' => $adv[$tag_name]['text']
 			];
 
-        	$user_info = DB::table('users')
-                    ->select('name', 'photo')
-                    ->where('id', '=', $snips[0]->user_id)
-                    ->get();	
-
-        	return view('view_snip', ['snip' => $snips[0], 'user_info' => $user_info[0], 'adv' => $adv]);
+        	return view('view_snip', ['snip' => $snips[0],  'adv' => $adv]);
         } else {
         	return redirect('/');
         }
