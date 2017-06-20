@@ -46,17 +46,17 @@
 						<a class="butt more_info">MORE INFO</a>
 					</div>
 				</div>
-				<!--<div class="creation trivia">
+				<div class="creation trivia">
 					<div class="left">
-						<div class="name">Pimboo Trivia</div>
+						<div class="name">Pimboo Snip</div>
 						<div class="text">What is hiding on the other side? Click to reveal.</div>
 					</div>
 					<div class="right">
-						<a class="butt" href="/add_trivia_quiz">CREATE</a>
+						<a class="butt" href="/create-snip">CREATE</a>
 						<a class="butt more_info">MORE INFO</a>
 					</div>
 				</div>
-				-->
+				
 			</div>
 			<div class="side">
 				<img src="/img/create_step_1.png" />

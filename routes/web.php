@@ -84,6 +84,8 @@ Route::get('admin/ads', 'AdminController@getAds');
 Route::post('admin/ads/save', 'AdminController@saveAds');
 Route::get('admin/home', 'AdminController@getHome');
 Route::post('admin/postposition', 'AdminController@updatePost');
+Route::get('admin/snip', 'AdminController@getAdvSnip');
+Route::post('admin/snip/save', 'AdminController@saveAdvSnip');
 
 
 //Referrals

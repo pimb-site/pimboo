@@ -65,12 +65,30 @@ class SnipController extends Controller {
 
         if(count($snips) != 0) {
 
-        $user_info = DB::table('users')
+        	$tags = unserialize($snips[0]->tags);
+
+        	if(count($tags) == 0) {
+        		$tag_name = "notag";
+        	} else {
+        		$tag_num = rand (0, count($tags) - 1 );
+        		$tag_name = strtolower($tags[$tag_num]);
+        	}
+
+        	$adv = DB::select("select * from settings where setting = ?", ['snips']);
+			$adv = unserialize($adv['0']->value);
+
+			$adv = [
+				'href' => $adv[$tag_name]['href'],
+				'url'  => $adv[$tag_name]['url'],
+				'text' => $adv[$tag_name]['text']
+			];
+
+        	$user_info = DB::table('users')
                     ->select('name', 'photo')
                     ->where('id', '=', $snips[0]->user_id)
                     ->get();	
 
-        	return view('view_snip', ['snip' => $snips[0], 'user_info' => $user_info[0]]);
+        	return view('view_snip', ['snip' => $snips[0], 'user_info' => $user_info[0], 'adv' => $adv]);
         } else {
         	return redirect('/');
         }

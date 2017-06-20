@@ -82,6 +82,15 @@
 		
     <script src="/js/footer.min.js"></script>
     <script>
+    	$(document).ready(function() {
+	    	$("#form_create_snip").keydown(function(event){
+		        if(event.keyCode == 13) {
+		          event.preventDefault();
+		          return false;
+		        }
+	   		});
+    	});
+
 		function isValidURL(str) {
 		   var a  = document.createElement('a');
 		   a.href = str;

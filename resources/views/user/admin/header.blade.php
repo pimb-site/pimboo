@@ -11,4 +11,8 @@
 		<img src="/img/member_my_org.png" />
 		<div class="menu_text">Ads</div>
 	</a>
+	<a class="menu" href="/admin/snip">
+		<img src="/img/snip-adm.png" width="100" height="90" />
+		<div class="menu_text">ADV SNIP</div>
+	</a>
 </div>

@@ -17,6 +17,29 @@ use Illuminate\Http\Request;
 class AdminController extends Controller
 {
 
+	public function getAdvSnip() {
+		if(Auth::guest()) return redirect('/');
+		if(Auth::user()->permission == 1) return redirect('/');
+		if(Auth::user()->permission == 10) {
+			$snips = DB::select("select * from settings where setting = ?", ['snips']);
+			$snips = unserialize($snips['0']->value);
+			return view('user.admin.snip', ['body_class' => 'admin', 'snips' => $snips]);
+		}
+	}
+
+
+	public function saveAdvSnip() {
+		if(Auth::guest()) return redirect('/');
+		if(Auth::user()->permission == 1) return redirect('/');
+		if(Auth::user()->permission == 10) {
+			DB::delete("delete from settings where setting = 'snips'");
+			$tag = serialize(Input::get('tag'));
+			$snips = DB::insert("insert into settings (setting,value) values ('snips',?)", [$tag]);
+			
+			return redirect('/admin/snip');
+		}
+	}
+
 	public function getHome() {
 		if(Auth::guest()) return redirect('/');
 		if(Auth::user()->permission == 1) return redirect('/');
