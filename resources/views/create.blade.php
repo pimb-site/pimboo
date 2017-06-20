@@ -49,7 +49,7 @@
 				<div class="creation trivia">
 					<div class="left">
 						<div class="name">Pimboo Snip</div>
-						<div class="text">What is hiding on the other side? Click to reveal.</div>
+						<div class="text">Overlay ads on your social shares and profit!</div>
 					</div>
 					<div class="right">
 						<a class="butt" href="/create-snip">CREATE</a>
