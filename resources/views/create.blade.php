@@ -26,6 +26,16 @@
 						<a class="butt more_info">MORE INFO</a>
 					</div>
 				</div>
+				<div class="creation trivia">
+					<div class="left">
+						<div class="name">Pimboo Snip</div>
+						<div class="text">Overlay ads on your social shares and profit!</div>
+					</div>
+					<div class="right">
+						<a class="butt" href="/create-snip">CREATE</a>
+						<a class="butt more_info">MORE INFO</a>
+					</div>
+				</div>
 				<div class="creation rankedlist">
 					<div class="left">
 						<div class="name">Pimboo Ranked List</div>
@@ -43,16 +53,6 @@
 					</div>
 					<div class="right">
 						<a class="butt" href="/add_flip_cards">CREATE</a>
-						<a class="butt more_info">MORE INFO</a>
-					</div>
-				</div>
-				<div class="creation trivia">
-					<div class="left">
-						<div class="name">Pimboo Snip</div>
-						<div class="text">Overlay ads on your social shares and profit!</div>
-					</div>
-					<div class="right">
-						<a class="butt" href="/create-snip">CREATE</a>
 						<a class="butt more_info">MORE INFO</a>
 					</div>
 				</div>
