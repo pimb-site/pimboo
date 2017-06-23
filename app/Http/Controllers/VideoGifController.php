@@ -248,7 +248,6 @@ class VideoGifController extends Controller {
 							'description_footer' => '', 'content' => serialize($content), 'description_image' => $uniqid2.".jpeg", 'image_facebook' => $uniqid3.".jpeg",
 							'type' => 'gif', 'isDraft' => 'publish', 'tags' => $tags, 'permission' => 'public', 'options' => $options]
 						);
-						$link = '/'.Auth::user()->name.'/'.$str2;
 					} else {
 						$string = 'post-gif-'.strtolower(str_random(30));
 						$str2 = $string;
@@ -258,8 +257,8 @@ class VideoGifController extends Controller {
 							'description_footer' => '', 'content' => serialize($content), 'description_image' => $uniqid2.".jpeg", 'image_facebook' => $uniqid3.".jpeg",
 							'type' => 'gif', 'isDraft' => 'publish', 'tags' => $tags, 'permission' => 'public', 'options' => $options]
 						);
-
 					}
+					$link = '/'.Auth::user()->name.'/'.$str2;
                     return \Response::json(['success' => true, 'link' => $link]);
 				}
 		} else return \Response::json(['success' => false, 'errors' => $validator->errors()]);

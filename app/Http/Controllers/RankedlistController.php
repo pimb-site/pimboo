@@ -460,6 +460,7 @@ class RankedlistController extends Controller
 							'type' => 'rankedlist', 'isDraft' => 'publish', 'tags' => $tags, 'permission' => 'public', 'options' => $options]
 						 );
 					}
+					$link = '/'.Auth::user()->name.'/'.$str2;
                     return \Response::json(['success' => true, 'link' => $link]);
                 }
 				

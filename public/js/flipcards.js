@@ -238,29 +238,29 @@ $(document).ready(function () {
 		
 	});
 	
-	$('#publish').click(function() {
-		$('.isDraft').val('publish');
-		var alertHtml = '<div class="warning-text"><b>Warning!</b></div> <ul>';
-		if (tinymce_init == 1) {
-			tinyMCE.get("content_textarea").save();
-		}
-        $('#form_upload_cards').ajaxSubmit({
-            dataType: "json",
-            success: function (data) {
-                if (data.success == true) {
-					url = '/success'+data.link;
-					$( location ).attr("href", url);
-                } else {
-                    $.each(data.errors, function (i, value) {
-                        alertHtml += '<li>' + value + '</li>';
-                    });
-                    alertHtml += '</ul>';
-					$('.modal-alert').html(alertHtml);
-					$('.modal-alert').modal().open();
-                }
-            }
-        });
-	});
+	// $('#publish').click(function() {
+	// 	$('.isDraft').val('publish');
+	// 	var alertHtml = '<div class="warning-text"><b>Warning!</b></div> <ul>';
+	// 	if (tinymce_init == 1) {
+	// 		tinyMCE.get("content_textarea").save();
+	// 	}
+ //        $('#form_upload_cards').ajaxSubmit({
+ //            dataType: "json",
+ //            success: function (data) {
+ //                if (data.success == true) {
+	// 				url = '/success'+data.link;
+	// 				$( location ).attr("href", url);
+ //                } else {
+ //                    $.each(data.errors, function (i, value) {
+ //                        alertHtml += '<li>' + value + '</li>';
+ //                    });
+ //                    alertHtml += '</ul>';
+	// 				$('.modal-alert').html(alertHtml);
+	// 				$('.modal-alert').modal().open();
+ //                }
+ //            }
+ //        });
+	// });
 	
 	$('.btn-publish').click(function() {
 		$('.isDraft').val('publish');

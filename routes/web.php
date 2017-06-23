@@ -112,7 +112,7 @@ Route::get('/admin/snip', 'AdminController@getAdvSnip');
 Route::post('/admin/snip/save', 'AdminController@saveAdvSnip');
 
 //Referrals
-Route::get('/ref/{id}', 'ReferralController@index');
+Route::get('/ref/{name}', 'ReferralController@index');
 Route::post('/referrals/mass', 'ReferralController@MassMailing');
 
 // Channel page

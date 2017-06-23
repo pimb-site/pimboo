@@ -236,7 +236,7 @@ class FlipcardsController extends Controller
 				'Flip Cards Facebook Photo' => $input['form_flip']['form_photo_facebook']
             ),
             array(
-                'Flip Cards Title' => 'required',
+                'Flip Cards Title' => 'required|min:15',
                 'Flip Cards Description' => 'required',
                 'Flip Cards Footer' => 'required',
                 'Flip Cards Photo' => 'required',
@@ -282,8 +282,8 @@ class FlipcardsController extends Controller
             if(!$validator_cards->fails() && (count($errors_array) == 0)) {
                 $errors_array = array();
 				
-                if(!file_exists('temp/'.$input['form_flip']['form_photo'])) $errors_array[] = 'Wrong photo link';
-				if(!file_exists('temp/'.$input['form_flip']['form_photo_facebook'])) $errors_array[] = 'Wrong Facebook photo link';
+                if(!file_exists("temp/".$input['form_flip']['form_photo'])) $errors_array[] = 'Wrong photo link';
+				if(!file_exists("temp/".$input['form_flip']['form_photo_facebook'])) $errors_array[] = 'Wrong Facebook photo link';
 				
 				
                 foreach ($input['flip_cards'] as $key => $value) {
@@ -422,6 +422,7 @@ class FlipcardsController extends Controller
 							'type' => 'flipcards', 'isDraft' => 'publish', 'tags' => $tags, 'permission' => 'public', 'options' => $options]
 						);
 					}
+					$link = '/'.Auth::user()->name.'/'.$str2;
                     return \Response::json(['success' => true, 'link' => $link]);
                 }
             }
