@@ -18,7 +18,8 @@
 				'flipcards'  => 'FLIP CARD',
 				'trivia'     => 'TRIVIA CARD',
 				'story'      => 'STORY',
-				'gif'        => 'GIF'
+				'gif'        => 'GIF',
+				'snip'       => 'SNIP'
 			];
 			?>
 			@if(empty($user_info->cover_photo))

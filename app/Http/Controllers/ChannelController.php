@@ -16,7 +16,7 @@ class ChannelController extends Controller
 			}
 			$user_info = DB::select('select id, name, photo, cover_photo, public_info from users where name = ?', [$channel_name]);
 			if(count($user_info) != 0) {
-				$types = ['trivia', 'story', 'flipcards', 'rankedlist', 'gif'];
+				$types = ['trivia', 'story', 'flipcards', 'rankedlist', 'gif', 'snip'];
 				$channel_content = DB::table('posts')
 									->where('user_id', $user_info[0]->id)
 									->where('isDraft', 'publish')
