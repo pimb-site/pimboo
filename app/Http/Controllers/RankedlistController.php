@@ -89,7 +89,7 @@ class RankedlistController extends Controller
 		                'Ranked list Footer' => $input['form_flip']['form_footer']
 		            ),
 		            array(
-		                'Ranked list Title' => 'required',
+		                'Ranked list Title' => 'required|min:3',
 		                'Ranked list Description' => 'required',
 		                'Ranked list Footer' => 'required'
 					)
@@ -171,29 +171,29 @@ class RankedlistController extends Controller
 
 				$string = $input['form_flip']['form_flip_cards_title'];
 				$string = RankedlistController::translit($string);
-				if(strlen($string) < 10) $string = 'post-rankedlist-'.strtolower(str_random(30));
-
-				$str2 = $string;
-				$str2 = $str2.'-'.date('Y-d-m');
-				$count = DB::table('posts')->where('author_name', '=', Auth::user()->name)->where('url', '=', $str2)->count();
-				if($count == 0) {
-
-					$id = \DB::table('posts')->insertGetId(
-						['user_id' => \Auth::user()->id, 'author_name' => Auth::user()->name, 'url' => $str2, 'description_title' => $input['form_flip']['form_flip_cards_title'], 'description_text' => $input['form_flip']['form_description'],
-						'description_footer' => $input['form_flip']['form_footer'], 'content' => serialize($content), 'description_image' => $photo, 'image_facebook' => $photo_fb,
-						'type' => 'rankedlist', 'isDraft' => 'save', 'tags' => $tags, 'permission' => 'public', 'options' => $options]
-					);
-				} else {
-					$string = 'post-rankedlist-'.strtolower(str_random(30));
-					$str2 = $string;
-					$str2 = $str2.'-'.date('Y-d-m');
-					$id = \DB::table('posts')->insertGetId(
-						['user_id' => \Auth::user()->id, 'author_name' => Auth::user()->name, 'url' => $str2, 'description_title' => $input['form_flip']['form_flip_cards_title'], 'description_text' => $input['form_flip']['form_description'],
-						'description_footer' => $input['form_flip']['form_footer'], 'content' => serialize($content), 'description_image' => $photo, 'image_facebook' => $photo_fb,
-						'type' => 'rankedlist', 'isDraft' => 'save', 'tags' => $tags, 'permission' => 'public', 'options' => $options]
-					);
+				if(strlen($string) < 3) {
+					$string = 'rankedlist';
 				}
-				return \Response::json(['success' => true, 'id' => $id]);
+
+				$str = $string;
+
+				$first = false;
+				$count = -1;
+
+				while(true) {
+					$result = DB::table('posts')->where('author_name', '=', Auth::user()->name)->where('url', '=', $string)->count();
+					if($result == 0) {
+						$id = \DB::table('posts')->insertGetId(
+							['user_id' => \Auth::user()->id, 'author_name' => Auth::user()->name, 'url' => $string, 'description_title' => $input['form_flip']['form_flip_cards_title'], 'description_text' => $input['form_flip']['form_description'],
+							'description_footer' => $input['form_flip']['form_footer'], 'content' => serialize($content), 'description_image' => $photo, 'image_facebook' => $photo_fb,
+							'type' => 'rankedlist', 'isDraft' => 'save', 'tags' => $tags, 'permission' => 'public', 'options' => $options]
+						);
+						return \Response::json(['success' => true, 'id' => $id]);
+					} else {
+						$string = $str.$count;
+						$count--;
+					}
+				}
 			} else if ($input['isDraft'] == 'preview') {
 				
 				$tags = [];
@@ -261,7 +261,7 @@ class RankedlistController extends Controller
 				'Facebook Photo' => $input['form_flip']['form_photo_facebook']
             ),
             array(
-                'Ranked list Title' => 'required',
+                'Ranked list Title' => 'required|min:3',
                 'Ranked list Description' => 'required',
                 'Ranked list Footer' => 'required',
                 'Ranked list Photo' => 'required',
@@ -438,30 +438,30 @@ class RankedlistController extends Controller
 
 					$string = $input['form_flip']['form_flip_cards_title'];
 					$string = RankedlistController::translit($string);
-					if(strlen($string) < 10) $string = 'post-rankedlist-'.strtolower(str_random(30));
-
-					$str2 = $string;
-					$str2 = $str2.'-'.date('Y-d-m');
-					$count = DB::table('posts')->where('author_name', '=', Auth::user()->name)->where('url', '=', $str2)->count();
-
-					if($count == 0) {		
-					    $id = \DB::table('posts')->insertGetId(
-							['user_id' => \Auth::user()->id, 'author_name' => Auth::user()->name, 'url' => $str2, 'description_title' => $input['form_flip']['form_flip_cards_title'], 'description_text' => $input['form_flip']['form_description'],
-							'description_footer' => $input['form_flip']['form_footer'], 'content' => serialize($content), 'description_image' => $uniqid3.".jpeg", 'image_facebook' => $uniqid4.".jpeg",
-							'type' => 'rankedlist', 'isDraft' => 'publish', 'tags' => $tags, 'permission' => 'public', 'options' => $options]
-						 );
-					} else {
-						$string = 'post-gif-'.strtolower(str_random(30));
-						$str2 = $string;
-						$str2 = $str2.'-'.date('Y-d-m');
-					    $id = \DB::table('posts')->insertGetId(
-							['user_id' => \Auth::user()->id, 'author_name' => Auth::user()->name, 'url' => $str2, 'description_title' => $input['form_flip']['form_flip_cards_title'], 'description_text' => $input['form_flip']['form_description'],
-							'description_footer' => $input['form_flip']['form_footer'], 'content' => serialize($content), 'description_image' => $uniqid3.".jpeg", 'image_facebook' => $uniqid4.".jpeg",
-							'type' => 'rankedlist', 'isDraft' => 'publish', 'tags' => $tags, 'permission' => 'public', 'options' => $options]
-						 );
+					if(strlen($string) < 3) {
+						$string = 'rankedlist';
 					}
-					$link = '/'.Auth::user()->name.'/'.$str2;
-                    return \Response::json(['success' => true, 'link' => $link]);
+
+					$str = $string;
+
+					$first = false;
+					$count = -1;
+
+					while(true) {
+						$result = DB::table('posts')->where('author_name', '=', Auth::user()->name)->where('url', '=', $string)->count();
+						if($result == 0) {
+						    $id = DB::table('posts')->insertGetId(
+								['user_id' => \Auth::user()->id, 'author_name' => Auth::user()->name, 'url' => $string, 'description_title' => $input['form_flip']['form_flip_cards_title'], 'description_text' => $input['form_flip']['form_description'],
+								'description_footer' => $input['form_flip']['form_footer'], 'content' => serialize($content), 'description_image' => $uniqid3.".jpeg", 'image_facebook' => $uniqid4.".jpeg",
+								'type' => 'rankedlist', 'isDraft' => 'publish', 'tags' => $tags, 'permission' => 'public', 'options' => $options]
+							 );
+							$link = '/'.Auth::user()->name.'/'.$string;
+							return \Response::json(['success' => true, 'link' => $link]);
+						} else {
+							$string = $str.$count;
+							$count--;
+						}
+					}
                 }
 				
 			}

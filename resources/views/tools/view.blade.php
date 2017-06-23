@@ -14,14 +14,14 @@
                         <div class="border">
                             <div class="top">
                                 <div class="info">
-                                    <div class="published">Published on {{ $date }} by <a href="/channel/{{ $content->user_id }}">{{ $user_name }}</a></div>
+                                    <div class="published">Published on {{ $date }} by <a href="/{{ $user_name }}">{{ $user_name }}</a></div>
                                 </div>
                                 <div class="buttons">
-                                    <button data-title="{{ $content->description_title }}" data-url="{{ url('/viewID/'.$content->id) }}" data-type="fb" class="butt-for-sharing facebook"></button>
-                                    <button data-title="{{ $content->description_title }}" data-url="{{ url('/viewID/'.$content->id) }}" data-type="tw" class="butt-for-sharing twitter"></button>
-                                    <button data-title="{{ $content->description_title }}" data-url="{{ url('/viewID/'.$content->id) }}" data-type="gg" class="butt-for-sharing google_plus"></button>
-                                    <button data-title="{{ $content->description_title }}" data-url="{{ url('/viewID/'.$content->id) }}" data-type="li" class="butt-for-sharing linked_in"></button>
-                                    <button class="get_link" data-href="{{ url('/viewID/'.$content->id) }}">GET LINK</button>
+                                    <button data-title="{{ $content->description_title }}" data-url="{{ url('/'.$content->author_name.'/'.$content->url) }}" data-type="fb" class="butt-for-sharing facebook"></button>
+                                    <button data-title="{{ $content->description_title }}" data-url="{{ url('/'.$content->author_name.'/'.$content->url) }}" data-type="tw" class="butt-for-sharing twitter"></button>
+                                    <button data-title="{{ $content->description_title }}" data-url="{{ url('/'.$content->author_name.'/'.$content->url) }}" data-type="gg" class="butt-for-sharing google_plus"></button>
+                                    <button data-title="{{ $content->description_title }}" data-url="{{ url('/'.$content->author_name.'/'.$content->url) }}" data-type="li" class="butt-for-sharing linked_in"></button>
+                                    <button class="get_link" data-href="{{ url('/'.$content->author_name.'/'.$content->url) }}">GET LINK</button>
                                 </div>
                             </div>
                             <div class="content">
@@ -37,7 +37,7 @@
                           js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.9&appId=708685579238305";
                           fjs.parentNode.insertBefore(js, fjs);
                         }(document, 'script', 'facebook-jssdk'));</script>
-                        <div class="fb-comments" data-href="{{ url('/viewID/'.$content->id) }}" data-width="708" data-numposts="5"></div>
+                        <div class="fb-comments" data-href="{{ url('/'.$content->author_name.'/'.$content->url) }}" data-width="708" data-numposts="5"></div>
                         <div class="modal reports" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                           <div class="modal-dialog">
                             <div class="modal-content">

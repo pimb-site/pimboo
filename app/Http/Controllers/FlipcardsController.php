@@ -110,7 +110,7 @@ class FlipcardsController extends Controller
 		                'Flip Cards Footer' => $input['form_flip']['form_footer']
 		            ),
 		            array(
-		                'Flip Cards Title' => 'required',
+		                'Flip Cards Title' => 'required|min:3',
 		                'Flip Cards Description' => 'required',
 		                'Flip Cards Footer' => 'required'
 		            )
@@ -201,28 +201,29 @@ class FlipcardsController extends Controller
 				
 				$string = $input['form_flip']['form_flip_cards_title'];
 				$string = FlipcardsController::translit($string);
-				if(strlen($string) < 10) $string = 'post-flipcards-'.strtolower(str_random(30));
-
-				$str2 = $string;
-				$str2 = $str2.'-'.date('Y-d-m');
-				$count = DB::table('posts')->where('author_name', '=', Auth::user()->name)->where('url', '=', $str2)->count();
-				if($count == 0) {
-					$id = \DB::table('posts')->insertGetId(
-						['user_id' => \Auth::user()->id, 'author_name' => Auth::user()->name, 'url' => $str2, 'description_title' => $input['form_flip']['form_flip_cards_title'], 'description_text' => $input['form_flip']['form_description'],
-						'description_footer' => $input['form_flip']['form_footer'], 'content' => serialize($content), 'description_image' => $photo, 'image_facebook' => $photo_fb,
-						'type' => 'flipcards', 'isDraft' => 'save', 'tags' => $tags, 'permission' => 'public', 'options' => $options]
-					);
-				} else {
-					$string = 'post-flipcards-'.strtolower(str_random(30));
-					$str2 = $string;
-					$str2 = $str2.'-'.date('Y-d-m');
-					$id = \DB::table('posts')->insertGetId(
-						['user_id' => \Auth::user()->id, 'author_name' => Auth::user()->name, 'url' => $str2, 'description_title' => $input['form_flip']['form_flip_cards_title'], 'description_text' => $input['form_flip']['form_description'],
-						'description_footer' => $input['form_flip']['form_footer'], 'content' => serialize($content), 'description_image' => $photo, 'image_facebook' => $photo_fb,
-						'type' => 'flipcards', 'isDraft' => 'save', 'tags' => $tags, 'permission' => 'public', 'options' => $options]
-					);
+				if(strlen($string) < 3) {
+					$string = 'flipcards';
 				}
-				return \Response::json(['success' => true, 'id' => $id]);
+
+				$str = $string;
+
+				$first = false;
+				$count = -1;
+
+				while(true) {
+					$result = DB::table('posts')->where('author_name', '=', Auth::user()->name)->where('url', '=', $string)->count();
+					if($result == 0) {
+						$id = \DB::table('posts')->insertGetId(
+							['user_id' => \Auth::user()->id, 'author_name' => Auth::user()->name, 'url' => $string, 'description_title' => $input['form_flip']['form_flip_cards_title'], 'description_text' => $input['form_flip']['form_description'],
+							'description_footer' => $input['form_flip']['form_footer'], 'content' => serialize($content), 'description_image' => $photo, 'image_facebook' => $photo_fb,
+							'type' => 'flipcards', 'isDraft' => 'save', 'tags' => $tags, 'permission' => 'public', 'options' => $options]
+						);
+						return \Response::json(['success' => true, 'id' => $id]);
+					} else {
+						$string = $str.$count;
+						$count--;
+					}
+				}
 			}
 		}
 		
@@ -236,7 +237,7 @@ class FlipcardsController extends Controller
 				'Flip Cards Facebook Photo' => $input['form_flip']['form_photo_facebook']
             ),
             array(
-                'Flip Cards Title' => 'required|min:15',
+                'Flip Cards Title' => 'required|min:3',
                 'Flip Cards Description' => 'required',
                 'Flip Cards Footer' => 'required',
                 'Flip Cards Photo' => 'required',
@@ -398,32 +399,34 @@ class FlipcardsController extends Controller
 							}
 						}
 					}
-					
+
+
 					$string = $input['form_flip']['form_flip_cards_title'];
 					$string = FlipcardsController::translit($string);
-					if(strlen($string) < 10) $string = 'post-flipcards-'.strtolower(str_random(30));
-
-					$str2 = $string;
-					$str2 = $str2.'-'.date('Y-d-m');
-					$count = DB::table('posts')->where('author_name', '=', Auth::user()->name)->where('url', '=', $str2)->count();
-					if($count == 0) {	
-						$id = \DB::table('posts')->insertGetId(
-							['user_id' => \Auth::user()->id, 'author_name' => Auth::user()->name, 'url' => $str2, 'description_title' => $input['form_flip']['form_flip_cards_title'], 'description_text' => $input['form_flip']['form_description'],
-							'description_footer' => $input['form_flip']['form_footer'], 'content' => serialize($content), 'description_image' => $uniqid3.".jpeg", 'image_facebook' => $uniqid4.".jpeg",
-							'type' => 'flipcards', 'isDraft' => 'publish', 'tags' => $tags, 'permission' => 'public', 'options' => $options]
-						);
-					} else {
-						$string = 'post-gif-'.strtolower(str_random(30));
-						$str2 = $string;
-						$str2 = $str2.'-'.date('Y-d-m');
-						$id = \DB::table('posts')->insertGetId(
-							['user_id' => \Auth::user()->id, 'author_name' => Auth::user()->name, 'url' => $str2, 'description_title' => $input['form_flip']['form_flip_cards_title'], 'description_text' => $input['form_flip']['form_description'],
-							'description_footer' => $input['form_flip']['form_footer'], 'content' => serialize($content), 'description_image' => $uniqid3.".jpeg", 'image_facebook' => $uniqid4.".jpeg",
-							'type' => 'flipcards', 'isDraft' => 'publish', 'tags' => $tags, 'permission' => 'public', 'options' => $options]
-						);
+					if(strlen($string) < 3) {
+						$string = 'flipcards';
 					}
-					$link = '/'.Auth::user()->name.'/'.$str2;
-                    return \Response::json(['success' => true, 'link' => $link]);
+
+					$str = $string;
+
+					$first = false;
+					$count = -1;
+
+					while(true) {
+						$result = DB::table('posts')->where('author_name', '=', Auth::user()->name)->where('url', '=', $string)->count();
+						if($result == 0) {
+							$id = DB::table('posts')->insertGetId(
+								['user_id' => \Auth::user()->id, 'author_name' => Auth::user()->name, 'url' => $string, 'description_title' => $input['form_flip']['form_flip_cards_title'], 'description_text' => $input['form_flip']['form_description'],
+								'description_footer' => $input['form_flip']['form_footer'], 'content' => serialize($content), 'description_image' => $uniqid3.".jpeg", 'image_facebook' => $uniqid4.".jpeg",
+								'type' => 'flipcards', 'isDraft' => 'publish', 'tags' => $tags, 'permission' => 'public', 'options' => $options]
+							);
+							$link = '/'.Auth::user()->name.'/'.$string;
+							return \Response::json(['success' => true, 'link' => $link]);
+						} else {
+							$string = $str.$count;
+							$count--;
+						}
+					}
                 }
             }
         } else return \Response::json(['success' => false, 'errors' => $validator->errors()]);

@@ -83,7 +83,7 @@ class VideoGifController extends Controller {
 		                'Description' => $input['form_flip']['form_description']
 		            ),
 		            array(
-		                'Title' => 'required',
+		                'Title' => 'required|min:3',
 		                'Description' => 'required'
 		            )
 		        );
@@ -131,31 +131,32 @@ class VideoGifController extends Controller {
 					}
 				}
 
+
 				$string = $input['form_flip']['form_flip_cards_title'];
 				$string = VideoGifController::translit($string);
-				if(strlen($string) < 10) $string = 'post-gif-'.strtolower(str_random(30));
-				
-				$str2 = $string;
-				$str2 = $str2.'-'.date('Y-d-m');
-				$count = DB::table('posts')->where('author_name', '=', Auth::user()->name)->where('url', '=', $str2)->count();
-				if($count == 0) {
-					$id = \DB::table('posts')->insertGetId(
-						['user_id' => \Auth::user()->id, 'author_name' => Auth::user()->name, 'url' => $str2, 'description_title' => $input['form_flip']['form_flip_cards_title'], 'description_text' => $input['form_flip']['form_description'],
-						'description_footer' => '', 'content' => serialize($content), 'description_image' => $photo, 'image_facebook' => $photo_fb,
-						'type' => 'gif', 'isDraft' => 'save', 'tags' => $tags, 'permission' => 'public', 'options' => $options]
-					);
-				}else {
-					$string = 'post-gif-'.strtolower(str_random(30));
-					$str2 = $string;
-					$str2 = $str2.'-'.date('Y-d-m');
-					$id = \DB::table('posts')->insertGetId(
-						['user_id' => \Auth::user()->id, 'author_name' => Auth::user()->name, 'url' => $str2, 'description_title' => $input['form_flip']['form_flip_cards_title'], 'description_text' => $input['form_flip']['form_description'],
-						'description_footer' => '', 'content' => serialize($content), 'description_image' => $photo, 'image_facebook' => $photo_fb,
-						'type' => 'gif', 'isDraft' => 'save', 'tags' => $tags, 'permission' => 'public', 'options' => $options]
-					);
+				if(strlen($string) < 3) {
+					$string = 'gifmaker';
 				}
-				return \Response::json(['success' => true, 'id' => $id]);
-				
+
+				$str = $string;
+
+				$first = false;
+				$count = -1;
+
+				while(true) {
+					$result = DB::table('posts')->where('author_name', '=', Auth::user()->name)->where('url', '=', $string)->count();
+					if($result == 0) {
+						$id = \DB::table('posts')->insertGetId(
+							['user_id' => \Auth::user()->id, 'author_name' => Auth::user()->name, 'url' => $string, 'description_title' => $input['form_flip']['form_flip_cards_title'], 'description_text' => $input['form_flip']['form_description'],
+							'description_footer' => '', 'content' => serialize($content), 'description_image' => $photo, 'image_facebook' => $photo_fb,
+							'type' => 'gif', 'isDraft' => 'save', 'tags' => $tags, 'permission' => 'public', 'options' => $options]
+						);
+						return \Response::json(['success' => true, 'id' => $id]);
+					} else {
+						$string = $str.$count;
+						$count--;
+					}
+				}	
 			}
 		}
 		
@@ -165,7 +166,7 @@ class VideoGifController extends Controller {
                 'Description' => $input['form_flip']['form_description']
             ),
             array(
-                'Title' => 'required',
+                'Title' => 'required|min:3',
                 'Description' => 'required'
             )
         );
@@ -237,29 +238,30 @@ class VideoGifController extends Controller {
 
 					$string = $input['form_flip']['form_flip_cards_title'];
 					$string = VideoGifController::translit($string);
-					if(strlen($string) < 10) $string = 'post-gif-'.strtolower(str_random(30));
-
-					$str2 = $string;
-					$str2 = $str2.'-'.date('Y-d-m');
-					$count = DB::table('posts')->where('author_name', '=', Auth::user()->name)->where('url', '=', $str2)->count();
-					if($count == 0) {
-						$id = \DB::table('posts')->insertGetId(
-							['user_id' => \Auth::user()->id, 'author_name' => Auth::user()->name, 'url' => $str2, 'description_title' => $input['form_flip']['form_flip_cards_title'], 'description_text' => $input['form_flip']['form_description'],
-							'description_footer' => '', 'content' => serialize($content), 'description_image' => $uniqid2.".jpeg", 'image_facebook' => $uniqid3.".jpeg",
-							'type' => 'gif', 'isDraft' => 'publish', 'tags' => $tags, 'permission' => 'public', 'options' => $options]
-						);
-					} else {
-						$string = 'post-gif-'.strtolower(str_random(30));
-						$str2 = $string;
-						$str2 = $str2.'-'.date('Y-d-m');
-						$id = \DB::table('posts')->insertGetId(
-							['user_id' => \Auth::user()->id, 'author_name' => Auth::user()->name, 'url' => $str2, 'description_title' => $input['form_flip']['form_flip_cards_title'], 'description_text' => $input['form_flip']['form_description'],
-							'description_footer' => '', 'content' => serialize($content), 'description_image' => $uniqid2.".jpeg", 'image_facebook' => $uniqid3.".jpeg",
-							'type' => 'gif', 'isDraft' => 'publish', 'tags' => $tags, 'permission' => 'public', 'options' => $options]
-						);
+					if(strlen($string) < 3) {
+						$string = 'gifmaker';
 					}
-					$link = '/'.Auth::user()->name.'/'.$str2;
-                    return \Response::json(['success' => true, 'link' => $link]);
+
+					$str = $string;
+
+					$first = false;
+					$count = -1;
+
+					while(true) {
+						$result = DB::table('posts')->where('author_name', '=', Auth::user()->name)->where('url', '=', $string)->count();
+						if($result == 0) {
+							$id = \DB::table('posts')->insertGetId(
+								['user_id' => \Auth::user()->id, 'author_name' => Auth::user()->name, 'url' => $string, 'description_title' => $input['form_flip']['form_flip_cards_title'], 'description_text' => $input['form_flip']['form_description'],
+								'description_footer' => '', 'content' => serialize($content), 'description_image' => $uniqid2.".jpeg", 'image_facebook' => $uniqid3.".jpeg",
+								'type' => 'gif', 'isDraft' => 'publish', 'tags' => $tags, 'permission' => 'public', 'options' => $options]
+							);
+							$link = '/'.Auth::user()->name.'/'.$string;
+							return \Response::json(['success' => true, 'link' => $link]);
+						} else {
+							$string = $str.$count;
+							$count--;
+						}
+					}
 				}
 		} else return \Response::json(['success' => false, 'errors' => $validator->errors()]);
 	}

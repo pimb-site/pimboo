@@ -69,7 +69,7 @@ class StoryController extends Controller
 				'Story Content' => $input['form_story']['content']
             ),
             array(
-                'Story Title' => 'required|min:15',
+                'Story Title' => 'required|min:3',
                 'Story Description' => 'required',
                 'Story Photo' => 'required',
 				'Story Facebook Photo' => 'required',
@@ -167,33 +167,33 @@ class StoryController extends Controller
 				$options = ['display_item_numbers' => $display_item_numbers];
 				$options = serialize($options);
 
+
+
 				$string = $input['form_story']['form_story_cards_title'];
 				$string = StoryController::translit($string);
-				if(strlen($string) < 10) $string = 'post-story-'.strtolower(str_random(30));
+				if(strlen($string) < 3) {
+					$string = 'story';
+				}
 
-				$str2 = $string;
-				$str2 = $str2.'-'.date('Y-d-m');
+				$str = $string;
 
-				$count = DB::table('posts')->where('author_name', '=', Auth::user()->name)->where('url', '=', $str2)->count();
-				if($count == 0) {
-					$id = \DB::table('posts')->insertGetId(
-						['user_id' => \Auth::user()->id, 'author_name' => Auth::user()->name, 'url' => $str2, 'description_title' => $input['form_story']['form_story_cards_title'], 'description_text' => $input['form_story']['form_description'],
-						'content' => $input['form_story']['content'], 'description_image' => $uniqid3.".jpeg", 'image_facebook' => $uniqid4.".jpeg",
-						'type' => 'story', 'isDraft' => 'publish', 'tags' => $tags, 'permission' => 'public', 'options' => $options]
-					);
-					$link = '/'.Auth::user()->name.'/'.$str2;
-	                return \Response::json(['success' => true, 'link' => $link]);
-				} else {
-					$string = 'post-story-'.strtolower(str_random(30));
-					$str2 = $string;
-					$str2 = $str2.'-'.date('Y-d-m');
-					$id = \DB::table('posts')->insertGetId(
-						['user_id' => \Auth::user()->id, 'author_name' => Auth::user()->name, 'url' => $str2, 'description_title' => $input['form_story']['form_story_cards_title'], 'description_text' => $input['form_story']['form_description'],
-						'content' => $input['form_story']['content'], 'description_image' => $uniqid3.".jpeg", 'image_facebook' => $uniqid4.".jpeg",
-						'type' => 'story', 'isDraft' => 'publish', 'tags' => $tags, 'permission' => 'public', 'options' => $options]
-					);
-					$link = '/'.Auth::user()->name.'/'.$str2;
-					return \Response::json(['success' => true, 'link' => $link]);
+				$first = false;
+				$count = -1;
+
+				while(true) {
+					$result = DB::table('posts')->where('author_name', '=', Auth::user()->name)->where('url', '=', $string)->count();
+					if($result == 0) {
+						$id = \DB::table('posts')->insertGetId(
+							['user_id' => \Auth::user()->id, 'author_name' => Auth::user()->name, 'url' => $string, 'description_title' => $input['form_story']['form_story_cards_title'], 'description_text' => $input['form_story']['form_description'],
+							'content' => $input['form_story']['content'], 'description_image' => $uniqid3.".jpeg", 'image_facebook' => $uniqid4.".jpeg",
+							'type' => 'story', 'isDraft' => 'publish', 'tags' => $tags, 'permission' => 'public', 'options' => $options]
+						);
+						$link = '/'.Auth::user()->name.'/'.$string;
+						return \Response::json(['success' => true, 'link' => $link]);
+					} else {
+						$string = $str.$count;
+						$count--;
+					}
 				}
             }
         } else return \Response::json(['success' => false, 'errors' => $validator->errors()]);
