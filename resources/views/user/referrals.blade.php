@@ -31,7 +31,7 @@
 					</div>
 					<div class="invite_link">
 						<div class="sub_title">Your Invite Link</div>
-						<input type="text" name="" value="{!! url('/ref/') !!}/{{ $user->id }}" disabled="disabled">
+						<input type="text" name="" value="{!! url('/ref/') !!}/{{ $user->name }}" disabled="disabled">
 						<div class="shares">
 							<div class="fb share"></div>
 							<div class="twitter share"></div>

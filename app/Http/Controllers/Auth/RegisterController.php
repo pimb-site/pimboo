@@ -6,6 +6,7 @@ use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use DB;
 
 class RegisterController extends Controller
 {
@@ -64,6 +65,8 @@ class RegisterController extends Controller
     {
         if (isset($_COOKIE['ref']) and !empty($_COOKIE['ref'])) {
             $ref = $_COOKIE['ref'];
+            $check_users = DB::table('users')->select('id')->where('name', '=', $ref)->get();
+            if(count($check_users) != 0) $ref = $check_users[0]->id;
         } else {
             $ref = 0;
         }

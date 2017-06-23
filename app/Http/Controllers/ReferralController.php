@@ -18,7 +18,7 @@ class ReferralController extends Controller
 
 		$mails = Input::get('mails');
 		$mails_valid = [];
-		$invite = "Your invite: http://pimboo.com/ref/".Auth::user()->id;
+		$invite = "Your invite: http://pimboo.com/ref/".Auth::user()->name;
 
 		if(count($mails) != 0) {
 			foreach ($mails as $key => $value) {

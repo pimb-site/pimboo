@@ -8,6 +8,7 @@ use Input;
 use App\User;
 use Illuminate\Http\Request;
 use Laravel\Socialite\Contracts\Factory as Socialite;
+use DB;
 
 class AuthController extends Controller
 {
@@ -50,6 +51,8 @@ class AuthController extends Controller
                 } else {
                     if (isset($_COOKIE['ref']) and !empty($_COOKIE['ref'])) {
                         $ref = $_COOKIE['ref'];
+                        $check_users = DB::table('users')->select('id')->where('name', '=', $ref)->get();
+                        if(count($users_users) != 0) $ref = $check_users[0]->id;
                     } else {
                         $ref = 0;
                     }
