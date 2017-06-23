@@ -27,14 +27,19 @@ class ChannelController extends Controller
 
 				$show_more = (count($channel_content) == 10) ? true : false;
 
-				$user_id = Auth::user()->id;
+
+				if(Auth::guest()) {
+					$user_id = 0;
+				} else {
+					$user_id = Auth::user()->id;
+				}
 
 				// is subscribe? 
 				if($user_info[0]->id!= $user_id) {
 					$checkSubscribes = DB::table('subscribes')
                      ->select('user_id', 'channel_id')
                      ->where('user_id', '=', $user_id)
-                     ->where('channel_id', '=', $user_info[0]['id'])
+                     ->where('channel_id', '=', $user_info[0]->id)
                      ->get();
 
                     $isSubscribe = (count($checkSubscribes) == 0) ? false : true;
