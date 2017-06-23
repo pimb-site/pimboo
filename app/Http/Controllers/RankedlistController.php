@@ -1,9 +1,17 @@
 <?php namespace App\Http\Controllers;
 
 use Illuminate\View\View;
+use Auth;
+use DB;
 
 class RankedlistController extends Controller
 {
+
+
+	public function displayCreatePage() {
+        if(Auth::guest()) return view('auth/login');
+        else return view('ToolsCreate.rankedlist');
+	}
 	
 	public function voteRankedList() {
 		if(\Auth::guest()) {
@@ -49,13 +57,21 @@ class RankedlistController extends Controller
 		}
 	}
 	
-	public function addRankedList() {
-        if(\Auth::guest()) return view('auth/login');
-        else return view('add_ranked_list');
-	}
-	
-	
-	public function saveRankedList() {
+	public static function translit($s) {
+	    $s = (string) $s;
+	    $s = strip_tags($s);
+	    $s = str_replace(array("\n", "\r"), " ", $s);
+	    $s = trim($s);
+	    $s = function_exists('mb_strtolower') ? mb_strtolower($s) : strtolower($s);
+	    $s = strtr($s, array('а'=>'a','б'=>'b','в'=>'v','г'=>'g','д'=>'d','е'=>'e','ё'=>'e','ж'=>'j','з'=>'z','и'=>'i','й'=>'y','к'=>'k','л'=>'l','м'=>'m','н'=>'n','о'=>'o','п'=>'p','р'=>'r','с'=>'s','т'=>'t','у'=>'u','ф'=>'f','х'=>'h','ц'=>'c','ч'=>'ch','ш'=>'sh','щ'=>'shch','ы'=>'y','э'=>'e','ю'=>'yu','я'=>'ya','ъ'=>'','ь'=>''));
+    	$s = preg_replace("/[^0-9a-z-_ ]/i", "", $s);
+    	$s = preg_replace("/\s+/", ' ', $s);
+    	$s = str_replace(" ", "-", $s);
+
+    	return $s;
+    }
+
+	public function sendRankedList() {
 		
 		
 		if(\Auth::guest()) return view('auth/login');
@@ -152,12 +168,31 @@ class RankedlistController extends Controller
 						}
 					}
 				}
-					
-				$id = \DB::table('posts')->insertGetId(
-					['user_id' => \Auth::user()->id, 'description_title' => $input['form_flip']['form_flip_cards_title'], 'description_text' => $input['form_flip']['form_description'],
-					'description_footer' => $input['form_flip']['form_footer'], 'content' => serialize($content), 'description_image' => $photo, 'image_facebook' => $photo_fb,
-					'type' => 'rankedlist', 'isDraft' => 'save', 'tags' => $tags, 'permission' => 'public', 'options' => $options]
-				);
+
+				$string = $input['form_flip']['form_flip_cards_title'];
+				$string = RankedlistController::translit($string);
+				if(strlen($string) < 10) $string = 'post-rankedlist-'.strtolower(str_random(30));
+
+				$str2 = $string;
+				$str2 = $str2.'-'.date('Y-d-m');
+				$count = DB::table('posts')->where('author_name', '=', Auth::user()->name)->where('url', '=', $str2)->count();
+				if($count == 0) {
+
+					$id = \DB::table('posts')->insertGetId(
+						['user_id' => \Auth::user()->id, 'author_name' => Auth::user()->name, 'url' => $str2, 'description_title' => $input['form_flip']['form_flip_cards_title'], 'description_text' => $input['form_flip']['form_description'],
+						'description_footer' => $input['form_flip']['form_footer'], 'content' => serialize($content), 'description_image' => $photo, 'image_facebook' => $photo_fb,
+						'type' => 'rankedlist', 'isDraft' => 'save', 'tags' => $tags, 'permission' => 'public', 'options' => $options]
+					);
+				} else {
+					$string = 'post-rankedlist-'.strtolower(str_random(30));
+					$str2 = $string;
+					$str2 = $str2.'-'.date('Y-d-m');
+					$id = \DB::table('posts')->insertGetId(
+						['user_id' => \Auth::user()->id, 'author_name' => Auth::user()->name, 'url' => $str2, 'description_title' => $input['form_flip']['form_flip_cards_title'], 'description_text' => $input['form_flip']['form_description'],
+						'description_footer' => $input['form_flip']['form_footer'], 'content' => serialize($content), 'description_image' => $photo, 'image_facebook' => $photo_fb,
+						'type' => 'rankedlist', 'isDraft' => 'save', 'tags' => $tags, 'permission' => 'public', 'options' => $options]
+					);
+				}
 				return \Response::json(['success' => true, 'id' => $id]);
 			} else if ($input['isDraft'] == 'preview') {
 				
@@ -379,11 +414,13 @@ class RankedlistController extends Controller
 					
 					$options = [];
 					$options = serialize($options);
+
+
 					
 					if(isset($input['postID'])) {
 						$postID = (int)$input['postID'];
 						if(is_int($postID) && $postID > 0) {
-							$current_owner = \DB::select('select user_id from posts where id = ? and type = ?', [$postID, 'rankedlist']);
+							$current_owner = \DB::select('select user_id, url from posts where id = ? and type = ?', [$postID, 'rankedlist']);
 							if(count($current_owner != 0)) {
 								if($current_owner[0]->user_id == \Auth::user()->id) {
 									\DB::table('posts')
@@ -392,18 +429,38 @@ class RankedlistController extends Controller
 												'description_footer' => $input['form_flip']['form_footer'], 'content' => serialize($content), 'description_image' => $photo, 'image_facebook' => $photo_fb,
 												'type' => 'rankedlist', 'isDraft' => 'publish', 'tags' => $tags, 'permission' => 'public', 'options' => $options
 											]);
-									return \Response::json(['success' => true, 'id' => $postID]);
+									$link = '/'.Auth::user()->name.'/'.$current_owner[0]->url;
+									return \Response::json(['success' => true, 'link' => $link]);
 								}
 							}
 						}
 					}
-					
-				    $id = \DB::table('posts')->insertGetId(
-						['user_id' => \Auth::user()->id, 'description_title' => $input['form_flip']['form_flip_cards_title'], 'description_text' => $input['form_flip']['form_description'],
-						'description_footer' => $input['form_flip']['form_footer'], 'content' => serialize($content), 'description_image' => $uniqid3.".jpeg", 'image_facebook' => $uniqid4.".jpeg",
-						'type' => 'rankedlist', 'isDraft' => 'publish', 'tags' => $tags, 'permission' => 'public', 'options' => $options]
-					 );
-                    return \Response::json(['success' => true, 'id' => $id]);
+
+					$string = $input['form_flip']['form_flip_cards_title'];
+					$string = RankedlistController::translit($string);
+					if(strlen($string) < 10) $string = 'post-rankedlist-'.strtolower(str_random(30));
+
+					$str2 = $string;
+					$str2 = $str2.'-'.date('Y-d-m');
+					$count = DB::table('posts')->where('author_name', '=', Auth::user()->name)->where('url', '=', $str2)->count();
+
+					if($count == 0) {		
+					    $id = \DB::table('posts')->insertGetId(
+							['user_id' => \Auth::user()->id, 'author_name' => Auth::user()->name, 'url' => $str2, 'description_title' => $input['form_flip']['form_flip_cards_title'], 'description_text' => $input['form_flip']['form_description'],
+							'description_footer' => $input['form_flip']['form_footer'], 'content' => serialize($content), 'description_image' => $uniqid3.".jpeg", 'image_facebook' => $uniqid4.".jpeg",
+							'type' => 'rankedlist', 'isDraft' => 'publish', 'tags' => $tags, 'permission' => 'public', 'options' => $options]
+						 );
+					} else {
+						$string = 'post-gif-'.strtolower(str_random(30));
+						$str2 = $string;
+						$str2 = $str2.'-'.date('Y-d-m');
+					    $id = \DB::table('posts')->insertGetId(
+							['user_id' => \Auth::user()->id, 'author_name' => Auth::user()->name, 'url' => $str2, 'description_title' => $input['form_flip']['form_flip_cards_title'], 'description_text' => $input['form_flip']['form_description'],
+							'description_footer' => $input['form_flip']['form_footer'], 'content' => serialize($content), 'description_image' => $uniqid3.".jpeg", 'image_facebook' => $uniqid4.".jpeg",
+							'type' => 'rankedlist', 'isDraft' => 'publish', 'tags' => $tags, 'permission' => 'public', 'options' => $options]
+						 );
+					}
+                    return \Response::json(['success' => true, 'link' => $link]);
                 }
 				
 			}

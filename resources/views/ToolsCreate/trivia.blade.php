@@ -4,50 +4,105 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Pimboo Flip Cards</title>
-	<link href="css/style.min.css" rel="stylesheet">
-	<link href="test/jcrop/jquery.Jcrop.min.css" rel="stylesheet" type="text/css"/>
+	<title>Pimboo Trivia</title>
+	<link href="/css/style.min.css" rel="stylesheet">
+	<link href="/css/trivia_new.css" rel="stylesheet">
+	<link href="/test/jcrop/jquery.Jcrop.min.css" rel="stylesheet" type="text/css"/>
 </head>
 	<body class="tools_create_page">
 		@include('header')
 		<div class="body">
-		<form action="/upload_end" method="post" id="form_upload_cards">
+		<form action="/save_trivia_quiz" method="post" id="form_upload_cards">
 			<input type="hidden" name="_token" value="{{ csrf_token() }}">
 			<div class="left">
-				<div class="title">FLIP CARD CREATION</div>
-				<div class="sub_title">Add all necessary information to create new flip cards article</div>
+				<div class="title">TRIVIA CARD CREATION</div>
+				<div class="sub_title">Add all necessary information to create a new trivia card</div>
 				<div class="card_info">
 					<div class="top">
 						<div class="photo">CLICK<br>TO ADD PHOTO</div>
 						<div class="text_info">
-							<input type="text" name="form_flip[form_flip_cards_title]" placeholder="Flip cards title" autocomplete="off">
-							<input type="text" name="form_flip[form_description]" placeholder="Flip cards description" autocomplete="off">
-							<input type="text" name="flip_cards[1][form_item_title]" placeholder="Enter item title (45 symbols max)" maxlength="45" autocomplete="off">
+							<input type="text" name="form_flip[form_flip_cards_title]" placeholder="Trivia title" autocomplete="off" style="color:#6e8dc9;">
+							<textarea name="form_flip[form_description]" class="top_textarea_trivia" placeholder="Trivia description" autocomplete="off"></textarea>
 						</div>
 					</div>
-					<textarea name="form_flip[form_footer]" placeholder="Footer text (1500 symbols max)" maxlength="1500" autocomplete="off"></textarea>
+					<textarea name="form_flip[form_footer]" placeholder="Footer text (1500 symbols max)" maxlength="1500" autocomplete="off" style="color:#6e8dc9;"></textarea>
 				</div>
 				<div class="buttons">
-					<button type="button" class="front_card" data-id="1">FRONT CARD</button>
-					<button type="button" class="back_card" data-id="1">BACK CARD</button>
+					<button type="button" class="front_card_question" data-id="1" style="background-color: #99afd9;">QUESTION</button>
+					<button type="button" class="back_card_question" data-id="1">RESULT</button>
 				</div>
 				<div class="editor" data-id="1">
 					<div class="front-card" data-id="1">
-						<div class="title">CLICK TO ADD PHOTO OR TEXT</div>
-						<div class="butts">
-							<div class="add_image" data-id="1" data-side="1"></div>
-							<div class="add_text" data-id="1" data-side="1"></div>
+						<div class="main-remove-front" data-id="1">
+							<div class="title">CLICK TO ADD PHOTO OR VIDEO</div>
+							<div class="butts">
+								<div class="add_plus" data-id="1" data-side="1"></div>
+							</div>
+						</div>
+						<div class="block-type-caption">
+							<textarea name="flip_cards[1][caption1]" class="type-caption" placeholder="Type your caption" data-id="1" data-side="1" maxlength="50"></textarea>
 						</div>
 					</div>
 					<div class="back-card" data-id="1">
-						<div class="title">CLICK TO ADD PHOTO OR TEXT</div>
-						<div class="butts">
-							<div class="add_image" data-id="1" data-side="2"></div>
-							<div class="add_text" data-id="1" data-side="2"></div>
+						<div class="main-remove-back" data-id="1">
+							<div class="title">CLICK TO ADD PHOTO OR VIDEO</div>
+							<div class="butts">
+								<div class="add_plus" data-id="1" data-side="2"></div>
+							</div>
+						</div>
+						<div class="block-type-caption">
+							<textarea name="flip_cards[1][caption2]" class="type-caption" placeholder="Type your caption" data-id="1" data-side="2" maxlength="50"></textarea>
 						</div>
 					</div>	
 				</div>
-				<button type="button" id="add_card">ADD CARD</button>
+				
+				<div class="edit-answers">
+					<div class="media-answer">
+						<div class="title">CHOOSE ANSWER MEDIA</div>
+						<div class="buttons-answer">
+							<div class="btn-text"></div>
+							<div class="btn-img" data-id="1"></div>
+						</div>
+					</div>
+					<div class="add-answer">
+						<div class="answer-photo" data-id="1" data-side="1"><b>CLICK<br/> TO ADD PHOTO</b></div>
+						<div class="answer-text"> <textarea placeholder="Enter text" name="flip_cards[1][answer1]"></textarea></div>
+						<div class="answer-checkbox">
+							<div class="tag"><label><input class="checkbox" type="checkbox" name="flip_cards[1][answer_check1]" value="Celebrities"><span class="checkbox-custom"></span><span class="label">Correct answer</span></label></div>
+						</div>
+					</div>
+					<div class="add-answer">
+						<div class="answer-photo" data-id="1" data-side="2" ><b>CLICK<br/> TO ADD PHOTO</b></div>
+						<div class="answer-text"> <textarea placeholder="Enter text" name="flip_cards[1][answer2]"></textarea></div>
+						<div class="answer-checkbox">
+							<div class="tag"><label><input class="checkbox" type="checkbox" name="flip_cards[1][answer_check2]" value="Celebrities"><span class="checkbox-custom"></span><span class="label">Correct answer</span></label></div>
+						</div>
+					</div>
+				</div>
+				<div class="edit-questions">
+					<div class="media-questions">CHOOSE QUESTIONS MEDIA</div>
+					<div class="button-add-question"><button class="add-question" type="button">ADD QUESTION</button></div>
+				</div>
+				<div class="edit-quiz-result">
+					<div class="blocks-quiz">
+						<div class="left-block-quiz">
+							<div class="title">QUIZ RESULT</div>
+							<div class="description">
+								Results should be added once your quiz is finished. <br/>
+								A different result will appear based on the number <br/>
+								of correct answers made by the user. Each result <br/>
+								you add will be relevant to a range of correct </br>
+								answers.
+							</div>
+						</div>
+						<div class="right-block-quiz">
+							<div class="result-photo" data-id="1"><b>CLICK</br> TO ADD PHOTO</b></div>
+							<div class="result-photo-desc">Correct answers range: 0 - 1</div>
+							<div class="quiz-title"><input name="flip_cards[1][result_photo_title]" placeholder="Title (80 characters max)" maxlength="80"></div>
+						</div>
+					</div>
+					<div class="quiz-add-result"> <button type="button">ADD RESULT</button></div>
+				</div>
 				<div class="down_butts">
 					<button type="button" id="preview" class="btn-preview">PREVIEW</button>
 					<button type="button" id="save_draft" class="btn-save">SAVE DRAFT</button>
@@ -57,12 +112,16 @@
 				<input name="postID" type="hidden" value="" class="postID" autocomplete="off">
 				<input name="form_flip[form_photo]" type="hidden" value="" class="input-form-photo" autocomplete="off">
 				<input name="form_flip[form_photo_facebook]" type="hidden" value="" class="input-form-photo-facebook" autocomplete="off">
-				<input name="flip_cards[1][type_front]" type="hidden" value="image" class="input-type-front" autocomplete="off" data-id="1">
-				<input name="flip_cards[1][type_back]" type="hidden" value="image" class="input-type-back" autocomplete="off" data-id="1">
+				<input name="flip_cards[1][type_card1]" type="hidden" value="image" class="input-type-card" autocomplete="off" data-id="1" data-side="1">
+				<input name="flip_cards[1][type_card2]" type="hidden" value="image" class="input-type-card" autocomplete="off" data-id="1" data-side="2">
 				<input name="flip_cards[1][img_src1]" type="hidden" value="" class="input-form-img1" autocomplete="off" data-id="1">
 				<input name="flip_cards[1][img_src2]" type="hidden" value="" class="input-form-img2" autocomplete="off" data-id="1">
-				<input name="flip_cards[1][theme1]" type="hidden" value="blue" class="input-form-theme1" autocomplete="off" data-id="1">
-				<input name="flip_cards[1][theme2]" type="hidden" value="blue" class="input-form-theme2" autocomplete="off" data-id="1">
+				<input name="flip_cards[1][youtube_clip1]" type="hidden" value="" class="input-form-clip" autocomplete="off" data-id="1" data-side="1">
+				<input name="flip_cards[1][youtube_clip2]" type="hidden" value="" class="input-form-clip" autocomplete="off" data-id="1" data-side="2">
+				<input name="flip_cards[1][answer_img1]" type="hidden" value="" class="answer_img" autocomplete="off" data-id="1" data-side="1">
+				<input name="flip_cards[1][answer_img2]" type="hidden" value="" class="answer_img" autocomplete="off" data-id="1" data-side="2">
+				<input name="flip_cards[1][answers_type]" type="hidden" value="text" class="input-valtype" autocomplete="off" data-id="1">
+				<input name="flip_cards[1][result_photo_img]" type="hidden" value="text" class="result-photo-inp" autocomplete="off" data-id="1">
 			</div>
 			<div class="right">
 				<div class="title">SOCIAL APPEARANCE</div>
@@ -110,20 +169,28 @@
 					</div>
 				</div>
 				<div class="display_item_numbers">
-					<div class="title">DISPLAY ITEM NUMBERS</div>
-					<div class="sub_title">Choose whether or not to display the item numbers. The numbers will still appear in the creator</div>
+					<div class="title">QUESTION ORDER</div>
+					<div class="sub_title">Which order do you want the questions to be displayed in?</div>
 					<div class="radio">
-						<label><input class="checkbox" type="radio" name="display_item_numbers" value="yes"><span class="checkbox-custom"></span><span class="label">Yes</span></label>
-						<label><input class="checkbox" type="radio" name="display_item_numbers" value="no" checked><span class="checkbox-custom"></span><span class="label">No</span></label>
+						<label><input class="checkbox" type="radio" name="question_order" value="random"><span class="checkbox-custom"></span><span class="label" >Random</span></label>
+						<label><input class="checkbox" type="radio" name="question_order" value="norandom" checked><span class="checkbox-custom"></span><span class="label">User defined</span></label>
 					</div>
 				</div>
-				<div class="down_butts add_flip_cards_butts">
+				<div class="display_item_numbers">
+					<div class="title"> ANSWER ORDER</div>
+					<div class="sub_title">Which order do you want the answers to be displayed in?</div>
+					<div class="radio">
+						<label><input class="checkbox" type="radio" name="answer_order" value="random"><span class="checkbox-custom"></span><span class="label">Random</span></label>
+						<label><input class="checkbox" type="radio" name="answer_order" value="norandom" checked><span class="checkbox-custom"></span><span class="label">User defined</span></label>
+					</div>
+				</div>
+				<div class="down_butts add_trivia_quiz_butts">
 					<button type="button" id="preview" class="btn-preview">PREVIEW</button>
 					<button type="button" id="save_draft" class="btn-save">SAVE DRAFT</button>
 					<button type="button" id="publish" class="btn-publish">PUBLISH</button>
 				</div>
 			</div>
-		</form>
+			</form>
 		</div>
 		<footer>
 			<div class="up">
@@ -165,79 +232,99 @@
 			</div>
 		</div>
 		
-		
 		<div id="preview-modal" class="preview-modal" style="display: none;">
 			<div class="main-preview">
-				<div class="title">FLIP CARD PREVIEW</div>
-				<div class="flipcard_main">
-					<div class="flipcard_main_all">
-						<div class="flipcard_main_title"></div>
-						<div class="flipcard_main_description">
+				<div class="title">TRIVIA QUIZ PREVIEW</div>
+				<div class="trivia_main">
+					<div class="trivia_main_all">
+						<div class="trivia_main_title"></div>
+						<div class="trivia_main_description">
 						</div>
-						<div class="flipcard_main_tags">Tags: <b></b></div>
-						<div class="flipcard_main_author">
+						<div class="trivia_main_tags">Tags: <b></b></div>
+						<div class="trivia_main_author">
 							<img src="img/author.png">
-							<div class="flipcard_main_author_by"> Create by <b>Author...</b><br/>
+							<div class="trivia_main_author_by"> Create by <b></b><br/>
 							on (Waiting for Publish) </div>
 						</div>
 					</div>
 				</div>
 				
-				<div class="flipcard_main_footer">
+				<div class="trivia_main_cards">
+					<div class="trivia_item_title">QUESTION</div>
+					<div class="trivia_main_wrap" data-id="">
+						<div class="trivia_main_front" data-id=""></div>
+						<div class="trivia_main_back" data-id=""></div>
+					</div>
+				</div>
+				<div class="trivia_main_footer">
 				</div>
 				
-				<div class="flipcard_main_buttons">
+				<div class="trivia_main_results" style="display:none;">
+					<div class="photo_res"> 
+					</div>
+					<div class="title"><b></b></div>
+					<div class="score"></div>
+				</div>
+				<div class="trivia_main_buttons">
 					<button type="button" class="btn-save" id="save_draft">SAVE DRAFT</button>
 					<button type="button" class="btn-publish" id="publish">PUBLISH</button>
 				</div>
 			</div>
 		</div>
 		
+		<div id="choose-upload" class="choose-upload" style="display: none;">
+			<div class="modal-title">ADD PHOTO/VIDEO</div>
+			<div class="modal-upload-column">
+				<div class="title"> UPLOAD </div>
+				<div class="buttons-img">
+					<div class="modal-file-icon" onclick="$('input[name=filedata]')[0].click();"><div class="select-file"><input type="file" name="filedata" style="display: none"><div class="modal-text-upl">From File</div></div></div>
+					<div class="modal-file-upl"><div class="modal-url-icon"></div><div class="modal-text-upl" >From URL</div></div>
+					<div class="modal-file-upl"><div class="modal-youtube-icon"></div><div class="modal-text-upl">YouTube Clip</div></div>
+				</div>
+				<div class="modal-video-url">
+					<input type="text" class="upl-input-video-url" placeholder="Enter clip URL">
+					<button type="button" class="upl-video-valid">UPLOAD</button>
+				</div>
+				<div class="size-img-alert">Please make sure you upload an image at least of 200x160 for Landscape</div>
+			</div>
+		</div>
+		
+		<div id="modal-input-youtube" class="modal-input-youtube" style="display: none;">
+			<div class="modal-video-url">
+					<input type="text" class="upl-input-video-url" placeholder="Enter clip URL">
+					<button type="button" class="upl-video-valid">UPLOAD</button>
+			</div>
+		</div>
+		
+		<div id="modal-input-image" class="modal-input-image" style="display: none;">
+			<div class="modal-image-url">
+					<input type="text" class="upl-input-image-url" placeholder="Enter image URL">
+					<button type="button" class="upl-image-valid">UPLOAD</button>
+			</div>
+		</div>
+		
+		
 		<div id="modal-test" class="modal-test" style="display: none;">
 			<div class="popup__body"><div class="js-img"></div></div>
-			<div style="margin: 0 0 5px; text-align: center;">
+			<div>
 				<div class="modal-text-photo">ADD PHOTO</div>
 				<div class="modal-upload-column">
 					<p> UPLOAD IMAGE </p>
 					<div class="select-file"> <div class="modal-file-icon"></div><input type="file" name="filedata"></div>
 					<div class="modal-upload-url">
 						<p>or</p>
-						<input type="text" class="upload-img-url" placeholder="Enter URL">	
-						<button type="button" class="upload-img-url-btn">GO</button>
+						<input type="text" class="upload-img-url upl-input-image-url" placeholder="Enter URL">	
+						<button type="button" class="upload-img-url-btn upl-image-valid">GO</button>
 					</div>
 				</div>
 			</div>
 		</div>
+		
+		
 	<script>
 	var token = '{!! csrf_token() !!}';
-	tinymce_init = 0;
 	</script>
 	<script src="/js/footer.min.js"></script>
-	<script src="http://cloud.tinymce.com/stable/tinymce.min.js?apiKey=me1xx87jvui3cahvnslljl2cp1xb1ivawta8z8je4iesro99"></script>
-	<script>
-	tinymce.init({
-	  selector: 'textarea#content_textarea',
-	  height: 500,
-	  theme: 'modern',
-	  plugins: [
-	    'advlist autolink lists link image charmap print preview hr anchor pagebreak',
-	    'searchreplace wordcount visualblocks visualchars code fullscreen',
-	    'insertdatetime media nonbreaking save table contextmenu directionality',
-	    'emoticons template paste textcolor colorpicker textpattern imagetools codesample toc'
-	  ],
-	  toolbar1: 'undo redo | insert | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
-	  toolbar2: 'print preview media | forecolor backcolor emoticons | codesample',
-	  image_advtab: true,
-	  templates: [
-	    { title: 'Test template 1', content: 'Test 1' },
-	    { title: 'Test template 2', content: 'Test 2' }
-	  ],
-	  content_css: [
-	    '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
-	    '//www.tinymce.com/css/codepen.min.css'
-	  ]
-	 });
-	</script>
-	<script src="/js/script3.js"></script>
+	<script src="/js/trivia.js"></script>
 	</body>
 </html>

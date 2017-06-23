@@ -9,31 +9,32 @@ use Auth;
 
 class ChannelController extends Controller
 {
-	public function viewChannel($channel_id) {
-		$channel_id = (int)$channel_id;
-
-		if($channel_id != null && $channel_id > 0) {
-			$user_info = DB::select('select id, name, photo, cover_photo, public_info from users where id = ?', [$channel_id]);
+	public function viewChannel($channel_name) {
+		if( strlen($channel_name) >= 3 && strlen($channel_name) <= 255) {
+			if(!preg_match('|^[A-Z0-9]+$|i', $channel_name)) {
+				return view('home');
+			}
+			$user_info = DB::select('select id, name, photo, cover_photo, public_info from users where name = ?', [$channel_name]);
 			if(count($user_info) != 0) {
 				$types = ['trivia', 'story', 'flipcards', 'rankedlist', 'gif'];
 				$channel_content = DB::table('posts')
-									->where('user_id', $channel_id)
+									->where('user_id', $user_info[0]->id)
 									->where('isDraft', 'publish')
 									->whereIn('type', $types)
 									->orderBy('created_at', 'desc')
 									->skip(0)->take(10)
-									->get(['id', 'description_title', 'description_text', 'description_image', 'type', 'created_at']);
+									->get(['id', 'author_name', 'url', 'description_title', 'description_text', 'description_image', 'type', 'created_at']);
 
 				$show_more = (count($channel_content) == 10) ? true : false;
 
 				$user_id = Auth::user()->id;
 
 				// is subscribe? 
-				if($channel_id != $user_id) {
+				if($user_info[0]->id!= $user_id) {
 					$checkSubscribes = DB::table('subscribes')
                      ->select('user_id', 'channel_id')
                      ->where('user_id', '=', $user_id)
-                     ->where('channel_id', '=', $channel_id)
+                     ->where('channel_id', '=', $user_info[0]['id'])
                      ->get();
 
                     $isSubscribe = (count($checkSubscribes) == 0) ? false : true;
@@ -43,7 +44,7 @@ class ChannelController extends Controller
 				}
 
 				// count subscribers
-				$subscribers = DB::table('subscribes')->where('channel_id', '=', $channel_id)->count();
+				$subscribers = DB::table('subscribes')->where('channel_id', '=', $user_info[0]->id)->count();
 
 				return view('channel_page', ['user_info' => $user_info[0], 'channel_content' => $channel_content, 'show_more' => $show_more, 
 											 'isSubscribe' => $isSubscribe, 'subscribers' => $subscribers]);
@@ -67,7 +68,7 @@ class ChannelController extends Controller
 
 		$skip = ($multiplier == 1) ? 0 : $multiplier * 10 - 10;
 
-		$correct_names = ['flipcards', 'trivia', 'rankedlist', 'story', 'gif']; 
+		$correct_names = ['flipcards', 'trivia', 'rankedlist', 'story', 'gif', 'snip']; 
 
 		if(is_array($types) && count($types) != 0) {
 			foreach ($types as $key => $value) {
@@ -84,7 +85,7 @@ class ChannelController extends Controller
 							->whereIn('type', $types)
 							->orderBy('created_at', 'desc')
 							->skip($skip)->take(10)
-							->get(['id', 'description_title', 'description_text', 'description_image', 'type', 'created_at']);
+							->get(['id', 'author_name', 'url', 'description_title', 'description_text', 'description_image', 'type', 'created_at']);
 				
 				if(count($records) != 0) {
 
@@ -94,7 +95,8 @@ class ChannelController extends Controller
 						'story'      => 'STORY',
 						'flipcards'  => 'FLIP CARD',
 						'trivia'     => 'TRIVIA CARD',
-						'gif'        => 'GIF'
+						'gif'        => 'GIF',
+						'snip'       => 'SNIP'
 					];
 
 					$current_date = new DateTime();
@@ -113,6 +115,8 @@ class ChannelController extends Controller
 						$json[] = 
 						[
 							'id' => $value->id,
+							'author_name' => $value->author_name,
+							'url'         => $value->url,
 							'description_title' => $value->description_title,
 							'description_text' => $value->description_text,
 							'description_image' => $value->description_image,

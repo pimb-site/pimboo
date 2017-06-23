@@ -53,9 +53,12 @@ class AuthController extends Controller
                     } else {
                         $ref = 0;
                     }
+
+                    $name = str_random(20);
+
                     $User = new User;
 
-                    $User->name = $user->name;
+                    $User->name = $name;
                     $User->email = $user->id.$provider;
                     $User->refferal = $ref;
                     $User->social_type = $provider;

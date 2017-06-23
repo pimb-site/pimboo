@@ -5,13 +5,13 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Pimboo Snip</title>
-	<link href="css/style.min.css" rel="stylesheet">
-	<link href="css/snip.css" rel="stylesheet">
+	<link href="/css/style.min.css" rel="stylesheet">
+	<link href="/css/snip.css" rel="stylesheet">
 </head>
 	<body class="tools_create_page">
 		@include('header')
 		<div class="body">
-			<form id="form_create_snip" action="/create-snip-link" method="POST">
+			<form id="form_create_snip" action="/create/snip/createlink" method="POST">
 			<input type="hidden" name="_token" value="{{ csrf_token() }}">
 			<div class="left">
 				<div class="create-snip">

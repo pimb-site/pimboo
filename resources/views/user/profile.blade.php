@@ -52,7 +52,7 @@
 								<div class="input"><img src="/img/profile_google_plus_icon.png"><input value="{{ $user->google_pluse_link }}" type="text" name="google_pluse_link" placeholder="http://plus.google.com/MyGooglePlus"></div>
 							</div>
 							<div class="end-buttons">
-								<button type="button" onclick='window.location = "/channel/{{ Auth::id() }}"'>VIEW PROFILE</button>
+								<button type="button" onclick='window.location = "/{{ Auth::user()->name }}"'>VIEW PROFILE</button>
 								<button type="submit" class="save">SAVE CHANGES</button>
 							</div>
 						</div>

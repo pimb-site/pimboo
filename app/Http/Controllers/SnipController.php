@@ -9,15 +9,14 @@ use DB;
 
 class SnipController extends Controller {
 
-	public function createPage() {
-		return (Auth::guest()) ? view('auth/login') : view('create_snip');
+	public function displayCreatePage() {
+		return (Auth::guest()) ? view('auth/login') : view('ToolsCreate.snip');
 	}
 
 	public function createLink() {
-		if (Auth::guest()) return Response::json(['success' => false, 'text' => 'auth']);
+		if (Auth::guest()) return Response::json(['success' => false, 'errorText' => 'auth']);
 
 		$input = Input::all();
-		$snip_id = uniqid();
 
 		$url = $input['url'];
 
@@ -34,6 +33,11 @@ class SnipController extends Controller {
 			return Response::json(['success' => false, 'text' => 'Incorrect URL']);
 		}
 
+		// Content(iframe url)
+		$content = ['iframe_url' => $url];
+		$content = serialize($content);
+
+		// TAGS
 		$tags = [];
 		if(isset($input['tags'])) {
 			if(count($input['tags']) > 0) {
@@ -41,56 +45,23 @@ class SnipController extends Controller {
 					$tags[] = $value;
 				}
 			}
-		}
-		
+		}		
 		$tags = serialize($tags);
 
-		DB::table('snips')->insert(
-		    ['user_id' => Auth::user()->id, 'tags' => $tags, 'iframe_url' => $url, 'snip_id' => $snip_id]
+		// OPTIONS
+		$options = [];
+		$options = serialize($options);
+
+		$url_snip = 'post-snip-'.strtolower(str_random(30)).'-'.date('Y-d-m');
+
+		$id = DB::table('posts')->insertGetId(
+			['user_id' => Auth::user()->id, 'author_name' => Auth::user()->name, 'url' => $url_snip, 'description_title' => 'snip', 'description_text' => 'snip',
+			'content' => $content, 'description_image' => 'snip.png', 'image_facebook' => 'snip.png',
+			'type' => 'snip', 'isDraft' => 'publish', 'tags' => $tags, 'permission' => 'public', 'options' => $options]
 		);
 
-
-		$link = '/snip/'.$snip_id;
+		$link = '/'.Auth::user()->name.'/'.$url_snip;
 
 		return Response::json(['success' => true, 'link' => $link]);
 	}
-
-	public function viewLink($link) {
-		if($link == "") return redirect('/');
-
-		$snips = DB::table('snips')
-                    ->select('user_id', 'iframe_url', 'tags')
-                    ->where('snip_id', '=', $link)
-                    ->get();
-
-        if(count($snips) != 0) {
-
-        	$tags = unserialize($snips[0]->tags);
-
-        	if(count($tags) == 0) {
-        		$tag_name = "notag";
-        	} else {
-        		$tag_num = rand (0, count($tags) - 1 );
-        		$tag_name = strtolower($tags[$tag_num]);
-        	}
-
-        	$adv = DB::select("select * from settings where setting = ?", ['snips']);
-			$adv = unserialize($adv['0']->value);
-
-			$adv = [
-				'href' => $adv[$tag_name]['href'],
-				'url'  => $adv[$tag_name]['url'],
-				'text' => $adv[$tag_name]['text']
-			];
-
-        	return view('view_snip', ['snip' => $snips[0],  'adv' => $adv]);
-        } else {
-        	return redirect('/');
-        }
-	}
-
-	public function successID($id) {
-        return view('success_snip', ['id' => $id]);
-	}
-
 }

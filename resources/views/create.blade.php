@@ -12,7 +12,7 @@
 						<div class="text">Create Stories That Everyone Loves to Read & Share!</div>
 					</div>
 					<div class="right">
-						<a class="butt" href="/add_story">CREATE</a>
+						<a class="butt" href="create/story">CREATE</a>
 						<a class="butt more_info">MORE INFO</a>
 					</div>
 				</div>
@@ -22,7 +22,7 @@
 						<div class="text">Create Your Own Fun GIF's & Share!</div>
 					</div>
 					<div class="right">
-						<a class="butt" href="/video_to_gif">CREATE</a>
+						<a class="butt" href="create/gifmaker">CREATE</a>
 						<a class="butt more_info">MORE INFO</a>
 					</div>
 				</div>
@@ -32,7 +32,7 @@
 						<div class="text">Overlay ads on your social shares and profit!</div>
 					</div>
 					<div class="right">
-						<a class="butt" href="/create-snip">CREATE</a>
+						<a class="butt" href="/create/snip">CREATE</a>
 						<a class="butt more_info">MORE INFO</a>
 					</div>
 				</div>
@@ -42,7 +42,7 @@
 						<div class="text">Create Fun "Top Ten" Lists That Everyone Loves to Read & Share!</div>
 					</div>
 					<div class="right">
-						<a class="butt" href="/add_ranked_list">CREATE</a>
+						<a class="butt" href="/create/rankedlist">CREATE</a>
 						<a class="butt more_info">MORE INFO</a>
 					</div>
 				</div>
@@ -52,7 +52,7 @@
 						<div class="text">What is hiding on the other side? Click to reveal.</div>
 					</div>
 					<div class="right">
-						<a class="butt" href="/add_flip_cards">CREATE</a>
+						<a class="butt" href="/create/flipcards">CREATE</a>
 						<a class="butt more_info">MORE INFO</a>
 					</div>
 				</div>

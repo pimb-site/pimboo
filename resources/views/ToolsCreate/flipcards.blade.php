@@ -4,37 +4,65 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Pimboo Story</title>
-	<link href="css/style.min.css" rel="stylesheet">
-	<link href="css/flip_new.css" rel="stylesheet">
+	<title>Pimboo Flip Cards</title>
+	<link href="/css/style.min.css" rel="stylesheet">
+	<link href="/test/jcrop/jquery.Jcrop.min.css" rel="stylesheet" type="text/css"/>
 </head>
 	<body class="tools_create_page">
 		@include('header')
 		<div class="body">
-		<form action="/save_story" method="post" id="form_upload_cards">
+		<form action="/create/flipcards/send" method="post" id="form_upload_cards">
 			<input type="hidden" name="_token" value="{{ csrf_token() }}">
 			<div class="left">
-				<div class="title">STORY CREATION</div>
-				<div class="sub_title">Add all necessary information to create new story article</div>
+				<div class="title">FLIP CARD CREATION</div>
+				<div class="sub_title">Add all necessary information to create new flip cards article</div>
 				<div class="card_info">
 					<div class="top">
 						<div class="photo">CLICK<br>TO ADD PHOTO</div>
 						<div class="text_info">
-							<input type="text" name="form_story[form_story_cards_title]" placeholder="Story title" autocomplete="off">
-							<input type="text" name="form_story[form_description]" placeholder="Story description" autocomplete="off">
+							<input type="text" name="form_flip[form_flip_cards_title]" placeholder="Flip cards title" autocomplete="off">
+							<input type="text" name="form_flip[form_description]" placeholder="Flip cards description" autocomplete="off">
+							<input type="text" name="flip_cards[1][form_item_title]" placeholder="Enter item title (45 symbols max)" maxlength="45" autocomplete="off">
 						</div>
 					</div>
+					<textarea name="form_flip[form_footer]" placeholder="Footer text (1500 symbols max)" maxlength="1500" autocomplete="off"></textarea>
 				</div>
-				<textarea id="content_textarea" name="form_story[content]"></textarea>
-
+				<div class="buttons">
+					<button type="button" class="front_card" data-id="1">FRONT CARD</button>
+					<button type="button" class="back_card" data-id="1">BACK CARD</button>
+				</div>
+				<div class="editor" data-id="1">
+					<div class="front-card" data-id="1">
+						<div class="title">CLICK TO ADD PHOTO OR TEXT</div>
+						<div class="butts">
+							<div class="add_image" data-id="1" data-side="1"></div>
+							<div class="add_text" data-id="1" data-side="1"></div>
+						</div>
+					</div>
+					<div class="back-card" data-id="1">
+						<div class="title">CLICK TO ADD PHOTO OR TEXT</div>
+						<div class="butts">
+							<div class="add_image" data-id="1" data-side="2"></div>
+							<div class="add_text" data-id="1" data-side="2"></div>
+						</div>
+					</div>	
+				</div>
+				<button type="button" id="add_card">ADD CARD</button>
 				<div class="down_butts">
-					<button type="button" id="save_draft_story" class="btn-save">SAVE DRAFT</button>
-					<button type="button" id="publish_story" class="btn-publish">PUBLISH</button>
+					<button type="button" id="preview" class="btn-preview">PREVIEW</button>
+					<button type="button" id="save_draft" class="btn-save">SAVE DRAFT</button>
+					<button type="button" id="publish" class="btn-publish">PUBLISH</button>
 				</div>
 				<input name="isDraft" type="hidden" value="publish" class="isDraft" autocomplete="off">
 				<input name="postID" type="hidden" value="" class="postID" autocomplete="off">
-				<input name="form_story[form_photo]" type="hidden" value="" class="input-form-photo" autocomplete="off">
-				<input name="form_story[form_photo_facebook]" type="hidden" value="" class="input-form-photo-facebook" autocomplete="off">
+				<input name="form_flip[form_photo]" type="hidden" value="" class="input-form-photo" autocomplete="off">
+				<input name="form_flip[form_photo_facebook]" type="hidden" value="" class="input-form-photo-facebook" autocomplete="off">
+				<input name="flip_cards[1][type_front]" type="hidden" value="image" class="input-type-front" autocomplete="off" data-id="1">
+				<input name="flip_cards[1][type_back]" type="hidden" value="image" class="input-type-back" autocomplete="off" data-id="1">
+				<input name="flip_cards[1][img_src1]" type="hidden" value="" class="input-form-img1" autocomplete="off" data-id="1">
+				<input name="flip_cards[1][img_src2]" type="hidden" value="" class="input-form-img2" autocomplete="off" data-id="1">
+				<input name="flip_cards[1][theme1]" type="hidden" value="blue" class="input-form-theme1" autocomplete="off" data-id="1">
+				<input name="flip_cards[1][theme2]" type="hidden" value="blue" class="input-form-theme2" autocomplete="off" data-id="1">
 			</div>
 			<div class="right">
 				<div class="title">SOCIAL APPEARANCE</div>
@@ -89,7 +117,8 @@
 						<label><input class="checkbox" type="radio" name="display_item_numbers" value="no" checked><span class="checkbox-custom"></span><span class="label">No</span></label>
 					</div>
 				</div>
-				<div class="down_butts story_butts">
+				<div class="down_butts add_flip_cards_butts">
+					<button type="button" id="preview" class="btn-preview">PREVIEW</button>
 					<button type="button" id="save_draft" class="btn-save">SAVE DRAFT</button>
 					<button type="button" id="publish" class="btn-publish">PUBLISH</button>
 				</div>
@@ -139,7 +168,7 @@
 		
 		<div id="preview-modal" class="preview-modal" style="display: none;">
 			<div class="main-preview">
-				<div class="title">STORY PREVIEW</div>
+				<div class="title">FLIP CARD PREVIEW</div>
 				<div class="flipcard_main">
 					<div class="flipcard_main_all">
 						<div class="flipcard_main_title"></div>
@@ -147,7 +176,7 @@
 						</div>
 						<div class="flipcard_main_tags">Tags: <b></b></div>
 						<div class="flipcard_main_author">
-							<img src="img/author.png">
+							<img src="/img/author.png">
 							<div class="flipcard_main_author_by"> Create by <b>Author...</b><br/>
 							on (Waiting for Publish) </div>
 						</div>
@@ -180,34 +209,34 @@
 			</div>
 		</div>
 	<script>
-	var token = '{!! csrf_token() !!}';
+	tinymce_init = 0;
 	</script>
 	<script src="/js/footer.min.js"></script>
 	<script src="http://cloud.tinymce.com/stable/tinymce.min.js?apiKey=me1xx87jvui3cahvnslljl2cp1xb1ivawta8z8je4iesro99"></script>
 	<script>
-	tinymce_init = 1;
 	tinymce.init({
-  selector: 'textarea#content_textarea',
-  height: 500,
-  theme: 'modern',
-  plugins: [
-    'advlist autolink lists link image charmap print preview hr anchor pagebreak',
-    'searchreplace wordcount visualblocks visualchars code fullscreen',
-    'insertdatetime media nonbreaking save table contextmenu directionality',
-    'emoticons template paste textcolor colorpicker textpattern imagetools codesample toc'
-  ],
-  toolbar1: 'undo redo | insert | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
-  toolbar2: 'print preview media | forecolor backcolor emoticons | codesample',
-  image_advtab: true,
-  templates: [
-    { title: 'Test template 1', content: 'Test 1' },
-    { title: 'Test template 2', content: 'Test 2' }
-  ],
-  content_css: [
-    '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
-    '//www.tinymce.com/css/codepen.min.css'
-  ]
- });</script>
-	<script src="/js/script3.js"></script>
+	  selector: 'textarea#content_textarea',
+	  height: 500,
+	  theme: 'modern',
+	  plugins: [
+	    'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+	    'searchreplace wordcount visualblocks visualchars code fullscreen',
+	    'insertdatetime media nonbreaking save table contextmenu directionality',
+	    'emoticons template paste textcolor colorpicker textpattern imagetools codesample toc'
+	  ],
+	  toolbar1: 'undo redo | insert | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+	  toolbar2: 'print preview media | forecolor backcolor emoticons | codesample',
+	  image_advtab: true,
+	  templates: [
+	    { title: 'Test template 1', content: 'Test 1' },
+	    { title: 'Test template 2', content: 'Test 2' }
+	  ],
+	  content_css: [
+	    '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
+	    '//www.tinymce.com/css/codepen.min.css'
+	  ]
+	 });
+	</script>
+	<script src="/js/flipcards.js"></script>
 	</body>
 </html>

@@ -5,12 +5,13 @@ use App\Report;
 use Auth;
 use Illuminate\Http\Request;
 use App\User;
+use Input;
 
 class ReportsController extends Controller
 {
 	
     public function Add(Request $request) {
-        $input = \Input::all();
+        $input = Input::all();
         if ($input['action'] == 'input') {
             $report = new Report;
             $report->post_id = $input['post_id'];

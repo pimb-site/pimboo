@@ -1,5 +1,6 @@
 $(document).ready(function () {
 	
+	token = '{!! csrf_token() !!}';
 	side_fc       = 1;
 	count_fc      = 1;
 	current_id    = 1;
@@ -24,10 +25,10 @@ $(document).ready(function () {
 	$('.upload-img-url-btn').click(function() {
 		value_url = $('.upload-img-url').val();
 		$.modal().close();
-		
+		var token = $('input[name="_token"]').val();
 		if(value_url != "") {
 			$.ajax({
-                url: 'upload/img_url',
+                url: '/create/addition/saveimageonURL',
 				data: {'image_url': value_url, '_token': token},
                 type: 'POST',
             }).success(function (result) {
@@ -90,7 +91,7 @@ $(document).ready(function () {
 								+'</div></div></div>');
 							if(value.type_front == "image") {
 								if(value.front_card == null) value.front_card = "../img/no-img.jpg";
-								$('.flipcard_main_front[data-id="'+i+'"]').append('<img class="image-card" src="temp/'+value.front_card+'" />');
+								$('.flipcard_main_front[data-id="'+i+'"]').append('<img class="image-card" src="/temp/'+value.front_card+'" />');
 							} else {
 								switch(value.theme_front) {
 									case 'blue':
@@ -120,7 +121,7 @@ $(document).ready(function () {
 							
 							if(value.type_back == "image") {
 								if(value.back_card == null) value.back_card = "../img/no-img.jpg";
-								$('.flipcard_main_back[data-id="'+i+'"]').append('<img class="image-card" src="temp/'+value.back_card+'" />');
+								$('.flipcard_main_back[data-id="'+i+'"]').append('<img class="image-card" src="/temp/'+value.back_card+'" />');
 								
 							} else {
 								switch(value.theme_back) {
@@ -247,7 +248,7 @@ $(document).ready(function () {
             dataType: "json",
             success: function (data) {
                 if (data.success == true) {
-					url = "/success/"+data.id;
+					url = '/success'+data.link;
 					$( location ).attr("href", url);
                 } else {
                     $.each(data.errors, function (i, value) {
@@ -272,7 +273,7 @@ $(document).ready(function () {
             dataType: "json",
             success: function (data) {
                 if (data.success == true) {
-					url = "/success/"+data.id;
+					url = "/success"+data.link;
 					$( location ).attr("href", url);
                 } else {
                     $.each(data.errors, function (i, value) {
@@ -428,10 +429,10 @@ $(document).ready(function () {
 	   }).open();
 	});
 
-
 	token = $('input[name="_token"]').val();
+
 	$('.select-file').fileapi({
-	   url: 'test_upload_end',
+	   url: '/create/addition/saveimage',
 	   autoUpload: false,
 	   accept: 'image/*',
 	   data: {'_token': token},

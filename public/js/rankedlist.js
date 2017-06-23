@@ -7,6 +7,7 @@ $(document).ready(function () {
 	min_sizew_fc  = 10;
 	var ScreenWidth = screen.width;
 	var maxSizeW;
+	var token = '{!! csrf_token() !!}';
 	if (ScreenWidth >= 768) {
 		ScreenWidth = '50%';
 		maxSizeW    = 500;
@@ -24,7 +25,7 @@ $(document).ready(function () {
 		$.modal().close();
 		if(value_url != '') {
 			$.ajax({
-                url: 'upload/img_url',
+                url: '/create/addition/saveimageonURL',
 				data: {'image_url': value_url, '_token': token},
                 type: 'POST',
             }).success(function (result) {
@@ -32,17 +33,17 @@ $(document).ready(function () {
 					if(image_type_fc == 1) {
 						$('.photo').empty();
 						$('.photo').css({'padding-top': '0px'});
-						$('.photo').prepend("<img class='main-photo' src='temp/" + result.file + "'  />");
+						$('.photo').prepend("<img class='main-photo' src='/temp/" + result.file + "'  />");
 						$('.input-form-photo').val(result.file); 
 					} else if (image_type_fc == 2) {
 					   $('.add_fb_img').empty();
 					   $('.add_fb_img').css({'padding-top': '0px'});
-					   $('.add_fb_img').prepend("<img class='facebook-photo' src='temp/" + result.file + "'  />");
+					   $('.add_fb_img').prepend("<img class='facebook-photo' src='/temp/" + result.file + "'  />");
 					   $('.input-form-photo-facebook').val(result.file);
 					} else if(image_type_fc == 3) {
 						if(side_fc == 1) {
 							$('.main-remove-front[data-id="'+current_id+'"]').empty();
-							$('.front-card[data-id="'+current_id+'"]').prepend("<img style='position:absolute;' class='image-card' src='temp/" + result.file + "'  />");
+							$('.front-card[data-id="'+current_id+'"]').prepend("<img style='position:absolute;' class='image-card' src='/temp/" + result.file + "'  />");
 							$('.input-form-img1[data-id="'+current_id+'"]').val(result.file);
 							$('.input-type-card[data-id="'+current_id+'"][data-side="1"]').val('image');
 						} 
@@ -85,7 +86,7 @@ $(document).ready(function () {
 		
 		if(value_url != '') {
 			$.ajax({
-                url: 'upload/valid_url',
+                url: '/create/addition/getInfoYoutube',
 				data: {'video_url': value_url, '_token': token},
                 type: 'POST',
             }).success(function (response) {
@@ -95,7 +96,6 @@ $(document).ready(function () {
 					   $('.main-remove-front[data-id="'+current_id+'"]').empty();
 					   $('.front-card[data-id="'+current_id+'"]').prepend("<img style='position:relative; margin-top:157px; margin-left: 324px; opacity: 0.5' src='/img/movie_icon.png'  />");
 					   $('.front-card[data-id="'+current_id+'"]').prepend("<img style='position:absolute;' class='image-card' src='"+response.thumbnail_url+"'  />");
-					   $('.type-caption[data-id="'+current_id+'"][data-side="1"]').css({'margin-top': '60px'})
 					   $('.input-form-clip[data-id="'+current_id+'"][data-side="1"]').val(value_url);
 					   $('.input-type-card[data-id="'+current_id+'"][data-side="1"]').val('video');
 				   }
@@ -153,7 +153,7 @@ $(document).ready(function () {
 
 							if(value.type_card_front == "image") {
 								if(value.front_card == null) value.front_card = "../img/no-img.jpg";
-								html_trivia += '<div class="trivia_main_front" data-id="'+i+'"><img class="image-card" style="position:absolute;" src="temp/'+value.front_card+'" />';
+								html_trivia += '<div class="trivia_main_front" data-id="'+i+'"><img class="image-card" style="position:absolute;" src="/temp/'+value.front_card+'" />';
 								html_trivia += '<div class="trivia_main_caption">'+value.caption1+'</div></div>';
 							} else {
 								html_trivia += '<div class="trivia_main_front" data-id="'+i+'">'+value.youtube_clip1;
@@ -201,7 +201,7 @@ $(document).ready(function () {
             dataType: "json",
             success: function (data) {
                 if (data.success == true) {
-					url = "/success/"+data.id;
+					url = "/success"+data.link;
 					$( location ).attr("href", url);
                 } else {
                     $.each(data.errors, function (i, value) {
@@ -279,7 +279,7 @@ $(document).ready(function () {
 	
 	token = $('input[name="_token"]').val();
 	$('.select-file').fileapi({
-	   url: 'test_upload_end',
+	   url: '/create/addition/saveimage',
 	   autoUpload: false,
 	   accept: 'image/*',
 	   data: {'_token': token},
@@ -291,18 +291,18 @@ $(document).ready(function () {
 		   if(image_type_fc == 1) {
 			   $('.photo').empty();
 			   $('.photo').css({'padding-top': '0px'});
-			   $('.photo').prepend("<img class='main-photo' src='temp/" + result.file + "'  />");
+			   $('.photo').prepend("<img class='main-photo' src='/temp/" + result.file + "'  />");
 			   $('.input-form-photo').val(result.file);
 			   
 		   } else if (image_type_fc == 2) {
 			   $('.add_fb_img').empty();
 			   $('.add_fb_img').css({'padding-top': '0px'});
-			   $('.add_fb_img').prepend("<img class='facebook-photo' src='temp/" + result.file + "'  />");
+			   $('.add_fb_img').prepend("<img class='facebook-photo' src='/temp/" + result.file + "'  />");
 			   $('.input-form-photo-facebook').val(result.file);
 		   } else if(image_type_fc == 3) {
 			   if(side_fc == 1) {
 				   $('.main-remove-front[data-id="'+current_id+'"]').empty();
-				   $('.front-card[data-id="'+current_id+'"]').prepend("<img style='position:absolute;' class='image-card' src='temp/" + result.file + "'  />");
+				   $('.front-card[data-id="'+current_id+'"]').prepend("<img style='position:absolute;' class='image-card' src='/temp/" + result.file + "'  />");
 				   $('.input-form-img1[data-id="'+current_id+'"]').val(result.file);
 				   $('.input-type-card[data-id="'+current_id+'"][data-side="1"]').val('image');
 			   }
@@ -347,7 +347,4 @@ $(document).ready(function () {
 		  }
 	    },
     });
-	
-	
-  
 });

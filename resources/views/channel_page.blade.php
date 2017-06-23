@@ -54,13 +54,13 @@
 							</div>
 						</div>
 						<div class="post-right">
-							<div class="title"><a href="{{ url('/viewID/'.$post->id) }}">{{ $post->description_title }}</a></div>
+							<div class="title"><a href="{{ url('/'.$post->author_name.'/'.$post->url) }}">{{ $post->description_title }}</a></div>
 							<div class="description">{{ $post->description_text }}</div>
 							<div class="share">Share this <a href="#">{{ $aType[$post->type] }}</a></div>
 							<div class="share-buttons">
-								<button data-title="{{ $post->description_title }}" data-url="{{ url('/viewID/'.$post->id) }}" data-type="fb" class="butt-for-sharing"><img src="/img/view_fb.png"></button>
-								<button data-title="{{ $post->description_title }}" data-url="{{ url('/viewID/'.$post->id) }}" data-type="tw" class="butt-for-sharing"><img src="/img/view_twitter.png"></button>
-								<button data-title="{{ $post->description_title }}" data-url="{{ url('/viewID/'.$post->id) }}" data-type="li" class="butt-for-sharing"><img src="/img/view_linkedin.png"></button>
+								<button data-title="{{ $post->description_title }}" data-url="{{ url('/'.$post->author_name.'/'.$post->url) }}" data-type="fb" class="butt-for-sharing"><img src="/img/view_fb.png"></button>
+								<button data-title="{{ $post->description_title }}" data-url="{{ url('/'.$post->author_name.'/'.$post->url) }}" data-type="tw" class="butt-for-sharing"><img src="/img/view_twitter.png"></button>
+								<button data-title="{{ $post->description_title }}" data-url="{{ url('/'.$post->author_name.'/'.$post->url) }}" data-type="li" class="butt-for-sharing"><img src="/img/view_linkedin.png"></button>
 								<button><img src="/img/view_link.png"></button>
 								<button class="get-link">GET LINK</button>
 							</div>
@@ -99,7 +99,7 @@
 					<div class="filter">
 						<div class="title">FILTER</div>
 						<div class="text">Choose cards</div>
-						<form action="/channel-filter" method="post" id="channel-filter">
+						<form action="/channel/filter" method="post" id="channel-filter">
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
 						<input type="hidden" name="channel_id" value="{{ $user_info->id }}" />
 						<input type="hidden" name="multiplier" value="1" />
@@ -125,6 +125,10 @@
 	    					<div class="item">
 								<input type="checkbox" id="test5" value="rankedlist" name="types[]" checked autocomplete="off"/>
 		    					<label for="test5">Ranked list</label>
+	    					</div>
+	    					<div class="item">
+								<input type="checkbox" id="test6" value="snip" name="types[]" checked autocomplete="off"/>
+		    					<label for="test6">Snip</label>
 	    					</div>
 						</div>
 						</form>

@@ -46,26 +46,26 @@ Home
                     <div class="posts">
                         <div class="head">FEATURED POSTS</div>
                         <div class="left">
-                            <div class="img"><a href="/viewID/{{ $main_post->id }}"><img width="750px" height="445px" src="/uploads/{{ $main_post->description_image }}" /></a></div>
-                            <div class="title"><a href="/viewID/{{ $main_post->id }}">{{ $main_post->description_title }}</a></div>
+                            <div class="img"><a href="/{{ $main_post->author_name.'/'.$main_post->url }}"><img width="750px" height="445px" src="/uploads/{{ $main_post->description_image }}" /></a></div>
+                            <div class="title"><a href="/{{ $main_post->author_name.'/'.$main_post->url }}">{{ $main_post->description_title }}</a></div>
                             <div class="text">{{ $main_post->description_text }}</div>
                             <div class="info distab">
-                                <!--<div class="time"><a href="/viewID/{{ $main_post->id }}"><?php echo date("F j, Y", strtotime($main_post->created_at));  ?></a></div>-->
-                                <a href="/viewID/{{ $main_post->id }}" class="readmore">Read More >></a>
+                                <!--<div class="time"><a href="/viewID/-#- $main_post->id }}"><?php //echo date("F j, Y", strtotime($main_post->created_at));  ?></a></div>-->
+                                <a href="/{{ $main_post->author_name.'/'.$main_post->url }}" class="readmore">Read More >></a>
                             </div>
                         </div>
                         <div class="right">
                             @foreach ($posts as $post)
                                 <div class="post">
-                                    <a class="post_name" href="/viewID/{{ $post->id }}">{{ $post->description_title }}</a>
-                                    <a class="post_text" href="/viewID/{{ $post->id }}">{{ $post->description_text }}</a>
+                                    <a class="post_name" href="{{ '/'.$post->author_name.'/'.$post->url }}">{{ $post->description_title }}</a>
+                                    <a class="post_text" href="{{ '/'.$post->author_name.'/'.$post->url }}">{{ $post->description_text }}</a>
                                     <div class="posting">
                                         <span class="removing">
                                             <span class="sharing">SHARE &<br>PROFIT:</span>
-                                            <a data-title="{{ $post->description_title }}" data-url="{{ url('/viewID/'.$post->id) }}" data-type="fb"  class="butt-for-sharing facebook" href=""></a>
-                                            <a data-title="{{ $post->description_title }}" data-url="{{ url('/viewID/'.$post->id) }}" data-type="tw"  class="butt-for-sharing twitter" href=""></a>
-                                            <a data-title="{{ $post->description_title }}" data-url="{{ url('/viewID/'.$post->id) }}" data-type="li"  class="butt-for-sharing linkedin" href=""></a>
-                                            <button class="get_link" data-href="{{ url('/viewID/'.$post->id) }}">GET LINK</button>
+                                            <a data-title="{{ $post->description_title }}" data-url="{{ '/'.$post->author_name.'/'.$post->url }}" data-type="fb"  class="butt-for-sharing facebook" href=""></a>
+                                            <a data-title="{{ $post->description_title }}" data-url="{{ '/'.$post->author_name.'/'.$post->url }}" data-type="tw"  class="butt-for-sharing twitter" href=""></a>
+                                            <a data-title="{{ $post->description_title }}" data-url="{{ '/'.$post->author_name.'/'.$post->url }}" data-type="li"  class="butt-for-sharing linkedin" href=""></a>
+                                            <button class="get_link" data-href="{{ '/'.$post->author_name.'/'.$post->url }}">GET LINK</button>
                                         </span>
                                         <span class="link">
                                             <span class="link_in">COPIED TO YOUR<br>CLIPBOARD</span>
@@ -83,8 +83,8 @@ Home
                 <div class="headlines">
                     @foreach ($latest as $post)
                     <div class="headline">
-                        <a href="/viewID/{{ $post->id }}" class="img"><img width="360px" height="309px" src="/uploads/{{ $post->description_image }}" /></a>
-                        <a href="/viewID/{{ $post->id }}" class="text">{{ $post->description_title }}</a>
+                        <a href="{{ '/'.$post->author_name.'/'.$post->url }}" class="img"><img width="360px" height="309px" src="/uploads/{{ $post->description_image }}" /></a>
+                        <a href="{{ '/'.$post->author_name.'/'.$post->url }}" class="text">{{ $post->description_title }}</a>
                     </div>
                     @endforeach
                 </div>

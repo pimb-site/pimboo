@@ -56,7 +56,7 @@
 						</a>
 						<ul class="dropdown-menu" aria-labelledby="dLabel">
 							<li class="channels"><a>Channels</a></li>
-							<li class="channel"><a href="/channel/{{ Auth::user()->id }}">{{ Auth::user()->name }}</a></li>
+							<li class="channel"><a href="/{{ Auth::user()->name }}">{{ Auth::user()->name }}</a></li>
 							<li class="divider" role="separator"></li>
 							<li class="hrefs"><a href="/user/profile">Profile Settings</a></li>
 							@if (Auth::user()->permission == 10)

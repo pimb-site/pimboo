@@ -4,109 +4,33 @@ use App\PostView;
 use Auth;
 use Illuminate\Http\Request;
 use Input;
+use DB;
 
 class FlipcardsController extends Controller
-{
-	
-	public function testUploadEnd() {
-		if(\Auth::guest()) return view('auth/login');
-		if (\Input::file('filedata')->isValid()) {
-			$filename = uniqid().".jpeg";
-			$file_tmp = 'temp/'.\Session::getId()."/";
-			\Input::file('filedata')->move($file_tmp, $filename);
-			return \Response::json(['success' => true, 'file' => \Session::getId()."/".$filename]);
-		}
-	}
-	
-    public function addFlipCards() {
-        if(\Auth::guest()) {
-            return view('auth/login');
-        } else return view('add_flip_cards');
-    }
-
-    public function viewFlipCards() {
-
-        $contentflip = \DB::select('select * from posts where type = "flipcards" and isDraft = "publish"');
-        return view('tool_list', ['contentflip' => $contentflip, 'name' => 'Flip Cards']);
-    }
-
-
-    public function viewID($id, Request $request) {
-    	$view = new PostView;
-    	$view->post_id = $id;
-    	if (!Auth::guest()) {
-    		$view->user_id = Auth::user()->id;
-    	}
-    	$view->ip = $request->ip();
-    	$view->browser_info = $request->header('User-Agent');
-    	$view->save();
-        $content = \DB::select('select * from posts where id = ? and isDraft = ?', [$id, 'publish']);
-        return view('viewID', ['content' => $content[0]]);
+{	
+    public function displayCreatePage() {
+        if(Auth::guest()) return view('auth/login');
+        else return view('ToolsCreate.flipcards');
     }
 	
-	public function successID($id, Request $request) {
-        return view('success', ['id' => $id]);
+	public static function translit($s) {
+	    $s = (string) $s;
+	    $s = strip_tags($s);
+	    $s = str_replace(array("\n", "\r"), " ", $s);
+	    $s = trim($s);
+	    $s = function_exists('mb_strtolower') ? mb_strtolower($s) : strtolower($s);
+	    $s = strtr($s, array('а'=>'a','б'=>'b','в'=>'v','г'=>'g','д'=>'d','е'=>'e','ё'=>'e','ж'=>'j','з'=>'z','и'=>'i','й'=>'y','к'=>'k','л'=>'l','м'=>'m','н'=>'n','о'=>'o','п'=>'p','р'=>'r','с'=>'s','т'=>'t','у'=>'u','ф'=>'f','х'=>'h','ц'=>'c','ч'=>'ch','ш'=>'sh','щ'=>'shch','ы'=>'y','э'=>'e','ю'=>'yu','я'=>'ya','ъ'=>'','ь'=>''));
+    	$s = preg_replace("/[^0-9a-z-_ ]/i", "", $s);
+    	$s = preg_replace("/\s+/", ' ', $s);
+    	$s = str_replace(" ", "-", $s);
+
+    	return $s;
     }
-	
-	public function imageURL() {
-		
-		$url = \Input::get('image_url');
 
-		if (!filter_var($url, FILTER_VALIDATE_URL) === false) {
-			
-			$enabled = array( 'png', 'jpeg' );
-			
-			$name = uniqid().'.jpg';
-			$image = file_get_contents($url);
-			
-			if(!file_exists("temp/".\Session::getId())) {
-				mkdir("temp/".\Session::getId());
-			}
-			
-			$full_path = \Session::getId()."/".$name;
-			$success = file_put_contents("temp/".$full_path, $image);
-			unset($image);
-			
-			if($success) {
-				if( $info = getimagesize("temp/".$full_path)) {
-					$type = trim( strrchr( $info['mime'], '/' ), '/' );
-					if( !in_array( $type, $enabled ) ) {
-						return \Response::json(['success' => false, 'errors' => 'Invalid image mimetype']);
-					} else {
-						return \Response::json(['success' => true, 'file' => $full_path]);
-					}
-				} else return \Response::json(['success' => false, 'errors' => 'Invalid image']);
-			}
-			
-		} else {
-			return \Response::json(['success' => false, 'errors' => 'Invalid URL']);
-		}
-		
-	}
+	public function sendFlipcards() {
+        if(Auth::guest()) return Response::json(['success' => false, 'errorText' => 'You are not authorized.']);
 
-    public function postUpload() {
-        if(\Auth::guest()) return view('auth/login');
-        $image = \Input::get('image');
-        $img = str_replace('data:image/jpeg;base64,', '', $image);
-        $img = str_replace(' ', '+', $img);
-        $data = base64_decode($img);
-        if(!file_exists("temp/".\Session::getId())) {
-            mkdir("temp/".\Session::getId());
-        }
-        $temp_file = \Session::getId()."/".uniqid() . '.jpeg';
-        $file = "temp/".$temp_file;
-        $success = file_put_contents($file, $data);
-
-        if($success) {
-            return \Response::json(['success' => true, 'file' => $temp_file]);
-        }
-    }
-	
-	public function postUploadEnd() {
-        if(\Auth::guest()) return view('auth/login');
-
-        $input = \Input::all();
-		
+        $input = Input::all();
 		
 		if(isset($input['isDraft'])) {
 			if($input['isDraft'] == 'preview') {
@@ -275,11 +199,29 @@ class FlipcardsController extends Controller
 					}
 				}
 				
-				$id = \DB::table('posts')->insertGetId(
-					['user_id' => \Auth::user()->id, 'description_title' => $input['form_flip']['form_flip_cards_title'], 'description_text' => $input['form_flip']['form_description'],
-					'description_footer' => $input['form_flip']['form_footer'], 'content' => serialize($content), 'description_image' => $photo, 'image_facebook' => $photo_fb,
-					'type' => 'flipcards', 'isDraft' => 'save', 'tags' => $tags, 'permission' => 'public', 'options' => $options]
-				);
+				$string = $input['form_flip']['form_flip_cards_title'];
+				$string = FlipcardsController::translit($string);
+				if(strlen($string) < 10) $string = 'post-flipcards-'.strtolower(str_random(30));
+
+				$str2 = $string;
+				$str2 = $str2.'-'.date('Y-d-m');
+				$count = DB::table('posts')->where('author_name', '=', Auth::user()->name)->where('url', '=', $str2)->count();
+				if($count == 0) {
+					$id = \DB::table('posts')->insertGetId(
+						['user_id' => \Auth::user()->id, 'author_name' => Auth::user()->name, 'url' => $str2, 'description_title' => $input['form_flip']['form_flip_cards_title'], 'description_text' => $input['form_flip']['form_description'],
+						'description_footer' => $input['form_flip']['form_footer'], 'content' => serialize($content), 'description_image' => $photo, 'image_facebook' => $photo_fb,
+						'type' => 'flipcards', 'isDraft' => 'save', 'tags' => $tags, 'permission' => 'public', 'options' => $options]
+					);
+				} else {
+					$string = 'post-flipcards-'.strtolower(str_random(30));
+					$str2 = $string;
+					$str2 = $str2.'-'.date('Y-d-m');
+					$id = \DB::table('posts')->insertGetId(
+						['user_id' => \Auth::user()->id, 'author_name' => Auth::user()->name, 'url' => $str2, 'description_title' => $input['form_flip']['form_flip_cards_title'], 'description_text' => $input['form_flip']['form_description'],
+						'description_footer' => $input['form_flip']['form_footer'], 'content' => serialize($content), 'description_image' => $photo, 'image_facebook' => $photo_fb,
+						'type' => 'flipcards', 'isDraft' => 'save', 'tags' => $tags, 'permission' => 'public', 'options' => $options]
+					);
+				}
 				return \Response::json(['success' => true, 'id' => $id]);
 			}
 		}
@@ -441,7 +383,7 @@ class FlipcardsController extends Controller
 					if(isset($input['postID'])) {
 						$postID = (int)$input['postID'];
 						if(is_int($postID) && $postID > 0) {
-							$current_owner = \DB::select('select user_id from posts where id = ?', [$postID]);
+							$current_owner = \DB::select('select user_id, url from posts where id = ?', [$postID]);
 							if(count($current_owner != 0)) {
 								if($current_owner[0]->user_id == \Auth::user()->id) {
 									\DB::table('posts')
@@ -450,20 +392,37 @@ class FlipcardsController extends Controller
 												'description_footer' => $input['form_flip']['form_footer'], 'content' => serialize($content), 'description_image' => $photo, 'image_facebook' => $photo_fb,
 												'type' => 'flipcards', 'isDraft' => 'publish', 'tags' => $tags, 'permission' => 'public', 'options' => $options
 											]);
-									return \Response::json(['success' => true, 'id' => $postID]);
+									$link = '/'.Auth::user()->name.'/'.$current_owner[0]->url;
+									return \Response::json(['success' => true, 'link' => $link]);
 								}
 							}
 						}
 					}
 					
-					
-					
-					$id = \DB::table('posts')->insertGetId(
-						['user_id' => \Auth::user()->id, 'description_title' => $input['form_flip']['form_flip_cards_title'], 'description_text' => $input['form_flip']['form_description'],
-						'description_footer' => $input['form_flip']['form_footer'], 'content' => serialize($content), 'description_image' => $uniqid3.".jpeg", 'image_facebook' => $uniqid4.".jpeg",
-						'type' => 'flipcards', 'isDraft' => 'publish', 'tags' => $tags, 'permission' => 'public', 'options' => $options]
-					);
-                    return \Response::json(['success' => true, 'id' => $id]);
+					$string = $input['form_flip']['form_flip_cards_title'];
+					$string = FlipcardsController::translit($string);
+					if(strlen($string) < 10) $string = 'post-flipcards-'.strtolower(str_random(30));
+
+					$str2 = $string;
+					$str2 = $str2.'-'.date('Y-d-m');
+					$count = DB::table('posts')->where('author_name', '=', Auth::user()->name)->where('url', '=', $str2)->count();
+					if($count == 0) {	
+						$id = \DB::table('posts')->insertGetId(
+							['user_id' => \Auth::user()->id, 'author_name' => Auth::user()->name, 'url' => $str2, 'description_title' => $input['form_flip']['form_flip_cards_title'], 'description_text' => $input['form_flip']['form_description'],
+							'description_footer' => $input['form_flip']['form_footer'], 'content' => serialize($content), 'description_image' => $uniqid3.".jpeg", 'image_facebook' => $uniqid4.".jpeg",
+							'type' => 'flipcards', 'isDraft' => 'publish', 'tags' => $tags, 'permission' => 'public', 'options' => $options]
+						);
+					} else {
+						$string = 'post-gif-'.strtolower(str_random(30));
+						$str2 = $string;
+						$str2 = $str2.'-'.date('Y-d-m');
+						$id = \DB::table('posts')->insertGetId(
+							['user_id' => \Auth::user()->id, 'author_name' => Auth::user()->name, 'url' => $str2, 'description_title' => $input['form_flip']['form_flip_cards_title'], 'description_text' => $input['form_flip']['form_description'],
+							'description_footer' => $input['form_flip']['form_footer'], 'content' => serialize($content), 'description_image' => $uniqid3.".jpeg", 'image_facebook' => $uniqid4.".jpeg",
+							'type' => 'flipcards', 'isDraft' => 'publish', 'tags' => $tags, 'permission' => 'public', 'options' => $options]
+						);
+					}
+                    return \Response::json(['success' => true, 'link' => $link]);
                 }
             }
         } else return \Response::json(['success' => false, 'errors' => $validator->errors()]);

@@ -1,4 +1,37 @@
 $(document).ready(function () {
+	$('.nstSlider').nstSlider({
+	    "left_grip_selector": ".leftGrip",
+	    "value_bar_selector": ".bar",
+	    "value_changed_callback": function(cause, leftValue, rightValue) {
+	    	var id = $(this).data('id');
+
+	    	if(id == 1) {
+	    		startt = leftValue;
+
+	    		if(typeof video != "undefined") {
+	    			videoStartTime = leftValue;
+	    			video.currentTime = videoStartTime;
+	    		}
+
+	    		$('.un_start_time').val(leftValue);
+	    		leftValue = Math.floor(leftValue / 60) + ':' + leftValue % 60;
+	    		$('.choose-time .start-time').val(leftValue);
+
+	    	} else if (id == 2) {
+	    		durationTime = leftValue;
+	    		secs = parseInt(leftValue + '000');
+
+	    		if(typeof video != "undefined") {
+	    			videoStartTime = startt;
+	    			video.currentTime = videoStartTime;
+	    		}
+
+	    		$('.un_end_time').val(leftValue);
+	    		leftValue = Math.floor(leftValue / 60) + ':' + leftValue % 60;
+	    		$('.choose-time .duration-time').val(leftValue);
+	    	}
+	    }
+	});
 
 	function lock_buttons() {
 		$(".block-for-select-video").hide(1000);
@@ -258,7 +291,7 @@ $(document).ready(function () {
 					$('.input-form-photo').val(data.thumbnail_main); 
 					$('.add_fb_img').empty();
 					$('.add_fb_img').css({'padding-top': '0px'});
-					$('.add_fb_img').prepend("<img class='facebook-photo' src='temp/" + data.thumbnail_fb + "'  />");
+					$('.add_fb_img').prepend("<img class='facebook-photo' src='/temp/" + data.thumbnail_fb + "'  />");
 					$('.input-form-photo-facebook').val(data.thumbnail_fb);
 					lock_buttons();
 				}
@@ -303,7 +336,7 @@ $(document).ready(function () {
 				$('.input-form-photo').val(data.thumbnail_main); 
 				$('.add_fb_img').empty();
 				$('.add_fb_img').css({'padding-top': '0px'});
-				$('.add_fb_img').prepend("<img class='facebook-photo' src='temp/" + data.thumbnail_fb + "'  />");
+				$('.add_fb_img').prepend("<img class='facebook-photo' src='/temp/" + data.thumbnail_fb + "'  />");
 				$('.input-form-photo-facebook').val(data.thumbnail_fb);
 				lock_buttons();
 			}
@@ -323,12 +356,12 @@ $(document).ready(function () {
 					if(image_type_fc == 1) {
 						$('.photo').empty();
 						$('.photo').css({'padding-top': '0px'});
-						$('.photo').prepend("<img class='main-photo' src='temp/" + result.file + "'  />");
+						$('.photo').prepend("<img class='main-photo' src='/temp/" + result.file + "'  />");
 						$('.input-form-photo').val(result.file); 
 					}if (image_type_fc == 2) {
 					   $('.add_fb_img').empty();
 					   $('.add_fb_img').css({'padding-top': '0px'});
-					   $('.add_fb_img').prepend("<img class='facebook-photo' src='temp/" + result.file + "'  />");
+					   $('.add_fb_img').prepend("<img class='facebook-photo' src='/temp/" + result.file + "'  />");
 					   $('.input-form-photo-facebook').val(result.file);
 					}
 				}
@@ -367,7 +400,7 @@ $(document).ready(function () {
             dataType: "json",
             success: function (data) {
                 if (data.success == true) {
-					url = "/success/"+data.id;
+					url = "/success"+data.link;
 					$( location ).attr("href", url);
                 } else {
                     $.each(data.errors, function (i, value) {
@@ -382,64 +415,5 @@ $(document).ready(function () {
 	});
 
 	token = $('input[name="_token"]').val();
-	$('.select-file').fileapi({
-	   url: 'test_upload_end',
-	   autoUpload: false,
-	   accept: 'image/*',
-	   data: {'_token': token},
-	   onFileComplete: function (evt, uiEvt){
-		   var result = uiEvt.result; // server response
-		   
-		   if(image_type_fc == 1) {
-			   $('.photo').empty();
-			   $('.photo').css({'padding-top': '0px'});
-			   $('.photo').prepend("<img class='main-photo' src='temp/" + result.file + "'  />");
-			   $('.input-form-photo').val(result.file);
-			   
-		   } else if (image_type_fc == 2) {
-			   $('.add_fb_img').empty();
-			   $('.add_fb_img').css({'padding-top': '0px'});
-			   $('.add_fb_img').prepend("<img class='facebook-photo' src='temp/" + result.file + "'  />");
-			   $('.input-form-photo-facebook').val(result.file);
-		   }
-	   },
-	   imageSize: { minWidth: 200, minHeight: 160, maxWidth: 3840, maxHeight: 2160},
-	   
-	   onSelect: function (evt, ui){
-		  var file = ui.files[0];
-		  if( ui.other.length ){
-			var errors = ui.other[0].errors;
-			var alertHtml = '<div class="warning-text"><b>Warning!</b></div><div class="warning-text-other"><b> The image you are trying to upload is too small / big. </br> Minimum dimensions: 200x160 </br> Maximum dimensions: 3840x2160</b></div>';
-			$('.modal-alert').html(alertHtml);
-			$('.modal-alert').modal().open();
-		  }
-		  
-			
-		  if( !FileAPI.support.transform ) {
-			 alert('Your browser does not support Flash :(');
-		  }
-		  else if( file ){
-			 $('#popup').modal({
-				closeOnEsc: true,
-				closeOnOverlayClick: true,
-				onOpen: function (overlay){
-				   $(overlay).on('click', '.js-upload', function (){
-					  $.modal().close();
-					  $('.select-file').fileapi('upload');
-				   });
-				   $('.js-img', overlay).cropper({
-					  file: file,
-					  bgColor: '#fff',
-					  maxSize: [500, 500],
-					  minSize: [min_sizew_fc, min_sizeh_fc],
-					  selection: '50%',
-					  onSelect: function (coords){
-						 $('.select-file').fileapi('crop', file, coords);
-					  }
-				   });
-				}
-			 }).open();
-		  }
-	    },
-    });
+
 });

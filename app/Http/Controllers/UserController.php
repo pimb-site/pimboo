@@ -129,7 +129,19 @@ class UserController extends Controller
 	public function saveProfile(Request $request) {
 		$user = Auth::user();
 
-		$user->name = $request->input('name', $user->name);
+		if( strlen($request->input('name')) >= 3 && strlen($request->input('name')) <= 255) {
+			if(preg_match('|^[A-Z0-9]+$|i', $request->input('name', $user->name))) {
+				$info = DB::table('users')->select('name')->where('name', '=', $request->input('name'))->get();
+				if(count($info) == 0) {
+					DB::table('posts')
+				        ->where('user_id', Auth::user()->id)
+				        ->where('author_name', Auth::user()->name)
+				        ->update(['author_name' => $request->input('name')]);
+					$user->name = $request->input('name', $user->name);
+				}
+			}
+		}
+
 		$user->public_info = $request->input('public_info', '');
 		$user->website_link = $request->input('website_link', '');
 		$user->fb_link = $request->input('fb_link', '');

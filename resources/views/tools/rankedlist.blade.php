@@ -18,7 +18,6 @@
 
 @section('tool_content')
 		<?php $options = unserialize($content->options) ?>
-		<div class="panel-heading">View ranked list</div>
 		<?php $data_id = 1 ?>
 		<?php $uncontent = unserialize($content->content) ?>
 		<div class="post">
@@ -77,7 +76,7 @@
 		elem_id = $(this).data('elemid');
 		cid = $(this).data('cid');
 		$.post(
-		  "/vote_rankedlist",
+		  "/create/rankedlist/vote",
 		  {
 			id: elem_id,
 			cid: cid,

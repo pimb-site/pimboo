@@ -5,14 +5,14 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Pimboo GIF Maker</title>
-	<link href="css/style.min.css" rel="stylesheet">
-	<link type="text/css" rel="stylesheet" href="css/jquery.nstSlider.min.css">
+	<link href="/css/style.min.css" rel="stylesheet">
+	<link type="text/css" rel="stylesheet" href="/css/jquery.nstSlider.min.css">
 </head>
 	<body class="tools_create_page">
 		@include('header')
 		<div class="body">
 		<input type="file" name="video" id="input-video" accept="video/mp4" style="display: none;" />
-		<form id="form_upload_cards" action="/upload_end_gif" method="POST">
+		<form id="form_upload_cards" action="/create/gifmaker/send" method="POST">
 			<input type="hidden" name="_token" value="{{ csrf_token() }}">
 			<div class="left">
 				<div class="title">GIF CREATION</div>
@@ -166,7 +166,7 @@
 			</form>
 
 
-			<form id="create-gif-from-yb" action="/upload_yb_gif" method="POST">
+			<form id="create-gif-from-yb" action="/create/gifmaker/upload" method="POST">
 				<input type="hidden" name="_token" value="{{ csrf_token() }}">
 				<input type="hidden" name="video_youtube" value="" class="un_video_url">
 				<input type="hidden" name="id-gif" class="id-complete-gif">
@@ -291,42 +291,7 @@
       }
     </script>
     <script src="/js/footer.min.js"></script>
-	<script src="/js/video_to_gif.js"></script>
+	<script src="/js/gifmaker.js"></script>
 	<script src="/js/jquery.nstSlider.min.js"></script>
-	<script>
-	$('.nstSlider').nstSlider({
-	    "left_grip_selector": ".leftGrip",
-	    "value_bar_selector": ".bar",
-	    "value_changed_callback": function(cause, leftValue, rightValue) {
-	    	var id = $(this).data('id');
-
-	    	if(id == 1) {
-	    		startt = leftValue;
-
-	    		if(typeof video != "undefined") {
-	    			videoStartTime = leftValue;
-	    			video.currentTime = videoStartTime;
-	    		}
-
-	    		$('.un_start_time').val(leftValue);
-	    		leftValue = Math.floor(leftValue / 60) + ':' + leftValue % 60;
-	    		$('.choose-time .start-time').val(leftValue);
-
-	    	} else if (id == 2) {
-	    		durationTime = leftValue;
-	    		secs = parseInt(leftValue + '000');
-
-	    		if(typeof video != "undefined") {
-	    			videoStartTime = startt;
-	    			video.currentTime = videoStartTime;
-	    		}
-
-	    		$('.un_end_time').val(leftValue);
-	    		leftValue = Math.floor(leftValue / 60) + ':' + leftValue % 60;
-	    		$('.choose-time .duration-time').val(leftValue);
-	    	}
-	    }
-	});
-	</script>
 	</body>
 </html>

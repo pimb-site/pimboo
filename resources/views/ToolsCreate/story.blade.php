@@ -4,57 +4,37 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Pimboo Ranked List</title>
-	<link href="css/style.min.css" rel="stylesheet">
-	<link href="css/trivia_new.css" rel="stylesheet">
-	<link href="test/jcrop/jquery.Jcrop.min.css" rel="stylesheet" type="text/css"/>
+	<title>Pimboo Story</title>
+	<link href="/css/style.min.css" rel="stylesheet">
+	<link href="/css/flip_new.css" rel="stylesheet">
 </head>
 	<body class="tools_create_page">
 		@include('header')
 		<div class="body">
-		<form id="form_upload_cards" action="/upload_end_rankedlist" method="POST">
+		<form action="/create/story/send" method="post" id="form_upload_cards">
 			<input type="hidden" name="_token" value="{{ csrf_token() }}">
 			<div class="left">
-				<div class="title">RANKED LIST CREATION</div>
-				<div class="sub_title">Add all necessary information to create a new ranked list</div>
+				<div class="title">STORY CREATION</div>
+				<div class="sub_title">Add all necessary information to create new story article</div>
 				<div class="card_info">
 					<div class="top">
 						<div class="photo">CLICK<br>TO ADD PHOTO</div>
 						<div class="text_info">
-							<input type="text" name="form_flip[form_flip_cards_title]" placeholder="Ranked list title" autocomplete="off" style="color:#6e8dc9;">
-							<textarea name="form_flip[form_description]" class="top_textarea_trivia" placeholder="Ranked list description" autocomplete="off"></textarea>
-						</div>
-					</div>
-					<textarea name="form_flip[form_footer]" placeholder="Footer text (1500 symbols max)" maxlength="1500" autocomplete="off" style="color:#6e8dc9;"></textarea>
-				</div>
-				<input class="post-title" type="text" name="flip_cards[1][post_title]" placeholder="Post title"> </input>
-				<div class="editor" data-id="1">
-					<div class="front-card" data-id="1">
-						<div class="main-remove-front" data-id="1">
-							<div class="title">CLICK TO ADD PHOTO OR VIDEO</div>
-							<div class="butts">
-								<div class="add_plus" data-id="1" data-side="1"></div>
-							</div>
-						</div>
-						<div class="block-type-caption">
-							<textarea name="flip_cards[1][caption1]" class="type-caption" placeholder="Type your text or caption" style="position:relative;" data-id="1" data-side="1" maxlength="50"></textarea>
+							<input type="text" name="form_story[form_story_cards_title]" placeholder="Story title" autocomplete="off">
+							<input type="text" name="form_story[form_description]" placeholder="Story description" autocomplete="off">
 						</div>
 					</div>
 				</div>
-				
-				<button type="button" class="add-question">ADD QUESTION</button>
+				<textarea id="content_textarea" name="form_story[content]"></textarea>
+
 				<div class="down_butts">
-					<button type="button" id="preview" class="btn-preview">PREVIEW</button>
-					<button type="button" id="save_draft" class="btn-save">SAVE DRAFT</button>
-					<button type="button" id="publish" class="btn-publish">PUBLISH</button>
+					<!--<button type="button" id="save_draft_story" class="btn-save">SAVE DRAFT</button>-->
+					<button type="button" id="publish_story" class="btn-publish" style="margin-left: 250px;">PUBLISH</button>
 				</div>
 				<input name="isDraft" type="hidden" value="publish" class="isDraft" autocomplete="off">
 				<input name="postID" type="hidden" value="" class="postID" autocomplete="off">
-				<input name="form_flip[form_photo]" type="hidden" value="" class="input-form-photo" autocomplete="off">
-				<input name="form_flip[form_photo_facebook]" type="hidden" value="" class="input-form-photo-facebook" autocomplete="off">
-				<input name="flip_cards[1][type_card1]" type="hidden" value="image" class="input-type-card" autocomplete="off" data-id="1" data-side="1">
-				<input name="flip_cards[1][img_src1]" type="hidden" value="" class="input-form-img1" autocomplete="off" data-id="1">
-				<input name="flip_cards[1][youtube_clip1]" type="hidden" value="" class="input-form-clip" autocomplete="off" data-id="1" data-side="1">
+				<input name="form_story[form_photo]" type="hidden" value="" class="input-form-photo" autocomplete="off">
+				<input name="form_story[form_photo_facebook]" type="hidden" value="" class="input-form-photo-facebook" autocomplete="off">
 			</div>
 			<div class="right">
 				<div class="title">SOCIAL APPEARANCE</div>
@@ -101,13 +81,12 @@
 						</select>
 					</div>
 				</div>
-				<div class="down_butts add_ranked_list_butts">
-					<button type="button" id="preview" class="btn-preview">PREVIEW</button>
-					<button type="button" id="save_draft" class="btn-save">SAVE DRAFT</button>
+				<div class="down_butts story_butts">
+					<!--<button type="button" id="save_draft" class="btn-save">SAVE DRAFT</button>-->
 					<button type="button" id="publish" class="btn-publish">PUBLISH</button>
 				</div>
 			</div>
-			</form>
+		</form>
 		</div>
 		<footer>
 			<div class="up">
@@ -149,75 +128,6 @@
 			</div>
 		</div>
 		
-		<div id="preview-modal" class="preview-modal" style="display: none;">
-			<div class="main-preview">
-				<div class="title">RANKED LIST PREVIEW</div>
-				<div class="trivia_main">
-					<div class="trivia_main_all">
-						<div class="trivia_main_title"></div>
-						<div class="trivia_main_description">
-						</div>
-						<div class="trivia_main_tags">Tags: <b></b></div>
-						<div class="trivia_main_author">
-							<img src="img/author.png">
-							<div class="trivia_main_author_by"> Create by <b></b><br/>
-							on (Waiting for Publish) </div>
-						</div>
-					</div>
-				</div>
-				
-				<div class="trivia_main_cards">
-					<div class="vote">
-						<div class="vote-button"></div>
-						<b>+0</b>
-					</div>
-					<div class="trivia_item_title">POST TITLE</div>
-					<div class="trivia_main_wrap" data-id="">
-						<div class="trivia_main_front" data-id=""></div>
-					</div>
-				</div>
-				<div class="trivia_main_footer">
-				</div>
-				
-				<div class="trivia_main_buttons">
-					<button type="button" class="btn-save" id="save_draft">SAVE DRAFT</button>
-					<button type="button" class="btn-publish" id="publish">PUBLISH</button>
-				</div>
-			</div>
-		</div>
-		
-		<div id="choose-upload" class="choose-upload" style="display: none;">
-			<div class="modal-title">ADD PHOTO/VIDEO</div>
-			<div class="modal-upload-column">
-				<div class="title"> UPLOAD </div>
-				<div class="buttons-img">
-					<div class="modal-file-icon" onclick="$('input[name=filedata]')[0].click();"><div class="select-file" ><input type="file" name="filedata" style="display: none"><div class="modal-text-upl">From File</div></div></div>
-					<div class="modal-file-upl"><div class="modal-url-icon"></div><div class="modal-text-upl">From URL</div></div>
-					<div class="modal-file-upl"><div class="modal-youtube-icon"></div><div class="modal-text-upl">YouTube Clip</div></div>
-				</div>
-				<div class="modal-video-url">
-					<input type="text" class="upl-input-video-url" placeholder="Enter clip URL">
-					<button type="button" class="upl-video-valid">UPLOAD</button>
-				</div>
-				<div class="size-img-alert">Please make sure you upload an image at least of 200x160 for Landscape</div>
-			</div>
-		</div>
-		
-		<div id="modal-input-youtube" class="modal-input-youtube" style="display: none;">
-			<div class="modal-video-url">
-					<input type="text" class="upl-input-video-url" placeholder="Enter clip URL">
-					<button type="button" class="upl-video-valid">UPLOAD</button>
-			</div>
-		</div>
-		
-		<div id="modal-input-image" class="modal-input-image" style="display: none;">
-			<div class="modal-image-url">
-					<input type="text" class="upl-input-image-url" placeholder="Enter image URL">
-					<button type="button" class="upl-image-valid">UPLOAD</button>
-			</div>
-		</div>
-		
-		
 		<div id="modal-test" class="modal-test" style="display: none;">
 			<div class="popup__body"><div class="js-img"></div></div>
 			<div style="margin: 0 0 5px; text-align: center;">
@@ -227,18 +137,41 @@
 					<div class="select-file"> <div class="modal-file-icon"></div><input type="file" name="filedata"></div>
 					<div class="modal-upload-url">
 						<p>or</p>
-						<input type="text" class="upload-img-url upl-input-image-url" placeholder="Enter URL">	
-						<button type="button" class="upload-img-url-btn upl-image-valid">GO</button>
+						<input type="text" class="upload-img-url" placeholder="Enter URL">	
+						<button type="button" class="upload-img-url-btn">GO</button>
 					</div>
 				</div>
 			</div>
 		</div>
-		
-		
 	<script>
 	var token = '{!! csrf_token() !!}';
 	</script>
-	<script src="/js/main.js"></script>
-	<script src="/js/script5.js"></script>
+	<script src="/js/footer.min.js"></script>
+	<script src="http://cloud.tinymce.com/stable/tinymce.min.js?apiKey=me1xx87jvui3cahvnslljl2cp1xb1ivawta8z8je4iesro99"></script>
+	<script>
+	tinymce_init = 1;
+	tinymce.init({
+  selector: 'textarea#content_textarea',
+  height: 500,
+  theme: 'modern',
+  plugins: [
+    'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+    'searchreplace wordcount visualblocks visualchars code fullscreen',
+    'insertdatetime media nonbreaking save table contextmenu directionality',
+    'emoticons template paste textcolor colorpicker textpattern imagetools codesample toc'
+  ],
+  toolbar1: 'undo redo | insert | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+  toolbar2: 'print preview media | forecolor backcolor emoticons | codesample',
+  image_advtab: true,
+  templates: [
+    { title: 'Test template 1', content: 'Test 1' },
+    { title: 'Test template 2', content: 'Test 2' }
+  ],
+  content_css: [
+    '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
+    '//www.tinymce.com/css/codepen.min.css'
+  ]
+ });</script>
+	<script src="/js/flipcards.js"></script>
 	</body>
 </html>
