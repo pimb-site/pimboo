@@ -2,6 +2,8 @@
 use App\Post;
 use App\Redirect;
 use Illuminate\Http\Request;
+use Input;
+use Response;
 
 class HomeController extends Controller {
 
@@ -30,9 +32,9 @@ class HomeController extends Controller {
      */
     public function index()
     {
-        $home_main_post = Post::where([ ['status', '=', 'home_main'] ])->first();
-        $home_top_posts = Post::where('status', 'LIKE', '%home_post%')->orderBy('status')->get();
-        $latest = Post::latest()->where('type', '<>', 'snip')->take(6)->get();
+        $home_main_post = Post::where([ ['home_left', '=', '1'] ])->get();
+        $home_top_posts = Post::where('home_right', '=', '1')->get();
+        $latest = Post::where('home_latest', 1)->take(6)->get();
 
         return view('home', [
             'body_class' => 'home', 
@@ -56,6 +58,13 @@ class HomeController extends Controller {
         } else {
             abort(404);
         }
+    }
+
+    public function showmore() {
+        $multiply = Input::get('multiply');
+        $multiply = ($multiply > 0 && $multiply < 1000) ? $multiply : 1;
+        $latest = Post::select('author_name', 'url', 'description_title', 'description_image')->where('home_latest', 1)->skip($multiply * 6)->take(6)->get();
+        return Response::json(['success' => true, 'posts' => $latest]);
     }
 
 }

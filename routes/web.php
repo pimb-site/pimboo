@@ -51,6 +51,7 @@ Route::get('/create', 'HomeController@create');
 // Home page
 Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index');
+Route::post('/home/showmore/', 'HomeController@showmore');
 
 // Reports
 Route::post('report', 'ReportsController@Add');
@@ -107,9 +108,11 @@ Route::get('/admin/reports/update', 'AdminController@updateReport');
 Route::get('/admin/ads', 'AdminController@getAds');
 Route::get('/admin/home', 'AdminController@getHome');
 Route::post('/admin/ads/save', 'AdminController@saveAds');
-Route::post('/admin/postposition', 'AdminController@updatePost');
 Route::get('/admin/snip', 'AdminController@getAdvSnip');
 Route::post('/admin/snip/save', 'AdminController@saveAdvSnip');
+// adm action
+Route::post('/admin/action/deletepost', 'AdminController@deletepost');
+Route::post('/admin/action/postposition', 'AdminController@updatePost');
 
 //Referrals
 Route::get('/ref/{name}', 'ReferralController@index');

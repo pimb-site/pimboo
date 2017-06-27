@@ -46,26 +46,36 @@ Home
                     <div class="posts">
                         <div class="head">FEATURED POSTS</div>
                         <div class="left">
-                            <div class="img"><a href="/{{ $main_post->author_name.'/'.$main_post->url }}"><img width="750px" height="445px" src="/uploads/{{ $main_post->description_image }}" /></a></div>
-                            <div class="title"><a href="/{{ $main_post->author_name.'/'.$main_post->url }}">{{ $main_post->description_title }}</a></div>
-                            <div class="text">{{ $main_post->description_text }}</div>
-                            <div class="info distab">
-                                <!--<div class="time"><a href="/viewID/-#- $main_post->id }}"><?php //echo date("F j, Y", strtotime($main_post->created_at));  ?></a></div>-->
-                                <a href="/{{ $main_post->author_name.'/'.$main_post->url }}" class="readmore">Read More >></a>
+                        <div id="carousepostmain" class="carousel slide" data-interval="3000" data-ride="carousel">
+                            <div class="carousel-inner">
+                            <?php $count = 1; ?>
+                            @foreach ($main_post as $post_main)
+                                <div class="item <?php if($count == 1) print 'active'; ?>">
+                                <div class="img"><a href="/{{  $post_main->author_name.'/'.$post_main->url }}"><img width="750px" height="445px" src="/uploads/{{  $post_main->description_image }}" /></a></div>
+                                <div class="title"><a href="/{{  $post_main->author_name.'/'.$post_main->url }}">{{  $post_main->description_title }}</a></div>
+                                <div class="text">{{  $post_main->description_text }}</div>
+                                <div class="info distab">
+                                    <a href="/{{  $post_main->author_name.'/'.$post_main->url }}" class="readmore">Read More >></a>
+                                </div>
+                                </div>
+                                <?php $count++; ?>
+                            @endforeach
                             </div>
                         </div>
+                        </div>
                         <div class="right">
+                            @if(count($posts) != 0)
                             @foreach ($posts as $post)
                                 <div class="post">
-                                    <a class="post_name" href="{{ '/'.$post->author_name.'/'.$post->url }}">{{ $post->description_title }}</a>
-                                    <a class="post_text" href="{{ '/'.$post->author_name.'/'.$post->url }}">{{ $post->description_text }}</a>
+                                    <a class="post_name" href="{{  '/'.$post->author_name.'/'.$post->url }}">{{  $post->description_title }}</a>
+                                    <a class="post_text" href="{{  '/'.$post->author_name.'/'.$post->url }}">{{  $post->description_text }}</a>
                                     <div class="posting">
                                         <span class="removing">
                                             <span class="sharing">SHARE &<br>PROFIT:</span>
-                                            <a data-title="{{ $post->description_title }}" data-url="{{ '/'.$post->author_name.'/'.$post->url }}" data-type="fb"  class="butt-for-sharing facebook" href=""></a>
-                                            <a data-title="{{ $post->description_title }}" data-url="{{ '/'.$post->author_name.'/'.$post->url }}" data-type="tw"  class="butt-for-sharing twitter" href=""></a>
-                                            <a data-title="{{ $post->description_title }}" data-url="{{ '/'.$post->author_name.'/'.$post->url }}" data-type="li"  class="butt-for-sharing linkedin" href=""></a>
-                                            <button class="get_link" data-href="{{ '/'.$post->author_name.'/'.$post->url }}">GET LINK</button>
+                                            <a data-title="{{  $post->description_title }}" data-url="{{  '/'.$post->author_name.'/'.$post->url }}" data-type="fb"  class="butt-for-sharing facebook" href=""></a>
+                                            <a data-title="{{  $post->description_title }}" data-url="{{  '/'.$post->author_name.'/'.$post->url }}" data-type="tw"  class="butt-for-sharing twitter" href=""></a>
+                                            <a data-title="{{  $post->description_title }}" data-url="{{  '/'.$post->author_name.'/'.$post->url }}" data-type="li"  class="butt-for-sharing linkedin" href=""></a>
+                                            <button class="get_link" data-href="{{  '/'.$post->author_name.'/'.$post->url }}">GET LINK</button>
                                         </span>
                                         <span class="link">
                                             <span class="link_in">COPIED TO YOUR<br>CLIPBOARD</span>
@@ -74,21 +84,22 @@ Home
                                     </div>
                                 </div>
                             @endforeach
+                            @endif
                         </div>
                     </div>
                 </div>
             </div>
             <div class="wrap" style="position: relative;">
                 <div class="headlines-title">LATEST HEADLINES</div>
-                <div class="headlines">
+                <div class="headlines" data-id="0">
                     @foreach ($latest as $post)
                     <div class="headline">
-                        <a href="{{ '/'.$post->author_name.'/'.$post->url }}" class="img"><img width="360px" height="309px" src="/uploads/{{ $post->description_image }}" /></a>
-                        <a href="{{ '/'.$post->author_name.'/'.$post->url }}" class="text">{{ $post->description_title }}</a>
+                        <a href="{{  '/'.$post->author_name.'/'.$post->url }}" class="img"><img width="360px" height="309px" src="/uploads/{{  $post->description_image }}" /></a>
+                        <a href="{{  '/'.$post->author_name.'/'.$post->url }}" class="text">{{  $post->description_title }}</a>
                     </div>
                     @endforeach
                 </div>
-                <a href="#" class="headlines_show_more">SHOW MORE</a>
+                <button type="button" class="headlines_show_more" style="border: 0;">SHOW MORE</button>
             </div>
             <div class="join_us">
                 <div class="wrap">
@@ -162,4 +173,44 @@ now override the 3.3 new styles for modern browsers & apply opacity
 }
     </style>
 
+@endsection
+@section('script')
+<script type="text/javascript">
+    $(document).ready(function(){
+        var multiply = 1;
+        var token  = "{{ csrf_token() }}";
+
+        $('.headlines_show_more').click(function() {
+            $.ajax({
+                url: '/home/showmore',
+                dataType : "json",
+                data: {'multiply': multiply, '_token' : token},
+                type: 'POST',
+                success: function (data, textStatus) {
+                    if(data.success == true) {
+                        if(data.posts.length != 0) {
+                            var html = '<div class="headlines" data-id="'+multiply+'">';
+                            $.each(data.posts, function (i, value) {
+                                html += '<div class="headline">';
+                                html += '<a href="/'+value.author_name+'/'+value.url+'" class="img"><img width="360px" height="309px" src="/uploads/'+value.description_image+'" /></a>';
+                                html += '<a href="/'+value.author_name+'/'+value.url+'" class="text">'+value.description_title+'</a>';
+                                html += '</div>';
+                            });
+                            html += '</div>';
+                            $('.headlines[data-id="'+(multiply-1)+'"]').fadeToggle(500, function() {
+                                $('.headlines[data-id="'+(multiply-1)+'"]').remove();
+                                $('.headlines-title').after(html);
+                            });
+
+                        }
+                        multiply++;
+                    }
+                } 
+            });
+        });
+
+
+        $("#carousepostmain").carousel('cycle');
+    });
+</script>
 @endsection

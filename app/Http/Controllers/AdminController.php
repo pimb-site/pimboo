@@ -16,6 +16,44 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
+	public function deletePost() {
+		if(Auth::guest()) return redirect('/');
+		if(Auth::user()->permission == 1) return redirect('/');
+		if(Auth::user()->permission == 10) {
+			$post_id = Input::get('post_id');
+			if(is_numeric($post_id)) {
+				Post::where('id', $post_id)->delete();
+				return Response::json(['success' => true]);
+			} else return Response::json(['success' => false]);
+		}
+	}
+
+	public function updatePost() {
+		if(Auth::guest()) return redirect('/');
+		if(Auth::user()->permission == 1) return redirect('/');
+		if(Auth::user()->permission == 10) {
+			$action  = Input::get('action');
+			$post_id = Input::get('post_id');
+			$checked = Input::get('checked');
+			switch ($action) {
+				case 'set_left':
+					DB::update("update posts set home_left = ? where id = ?", [$checked, $post_id]);
+					break;
+				
+				case 'set_right':
+					DB::update("update posts set home_right = ? where id = ?", [$checked, $post_id]);
+					break;
+
+				case 'set_latest':
+					DB::update("update posts set home_latest = ? where id = ?", [$checked, $post_id]);
+					break;
+
+				default:
+					break;
+			}
+			return Response::json(['success' => true]);
+		}
+	}
 
 	public function getAdvSnip() {
 		if(Auth::guest()) return redirect('/');
@@ -44,8 +82,8 @@ class AdminController extends Controller
 		if(Auth::guest()) return redirect('/');
 		if(Auth::user()->permission == 1) return redirect('/');
 		if(Auth::user()->permission == 10) {
-			$posts = Post::all();
-			return view('user.admin.home', ['body_class' => 'admin', 'posts' => $posts]);
+			$posts = Post::latest()->take(100)->get();
+			return view('user.admin.home_table', ['body_class' => 'admin', 'posts' => $posts]);
 		}
 	}
 
@@ -100,42 +138,6 @@ class AdminController extends Controller
 			$links = DB::insert("insert into settings (setting,value) values ('ads',?)", [$ads]);
 			
 			return redirect('/admin/ads');
-		}
-	}
-
-	public function updatePost() {
-		if(Auth::guest()) return redirect('/');
-		if(Auth::user()->permission == 1) return redirect('/');
-		if(Auth::user()->permission == 10) {
-			if (Input::get('position') == 'home_main') {
-				DB::update("update posts set status = '' where status = 'home_main'");
-				DB::update("update posts set status = 'home_main' where id = ?", [Input::get('post_id')]);
-				echo "main";
-			} elseif (Input::get('position') == 'home_post1') {
-				DB::update("update posts set status = '' where status = 'home_post1'");
-				DB::update("update posts set status = 'home_post1' where id = ?", [Input::get('post_id')]);
-			} elseif (Input::get('position') == 'home_post2') {
-				DB::update("update posts set status = '' where status = 'home_post2'");
-				DB::update("update posts set status = 'home_post2' where id = ?", [Input::get('post_id')]);
-			} elseif (Input::get('position') == 'home_post3') {
-				DB::update("update posts set status = '' where status = 'home_post3'");
-				DB::update("update posts set status = 'home_post3' where id = ?", [Input::get('post_id')]);
-			} elseif (Input::get('position') == 'home_post4') {
-				DB::update("update posts set status = '' where status = 'home_post4'");
-				DB::update("update posts set status = 'home_post4' where id = ?", [Input::get('post_id')]);
-			} elseif (Input::get('position') == 'home_post5') {
-				DB::update("update posts set status = '' where status = 'home_post5'");
-				DB::update("update posts set status = 'home_post5' where id = ?", [Input::get('post_id')]);
-			} elseif (Input::get('position') == 'home_post6') {
-				DB::update("update posts set status = '' where status = 'home_post6'");
-				DB::update("update posts set status = 'home_post6' where id = ?", [Input::get('post_id')]);
-			} elseif (Input::get('position') == 'home_post7') {
-				DB::update("update posts set status = '' where status = 'home_post7'");
-				DB::update("update posts set status = 'home_post7' where id = ?", [Input::get('post_id')]);
-			} elseif (Input::get('position') == 'home_post8') {
-				DB::update("update posts set status = '' where status = 'home_post8'");
-				DB::update("update posts set status = 'home_post8' where id = ?", [Input::get('post_id')]);	
-			}
 		}
 	}
 }
