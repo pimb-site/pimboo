@@ -16,6 +16,19 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
+
+	public function editPost($type, $id) {
+		if(Auth::guest()) return redirect('/');
+		if(Auth::user()->permission == 1) return redirect('/');
+		if(Auth::user()->permission == 10) {
+			$id = (int) $id;
+			$post = Post::where([ ['id', $id], ['type', $type] ])->get();
+			if(count($post) != 0) {
+				return view('user.admin.editing.'.$type, ['post' => $post[0]]);
+			} else return redirect('/admin/');
+		}
+	}
+
 	public function deletePost() {
 		if(Auth::guest()) return redirect('/');
 		if(Auth::user()->permission == 1) return redirect('/');
@@ -82,7 +95,7 @@ class AdminController extends Controller
 		if(Auth::guest()) return redirect('/');
 		if(Auth::user()->permission == 1) return redirect('/');
 		if(Auth::user()->permission == 10) {
-			$posts = Post::latest()->take(100)->get();
+			$posts = Post::latest()->where('isDraft', 'publish')->take(100)->get();
 			return view('user.admin.home_table', ['body_class' => 'admin', 'posts' => $posts]);
 		}
 	}
@@ -92,6 +105,7 @@ class AdminController extends Controller
 		if(Auth::user()->permission == 1) return redirect('/');
 		if(Auth::user()->permission == 10) {
 			$reports = Report::all();
+			print_r($reports);
 			return view('user.admin.reports', ['body_class' => 'reports', 'reports' => $reports]);
 		}
 	}

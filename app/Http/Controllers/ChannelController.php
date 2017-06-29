@@ -12,7 +12,7 @@ class ChannelController extends Controller
 	public function viewChannel($channel_name) {
 		if( strlen($channel_name) >= 3 && strlen($channel_name) <= 255) {
 			if(!preg_match('|^[A-Z0-9]+$|i', $channel_name)) {
-				return view('home');
+				return redirect('/home');
 			}
 			$user_info = DB::select('select id, name, photo, cover_photo, public_info from users where name = ?', [$channel_name]);
 			if(count($user_info) != 0) {
@@ -55,11 +55,11 @@ class ChannelController extends Controller
 											 'isSubscribe' => $isSubscribe, 'subscribers' => $subscribers]);
 			}
 			else {
-				return view('home');
+				return redirect('/home');
 			}
 		}
 		else {
-			return view('home');
+			return redirect('/home');
 		}
 	}
 

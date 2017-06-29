@@ -46,7 +46,7 @@ Home
                     <div class="posts">
                         <div class="head">FEATURED POSTS</div>
                         <div class="left">
-                        <div id="carousepostmain" class="carousel slide" data-interval="3000" data-ride="carousel">
+                        <div id="carousepostmain" class="carousel slide" data-interval="6000" data-ride="carousel">
                             <div class="carousel-inner">
                             <?php $count = 1; ?>
                             @foreach ($main_post as $post_main)
@@ -211,6 +211,6 @@ now override the 3.3 new styles for modern browsers & apply opacity
 
 
         $("#carousepostmain").carousel('cycle');
-    });
+
 </script>
 @endsection

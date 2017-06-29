@@ -98,5 +98,7 @@ Admin
 		    } 
 		});
 	});
+
+
 </script>
 @endsection

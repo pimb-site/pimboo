@@ -110,6 +110,7 @@ Route::get('/admin/home', 'AdminController@getHome');
 Route::post('/admin/ads/save', 'AdminController@saveAds');
 Route::get('/admin/snip', 'AdminController@getAdvSnip');
 Route::post('/admin/snip/save', 'AdminController@saveAdvSnip');
+Route::get('/admin/editing/{type}/{id}', 'AdminController@editPost');
 // adm action
 Route::post('/admin/action/deletepost', 'AdminController@deletepost');
 Route::post('/admin/action/postposition', 'AdminController@updatePost');
