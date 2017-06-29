@@ -50,6 +50,9 @@
 						<div class="tag"><label><input class="checkbox" type="checkbox" name="tags[]" value="News"><span class="checkbox-custom"></span><span class="label">News</span></label></div>
 					</div>
 				</div>
+				<div class="down_butts snip_butts">
+					<div class="button-snip"> <button type="button" disabled>SNIP</button> </div>
+				</div>
 			</div>
 			</form>
 		</div>
