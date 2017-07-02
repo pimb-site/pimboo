@@ -103,24 +103,25 @@
 			</div>
 		</div>
 		<script>
-			id = 'all';
-			end = '<?php echo date('Y-m-d H:i:s', mktime(24, 0, 0, date("m")  , date("d"), date("Y"))); ?>';
-			start = '<?php echo date('Y-m-d H:i:s', mktime(0, 0, 0, date("m")  , date("d"), date("Y"))); ?>';
-			token = '{{ csrf_token() }}';
-			name_in = 'All time';
+			var id = 'all';
+			var end = '<?php echo date('Y-m-d H:i:s', mktime(24, 0, 0, date("m")  , date("d"), date("Y"))); ?>';
+			var start = '<?php echo date('Y-m-d H:i:s', mktime(0, 0, 0, date("m")  , date("d"), date("Y"))); ?>';
+			var name_in = 'All time';
 			function account_forma_in(f_id,name) {
+				var token = '{{ csrf_token() }}';
 				id = f_id;
-				$.post( "/user/account", { text:name_in, post_id: id, start:start, end:end, _token:token })
+				$.post( "/user/account", { text:name_in, post_id: id, start:start, end:end, '_token' :token })
 				.done(function( data ) {
 					$('#member_page_traffic_updated').html(data);
 				});
 			}
 			function account_forma(f_id,name) {
+				var token = '{{ csrf_token() }}';
 				end = $("#acc_time_select option[value="+f_id+"]").attr('end');
 				start = $("#acc_time_select option[value="+f_id+"]").attr('start');
 				name_in = name;
 				$('#reports-loading').css('display','block');
-				$.post( "/user/account", { text:name_in, post_id: id, start:start, end:end, _token:token })
+				$.post( "/user/account", { text:name_in, post_id: id, start:start, end:end, '_token' :token })
 				.done(function( data ) {
 					$('#member_page_traffic_updated').html(data);
 				});

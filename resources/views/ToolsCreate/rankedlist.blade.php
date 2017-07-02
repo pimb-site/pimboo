@@ -235,5 +235,8 @@
 		</div>
 	<script src="/js/footer.min.js"></script>
 	<script src="/js/rankedlist.js"></script>
+	<script> 
+	var count_fc = 1;
+	 </script>
 	</body>
 </html>

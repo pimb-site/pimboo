@@ -326,7 +326,6 @@ class RankedlistController extends Controller
 						}
 					}
 					
-
                     if(count($errors_array) > 0) return \Response::json(['success' => false, 'errors' => $errors_array]);
                 }
 				

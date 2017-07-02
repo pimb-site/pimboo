@@ -1,6 +1,5 @@
 $(document).ready(function () {
 	side_fc       = 1;
-	count_fc      = 1;
 	current_id    = 1;
 	image_type_fc = 1;
 	min_sizeh_fc  = 10;

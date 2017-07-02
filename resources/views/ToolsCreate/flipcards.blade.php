@@ -238,5 +238,8 @@
 	 });
 	</script>
 	<script src="/js/flipcards.js"></script>
+	<script> 
+		var count_fc = 1;
+	 </script>
 	</body>
 </html>

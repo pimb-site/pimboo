@@ -2,7 +2,6 @@ $(document).ready(function () {
 	
 	token = '{!! csrf_token() !!}';
 	side_fc       = 1;
-	count_fc      = 1;
 	current_id    = 1;
 	image_type_fc = 1;
 	min_sizeh_fc  = 10;
@@ -318,7 +317,7 @@ $(document).ready(function () {
 			+'<button type="button" class="front_card" data-id="'+count_fc+'">FRONT CARD</button>'
 			+'<button type="button" class="back_card" data-id="'+count_fc+'">BACK CARD</button>'
 			+'</div>'
-			+'<input class="item-title-input" type="text" name="flip_cards['+count_fc+'][form_item_title]" placeholder="Enter item title (60 symbols max)" maxlength="60">'
+			+'<input class="item-title-input" type="text" name="flip_cards['+count_fc+'][form_item_title]" placeholder="Enter item title (45 symbols max)" maxlength="45">'
 			+'<div class="editor" data-id="'+count_fc+'"> <div class="front-card" data-id="'+count_fc+'">'
 			+'<div class="title">CLICK TO ADD PHOTO OR TEXT</div> <div class="butts">'
 			+'<div class="add_image" data-id="'+count_fc+'" data-side="1"></div> <div class="add_text" data-id="'+count_fc+'" data-side="1"></div> </div> </div>'

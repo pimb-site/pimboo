@@ -110,10 +110,17 @@ Route::get('/admin/home', 'AdminController@getHome');
 Route::post('/admin/ads/save', 'AdminController@saveAds');
 Route::get('/admin/snip', 'AdminController@getAdvSnip');
 Route::post('/admin/snip/save', 'AdminController@saveAdvSnip');
+// Editing
+Route::post('/admin/editing/update/rankedlist', 'AdminEditingController@updateRankedlist');
+Route::post('/admin/editing/update/flipcards', 'AdminEditingController@updateFlipcards');
+Route::post('/admin/editing/update/story', 'AdminEditingController@updateStory');
+Route::post('/admin/editing/update/snip', 'AdminEditingController@updateSnip');
+Route::post('/admin/editing/update/gif', 'AdminEditingController@updateGif');
 Route::get('/admin/editing/{type}/{id}', 'AdminController@editPost');
 // adm action
 Route::post('/admin/action/deletepost', 'AdminController@deletepost');
 Route::post('/admin/action/postposition', 'AdminController@updatePost');
+Route::post('/admin/action/sortentries', 'AdminController@sortEntries');
 
 //Referrals
 Route::get('/ref/{name}', 'ReferralController@index');
