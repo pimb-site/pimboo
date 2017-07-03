@@ -21,7 +21,8 @@ class AdminController extends Controller
 		if(Auth::guest()) return redirect('/');
 		if(Auth::user()->permission == 1) return redirect('/');
 		if(Auth::user()->permission == 10) {
-			return view('user.admin.users_list');
+			$users = User::select('id', 'name', 'email', 'photo', 'permission')->get();
+			return view('user.admin.users_list', ['users' => $users]);
 		}
 	}
 
