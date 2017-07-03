@@ -16,6 +16,15 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
+
+	public function getUsers() {
+		if(Auth::guest()) return redirect('/');
+		if(Auth::user()->permission == 1) return redirect('/');
+		if(Auth::user()->permission == 10) {
+			return view('user.admin.users_list');
+		}
+	}
+
 	public function sortEntries() {
 		if(Auth::guest()) return redirect('/');
 		if(Auth::user()->permission == 1) return redirect('/');
@@ -42,14 +51,18 @@ class AdminController extends Controller
 						 		       ['home_right', $operator_right, $right], ['home_latest', $operator_right, $right] ])
 							 ->skip($multiply * $entries)
 							 ->take($entries)
+							 ->latest()
 							 ->get();
 			else
 				$posts = Post::select('id', 'author_name', 'url', 'description_image', 'description_title', 'home_left', 'home_right', 'home_latest', 'type', 'created_at')
 							 ->whereDate('created_at', '>=', $start_time)->whereDate('created_at', '<=', $end_time)
 							 ->where([ ['author_name', $operator_name, $name], ['type', $operator_type, $type] ])
-							 ->orWhere([ ['home_left', $operator_right, $right], ['home_right', $operator_right, $right], ['home_latest', $operator_right, $right] ])
+							 ->orWhere('home_left', '=', $right)
+							 ->orWhere('home_right', '=', $right)
+							 ->orWhere('home_latest', '=', $right)
 							 ->skip($multiply * $entries)
 							 ->take($entries)
+							 ->latest()
 							 ->get();
 
 			return Response::json(['success' => true, 'posts' => $posts]);
