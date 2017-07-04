@@ -17,11 +17,12 @@ class UserController extends Controller
 {
 
 	public function setPhoto() {
-		if(Auth::guest()) return view('auth/login');
+		if(Auth::guest()) return redirect('/home');
 
 		if (Input::file('filedata')->isValid()) {
 			$filename = uniqid().".jpeg";
 			Input::file('filedata')->move("uploads/", $filename);
+
 			$user_id = Auth::user()->id;
 
 			$type = Input::get('photo_type');

@@ -6,7 +6,7 @@
 				@include('user.header')
 				<div class="top_title">EARNING STATUS</div>
 				<div class="ref-link">
-					<span>Your Referral Link is:</span><input value="{!! url('/ref/') !!}/{{ $user->id }}" readonly />
+					<span>Your Referral Link is:</span><input value="{!! url('/ref/') !!}/{{ $user->name }}" readonly />
 				</div>
 				<div id="ref-tree">
 					<div id="ref-tree-me" style="height:{{ $i*100 }}px">

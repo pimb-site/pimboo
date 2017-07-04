@@ -117,11 +117,15 @@ Route::post('/admin/editing/update/flipcards', 'AdminEditingController@updateFli
 Route::post('/admin/editing/update/story', 'AdminEditingController@updateStory');
 Route::post('/admin/editing/update/snip', 'AdminEditingController@updateSnip');
 Route::post('/admin/editing/update/gif', 'AdminEditingController@updateGif');
+Route::post('/admin/editing/update/user', 'AdminController@updateUser');
+Route::get('/admin/editing/user/{id}', 'AdminController@editUser');
 Route::get('/admin/editing/{type}/{id}', 'AdminController@editPost');
 // adm action
-Route::post('/admin/action/deletepost', 'AdminController@deletepost');
+Route::post('/admin/action/deleteuser', 'AdminController@deleteUser');
+Route::post('/admin/action/deletepost', 'AdminController@deletePost');
 Route::post('/admin/action/postposition', 'AdminController@updatePost');
 Route::post('/admin/action/sortentries', 'AdminController@sortEntries');
+Route::post('/admin/action/deleteuserphoto', 'AdminController@deletePhotoUser');
 
 //Referrals
 Route::get('/ref/{name}', 'ReferralController@index');

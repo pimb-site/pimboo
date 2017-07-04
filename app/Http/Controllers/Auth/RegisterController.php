@@ -66,7 +66,7 @@ class RegisterController extends Controller
         if (isset($_COOKIE['ref']) and !empty($_COOKIE['ref'])) {
             $ref = $_COOKIE['ref'];
             $check_users = DB::table('users')->select('id')->where('name', '=', $ref)->get();
-            if(count($check_users) != 0) $ref = $check_users[0]->id;
+            $ref = (count($check_users) != 0) ? $check_users[0]->id : 0;
         } else {
             $ref = 0;
         }

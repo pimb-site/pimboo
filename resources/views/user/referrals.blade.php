@@ -5,7 +5,7 @@
 			<div class="wrap">
 				@include('user.header')
 				<div class="referals">
-					<div class="title">Invite Friends. Get Paid For Life <span>!</span></div>
+					<div class="title">Invite Friends. Get Paid For <span>Life!</span></div>
 					<div class="text">Use our tools to invite your friends to join Pimboo and get a % of their posts for life!<br>It's free for them as well, and always will be! Its a win win!</div>
 					<div class="address_book">
 						<div class="sub_title">Invite Your Contacts from Your Address Book</div>

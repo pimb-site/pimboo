@@ -139,7 +139,7 @@ Admin
 		<div class="wrap">
 			@include('user.admin.header')
 
-			<div class="top_title">Posts</div>
+			<div class="top_title">Current page: Posts <a href="/admin/users/"> List of users</a></div>
 			<div class="entries">
 				<select>
 				  <option data-entries="100">100 Entries(defalult)</option>

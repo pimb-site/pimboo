@@ -17,12 +17,105 @@ use Illuminate\Http\Request;
 class AdminController extends Controller
 {
 
+	public function deletePhotoUser() {
+		if(Auth::guest()) return redirect('/');
+		if(Auth::user()->permission == 1) return redirect('/');
+		if(Auth::user()->permission == 10) {
+			$user_id = Input::get('user_id');
+			$type = Input::get('type');
+
+			switch ($type) {
+				case 'photo':
+					User::where('id', $user_id)->update(['photo' => '']);
+					break;
+				case 'cover':
+					User::where('id', $user_id)->update(['cover_photo' => '']);
+					break;
+
+				default:
+					# code...
+					break;
+			}
+			return Response::json(['success' => true]);
+		}
+	}
+
+	public function updateUser() {
+		if(Auth::guest()) return redirect('/');
+		if(Auth::user()->permission == 1) return redirect('/');
+		if(Auth::user()->permission == 10) {
+
+			$input = Input::get();
+
+			if( strlen($input['name']) >= 3 && strlen($input['name']) <= 255) {
+				if(preg_match('|^[A-Z0-9]+$|i', $input['name'])) {
+					$info = DB::table('users')->select('name')->where('name', '=', $input['name'])->get();
+					if(count($info) == 0) {
+						DB::table('posts')
+					        ->where('user_id', $input['user_id'])
+					        ->where('author_name', $input['user_name'])
+					        ->update(['author_name' => $input['name']]);
+
+					    User::where('id', $input['user_id'])->update(['name' => $input['name']]);
+					}
+				}
+			}
+
+
+			$input['show_fb_link'] = (isset($input['show_fb_link'])) ? 1 : 0;
+			$input['show_twitter_link'] = (isset($input['show_twitter_link'])) ? 1 : 0;
+			$input['weekly_digest'] = (isset($input['weekly_digest'])) ? 1 : 0;
+			$input['new_subs_update'] = (isset($input['new_subs_update'])) ? 1 : 0;
+
+			User::where('id', $input['user_id'])
+				->update(['public_info' => $input['public_info'], 'website_link' => $input['website_link'],
+						  'fb_link' => $input['fb_link'], 'show_fb_link' => $input['show_fb_link'],
+						  'twitter_link' => $input['twitter_link'], 'show_twitter_link' => $input['show_twitter_link'],
+						  'google_pluse_link' => $input['google_pluse_link'], 'email_for_news' => $input['email_for_news'],
+						  'weekly_digest' => $input['weekly_digest'], 'new_subs_update' => $input['new_subs_update']]);
+
+			$user = User::where('id', $input['user_id'])->get();
+
+			if(count($user) != 0) {
+				return view('user.admin.editing.user', ['body_class' => 'member-profile-settings', 'user' => $user[0]]);
+			} else return redirect('/admin/');
+		}
+	}
+
+	public function editUser($user_id) {
+		if(Auth::guest()) return redirect('/');
+		if(Auth::user()->permission == 1) return redirect('/');
+		if(Auth::user()->permission == 10) {
+			$user_id = (int) $user_id;
+			$user = User::where([ ['id', $user_id] ])->get();
+			if(count($user) != 0) {
+				return view('user.admin.editing.user', ['body_class' => 'member-profile-settings', 'user' => $user[0]]);
+			} else return redirect('/admin/');
+		}
+	}
+
+	public function deleteUser() {
+		if(Auth::guest()) return redirect('/');
+		if(Auth::user()->permission == 1) return redirect('/');
+		if(Auth::user()->permission == 10) {
+			$user_id = Input::get('user_id');
+			User::where('id', $user_id)->delete();
+			Post::where('user_id', $user_id)->delete();
+			return Response::json(['success' => true]); 
+		}
+	}
+
 	public function getUsers() {
 		if(Auth::guest()) return redirect('/');
 		if(Auth::user()->permission == 1) return redirect('/');
 		if(Auth::user()->permission == 10) {
 			$users = User::select('id', 'name', 'email', 'photo', 'permission')->get();
-			return view('user.admin.users_list', ['body_class' => 'admin', 'users' => $users]);
+			$count_posts = [];
+			foreach ($users as $key => $value) {
+				$count = Post::where('user_id', $value['id'])->count();
+				$count_posts[$value['id']] = $count;
+			}
+			return view('user.admin.users_list', ['body_class' => 'admin', 'users' => $users, 'count_posts' => $count_posts]);
 		}
 	}
 
