@@ -9,7 +9,7 @@
 					<span>Your Referral Link is:</span><input value="{!! url('/ref/') !!}/{{ $user->name }}" readonly />
 				</div>
 				<div class="scrollbar-inner">
-					<div class="centering " style="width: {{ $i*76 }}px">
+					<div class="centering " style="width: <?php  if($i != 0) { echo $i*76; } else { echo 84; } ?>px;">
 						<div id="ref-tree">
 							<div id="ref-tree-me" style="width: 100%">
 								<table cellpadding="0" cellspacing="0" border="0" style="width: {{ $i*76 }}px">
@@ -31,7 +31,7 @@
 									</tr>
 									<tr style="width: 100%;height: 32px;" align="middle">
 										<td style="width: 32px;height: 32px;" align="middle">
-											<div class="line" style="border-left: 1px solid black; height: 100%; width: 0px;"></div>
+											<div class="line" style="border: 1px solid #b6c6e4; height: 100%; width: 0px;"></div>
 										</td>
 									</tr>
 								</table> 
@@ -58,7 +58,7 @@
 								width: <?php echo $i; ?>px;
 								margin-right: <?php echo 38*$l; ?>px;
 								margin-left: <?php echo 38*$f; ?>px;
-								border-top: 1px solid black;
+								border: 1px solid #b6c6e4;
 								"
 							"></div>
 							<div id="ref-tree-first" style="width: 100%;">
@@ -67,7 +67,7 @@
 									<table cellpadding="0" cellspacing="0" border="0" style="width: <?php  if(count($my_org_users_second_level[$user_f_l->id]) != 0) { echo count($my_org_users_second_level[$user_f_l->id])*76; } else { echo 76; } ?>px; float: left;">
 										<tr >
 											<td style="width: 32px;height: 32px;" align="middle">
-												<div class="line" style="border-left: 1px solid black; height: 100%; width: 0px;"></div>
+												<div class="line" style="border: 1px solid #b6c6e4; height: 100%; width: 0px;"></div>
 											</td>
 										</tr>
 										<tr>
@@ -87,7 +87,7 @@
 										<tr>
 											<td style="width: 250px;height: 76px;" align="middle">
 												@if (count($my_org_users_second_level[$user_f_l->id]))
-													<div class="line" style="border-left: 1px solid black; height: 100%; width: 0px;"></div>
+													<div class="line" style="border: 1px solid #b6c6e4; height: 100%; width: 0px;"></div>
 												@endif
 											</td>
 										</tr>
@@ -111,7 +111,7 @@
 											width: <?php echo $c; ?>px;
 											margin-left: <?php echo 38;?>px;
 											margin-right: <?php echo 38; ?>px;
-											border-top: 1px solid black;
+											border: 1px solid #b6c6e4;
 											" ></div>
 
 										<table cellpadding="0" cellspacing="0" border="0" style="width: <?php  if(count($my_org_users_second_level[$user_f_l->id]) != 0) { echo count($my_org_users_second_level[$user_f_l->id])*76; } else { echo 76; } ?>px">
@@ -120,7 +120,7 @@
 											<table cellpadding="0" cellspacing="0" border="0" style="width: 76px;float: left;">
 											<tr>
 												<td style="height:  32px; width: 76px" align="middle">
-													<div class="line" style="border-left: 1px solid black; height: 100%; width: 0px;"></div>
+													<div class="line" style="border: 1px solid #b6c6e4; height: 100%; width: 0px;"></div>
 												</td>
 											</tr>
 											<tr>
