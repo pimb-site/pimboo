@@ -72,7 +72,7 @@
 										</tr>
 										<tr>
 											<td height="63" align="middle">
-												<div class="user-first" data-trigger="hover" data-content='<?php echo $content; ?>' data-html="true" data-placement="right" id="user-<?php echo $user_f_l->id; ?>" style='z-index: 1000;'>
+												<div class="user-first" data-trigger="hover" data-content='<?php echo $content; ?>' data-html="true" data-placement="top" id="user-<?php echo $user_f_l->id; ?>" style='z-index: 1000;'>
 													@if (empty($user_f_l->photo))
 													<img width="63px" height="63px" src="/img/header_default_photo.png" />
 												@else
@@ -125,7 +125,7 @@
 											</tr>
 											<tr>
 												<td height="42" align="middle">
-													<div class="user-second" data-trigger="hover" data-content='<?php echo $content; ?>' data-html="true" data-placement="right" id="user-<?php echo $user_s_l->id; ?>" style='z-index: 1000;'>
+													<div class="user-second" data-trigger="hover" data-content='<?php echo $content; ?>' data-html="true" data-placement="top" id="user-<?php echo $user_s_l->id; ?>" style='z-index: 1000;'>
 														@if (empty($user_s_l->photo))
 															<img width="42px" height="42px" src="/img/header_default_photo.png" />
 														@else
