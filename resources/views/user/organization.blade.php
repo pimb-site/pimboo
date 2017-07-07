@@ -36,32 +36,34 @@
 									</tr>
 								</table> 
 							</div>
-							<div class="vertical-ref-line"
-								style="
-								<?php
-								
-								$users_tmp = $my_org_users_second_level;
-								
-								$f = count(current($users_tmp));
-								if ($f == 0) {
-									$f = 1;
-								}
-								$l = count(array_pop($users_tmp));
-								if ($l == 0) {
-									$l = 1;
-								}
-								$i = $i*76-38*($f+$l);
-								if ($i == 0) {
-									$i = 1;
-								}
-								?>
-								width: <?php echo $i; ?>px;
-								margin-right: <?php echo 38*$l; ?>px;
-								margin-left: <?php echo 38*$f; ?>px;
-								border: 1px solid #b6c6e4;
-								"
-							"></div>
-							<div id="ref-tree-first" style="width: 100%;">
+							<div class="centering">
+								<div class="vertical-ref-line"
+									style="
+									<?php
+									
+									$users_tmp = $my_org_users_second_level;
+									
+									$f = count(current($users_tmp));
+									if ($f == 0) {
+										$f = 1;
+									}
+									$l = count(array_pop($users_tmp));
+									if ($l == 0) {
+										$l = 1;
+									}
+									$i = $i*76-38*($f+$l);
+									if ($i == 0) {
+										$i = 1;
+									}
+									?>
+									width: <?php echo $i; ?>px;
+									margin-right: <?php echo 38*$l; ?>px;
+									margin-left: <?php echo 38*$f; ?>px;
+									border: 1px solid #b6c6e4;
+									"
+								"></div>
+							</div>
+							<div id="ref-tree-first" >
 								<?php foreach($my_org_users_first_level as $user_f_l) : ?>
 								<?php $content = '<div class="user-pop"><div class="user-info"><div class="full-name">'.$user_f_l->name.'</div><div class="line"></div><div class="birthday">'.$user_f_l->created_at.'</div><div class="line"></div></div></div>'; ?>
 									<table cellpadding="0" cellspacing="0" border="0" style="width: <?php  if(count($my_org_users_second_level[$user_f_l->id]) != 0) { echo count($my_org_users_second_level[$user_f_l->id])*76; } else { echo 76; } ?>px; float: left;">
@@ -94,7 +96,7 @@
 									</table> 
 								<?php endforeach; ?>
 							</div>
-							<div id="ref-tree-second" style="width: 100%">
+							<div id="ref-tree-second" >
 								
 								<?php foreach($my_org_users_first_level as $user_f_l) : ?>
 									<div class="user-group" style="width: <?php  if(count($my_org_users_second_level[$user_f_l->id]) != 0) { echo count($my_org_users_second_level[$user_f_l->id])*76; } else { echo 76; } ?>px; float: left;">
@@ -103,13 +105,15 @@
 											<?php $c = count($my_org_users_second_level[$user_f_l->id]); 
 											if ($c*76-76 <= 0) {
 												$c = 1;
+												$k = 37;
 											} else {
 												$c = $c*76-76;
+												$k = 38;
 											}
 											?>
 											
 											width: <?php echo $c; ?>px;
-											margin-left: <?php echo 38;?>px;
+											margin-left: <?php echo $k;?>px;
 											margin-right: <?php echo 38; ?>px;
 											border: 1px solid #b6c6e4;
 											" ></div>
