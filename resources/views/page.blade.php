@@ -52,8 +52,8 @@
 				</div>
 			</div>
 		</footer>
-		<script src="http://pimboo-front.local/js/footer.min.js" type="text/javascript"></script>
-		<!--<script src="/js/footer.min.js" type="text/javascript"></script>-->
+		<!--<script src="http://pimboo-front.local/js/footer.min.js" type="text/javascript"></script>-->
+		<script src="/js/footer.min.js" type="text/javascript"></script>
 		<script src="/js/register.js" type="text/javascript"></script>
 		<script type="text/javascript">
 			_token = '{{ csrf_token() }}';
