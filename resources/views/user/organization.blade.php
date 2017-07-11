@@ -72,7 +72,7 @@
 															<div class="id">#'.sprintf("%'.09d\n",$user_f_l->id).'</div>
 															<div class="birthday">'.$user_f_l->created_at.'</div>
 															<div class="line"></div>
-															<div class="balance">Total balance: $28</div>
+															<div class="balance">Total balance: $0</div>
 														</div>
 													</div>'; ?>
 									<table cellpadding="0" cellspacing="0" border="0" style="width: <?php  if(count($my_org_users_second_level[$user_f_l->id]) != 0) { echo count($my_org_users_second_level[$user_f_l->id])*120; } else { echo 120; } ?>px; float: left;">
