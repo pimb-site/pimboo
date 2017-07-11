@@ -129,19 +129,6 @@
                             </div>
                         </div>
                     </div>
-                    <style>
-                        .trklvs-banner {
-                            text-align: center;
-                            display: table;
-                            width: 100%; 
-                        }
-                        .trklvs-banner iframe{
-                            width: 728px;
-                            margin-left: auto;
-                            margin-right: auto;
-                            display: block;
-                        }
-                    </style>
                     <div class="trklvs-banner">
                         <script src="https://trklvs.com/track.html?pid=599945&id=22899&bid=3&w=728&h=90"></script>
                     </div>
