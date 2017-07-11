@@ -59,7 +59,14 @@
 									width: <?php echo $i; ?>px;
 									margin-right: <?php echo 60*$l; ?>px;
 									margin-left: <?php echo 60*$f; ?>px;
+									<?php 
+									if (empty ($my_org_users_first_level)) {
+									 ?>
+									
+									border: 1px solid transparent;
+									<?php } else { ?>
 									border: 1px solid #b6c6e4;
+									<?php } ?>
 									"
 								"></div>
 							</div> 

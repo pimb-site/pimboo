@@ -106,24 +106,25 @@
                             <div class="content-side">
                                 <div class="content-left">
                                     <a class="content-left-part" href="http://clck.adcnvr.com/aff_c?offer_id=22&aff_id=1242">
-                                        <div class="content-image"><img src="/img/b3.gif"/></div>
+                                        <div class="content-image"><img src="/img/b3.jpg"/></div>
+                                        <div class="content-title">{{ $ads['1']['name'] }}</div>
+                                    </a>
+                                    <script src="https://trklvs.com/track.html?pid=599945&id=22849&bid=2&w=300&h=250"></script>
+                                    <a class="content-left-part" href="http://clck.adcnvr.com/aff_c?offer_id=22&aff_id=1242">
+                                        <div class="content-image"><img src="/img/b4.jpg"/></div>
                                         <div class="content-title">{{ $ads['1']['name'] }}</div>
                                     </a>
                                     <a class="content-left-part" href="http://clck.adcnvr.com/aff_c?offer_id=22&aff_id=1242">
-                                        <div class="content-image"><img src="/img/b4.gif"/></div>
+                                        <div class="content-image"><img src="/img/b5.jpg"/></div>
                                         <div class="content-title">{{ $ads['1']['name'] }}</div>
                                     </a>
                                     <a class="content-left-part" href="http://clck.adcnvr.com/aff_c?offer_id=22&aff_id=1242">
-                                        <div class="content-image"><img src="/img/b5.gif"/></div>
-                                        <div class="content-title">{{ $ads['1']['name'] }}</div>
-                                    </a>
-                                    <a class="content-left-part" href="http://clck.adcnvr.com/aff_c?offer_id=22&aff_id=1242">
-                                        <div class="content-image"><img src="/img/b4.gif"/></div>
+                                        <div class="content-image"><img src="/img/b4.jpg"/></div>
                                         <div class="content-title">{{ $ads['1']['name'] }}</div>
                                     </a>
                                 </div>
                                 <a class="content-right" href="{{ $ads['2']['href'] }}">
-                                    <div class="content-image"><img src="/img/b2.gif"/></div>
+                                    <div class="content-image"><img src="/img/b2.jpg"/></div>
                                     <div class="content-title">{{ $ads['2']['name'] }}</div>
                                 </a>
                             </div>
@@ -132,7 +133,7 @@
                     <div class="content-bottom">
                         <a href="http://clck.adcnvr.com/aff_c?offer_id=22&aff_id=1242">
                             <div class="content-side">
-                                <div class="content-image"><img src="/img/b6.gif"/></div>
+                                <div class="content-image"><img src="/img/b6.jpg"/></div>
                                 <div class="content-title"></div>
                             </div>
                         </a>
