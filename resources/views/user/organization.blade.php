@@ -171,4 +171,35 @@
 			</div>
 
 		</div>
+
+@endsection
+@section('script')
+<script type="text/javascript">
+	// var ScreenWidth = screen.width; 
+	// var maxSizeW;
+	// if (ScreenWidth >= 768) {
+	// 	ScreenWidth = '50%';
+	// 	maxSizeW    = 500;
+	// } else if (ScreenWidth <= 479){
+	// 	ScreenWidth = '50%';
+	// 	maxSizeW    = 300;
+	// }
+	// else {
+	// 	ScreenWidth = '50%';
+	// 	maxSizeW    = 400;
+	// }
+	
+	// if (ScreenWidth >= 768) {
+	// 	$('.member-my-org #ref-tree-me [id*="user-"], .member-my-org #ref-tree-first [id*="user-"], .member-my-org #ref-tree-second [id*="user-"]').popover({delay: { show: 500, hide: 500}});
+	// } else {
+	// 	$('.member-my-org #ref-tree-me [id*="user-"], .member-my-org #ref-tree-first [id*="user-"]').popover({delay: {show: 500, hide: 500}, placement: 'top'});
+	// 	$('.member-my-org #ref-tree-second [id*="user-"]').popover({delay: {show: 500, hide: 500}, placement: 'top'});
+	// }
+
+	// $('.member-my-org [id*="user-"]').popover('show');
+
+	// $('.member-my-org [id*="user-"]').popover('hide');
+
+	$('.member-my-org [id*="user-"]').popover();
+</script>
 @endsection
