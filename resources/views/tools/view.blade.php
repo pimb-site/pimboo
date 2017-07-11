@@ -104,72 +104,38 @@
                         </div>
                         <div class="content">
                             <div class="content-side">
-                                <a class="content-left" href="{{ $ads['1']['href'] }}">
-                                    <div class="content-image"><img src="/img/view_back_3.jpg"/></div>
-                                    <div class="content-title">{{ $ads['1']['name'] }}</div>
-                                </a>
+                                <div class="content-left">
+                                    <a class="content-left-part" href="http://clck.adcnvr.com/aff_c?offer_id=22&aff_id=1242">
+                                        <div class="content-image"><img src="/img/b3.gif"/></div>
+                                        <div class="content-title">{{ $ads['1']['name'] }}</div>
+                                    </a>
+                                    <a class="content-left-part" href="http://clck.adcnvr.com/aff_c?offer_id=22&aff_id=1242">
+                                        <div class="content-image"><img src="/img/b4.gif"/></div>
+                                        <div class="content-title">{{ $ads['1']['name'] }}</div>
+                                    </a>
+                                    <a class="content-left-part" href="http://clck.adcnvr.com/aff_c?offer_id=22&aff_id=1242">
+                                        <div class="content-image"><img src="/img/b5.gif"/></div>
+                                        <div class="content-title">{{ $ads['1']['name'] }}</div>
+                                    </a>
+                                    <a class="content-left-part" href="http://clck.adcnvr.com/aff_c?offer_id=22&aff_id=1242">
+                                        <div class="content-image"><img src="/img/b4.gif"/></div>
+                                        <div class="content-title">{{ $ads['1']['name'] }}</div>
+                                    </a>
+                                </div>
                                 <a class="content-right" href="{{ $ads['2']['href'] }}">
-                                    <div class="content-image"><img src="/img/view_back_1.jpg"/></div>
+                                    <div class="content-image"><img src="/img/b2.gif"/></div>
                                     <div class="content-title">{{ $ads['2']['name'] }}</div>
-                                </a>
-                            </div>
-                            <div class="content-side">
-                                <a class="content-left" href="{{ $ads['3']['href'] }}">
-                                    <div class="content-image"><img src="/img/view_back_2.jpg"/></div>
-                                    <div class="content-title">{{ $ads['3']['name'] }}</div>
-                                </a>
-                                <a class="content-right" href="{{ $ads['4']['href'] }}">
-                                    <div class="content-image"><img src="/img/view_back_3.jpg"/></div>
-                                    <div class="content-title">{{ $ads['4']['name'] }}</div>
-                                </a>
-                            </div>
-                            <div class="content-side">
-                                <a class="content-left" href="{{ $ads['5']['href'] }}">
-                                    <div class="content-image"><img src="/img/view_back_4.jpg"/></div>
-                                    <div class="content-title">{{ $ads['5']['name'] }}</div>
-                                </a>
-                                <a class="content-right" href="{{ $ads['6']['href'] }}">
-                                    <div class="content-image"><img src="/img/view_back_2.jpg"/></div>
-                                    <div class="content-title">{{ $ads['6']['name'] }}</div>
-                                </a>
-                            </div>
-                            <div class="content-side">
-                                <a class="content-left" href="{{ $ads['7']['href'] }}">
-                                    <div class="content-image"><img src="/img/view_back_3.jpg"/></div>
-                                    <div class="content-title">{{ $ads['7']['name'] }}</div>
-                                </a>
-                                <a class="content-right" href="{{ $ads['8']['href'] }}">
-                                    <div class="content-image"><img src="/img/view_back_1.jpg"/></div>
-                                    <div class="content-title">{{ $ads['8']['name'] }}</div>
                                 </a>
                             </div>
                         </div>
                     </div>
                     <div class="content-bottom">
-                        <div class="content-side">
-                            <div class="content-image"><img src="/img/view_back_4.jpg"/></div>
-                            <div class="content-title">How to Make fast Delivery and do not Loose your Money?</div>
-                        </div>
-                        <div class="content-side">
-                            <div class="content-image"><img src="/img/view_back_3.jpg"/></div>
-                            <div class="content-title">Poligraphy Trends 2017</div>
-                        </div>
-                        <div class="content-side">
-                            <div class="content-image"><img src="/img/view_back_1.jpg"/></div>
-                            <div class="content-title">Vechicle Mashap Attorney Atlanta</div>
-                        </div>
-                        <div class="content-side">
-                            <div class="content-image"><img src="/img/view_back_3.jpg"/></div>
-                            <div class="content-title">Why Hashish Edibles?</div>
-                        </div>
-                        <div class="content-side">
-                            <div class="content-image"><img src="/img/view_back_2.jpg"/></div>
-                            <div class="content-title">How to Make fast Delivery and do not Loose your Money?</div>
-                        </div>
-                        <div class="content-side">
-                            <div class="content-image"><img src="/img/view_back_2.jpg"/></div>
-                            <div class="content-title">Poligraphy Trends 2017</div>
-                        </div>
+                        <a href="http://clck.adcnvr.com/aff_c?offer_id=22&aff_id=1242">
+                            <div class="content-side">
+                                <div class="content-image"><img src="/img/b6.gif"/></div>
+                                <div class="content-title"></div>
+                            </div>
+                        </a>
                     </div>
                 </div>
             </div>
