@@ -109,7 +109,6 @@
                                         <div class="content-image"><img src="/img/b3.jpg"/></div>
                                         <div class="content-title">{{ $ads['1']['name'] }}</div>
                                     </a>
-                                    <script src="https://trklvs.com/track.html?pid=599945&id=22849&bid=2&w=300&h=250"></script>
                                     <a class="content-left-part" href="http://clck.adcnvr.com/aff_c?offer_id=22&aff_id=1242">
                                         <div class="content-image"><img src="/img/b4.jpg"/></div>
                                         <div class="content-title">{{ $ads['1']['name'] }}</div>
@@ -129,6 +128,22 @@
                                 </a>
                             </div>
                         </div>
+                    </div>
+                    <style>
+                        .trklvs-banner {
+                            text-align: center;
+                            display: table;
+                            width: 100%; 
+                        }
+                        .trklvs-banner iframe{
+                            width: 728px;
+                            margin-left: auto;
+                            margin-right: auto;
+                            display: block;
+                        }
+                    </style>
+                    <div class="trklvs-banner">
+                        <script src="https://trklvs.com/track.html?pid=599945&id=22899&bid=3&w=728&h=90"></script>
                     </div>
                     <div class="content-bottom">
                         <a href="http://clck.adcnvr.com/aff_c?offer_id=22&aff_id=1242">
