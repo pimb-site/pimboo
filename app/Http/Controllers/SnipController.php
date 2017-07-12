@@ -22,10 +22,11 @@ class SnipController extends Controller {
 
 		if (!filter_var($url, FILTER_VALIDATE_URL) === false) {
 			$header = @get_headers($url, 1);
+			$header = array_change_key_case($header, CASE_LOWER);
 			if (!$header || !stripos($header[0], '200 OK ') === false) {
 				return Response::json(['success' => false, 'text' => 'This domain has opted out of the service. Please try another domain.']);
 			}
-			elseif (isset($header['X-Frame-Options']) && (stripos($header['X-Frame-Options'], 'SAMEORIGIN') !== false || stripos($header['X-Frame-Options'], 'deny') !== false) || isset($header['content-security-policy'])) {
+			elseif (isset($header['x-frame-options']) && (stripos($header['x-frame-options'], 'SAMEORIGIN') !== false || stripos($header['x-frame-options'], 'deny') !== false) || isset($header['content-security-policy'])) {
 				return Response::json(['success' => false, 'text' => 'This domain has opted out of the service. Please try another domain.']);
 			}
 		}

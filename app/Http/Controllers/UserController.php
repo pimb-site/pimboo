@@ -53,6 +53,7 @@ class UserController extends Controller
 	}
 
 	public function getAccount() {
+		if(Auth::guest()) return redirect('/home');
 		$my_all_posts = Post::where('user_id', Auth::user()->id)->get();
 		$posts = [];
 		foreach ($my_all_posts as $post) {
@@ -125,9 +126,11 @@ class UserController extends Controller
 	}
 
 	public function getProfile() {
+		if(Auth::guest()) return redirect('/home');
 		return view('/user/profile', ['body_class' => 'member-profile-settings', 'user' => Auth::user()]);
 	}
 	public function saveProfile(Request $request) {
+		if(Auth::guest()) return redirect('/home');
 		$user = Auth::user();
 
 		if( strlen($request->input('name')) >= 3 && strlen($request->input('name')) <= 255) {
@@ -159,6 +162,7 @@ class UserController extends Controller
 	}
 
 	public function getOrganization() {
+		if(Auth::guest()) return redirect('/home');
 		$my_org_users_first_level = User::where('refferal', Auth::user()->id)->get();
 		$my_org_users_second_level = [];
 		$i = 0;
@@ -185,6 +189,7 @@ class UserController extends Controller
 		]);
 	}
 	public function getReferrals() {
+		if(Auth::guest()) return redirect('/home');
 		return view('/user/referrals', ['body_class' => 'member-referral-program', 'user' => Auth::user()]);
 	}
 
