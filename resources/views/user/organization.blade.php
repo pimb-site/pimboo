@@ -12,29 +12,31 @@
 					<div class="centering" id='scroll-center' style="width: <?php  if($i != 0) { echo $i*120; } else { echo 116; } ?>px;">
 						<div id="ref-tree">
 							<div id="ref-tree-me" style="width: 100%">
-								<table cellpadding="0" cellspacing="0" border="0" style="width: {{ $i*120 }}px">
-									<tr>
+								<div class="centering">
+									<table cellpadding="0" cellspacing="0" border="0" style="width: {{ $i*120 }}px">
+										<tr>
 
-										<td height="116" align="middle">
-											<div class="user">
-												@if (empty($user->photo))
-													<img width="116px" height="116px" src="/img/header_default_photo.png" />
-												@else
-													<img width="116px" height="116px" src="/uploads/{{ $user->photo }}" />
-												@endif
-												<div class="hide">
-													<a>{{ $user->id }}</a>
+											<td height="116" align="middle">
+												<div class="user">
+													@if (empty($user->photo))
+														<img width="116px" height="116px" src="/img/header_default_photo.png" />
+													@else
+														<img width="116px" height="116px" src="/uploads/{{ $user->photo }}" />
+													@endif
+													<div class="hide">
+														<a>{{ $user->id }}</a>
+													</div>
 												</div>
-											</div>
-										</td>
+											</td>
 
-									</tr>
-									<tr style="width: 100%;height: 20px;" align="middle">
-										<td style="width: 20px;height: 20px;" align="middle">
-											<div class="line" style="border: 1px solid #b6c6e4; height: 100%; width: 0px;"></div>
-										</td>
-									</tr>
-								</table> 
+										</tr>
+										<tr style="width: 100%;height: 20px;" align="middle">
+											<td style="width: 20px;height: 20px;" align="middle">
+												<div class="line" style="border: 1px solid #b6c6e4; height: 100%; width: 0px;"></div>
+											</td>
+										</tr>
+									</table> 
+								</div>
 							</div>
 							<div class="centering">
 								<div class="vertical-ref-line"
@@ -51,14 +53,14 @@
 									if ($l == 0) {
 										$l = 1;
 									}
-									$i = $i*120-60*($f+$l);
+									$i = $i*120-60*($f+$l)+2;
 									if ($i == 0) {
 										$i = 1;
 									}
 									?>
 									width: <?php echo $i; ?>px;
-									margin-right: <?php echo 60*$l; ?>px;
-									margin-left: <?php echo 60*$f; ?>px;
+									margin-right: <?php echo (60*$l)-1; ?>px;
+									margin-left: <?php echo (60*$f)-1; ?>px;
 									<?php 
 									if (empty ($my_org_users_first_level)) {
 									 ?>
@@ -121,16 +123,16 @@
 											<?php $c = count($my_org_users_second_level[$user_f_l->id]); 
 											if ($c*120-120 <= 0) {
 												$c = 1;
-												$k = 37;
+												$k = 59;
 											} else {
-												$c = $c*120-120;
-												$k = 60;
+												$c = ($c*120-120)+2;
+												$k = 59;
 											}
 											?>
 											
 											width: <?php echo $c; ?>px;
 											margin-left: <?php echo $k;?>px;
-											margin-right: <?php echo 60; ?>px;
+											margin-right: <?php echo 59; ?>px;
 											border: 1px solid #b6c6e4;
 											" ></div>
 
@@ -208,5 +210,6 @@
 	// $('.member-my-org [id*="user-"]').popover('hide');
 
 	$('.member-my-org [id*="user-"]').popover();
+
 </script>
 @endsection
