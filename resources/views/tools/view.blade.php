@@ -72,7 +72,7 @@
                                 <input type="hidden" id="report_id" name="report_id">
                                 <div class="mailer">
                                     <input placeholder="Email Address" id="report_mail" name="report_mail">
-                                    <button id="mail-submit"><img src="/wp-content/themes/PricerrTheme/images/report-mail-arrow.png"></button><span class="optional">(optional)</span>
+                                    <button id="mail-submit">send</button><span class="optional">(optional)</span>
                                 </div>
                               </div>
                               <div class="modal-footer">
