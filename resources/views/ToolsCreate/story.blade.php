@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Pimboo Story</title>
 	<link href="/css/style.min.css" rel="stylesheet">
-	<link href="/css/flip_new.css" rel="stylesheet">
+	<link href="/css/jquery.Jcrop.min.css" rel="stylesheet" type="text/css"/>
 </head>
 	<body class="tools_create_page">
 		@include('header')
