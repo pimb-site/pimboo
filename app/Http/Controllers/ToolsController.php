@@ -66,7 +66,7 @@ class ToolsController extends Controller
                 return view('tools.'.$content->type, ['body_class' => 'view '.$content->type, 'content' => $content, 'name' => $content->type, 'user_name' => $user_name, 'source_link' => '', 'ads' => $ads, 'tags' => unserialize($content->tags), 'date' => $date]);
             }
         } else {
-            return view('home');
+            return redirect('/home');
         }
     }
 }
