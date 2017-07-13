@@ -20,7 +20,7 @@ $(document).ready(function() {
 						html_post += '<button class="btn-share"><img src="/img/view_twitter.png"></button>';
 						html_post += '<button class="btn-share"><img src="/img/view_linkedin.png"></button>';
 						html_post += '<button class="btn-share"><img src="/img/view_link.png"></button>';
-						html_post += '<button class="get-link">GET LINK</button></div></div></div>';
+						html_post += '<button class="get_link">GET LINK</button></div></div></div>';
 					});
 					$('.show-more').before(html_post);
 					if(data.show_more == true) $('.show-more').css({'display': 'block'});
@@ -55,7 +55,7 @@ $(document).ready(function() {
 						html_post += '<div class="share">Share this <a href="#">'+value.type+'</a></div>';
 						html_post += '<div class="share-buttons"><button class="btn-share"><img src="/img/view_fb.png"></button>';
 						html_post += '<button class="btn-share"><img src="/img/view_twitter.png"></button><button class="btn-share"><img src="/img/view_linkedin.png"></button>';
-						html_post += '<button class="btn-share"><img src="/img/view_link.png"></button><button class="get-link">GET LINK</button></div></div></div>';
+						html_post += '<button class="btn-share"><img src="/img/view_link.png"></button><button class="get_link">GET LINK</button></div></div></div>';
 					});
 					$('.show-more').before(html_post);
 					if(data.show_more == true) $('.show-more').css({'display': 'block'});

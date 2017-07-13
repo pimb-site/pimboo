@@ -63,7 +63,7 @@
 								<button data-title="{{ $post->description_title }}" data-url="{{ url('/'.$post->author_name.'/'.$post->url) }}" data-type="tw" class="butt-for-sharing"><img src="/img/view_twitter.png"></button>
 								<button data-title="{{ $post->description_title }}" data-url="{{ url('/'.$post->author_name.'/'.$post->url) }}" data-type="li" class="butt-for-sharing"><img src="/img/view_linkedin.png"></button>
 								<button><img src="/img/view_link.png"></button>
-								<button class="get-link">GET LINK</button>
+								<button class="get_link" data-href="{{ url('/'.$post->author_name.'/'.$post->url) }}">GET LINK</button>
 							</div>
 						</div>
 					</div>
