@@ -15,16 +15,16 @@
 
 @section('tool_content')
 
-<?php
-$current_id = 1;
-$flipcards  = unserialize($content->content);
-$themes = [
-	'green' => '#8dc63f',
-	'purple' => '#605ca8',
-	'blue'  => '#009cff',
-	'turquoise' => '#00a99d'
-];
-?>
+	<?php
+	$current_id = 1;
+	$flipcards  = unserialize($content->content);
+	$themes = [
+		'green' => '#8dc63f',
+		'purple' => '#605ca8',
+		'blue'  => '#009cff',
+		'turquoise' => '#00a99d'
+	];
+	?>
 	<div class="content-flipcard">
 		<div class="description">{{ $content->description_text }} </div>
 		@foreach($flipcards as $key => $value)
