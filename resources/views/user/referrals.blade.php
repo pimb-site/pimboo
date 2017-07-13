@@ -33,8 +33,8 @@
 						<div class="sub_title">Your Invite Link</div>
 						<input type="text" name="" value="{!! url('/ref/') !!}/{{ $user->name }}" disabled="disabled">
 						<div class="shares">
-							<div class="fb share"></div>
-							<div class="twitter share"></div>
+							<div data-title="Pimboo" data-url="{!! url('/ref/') !!}/{{ $user->name }}" data-type="fb" class="butt-for-sharing fb share"></div>
+							<div data-title="Pimboo" data-url="{!! url('/ref/') !!}/{{ $user->name }}" data-type="tw" class="butt-for-sharing twitter share"></div>
 						</div>
 					</div>
 				</div>
