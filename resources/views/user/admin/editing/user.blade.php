@@ -14,6 +14,11 @@
 								<div class="left">
 									<div class="sub_title">Edit profile</div>
 									<input type="text" name="name" placeholder="Name" value="{{ $user->name }}">
+									<?php
+								    foreach ($errors->all(':message<br/>') as $message) {
+						                echo $message;
+						            }
+									?>
 									<textarea name="public_info" placeholder="Public profile info">{{ $user->public_info }}</textarea>
 								</div>
 								<div class="right">
