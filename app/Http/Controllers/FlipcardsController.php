@@ -110,9 +110,9 @@ class FlipcardsController extends Controller
 		                'Flip Cards Footer' => $input['form_flip']['form_footer']
 		            ),
 		            array(
-		                'Flip Cards Title' => 'required|min:3',
-		                'Flip Cards Description' => 'required',
-		                'Flip Cards Footer' => 'required'
+		                'Flip Cards Title' => 'required|min:3|max:400',
+		                'Flip Cards Description' => 'required|min:3',
+		                'Flip Cards Footer' => 'required|min:3|max:500'
 		            )
 		        );
 
@@ -203,6 +203,8 @@ class FlipcardsController extends Controller
 				$string = FlipcardsController::translit($string);
 				if(strlen($string) < 3) {
 					$string = 'flipcards';
+				} else if(strlen($string) > 180) {
+					$string = substr($string, 0, 190);
 				}
 
 				$str = $string;
@@ -237,9 +239,9 @@ class FlipcardsController extends Controller
 				'Flip Cards Facebook Photo' => $input['form_flip']['form_photo_facebook']
             ),
             array(
-                'Flip Cards Title' => 'required|min:3',
-                'Flip Cards Description' => 'required',
-                'Flip Cards Footer' => 'required',
+                'Flip Cards Title' => 'required|min:3|max:400',
+                'Flip Cards Description' => 'required|min:3',
+                'Flip Cards Footer' => 'required|min:3|max:500',
                 'Flip Cards Photo' => 'required',
 				'Flip Cards Facebook Photo' => 'required'
             )
@@ -405,6 +407,8 @@ class FlipcardsController extends Controller
 					$string = FlipcardsController::translit($string);
 					if(strlen($string) < 3) {
 						$string = 'flipcards';
+					} else if(strlen($string) > 180) {
+						$string = substr($string, 0, 190);
 					}
 
 					$str = $string;

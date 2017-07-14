@@ -24,7 +24,7 @@
 							<textarea name="form_flip[form_description]" class="top_textarea_trivia" placeholder="Ranked list description" autocomplete="off"></textarea>
 						</div>
 					</div>
-					<textarea name="form_flip[form_footer]" placeholder="Footer text (1500 symbols max)" maxlength="1500" autocomplete="off" style="color:#6e8dc9;"></textarea>
+					<textarea name="form_flip[form_footer]" placeholder="Footer text (500 symbols max)" maxlength="500" autocomplete="off" style="color:#6e8dc9;"></textarea>
 				</div>
 				<input class="post-title" type="text" name="flip_cards[1][post_title]" placeholder="Post title"> </input>
 				<div class="editor" data-id="1">

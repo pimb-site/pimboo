@@ -69,8 +69,8 @@ class StoryController extends Controller
 				'Story Content' => $input['form_story']['content']
             ),
             array(
-                'Story Title' => 'required|min:3',
-                'Story Description' => 'required',
+                'Story Title' => 'required|min:3|max:400',
+                'Story Description' => 'required|min:3',
                 'Story Photo' => 'required',
 				'Story Facebook Photo' => 'required',
 				'Story Content' => 'required'
@@ -173,6 +173,8 @@ class StoryController extends Controller
 				$string = StoryController::translit($string);
 				if(strlen($string) < 3) {
 					$string = 'story';
+				} else if(strlen($string) > 180) {
+					$string = substr($string, 0, 190);
 				}
 
 				$str = $string;
