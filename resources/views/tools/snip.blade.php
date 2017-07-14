@@ -21,10 +21,13 @@
 					<div class="pimboo-logo"><a href="http://pimboo.com">Powered by <img src="/img/snip-pimboo-logo.png" /> </a></div>
 				</div>
 			</div>
-			<iframe src="{{ $snip['iframe_url'] }}"></iframe>
+			<iframe id="main-iframe" src="{{ $snip['iframe_url'] }}" onload="document.title=this.contentWindow.document.title"></iframe>
 		</div>
-		
 
 	<script src="/js/footer.min.js"></script>
+	<script>
+		var title = "{{ $snip['title'] }}";
+		if(title != "") document.title = title;
+	</script>
 	</body>
 </html>

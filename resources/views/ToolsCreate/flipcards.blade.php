@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Pimboo Flip Cards</title>
 	<link href="/css/style.min.css" rel="stylesheet">
-	<link href="/test/jcrop/jquery.Jcrop.min.css" rel="stylesheet" type="text/css"/>
+	<link href="/css/jquery.Jcrop.min.css" rel="stylesheet" type="text/css"/>
 </head>
 	<body class="tools_create_page">
 		@include('header')
@@ -25,7 +25,7 @@
 							<input type="text" name="flip_cards[1][form_item_title]" placeholder="Enter item title (45 symbols max)" maxlength="45" autocomplete="off">
 						</div>
 					</div>
-					<textarea name="form_flip[form_footer]" placeholder="Footer text (1500 symbols max)" maxlength="1500" autocomplete="off"></textarea>
+					<textarea name="form_flip[form_footer]" placeholder="Footer text (500 symbols max)" maxlength="500" autocomplete="off"></textarea>
 				</div>
 				<div class="buttons">
 					<button type="button" class="front_card" data-id="1">FRONT CARD</button>

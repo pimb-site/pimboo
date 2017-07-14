@@ -12,6 +12,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\Registrar;
 use Illuminate\Http\Request;
+use Validator;
 
 class UserController extends Controller
 {
@@ -131,18 +132,17 @@ class UserController extends Controller
 	}
 	public function saveProfile(Request $request) {
 		if(Auth::guest()) return redirect('/home');
+
 		$user = Auth::user();
 
-		if( strlen($request->input('name')) >= 3 && strlen($request->input('name')) <= 255) {
-			if(preg_match('|^[A-Z0-9]+$|i', $request->input('name', $user->name))) {
-				$info = DB::table('users')->select('name')->where('name', '=', $request->input('name'))->get();
-				if(count($info) == 0) {
-					DB::table('posts')
-				        ->where('user_id', Auth::user()->id)
-				        ->where('author_name', Auth::user()->name)
-				        ->update(['author_name' => $request->input('name')]);
-					$user->name = $request->input('name', $user->name);
-				}
+		$validator = Validator::make($request->input(), [
+            'name' => 'required|min:3|max:255|unique:users|alpha_num|regex:/^[a-zA-Z0-9]+$/u|not_in:admin,create,upload,success,report,auth,user,ref,referrals,home,logout,login,charity,disclaimer,channel',
+        ]);
+		if(!$validator->fails()) {
+			$info = User::select('name')->where('name', $request->input('name'))->get();
+			if(count($info) == 0) {
+				Post::where(['user_id' => Auth::user()->id, 'author_name' => Auth::user()->name])->update(['author_name' => $request->input('name')]);
+				$user->name = $request->input('name', $user->name);
 			}
 		}
 
@@ -158,7 +158,7 @@ class UserController extends Controller
 		$user->new_subs_update = $request->input('new_subs_update', 0);
 		$user->save();
 
-		return view('/user/profile', ['body_class' => 'member-profile-settings', 'user' => $user]);
+		return view('/user/profile', ['body_class' => 'member-profile-settings', 'user' => $user, 'errors' => $validator->messages()]);
 	}
 
 	public function getOrganization() {

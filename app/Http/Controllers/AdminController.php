@@ -13,6 +13,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\Registrar;
 use Illuminate\Http\Request;
+use Validator;
 
 class AdminController extends Controller
 {
@@ -47,20 +48,16 @@ class AdminController extends Controller
 
 			$input = Input::get();
 
-			if( strlen($input['name']) >= 3 && strlen($input['name']) <= 255) {
-				if(preg_match('|^[A-Z0-9]+$|i', $input['name'])) {
-					$info = DB::table('users')->select('name')->where('name', '=', $input['name'])->get();
-					if(count($info) == 0) {
-						DB::table('posts')
-					        ->where('user_id', $input['user_id'])
-					        ->where('author_name', $input['user_name'])
-					        ->update(['author_name' => $input['name']]);
-
-					    User::where('id', $input['user_id'])->update(['name' => $input['name']]);
-					}
+			$validator = Validator::make($input, [
+	            'name' => 'required|min:3|max:255|unique:users|alpha_num|regex:/^[a-zA-Z0-9]+$/u|not_in:admin,create,upload,success,report,auth,user,ref,referrals,home,logout,login,charity,disclaimer,channel',
+	        ]);
+			if(!$validator->fails()) {
+				$info = User::select('name')->where('name', $input['name'])->get();
+				if(count($info) == 0) {
+					Post::where(['user_id' => $input['user_id'], 'author_name' => $input['user_name']])->update(['author_name' => $input['name']]);
+					User::where('id', $input['user_id'])->update(['name' => $input['name']]);
 				}
 			}
-
 
 			$input['show_fb_link'] = (isset($input['show_fb_link'])) ? 1 : 0;
 			$input['show_twitter_link'] = (isset($input['show_twitter_link'])) ? 1 : 0;
@@ -77,7 +74,7 @@ class AdminController extends Controller
 			$user = User::where('id', $input['user_id'])->get();
 
 			if(count($user) != 0) {
-				return view('user.admin.editing.user', ['body_class' => 'member-profile-settings', 'user' => $user[0]]);
+				return view('user.admin.editing.user', ['body_class' => 'member-profile-settings', 'user' => $user[0], 'errors' => $validator->messages()]);
 			} else return redirect('/admin/');
 		}
 	}

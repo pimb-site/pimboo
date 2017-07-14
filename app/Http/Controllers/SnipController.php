@@ -6,6 +6,7 @@ use redirect;
 use Response;
 use Auth;
 use DB;
+use DOMDocument;
 
 class SnipController extends Controller {
 
@@ -34,8 +35,9 @@ class SnipController extends Controller {
 			return Response::json(['success' => false, 'text' => 'Incorrect URL']);
 		}
 
+		$title = SnipController::get_title($url);
 		// Content(iframe url)
-		$content = ['iframe_url' => $url];
+		$content = ['iframe_url' => $url, 'title' => $title];
 		$content = serialize($content);
 
 		// TAGS
@@ -64,5 +66,21 @@ class SnipController extends Controller {
 		$link = '/'.Auth::user()->name.'/'.$url_snip;
 
 		return Response::json(['success' => true, 'link' => $link]);
+	}
+
+	public static function get_title($url_site) {
+	    $ch = curl_init();
+	    curl_setopt($ch, CURLOPT_URL, $url_site);
+	    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	    // some websites like Facebook need a user agent to be set.
+	    curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.94 Safari/537.36');
+  	    $html = curl_exec($ch);
+	    curl_close($ch);
+
+	    $dom  = new DOMDocument;
+	    @$dom->loadHTML($html);
+
+	    $title = $dom->getElementsByTagName('title')->item('0')->nodeValue;
+	    return $title;
 	}
 }

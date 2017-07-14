@@ -6,8 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Pimboo Trivia</title>
 	<link href="/css/style.min.css" rel="stylesheet">
-	<link href="/css/trivia_new.css" rel="stylesheet">
-	<link href="/test/jcrop/jquery.Jcrop.min.css" rel="stylesheet" type="text/css"/>
+	<link href="/css/jquery.Jcrop.min.css" rel="stylesheet" type="text/css"/>
 </head>
 	<body class="tools_create_page">
 		@include('header')

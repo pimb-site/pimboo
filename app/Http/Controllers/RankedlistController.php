@@ -89,9 +89,9 @@ class RankedlistController extends Controller
 		                'Ranked list Footer' => $input['form_flip']['form_footer']
 		            ),
 		            array(
-		                'Ranked list Title' => 'required|min:3',
-		                'Ranked list Description' => 'required',
-		                'Ranked list Footer' => 'required'
+		                'Ranked list Title' => 'required|min:3|max:400',
+		                'Ranked list Description' => 'required|min:3',
+		                'Ranked list Footer' => 'required|min:3|max:500'
 					)
 		        );
 				
@@ -173,6 +173,8 @@ class RankedlistController extends Controller
 				$string = RankedlistController::translit($string);
 				if(strlen($string) < 3) {
 					$string = 'rankedlist';
+				} else if(strlen($string) > 180) {
+					$string = substr($string, 0, 190);
 				}
 
 				$str = $string;
@@ -261,9 +263,9 @@ class RankedlistController extends Controller
 				'Facebook Photo' => $input['form_flip']['form_photo_facebook']
             ),
             array(
-                'Ranked list Title' => 'required|min:3',
-                'Ranked list Description' => 'required',
-                'Ranked list Footer' => 'required',
+                'Ranked list Title' => 'required|min:3|max:400',
+                'Ranked list Description' => 'required|min:3',
+                'Ranked list Footer' => 'required|min:3|max:500',
                 'Ranked list Photo' => 'required',
 				'Facebook Photo' => 'required'
 			)
@@ -439,6 +441,8 @@ class RankedlistController extends Controller
 					$string = RankedlistController::translit($string);
 					if(strlen($string) < 3) {
 						$string = 'rankedlist';
+					} else if(strlen($string) > 180) {
+						$string = substr($string, 0, 190);
 					}
 
 					$str = $string;

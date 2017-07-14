@@ -75,7 +75,7 @@ Home
                                             <a data-title="{{  $post->description_title }}" data-url="{{  '/'.$post->author_name.'/'.$post->url }}" data-type="fb"  class="butt-for-sharing facebook" href=""></a>
                                             <a data-title="{{  $post->description_title }}" data-url="{{  '/'.$post->author_name.'/'.$post->url }}" data-type="tw"  class="butt-for-sharing twitter" href=""></a>
                                             <a data-title="{{  $post->description_title }}" data-url="{{  '/'.$post->author_name.'/'.$post->url }}" data-type="li"  class="butt-for-sharing linkedin" href=""></a>
-                                            <button class="get_link" data-href="{{  '/'.$post->author_name.'/'.$post->url }}">GET LINK</button>
+                                            <button class="get_link" data-href="{{  url('/'.$post->author_name.'/'.$post->url) }}">GET LINK</button>
                                         </span>
                                         <span class="link">
                                             <span class="link_in">COPIED TO YOUR<br>CLIPBOARD</span>
@@ -121,56 +121,56 @@ Home
             </div>
         </div>
         <style type="text/css">
-.carousel-fade .carousel-inner .item {
-  opacity: 0;
-  transition-property: opacity;
-}
+        .carousel-fade .carousel-inner .item {
+          opacity: 0;
+          transition-property: opacity;
+        }
 
-.carousel-fade .carousel-inner .active {
-  opacity: 1;
-}
+        .carousel-fade .carousel-inner .active {
+          opacity: 1;
+        }
 
-.carousel-fade .carousel-inner .active.left,
-.carousel-fade .carousel-inner .active.right {
-  left: 0;
-  opacity: 0;
-  z-index: 1;
-}
+        .carousel-fade .carousel-inner .active.left,
+        .carousel-fade .carousel-inner .active.right {
+          left: 0;
+          opacity: 0;
+          z-index: 1;
+        }
 
-.carousel-fade .carousel-inner .next.left,
-.carousel-fade .carousel-inner .prev.right {
-  opacity: 1;
-}
+        .carousel-fade .carousel-inner .next.left,
+        .carousel-fade .carousel-inner .prev.right {
+          opacity: 1;
+        }
 
-.carousel-fade .carousel-control {
-  z-index: 2;
-}
+        .carousel-fade .carousel-control {
+          z-index: 2;
+        }
 
-/*
-WHAT IS NEW IN 3.3: "Added transforms to improve carousel performance in modern browsers."
-now override the 3.3 new styles for modern browsers & apply opacity
-*/
-@media all and (transform-3d), (-webkit-transform-3d) {
-    .carousel-fade .carousel-inner > .item.next,
-    .carousel-fade .carousel-inner > .item.active.right {
-      opacity: 0;
-      -webkit-transform: translate3d(0, 0, 0);
-              transform: translate3d(0, 0, 0);
-    }
-    .carousel-fade .carousel-inner > .item.prev,
-    .carousel-fade .carousel-inner > .item.active.left {
-      opacity: 0;
-      -webkit-transform: translate3d(0, 0, 0);
-              transform: translate3d(0, 0, 0);
-    }
-    .carousel-fade .carousel-inner > .item.next.left,
-    .carousel-fade .carousel-inner > .item.prev.right,
-    .carousel-fade .carousel-inner > .item.active {
-      opacity: 1;
-      -webkit-transform: translate3d(0, 0, 0);
-              transform: translate3d(0, 0, 0);
-    }
-}
+        /*
+        WHAT IS NEW IN 3.3: "Added transforms to improve carousel performance in modern browsers."
+        now override the 3.3 new styles for modern browsers & apply opacity
+        */
+        @media all and (transform-3d), (-webkit-transform-3d) {
+            .carousel-fade .carousel-inner > .item.next,
+            .carousel-fade .carousel-inner > .item.active.right {
+              opacity: 0;
+              -webkit-transform: translate3d(0, 0, 0);
+                      transform: translate3d(0, 0, 0);
+            }
+            .carousel-fade .carousel-inner > .item.prev,
+            .carousel-fade .carousel-inner > .item.active.left {
+              opacity: 0;
+              -webkit-transform: translate3d(0, 0, 0);
+                      transform: translate3d(0, 0, 0);
+            }
+            .carousel-fade .carousel-inner > .item.next.left,
+            .carousel-fade .carousel-inner > .item.prev.right,
+            .carousel-fade .carousel-inner > .item.active {
+              opacity: 1;
+              -webkit-transform: translate3d(0, 0, 0);
+                      transform: translate3d(0, 0, 0);
+            }
+        }
     </style>
 
 @endsection
@@ -208,9 +208,8 @@ now override the 3.3 new styles for modern browsers & apply opacity
                 } 
             });
         });
-
-
         $("#carousepostmain").carousel('cycle');
+    });
 
 </script>
 @endsection

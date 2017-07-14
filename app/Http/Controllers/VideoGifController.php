@@ -83,8 +83,8 @@ class VideoGifController extends Controller {
 		                'Description' => $input['form_flip']['form_description']
 		            ),
 		            array(
-		                'Title' => 'required|min:3',
-		                'Description' => 'required'
+		                'Title' => 'required|min:3|max:400',
+		                'Description' => 'required|min:3'
 		            )
 		        );
 		
@@ -136,6 +136,8 @@ class VideoGifController extends Controller {
 				$string = VideoGifController::translit($string);
 				if(strlen($string) < 3) {
 					$string = 'gifmaker';
+				} else if(strlen($string) > 180) {
+					$string = substr($string, 0, 190);
 				}
 
 				$str = $string;
@@ -166,8 +168,8 @@ class VideoGifController extends Controller {
                 'Description' => $input['form_flip']['form_description']
             ),
             array(
-                'Title' => 'required|min:3',
-                'Description' => 'required'
+                'Title' => 'required|min:3|max:400',
+                'Description' => 'required|min:3'
             )
         );
 		
@@ -240,6 +242,8 @@ class VideoGifController extends Controller {
 					$string = VideoGifController::translit($string);
 					if(strlen($string) < 3) {
 						$string = 'gifmaker';
+					} else if(strlen($string) > 180) {
+						$string = substr($string, 0, 190);
 					}
 
 					$str = $string;
