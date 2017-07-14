@@ -5,6 +5,9 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Pimboo Snip</title>
+	<meta property="og:url" content="{{ $snip['iframe_url'] }}" />
+	<meta property="og:type" content="article" />
+	<meta name="twitter:url" content="{{ $snip['iframe_url'] }}">
 	<link href="/css/style.min.css" rel="stylesheet">
 	<link href="/css/snip.css" rel="stylesheet">
 </head>
