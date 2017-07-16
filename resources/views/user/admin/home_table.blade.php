@@ -2,184 +2,54 @@
 @section('title')
 Admin
 @endsection
-@section('css')
-
-<style>
-
-.username {
-    float: left;
-    margin-left: 10px;
-    margin-top: 9px;
-}
-
-.username input {
-    width: 200px;
-    height: 30px;
-    color: #337ab7;
-    padding-left: 20px;
-    border: 1px solid;
-    border-radius: 8px;
-    outline: none;
- }
-
-.show_more {
-	margin-top: 35px;
-	width: 180px;
-	height: 45px;
-	font-size: 16px;
-	color: #fff;
-	background-color: #00c402;
-	border: 0;
-	border-radius: 8px;
-}
-
-.entries{
-	margin-left: 45px;
-	float: left;
-	border-radius: 3px;
-	width: 194px;
-	height: 30px;
-	border: 1px solid #c9d5eb;
-	background-image: url(/img/select_arrow.png);
-	background-color: #fff;
-	background-repeat: no-repeat;
-	background-position: 289px;
-	overflow: hidden;
-	margin-top: 10px;
-}
-
-.types{
-	margin-left: 5px;
-	float: left;
-	border-radius: 3px;
-	width: 194px;
-	height: 30px;
-	border: 1px solid #c9d5eb;
-	background-image: url(/img/select_arrow.png);
-	background-color: #fff;
-	background-repeat: no-repeat;
-	background-position: 289px;
-	overflow: hidden;
-	margin-top: 10px;
-}
-
-.rights{
-	margin-left: 5px;
-	float: left;
-	border-radius: 3px;
-	width: 254px;
-	height: 30px;
-	border: 1px solid #c9d5eb;
-	background-image: url(/img/select_arrow.png);
-	background-color: #fff;
-	background-repeat: no-repeat;
-	background-position: 289px;
-	overflow: hidden;
-	margin-top: 10px;
-}
-
-.time{
-	margin-left: 5px;
-	float: left;
-	border-radius: 3px;
-	width: 194px;
-	height: 30px;
-	border: 1px solid #c9d5eb;
-	background-image: url(/img/select_arrow.png);
-	background-color: #fff;
-	background-repeat: no-repeat;
-	background-position: 289px;
-	overflow: hidden;
-	margin-top: 10px;
-}
-
-.entries select {
-	background-image: url(/img/select_arrow.png);
-	background-color: #fff;
-	background-repeat: no-repeat;
-	background-position: 164px;
-	width: 210px;
-	height: 30px;
-	border: 0;
-}
-
-.types select {
-	background-image: url(/img/select_arrow.png);
-	background-color: #fff;
-	background-repeat: no-repeat;
-	background-position: 164px;
-	width: 210px;
-	height: 30px;
-	border: 0;
-}
-
-.time select {
-	background-image: url(/img/select_arrow.png);
-	background-color: #fff;
-	background-repeat: no-repeat;
-	background-position: 164px;
-	width: 210px;
-	height: 30px;
-	border: 0;
-}
-
-.rights select {
-	background-image: url(/img/select_arrow.png);
-	background-color: #fff;
-	background-repeat: no-repeat;
-	background-position: 222px;
-	width: 270px;
-	height: 30px;
-	border: 0;
-}
-</style>
-@endsection
 @section('content')
 	<div class="body">
 		<div class="wrap">
 			@include('user.admin.header')
 
 			<div class="top_title">Current page: Posts <a href="/admin/users/"> List of users</a></div>
-			<div class="entries">
-				<select>
-				  <option data-entries="100">100 Entries(defalult)</option>
-				  <option data-entries="10">10 Entries</option>
-				  <option data-entries="50">50 Entries</option>
-				  <option data-entries="200">200 Entries</option>
-				  <option data-entries="300">300 Entries</option>
-				  <option data-entries="400">400 Entries</option>
-				  <option data-entries="500">500 Entries</option>
-				  <option data-entries="1000">1000 Entries</option>
-				</select>
+			<div class="filter">
+				<div class="entries">
+					<select>
+					  <option data-entries="100">100 Entries(defalult)</option>
+					  <option data-entries="10">10 Entries</option>
+					  <option data-entries="50">50 Entries</option>
+					  <option data-entries="200">200 Entries</option>
+					  <option data-entries="300">300 Entries</option>
+					  <option data-entries="400">400 Entries</option>
+					  <option data-entries="500">500 Entries</option>
+					  <option data-entries="1000">1000 Entries</option>
+					</select>
+				</div>
+				<div class="types"> 
+					<select>
+					  <option data-type="all">All types posts</option>
+					  <option data-type="rankedlist">Ranked List</option>
+					  <option data-type="flipcards">Flip Cards</option>
+					  <option data-type="story">Story</option>
+					  <option data-type="snip">Snip</option>
+					  <option data-type="gif">GIF</option>
+					</select>
+				</div>
+				<div class="time">
+					<select>
+					  <option data-starttime="<?php echo date('Y-m-d H:i:s', mktime(0, 0, 0, 0, 0, 0)); ?>" data-endtime="<?php echo date('Y-m-d H:i:s', mktime(24, 0, 0, date("m")  , date("d"), date("Y"))); ?>">All time</option>
+					  <option data-starttime="<?php echo date('Y-m-d H:i:s', mktime(0, 0, 0, date("m")  , date("d"), date("Y"))); ?>" data-endtime="<?php echo date('Y-m-d H:i:s', mktime(24, 0, 0, date("m")  , date("d"), date("Y"))); ?>">Today</option>
+					  <option data-starttime="<?php echo date('Y-m-d H:i:s', mktime(0, 0, 0, date("m")  , date("d")-1, date("Y"))); ?>" data-endtime="<?php echo date('Y-m-d H:i:s', mktime(24, 0, 0, date("m")  , date("d")-1, date("Y"))); ?>">Yesterday</option>
+					  <option data-starttime="<?php echo date('Y-m-d H:i:s', mktime(0, 0, 0, date("m")  , date("d")-7, date("Y"))); ?>" data-endtime="<?php echo date('Y-m-d H:i:s', mktime(24, 0, 0, date("m")  , date("d"), date("Y"))); ?>">Last 7 days</option>
+					  <option data-starttime="<?php echo date('Y-m-d H:i:s', mktime(0, 0, 0, date("m")  , date("d")-14, date("Y"))); ?>" data-endtime="<?php echo date('Y-m-d H:i:s', mktime(24, 0, 0, date("m")  , date("d"), date("Y"))); ?>">Last 14 days</option>
+					  <option data-starttime="<?php echo date('Y-m-d H:i:s', mktime(0, 0, 0, date("m")  , date("d")-30, date("Y"))); ?>" data-endtime="<?php echo date('Y-m-d H:i:s', mktime(24, 0, 0, date("m")  , date("d"), date("Y"))); ?>">Last 30 days</option>
+					</select>
+				</div>
+				<div class="rights">
+					<select>
+					  <option data-right="-1">All(with+without additional rights)</option>
+					  <option data-right="0">Only without additional rights</option>
+					  <option data-right="1">Only with additional rights</option>
+					</select>
+				</div>
+				<div class="username"><input type="text" name="user" placeholder="All users..."></div>
 			</div>
-			<div class="types"> 
-				<select>
-				  <option data-type="all">All types posts</option>
-				  <option data-type="rankedlist">Ranked List</option>
-				  <option data-type="flipcards">Flip Cards</option>
-				  <option data-type="story">Story</option>
-				  <option data-type="snip">Snip</option>
-				  <option data-type="gif">GIF</option>
-				</select>
-			</div>
-			<div class="time">
-				<select>
-				  <option data-starttime="<?php echo date('Y-m-d H:i:s', mktime(0, 0, 0, 0, 0, 0)); ?>" data-endtime="<?php echo date('Y-m-d H:i:s', mktime(24, 0, 0, date("m")  , date("d"), date("Y"))); ?>">All time</option>
-				  <option data-starttime="<?php echo date('Y-m-d H:i:s', mktime(0, 0, 0, date("m")  , date("d"), date("Y"))); ?>" data-endtime="<?php echo date('Y-m-d H:i:s', mktime(24, 0, 0, date("m")  , date("d"), date("Y"))); ?>">Today</option>
-				  <option data-starttime="<?php echo date('Y-m-d H:i:s', mktime(0, 0, 0, date("m")  , date("d")-1, date("Y"))); ?>" data-endtime="<?php echo date('Y-m-d H:i:s', mktime(24, 0, 0, date("m")  , date("d")-1, date("Y"))); ?>">Yesterday</option>
-				  <option data-starttime="<?php echo date('Y-m-d H:i:s', mktime(0, 0, 0, date("m")  , date("d")-7, date("Y"))); ?>" data-endtime="<?php echo date('Y-m-d H:i:s', mktime(24, 0, 0, date("m")  , date("d"), date("Y"))); ?>">Last 7 days</option>
-				  <option data-starttime="<?php echo date('Y-m-d H:i:s', mktime(0, 0, 0, date("m")  , date("d")-14, date("Y"))); ?>" data-endtime="<?php echo date('Y-m-d H:i:s', mktime(24, 0, 0, date("m")  , date("d"), date("Y"))); ?>">Last 14 days</option>
-				  <option data-starttime="<?php echo date('Y-m-d H:i:s', mktime(0, 0, 0, date("m")  , date("d")-30, date("Y"))); ?>" data-endtime="<?php echo date('Y-m-d H:i:s', mktime(24, 0, 0, date("m")  , date("d"), date("Y"))); ?>">Last 30 days</option>
-				</select>
-			</div>
-			<div class="rights">
-				<select>
-				  <option data-right="-1">All(with+without additional rights)</option>
-				  <option data-right="0">Only without additional rights</option>
-				  <option data-right="1">Only with additional rights</option>
-				</select>
-			</div>
-			<div class="username"><input type="text" name="user" placeholder="All users..."></div>
 			<div class="all_table">
 				<div class="table_title" id="aside1">
 					<div class="title_cell cell_image">Image</div>
