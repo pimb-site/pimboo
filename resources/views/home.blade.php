@@ -54,7 +54,21 @@ Home
                                 <div class="img"><a href="/{{  $post_main->author_name.'/'.$post_main->url }}"><img width="750px" height="445px" src="/uploads/{{  $post_main->description_image }}" /></a></div>
                                 <div class="title"><a href="/{{  $post_main->author_name.'/'.$post_main->url }}">{{  $post_main->description_title }}</a></div>
                                 <div class="text">{{  $post_main->description_text }}</div>
+
                                 <div class="info distab">
+                                    <div class="posting">
+                                        <span class="buttons_share">
+                                            <span class="sharing">SHARE & PROFIT:</span>
+                                            <a data-title="{{  $post_main->description_title }}" data-url="{{  '/'.$post_main->author_name.'/'.$post_main->url }}" data-type="fb"  class="butt-for-sharing facebook" href=""></a>
+                                            <a data-title="{{  $post_main->description_title }}" data-url="{{  '/'.$post_main->author_name.'/'.$post_main->url }}" data-type="tw"  class="butt-for-sharing twitter" href=""></a>
+                                            <a data-title="{{  $post_main->description_title }}" data-url="{{  '/'.$post_main->author_name.'/'.$post_main->url }}" data-type="li"  class="butt-for-sharing linkedin" href=""></a>
+                                            <button class="get_link" data-href="{{  url('/'.$post_main->author_name.'/'.$post_main->url) }}">GET LINK</button>
+                                        </span>
+                                        <span class="link">
+                                            <span class="link_in">COPIED TO YOUR CLIPBOARD</span>
+                                            <input class="link_input" type="" name="" value="" />
+                                        </span>
+                                    </div>
                                     <a href="/{{  $post_main->author_name.'/'.$post_main->url }}" class="readmore">Read More >></a>
                                 </div>
                                 </div>
@@ -70,7 +84,7 @@ Home
                                     <a class="post_name" href="{{  '/'.$post->author_name.'/'.$post->url }}">{{  $post->description_title }}</a>
                                     <a class="post_text" href="{{  '/'.$post->author_name.'/'.$post->url }}">{{  $post->description_text }}</a>
                                     <div class="posting">
-                                        <span class="removing">
+                                        <span class="buttons_share">
                                             <span class="sharing">SHARE &<br>PROFIT:</span>
                                             <a data-title="{{  $post->description_title }}" data-url="{{  '/'.$post->author_name.'/'.$post->url }}" data-type="fb"  class="butt-for-sharing facebook" href=""></a>
                                             <a data-title="{{  $post->description_title }}" data-url="{{  '/'.$post->author_name.'/'.$post->url }}" data-type="tw"  class="butt-for-sharing twitter" href=""></a>
@@ -79,7 +93,7 @@ Home
                                         </span>
                                         <span class="link">
                                             <span class="link_in">COPIED TO YOUR<br>CLIPBOARD</span>
-                                            <input type="" name="" value="" />
+                                            <input class="link_input" type="" name="" value="" />
                                         </span>
                                     </div>
                                 </div>
@@ -95,19 +109,19 @@ Home
                     @foreach ($latest as $post)
                     <div class="headline">
                         <a href="{{  '/'.$post->author_name.'/'.$post->url }}" class="img"><img width="360px" height="309px" src="/uploads/{{  $post->description_image }}" /></a>
-                                                            <div class="posting">
-                                        <span class="removing">
-                                            <span class="sharing">SHARE &<br>PROFIT:</span>
-                                            <a data-title="{{  $post->description_title }}" data-url="{{  '/'.$post->author_name.'/'.$post->url }}" data-type="fb"  class="butt-for-sharing facebook" href=""></a>
-                                            <a data-title="{{  $post->description_title }}" data-url="{{  '/'.$post->author_name.'/'.$post->url }}" data-type="tw"  class="butt-for-sharing twitter" href=""></a>
-                                            <a data-title="{{  $post->description_title }}" data-url="{{  '/'.$post->author_name.'/'.$post->url }}" data-type="li"  class="butt-for-sharing linkedin" href=""></a>
-                                            <button class="get_link" data-href="{{  url('/'.$post->author_name.'/'.$post->url) }}">GET LINK</button>
-                                        </span>
-                                        <span class="link">
-                                            <span class="link_in">COPIED TO YOUR<br>CLIPBOARD</span>
-                                            <input type="" name="" value="" />
-                                        </span>
-                                    </div>
+                            <div class="posting">
+                                <span class="buttons_share">
+                                    <span class="sharing">SHARE &<br>PROFIT:</span>
+                                    <a data-title="{{  $post->description_title }}" data-url="{{  '/'.$post->author_name.'/'.$post->url }}" data-type="fb"  class="butt-for-sharing facebook" href=""></a>
+                                    <a data-title="{{  $post->description_title }}" data-url="{{  '/'.$post->author_name.'/'.$post->url }}" data-type="tw"  class="butt-for-sharing twitter" href=""></a>
+                                    <a data-title="{{  $post->description_title }}" data-url="{{  '/'.$post->author_name.'/'.$post->url }}" data-type="li"  class="butt-for-sharing linkedin" href=""></a>
+                                    <button class="get_link" data-href="{{  url('/'.$post->author_name.'/'.$post->url) }}">GET LINK</button>
+                                </span>
+                                <span class="link">
+                                    <span class="link_in">COPIED TO YOUR<br>CLIPBOARD</span>
+                                    <input type="" name="" value="" />
+                                </span>
+                            </div>
                         <a href="{{  '/'.$post->author_name.'/'.$post->url }}" class="text">{{  $post->description_title }}</a>
                     </div>
                     @endforeach

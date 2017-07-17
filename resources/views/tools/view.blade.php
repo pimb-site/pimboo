@@ -16,13 +16,17 @@
                                 <div class="info">
                                     <div class="published">Published on {{ $date }} by <a href="/{{ $user_name }}">{{ $user_name }}</a></div>
                                 </div>
-                                <div class="buttons">
+                                <div class="buttons_share">
                                     <button data-title="{{ $content->description_title }}" data-url="{{ url('/'.$content->author_name.'/'.$content->url) }}" data-type="fb" class="butt-for-sharing facebook"></button>
                                     <button data-title="{{ $content->description_title }}" data-url="{{ url('/'.$content->author_name.'/'.$content->url) }}" data-type="tw" class="butt-for-sharing twitter"></button>
                                     <button data-title="{{ $content->description_title }}" data-url="{{ url('/'.$content->author_name.'/'.$content->url) }}" data-type="gg" class="butt-for-sharing google_plus"></button>
                                     <button data-title="{{ $content->description_title }}" data-url="{{ url('/'.$content->author_name.'/'.$content->url) }}" data-type="li" class="butt-for-sharing linked_in"></button>
                                     <button class="get_link" data-href="{{ url('/'.$content->author_name.'/'.$content->url) }}">GET LINK</button>
                                 </div>
+                                <span class="link">
+                                    <span class="link_in">COPIED TO YOUR<br>CLIPBOARD</span>
+                                    <input type="" name="" value="" />
+                                </span>
                             </div>
                             <div class="content">
                                 @yield('tool_content')
