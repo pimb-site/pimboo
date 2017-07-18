@@ -108,24 +108,26 @@ Home
             <div class="wrap" style="position: relative;">
                 <div class="headlines-title">LATEST HEADLINES</div>
                 <div class="headlines" data-id="0">
+                   <?php $count = 1; ?> 
                     @foreach ($latest as $post)
                     <div class="headline">
                         <a href="{{  '/'.$post->author_name.'/'.$post->url }}" class="img"><img width="360px" height="309px" src="/uploads/{{  $post->description_image }}" /></a>
                             <div class="posting">
-                                <span class="buttons_share">
+                                <span class="buttons_share" data-id="{{ $count }}">
                                     <span class="sharing">SHARE &<br>PROFIT:</span>
                                     <a data-title="{{  $post->description_title }}" data-url="{{  '/'.$post->author_name.'/'.$post->url }}" data-type="fb"  class="butt-for-sharing facebook" href=""></a>
                                     <a data-title="{{  $post->description_title }}" data-url="{{  '/'.$post->author_name.'/'.$post->url }}" data-type="tw"  class="butt-for-sharing twitter" href=""></a>
                                     <a data-title="{{  $post->description_title }}" data-url="{{  '/'.$post->author_name.'/'.$post->url }}" data-type="li"  class="butt-for-sharing linkedin" href=""></a>
-                                    <button class="get_link" data-href="{{  url('/'.$post->author_name.'/'.$post->url) }}">GET LINK</button>
+                                    <button class="get_link" data-href="{{  url('/'.$post->author_name.'/'.$post->url) }}" data-id="{{ $count }}">GET LINK</button>
                                 </span>
-                                <span class="link">
+                                <span class="link" data-id="{{ $count }}">
                                     <span class="link_in">COPIED TO YOUR<br>CLIPBOARD</span>
                                     <input type="" name="" value="" />
                                 </span>
                             </div>
                         <a href="{{  '/'.$post->author_name.'/'.$post->url }}" class="text">{{  $post->description_title }}</a>
                     </div>
+                    <?php $count++; ?>
                     @endforeach
                 </div>
                 <button type="button" class="headlines_show_more" style="border: 0;">SHOW MORE</button>
