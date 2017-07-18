@@ -24,7 +24,7 @@
                                     <button class="get_link" data-href="{{ url('/'.$content->author_name.'/'.$content->url) }}" data-id="1">GET LINK</button>
                                 </div>
                                 <span class="link" data-id="1">
-                                    <span class="link_in">COPIED TO YOUR CLIPBOARD</span>
+                                    <span class="link_in">COPIED TO YOUR<br>CLIPBOARD</span>
                                     <input type="" name="" value="" />
                                 </span>
                             </div>

@@ -32,6 +32,7 @@
 					@if(count($channel_content) == 0)
 						<div class="post"><h1> User has no entries </h1> </div>
 					@endif
+					<?php $count = 1; ?>
 					@foreach($channel_content as $post)
 					<?php
 					$post_date    = new DateTime($post->created_at);
@@ -58,15 +59,20 @@
 							<div class="title"><a href="{{ url('/'.$post->author_name.'/'.$post->url) }}">{{ $post->description_title }}</a></div>
 							<div class="description">{{ $post->description_text }}</div>
 							<div class="share">Share this <a href="#">{{ $aType[$post->type] }}</a></div>
-							<div class="share-buttons">
+							<div class="buttons_share" data-id="{{ $count }}">
 								<button data-title="{{ $post->description_title }}" data-url="{{ url('/'.$post->author_name.'/'.$post->url) }}" data-type="fb" class="butt-for-sharing"><img src="/img/view_fb.png"></button>
 								<button data-title="{{ $post->description_title }}" data-url="{{ url('/'.$post->author_name.'/'.$post->url) }}" data-type="tw" class="butt-for-sharing"><img src="/img/view_twitter.png"></button>
 								<button data-title="{{ $post->description_title }}" data-url="{{ url('/'.$post->author_name.'/'.$post->url) }}" data-type="li" class="butt-for-sharing"><img src="/img/view_linkedin.png"></button>
 								<button><img src="/img/view_link.png"></button>
-								<button class="get_link" data-href="{{ url('/'.$post->author_name.'/'.$post->url) }}">GET LINK</button>
+								<button class="get_link" data-href="{{ url('/'.$post->author_name.'/'.$post->url) }}" data-id="{{ $count }}">GET LINK</button>
 							</div>
+                            <div class="link"  data-id="{{ $count }}">
+                                <span class="link_in">COPIED TO YOUR<br>CLIPBOARD</span>
+                                <input type="" name="" value="" />
+                            </div>
 						</div>
 					</div>
+					<?php $count++; ?>
 					@endforeach
 					@if($show_more == true)
 						<button class="show-more">SHOW MORE</button>

@@ -66,7 +66,7 @@ Home
                                         </span>
                                         <span class="link" data-id="{{ $count }}">
                                             <span class="link_in">COPIED TO YOUR CLIPBOARD</span>
-                                            <input class="link_input" type="" name="" value="" />
+                                            <input class="link_input"  type="" name="" value="" />
                                         </span>
                                     </div>
                                     <a href="/{{  $post_main->author_name.'/'.$post_main->url }}" class="readmore">Read More >></a>
@@ -78,7 +78,6 @@ Home
                         </div>
                         </div>
                         <div class="right">
-                            <?php $count = 1; ?>
                             @if(count($posts) != 0)
                             @foreach ($posts as $post)
                                 <div class="post">
@@ -108,7 +107,6 @@ Home
             <div class="wrap" style="position: relative;">
                 <div class="headlines-title">LATEST HEADLINES</div>
                 <div class="headlines" data-id="0">
-                   <?php $count = 1; ?> 
                     @foreach ($latest as $post)
                     <div class="headline">
                         <a href="{{  '/'.$post->author_name.'/'.$post->url }}" class="img"><img width="360px" height="309px" src="/uploads/{{  $post->description_image }}" /></a>
