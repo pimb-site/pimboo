@@ -207,6 +207,7 @@ Home
 <script type="text/javascript">
     $(document).ready(function(){
         var multiply = 1;
+        var data_title_id = 100;  
         var token  = "{{ csrf_token() }}";
 
         $('.headlines_show_more').click(function() {
@@ -222,8 +223,22 @@ Home
                             $.each(data.posts, function (i, value) {
                                 html += '<div class="headline">';
                                 html += '<a href="/'+value.author_name+'/'+value.url+'" class="img"><img width="360px" height="309px" src="/uploads/'+value.description_image+'" /></a>';
+                                html += '<div class="posting">';
+                                html += '<span class="buttons_share" data-id="'+data_title_id+'">';
+                                html += '<span class="sharing">SHARE &<br>PROFIT:</span>';
+                                html += '<a  data-title="'+value.description_title+'" data-url="'+window.location.hostname+"/"+value.author_name+"/"+value.url+'"data-type="fb"  class="butt-for-sharing facebook" href=""></a>';
+                                html += '<a  data-title="'+value.description_title+'" data-url="'+window.location.hostname+"/"+value.author_name+"/"+value.url+'" data-type="tw"  class="butt-for-sharing twitter" href=""></a>';
+                                html += '<a  data-title="'+value.description_title+'" data-url="'+window.location.hostname+"/"+value.author_name+"/"+value.url+'" data-type="li"  class="butt-for-sharing linkedin" href=""></a>';
+                                html += '<button class="get_link" data-href="'+window.location.hostname+"/"+value.author_name+"/"+value.url+'" data-id="'+data_title_id+'">GET LINK</button>';
+                                html += '</span>';
+                                html += '<span class="link" data-id="'+data_title_id+'">';
+                                html += '<span class="link_in">COPIED TO YOUR<br>CLIPBOARD</span>';
+                                html += '<input type="" name="" value="" />';
+                                html += '</span>';
+                                html += '</div>';
                                 html += '<a href="/'+value.author_name+'/'+value.url+'" class="text">'+value.description_title+'</a>';
                                 html += '</div>';
+                                data_title_id++;
                             });
                             html += '</div>';
                             $('.headlines[data-id="'+(multiply-1)+'"]').fadeToggle(500, function() {
@@ -233,6 +248,7 @@ Home
 
                         }
                         multiply++;
+
                     }
                 } 
             });

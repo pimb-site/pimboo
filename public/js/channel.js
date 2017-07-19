@@ -1,4 +1,5 @@
 $(document).ready(function() {
+	var data_title_id = 1;
 	$('button.run-filter').click(function() {
 		$('input[name="multiplier"]').val('1');
 		$('#channel-filter').ajaxSubmit({
@@ -15,12 +16,14 @@ $(document).ready(function() {
 						html_post += '<div class="post-right"><div class="title"><a href="/'+value.author_name+'/'+value.url+'">'+value.description_title+'</a></div>';
 						html_post += '<div class="description">'+value.description_text+'</div>';
 						html_post += '<div class="share">Share this <a href="#">'+value.type+'</a></div>';
-						html_post += '<div class="share-buttons">';
+						html_post += '<div class="buttons_share" data-id="'+data_title_id+'">';
 						html_post += '<button class="butt-for-sharing" data-title="'+value.description_title+'" data-url="'+window.location.hostname+"/"+value.author_name+"/"+value.url+'" data-type="fb" ><img src="/img/view_fb.png"></button>';
 						html_post += '<button class="butt-for-sharing" data-title="'+value.description_title+'" data-url="'+window.location.hostname+"/"+value.author_name+"/"+value.url+'" data-type="tw"><img src="/img/view_twitter.png"></button>';
 						html_post += '<button class="butt-for-sharing" data-title="'+value.description_title+'" data-url="'+window.location.hostname+"/"+value.author_name+"/"+value.url+'" data-type="li"><img src="/img/view_linkedin.png"></button>';
 						html_post += '<button class="butt-for-sharing" data-title="'+value.description_title+'" data-url="'+window.location.hostname+"/"+value.author_name+"/"+value.url+'" data-type=""><img src="/img/view_link.png"></button>';
-						html_post += '<button class="get_link" data-href="'+window.location.hostname+"/"+value.author_name+"/"+value.url+'">GET LINK</button></div></div></div>';
+						html_post += '<button class="get_link" data-id="'+data_title_id+'" data-href="'+window.location.hostname+"/"+value.author_name+"/"+value.url+'">GET LINK</button></div>';
+						html_post += '<div class="link"  data-id="'+data_title_id+'"><span class="link_in">COPIED TO YOUR<br>CLIPBOARD</span><input type="" name="" value="" /></div></div></div>';
+						data_title_id++
 					});
 					$('.show-more').before(html_post);
 					if(data.show_more == true) $('.show-more').css({'display': 'block'});
@@ -53,9 +56,11 @@ $(document).ready(function() {
 						html_post += '<div class="post-right"><div class="title"><a href="/viewID/'+value.id+'">'+value.description_title+'</a></div>';
 						html_post += '<div class="description">'+value.description_text+'</div>';
 						html_post += '<div class="share">Share this <a href="#">'+value.type+'</a></div>';
-						html_post += '<div class="share-buttons"><button class="butt-for-sharing" data-title="'+value.description_title+'" data-url="'+window.location.hostname+"/"+value.author_name+"/"+value.url+'" data-type="fb"><img src="/img/view_fb.png"></button>';
+						html_post += '<div class="buttons_share" data-id="'+data_title_id+'"><button class="butt-for-sharing" data-title="'+value.description_title+'" data-url="'+window.location.hostname+"/"+value.author_name+"/"+value.url+'" data-type="fb"><img src="/img/view_fb.png"></button>';
 						html_post += '<button class="butt-for-sharing" data-title="'+value.description_title+'" data-url="'+window.location.hostname+"/"+value.author_name+"/"+value.url+'" data-type="tw"><img src="/img/view_twitter.png"></button><button class="butt-for-sharing" data-title="'+value.description_title+'" data-url="'+window.location.hostname+"/"+value.author_name+"/"+value.url+'" data-type="li"><img src="/img/view_linkedin.png"></button>';
-						html_post += '<button class="butt-for-sharing"><img src="/img/view_link.png"></button><button class="get_link">GET LINK</button></div></div></div>';
+						html_post += '<button class="butt-for-sharing"><img src="/img/view_link.png"></button><button class="get_link" data-id="'+data_title_id+'" data-href="'+window.location.hostname+"/"+value.author_name+"/"+value.url+'">GET LINK</button></div>';
+						html_post += '<div class="link"  data-id="'+data_title_id+'"><span class="link_in">COPIED TO YOUR<br>CLIPBOARD</span><input type="" name="" value="" /></div></div></div>';
+						data_title_id++
 					});
 					$('.show-more').before(html_post);
 					if(data.show_more == true) $('.show-more').css({'display': 'block'});
