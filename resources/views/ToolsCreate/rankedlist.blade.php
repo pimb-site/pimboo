@@ -20,13 +20,13 @@
 					<div class="top">
 						<div class="photo">CLICK<br>TO ADD PHOTO</div>
 						<div class="text_info">
-							<input type="text" name="form_flip[form_flip_cards_title]" placeholder="Ranked list title" autocomplete="off" style="color:#6e8dc9;">
-							<textarea name="form_flip[form_description]" class="top_textarea_trivia" placeholder="Ranked list description" autocomplete="off"></textarea>
+							<input type="text" name="rankedlist[data][rankedlist_title]" placeholder="Ranked list title" autocomplete="off" style="color:#6e8dc9;">
+							<textarea name="rankedlist[data][rankedlist_description]" class="top_textarea_trivia" placeholder="Ranked list description" autocomplete="off"></textarea>
 						</div>
 					</div>
-					<textarea name="form_flip[form_footer]" placeholder="Footer text (500 symbols max)" maxlength="500" autocomplete="off" style="color:#6e8dc9;"></textarea>
+					<textarea name="rankedlist[data][rankedlist_footer]" placeholder="Footer text (500 symbols max)" maxlength="500" autocomplete="off" style="color:#6e8dc9;"></textarea>
 				</div>
-				<input class="post-title" type="text" name="flip_cards[1][post_title]" placeholder="Post title"> </input>
+				<input class="post-title" type="text" name="rankedlist[cards][1][post_title]" placeholder="Post title"> </input>
 				<div class="editor" data-id="1">
 					<div class="front-card" data-id="1">
 						<div class="main-remove-front" data-id="1">
@@ -36,7 +36,7 @@
 							</div>
 						</div>
 						<div class="block-type-caption">
-							<textarea name="flip_cards[1][caption1]" class="type-caption" placeholder="Type your text or caption" style="position:relative;" data-id="1" data-side="1" maxlength="50"></textarea>
+							<textarea name="rankedlist[cards][1][caption_card]" class="type-caption" placeholder="Type your text or caption" style="position:relative;" data-id="1" data-side="1" maxlength="50"></textarea>
 						</div>
 					</div>
 				</div>
@@ -48,12 +48,12 @@
 					<button type="button" id="publish" class="btn-publish">PUBLISH</button>
 				</div>
 				<input name="isDraft" type="hidden" value="publish" class="isDraft" autocomplete="off">
-				<input name="postID" type="hidden" value="" class="postID" autocomplete="off">
-				<input name="form_flip[form_photo]" type="hidden" value="" class="input-form-photo" autocomplete="off">
-				<input name="form_flip[form_photo_facebook]" type="hidden" value="" class="input-form-photo-facebook" autocomplete="off">
-				<input name="flip_cards[1][type_card1]" type="hidden" value="image" class="input-type-card" autocomplete="off" data-id="1" data-side="1">
-				<input name="flip_cards[1][img_src1]" type="hidden" value="" class="input-form-img1" autocomplete="off" data-id="1">
-				<input name="flip_cards[1][youtube_clip1]" type="hidden" value="" class="input-form-clip" autocomplete="off" data-id="1" data-side="1">
+				<input name="rankedlist[data][postID]" type="hidden" value="" class="postID" autocomplete="off">
+				<input name="rankedlist[data][photo_main]" type="hidden" value="" class="input-form-photo" autocomplete="off">
+				<input name="rankedlist[data][photo_facebook]" type="hidden" value="" class="input-form-photo-facebook" autocomplete="off">
+				<input name="rankedlist[cards][1][type_card]" type="hidden" value="image" class="input-type-card" autocomplete="off" data-id="1" data-side="1">
+				<input name="rankedlist[cards][1][image_card]" type="hidden" value="" class="input-form-img1" autocomplete="off" data-id="1">
+				<input name="rankedlist[cards][1][youtube_clip]" type="hidden" value="" class="input-form-clip" autocomplete="off" data-id="1" data-side="1">
 			</div>
 			<div class="right">
 				<div class="title">SOCIAL APPEARANCE</div>

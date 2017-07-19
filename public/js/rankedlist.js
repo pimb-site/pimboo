@@ -53,18 +53,15 @@ $(document).ready(function () {
 	});
 	
 	$('.add-question').click(function() {
-		
 		count_fc++;
-		
-		$('.add-question').before('<input class="post-title" type="text" name="flip_cards['+count_fc+'][post_title]" placeholder="Post title"> </input>'
+		$('.add-question').before('<input class="post-title" type="text" name="rankedlist[cards]['+count_fc+'][post_title]" placeholder="Post title"> </input>'
 			+'<div class="editor" data-id="'+count_fc+'"><div class="front-card" data-id="'+count_fc+'"><div class="main-remove-front" data-id="'+count_fc+'">'
 			+'<div class="title">CLICK TO ADD PHOTO OR VIDEO</div><div class="butts"><div class="add_plus" data-id="'+count_fc+'" data-side="1"></div></div></div>'
-			+'<div class="block-type-caption"><textarea name="flip_cards['+count_fc+'][caption1]" class="type-caption" placeholder="Type your text or caption" style="position:relative;" data-id="'+count_fc+'" data-side="1" maxlength="50"></textarea>'
+			+'<div class="block-type-caption"><textarea name="rankedlist[cards]['+count_fc+'][caption_card]" class="type-caption" placeholder="Type your text or caption" style="position:relative;" data-id="'+count_fc+'" data-side="1" maxlength="50"></textarea>'
 			+'</div></div></div>'
-			+'<input name="flip_cards['+count_fc+'][type_card1]" type="hidden" value="image" class="input-type-card" autocomplete="off" data-id="'+count_fc+'" data-side="1">'
-			+'<input name="flip_cards['+count_fc+'][img_src1]" type="hidden" value="" class="input-form-img1" autocomplete="off" data-id="'+count_fc+'">'
-			+'<input name="flip_cards['+count_fc+'][youtube_clip1]" type="hidden" value="" class="input-form-clip" autocomplete="off" data-id="'+count_fc+'" data-side="1">');
-		
+			+'<input name="rankedlist[cards]['+count_fc+'][type_card]" type="hidden" value="image" class="input-type-card" autocomplete="off" data-id="'+count_fc+'" data-side="1">'
+			+'<input name="rankedlist[cards]['+count_fc+'][image_card]" type="hidden" value="" class="input-form-img1" autocomplete="off" data-id="'+count_fc+'">'
+			+'<input name="rankedlist[cards]['+count_fc+'][youtube_clip]" type="hidden" value="" class="input-form-clip" autocomplete="off" data-id="'+count_fc+'" data-side="1">');
 	});
 	
 	
