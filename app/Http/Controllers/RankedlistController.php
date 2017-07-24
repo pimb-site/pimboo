@@ -8,6 +8,7 @@ use File;
 use Post;
 use DB;
 
+
 class RankedlistController extends Controller {
 
 	public function displayCreatePage() {
