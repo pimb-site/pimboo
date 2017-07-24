@@ -10,7 +10,7 @@ $(document).ready(function() {
 					html_post = "";
 					json_data = JSON.parse(data.posts);
 					$.each(json_data, function (i, value) {
-						html_post += '<div class="post"><div class="post-left">';
+						html_post += '<div class="post" style="display:none"><div class="post-left">';
 						html_post += '<div class="photo"> <img src="/uploads/'+value.description_image+'"></div>';
 						html_post += '<div class="date">'+value.posted+'</div> </div>';
 						html_post += '<div class="post-right"><div class="title"><a href="/'+value.author_name+'/'+value.url+'">'+value.description_title+'</a></div>';
@@ -26,6 +26,7 @@ $(document).ready(function() {
 						data_title_id++
 					});
 					$('.show-more').before(html_post);
+					$('.post:hidden').fadeToggle(600);
 					if(data.show_more == true) $('.show-more').css({'display': 'block'});
 					else $('.show-more').css({'display': 'none'});
 				}
@@ -50,7 +51,7 @@ $(document).ready(function() {
 					html_post = "";
 					json_data = JSON.parse(data.posts);
 					$.each(json_data, function (i, value) {
-						html_post += '<div class="post"><div class="post-left">';
+						html_post += '<div class="post" style="display:none"><div class="post-left">';
 						html_post += '<div class="photo"> <img src="/uploads/'+value.description_image+'"></div>';
 						html_post += '<div class="date">'+value.posted+'</div> </div>';
 						html_post += '<div class="post-right"><div class="title"><a href="/viewID/'+value.id+'">'+value.description_title+'</a></div>';
@@ -63,6 +64,7 @@ $(document).ready(function() {
 						data_title_id++
 					});
 					$('.show-more').before(html_post);
+					$('.post:hidden').fadeToggle(600);
 					if(data.show_more == true) $('.show-more').css({'display': 'block'});
 					else $('.show-more').css({'display': 'none'});
 				}

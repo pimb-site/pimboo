@@ -28,7 +28,7 @@
 				<div class="cover-bg" style="background-image: url(/uploads/{{ $user_info->cover_photo }})"></div>
 			@endif
 			<div class="wrap">
-				<div class="channel-posts">
+				<div class="channel-posts" >
 					@if(count($channel_content) == 0)
 						<div class="post"><h1> User has no entries </h1> </div>
 					@endif
@@ -40,7 +40,7 @@
 					$days = $current_date->format("d") - $post_date->format("d");
 					$month = $current_date->format("m") - $post_date->format("m");
 					?>
-					<div class="post">
+					<div class="post" data-id="0" >
 						<div class="post-left">
 							<div class="photo"> <img src="/uploads/{{ $post->description_image }}"></div>
 							<div class="date">

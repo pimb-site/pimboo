@@ -52,24 +52,26 @@ Home
                             @foreach ($main_post as $post_main)
                                 <div class="item <?php if($count == 1) print 'active'; ?>">
                                 <div class="img"><a href="/{{  $post_main->author_name.'/'.$post_main->url }}"><img width="750px" height="445px" src="/uploads/{{  $post_main->description_image }}" /></a></div>
-                                <div class="title"><a href="/{{  $post_main->author_name.'/'.$post_main->url }}">{{  $post_main->description_title }}</a></div>
-                                <div class="text">{{  $post_main->description_text }}</div>
+                                <div class="carousel_bottom">
+                                    <div class="title"><a href="/{{  $post_main->author_name.'/'.$post_main->url }}">{{  $post_main->description_title }}</a></div>
+                                    <div class="text">{{  $post_main->description_text }}</div>
 
-                                <div class="info distab">
-                                    <div class="posting">
-                                        <span class="buttons_share" data-id="{{ $count }}">
-                                            <span class="sharing">SHARE & PROFIT:</span>
-                                            <a data-title="{{  $post_main->description_title }}" data-url="{{  '/'.$post_main->author_name.'/'.$post_main->url }}" data-type="fb"  class="butt-for-sharing facebook" href=""></a>
-                                            <a data-title="{{  $post_main->description_title }}" data-url="{{  '/'.$post_main->author_name.'/'.$post_main->url }}" data-type="tw"  class="butt-for-sharing twitter" href=""></a>
-                                            <a data-title="{{  $post_main->description_title }}" data-url="{{  '/'.$post_main->author_name.'/'.$post_main->url }}" data-type="li"  class="butt-for-sharing linkedin" href=""></a>
-                                            <button class="get_link" data-id="{{ $count }}" data-href="{{  url('/'.$post_main->author_name.'/'.$post_main->url) }}">GET LINK</button>
-                                        </span>
-                                        <span class="link" data-id="{{ $count }}">
-                                            <span class="link_in">COPIED TO YOUR CLIPBOARD</span>
-                                            <input class="link_input"  type="" name="" value="" />
-                                        </span>
+                                    <div class="info distab">
+                                        <div class="posting">
+                                            <span class="buttons_share" data-id="{{ $count }}">
+                                                <span class="sharing">SHARE & PROFIT:</span>
+                                                <a data-title="{{  $post_main->description_title }}" data-url="{{  '/'.$post_main->author_name.'/'.$post_main->url }}" data-type="fb"  class="butt-for-sharing facebook" href=""></a>
+                                                <a data-title="{{  $post_main->description_title }}" data-url="{{  '/'.$post_main->author_name.'/'.$post_main->url }}" data-type="tw"  class="butt-for-sharing twitter" href=""></a>
+                                                <a data-title="{{  $post_main->description_title }}" data-url="{{  '/'.$post_main->author_name.'/'.$post_main->url }}" data-type="li"  class="butt-for-sharing linkedin" href=""></a>
+                                                <button class="get_link" data-id="{{ $count }}" data-href="{{  url('/'.$post_main->author_name.'/'.$post_main->url) }}">GET LINK</button>
+                                            </span>
+                                            <span class="link" data-id="{{ $count }}">
+                                                <span class="link_in">COPIED TO YOUR CLIPBOARD</span>
+                                                <input class="link_input"  type="" name="" value="" />
+                                            </span>
+                                        </div>
+                                        <a href="/{{  $post_main->author_name.'/'.$post_main->url }}" class="readmore">Read More >></a>
                                     </div>
-                                    <a href="/{{  $post_main->author_name.'/'.$post_main->url }}" class="readmore">Read More >></a>
                                 </div>
                                 </div>
                                 <?php $count++; ?>
@@ -108,9 +110,10 @@ Home
                 <div class="headlines-title">LATEST HEADLINES</div>
                 <div class="headlines" data-id="0">
                     @foreach ($latest as $post)
-                    <div class="headline">
-                        <a href="{{  '/'.$post->author_name.'/'.$post->url }}" class="img"><img width="360px" height="309px" src="/uploads/{{  $post->description_image }}" /></a>
-                            <div class="posting">
+                    <div class="headline" data-id="{{ $count }}">
+                        <div class="img">
+                            <a href="{{  '/'.$post->author_name.'/'.$post->url }}" class="img"><img width="360px" height="309px" src="/uploads/{{  $post->description_image }}" /></a>
+                            <div class="posting" data-id="{{ $count }}">
                                 <span class="buttons_share" data-id="{{ $count }}">
                                     <span class="sharing">SHARE &<br>PROFIT:</span>
                                     <a data-title="{{  $post->description_title }}" data-url="{{  '/'.$post->author_name.'/'.$post->url }}" data-type="fb"  class="butt-for-sharing facebook" href=""></a>
@@ -123,6 +126,7 @@ Home
                                     <input type="" name="" value="" />
                                 </span>
                             </div>
+                        </div>
                         <a href="{{  '/'.$post->author_name.'/'.$post->url }}" class="text">{{  $post->description_title }}</a>
                     </div>
                     <?php $count++; ?>
@@ -221,9 +225,10 @@ Home
                         if(data.posts.length != 0) {
                             var html = '<div class="headlines" data-id="'+multiply+'">';
                             $.each(data.posts, function (i, value) {
-                                html += '<div class="headline">';
+                                html += '<div class="headline" data-id="'+data_title_id+'">';
+                                html += '<div class="img">';
                                 html += '<a href="/'+value.author_name+'/'+value.url+'" class="img"><img width="360px" height="309px" src="/uploads/'+value.description_image+'" /></a>';
-                                html += '<div class="posting">';
+                                html += '<div class="posting" data-id="'+data_title_id+'">';
                                 html += '<span class="buttons_share" data-id="'+data_title_id+'">';
                                 html += '<span class="sharing">SHARE &<br>PROFIT:</span>';
                                 html += '<a  data-title="'+value.description_title+'" data-url="'+window.location.hostname+"/"+value.author_name+"/"+value.url+'"data-type="fb"  class="butt-for-sharing facebook" href=""></a>';
@@ -235,6 +240,7 @@ Home
                                 html += '<span class="link_in">COPIED TO YOUR<br>CLIPBOARD</span>';
                                 html += '<input type="" name="" value="" />';
                                 html += '</span>';
+                                html += '</div>';
                                 html += '</div>';
                                 html += '<a href="/'+value.author_name+'/'+value.url+'" class="text">'+value.description_title+'</a>';
                                 html += '</div>';
@@ -253,6 +259,32 @@ Home
                 } 
             });
         });
+        var ScreenWidth = screen.width; 
+        if (ScreenWidth >= 768) {
+            var bottom_value = 0;
+            if (ScreenWidth > 1199) {
+                bottom_value = 70;
+            } else if ((ScreenWidth > 991) && (ScreenWidth <= 1199)) {
+                bottom_value = 56;
+            } else {
+                bottom_value = 50;
+            }
+            $('.body').on('mouseover', '.headline', function() { 
+                var elem_id = $(this).data('id');
+                var _block = $('.posting[data-id="'+elem_id+'"]');
+                _block.animate({
+                    'bottom': ''+bottom_value+'px'
+                }, 300);
+            });
+            $('.body').on('mouseleave', '.headline', function() { 
+                var elem_id = $(this).data('id');
+                var _block = $('.posting[data-id="'+elem_id+'"]');
+                _block.animate({
+                    'bottom': '0px'
+                }, 300);
+            });
+        };
+
         $("#carousepostmain").carousel('cycle');
     });
 
