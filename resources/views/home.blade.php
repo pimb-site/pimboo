@@ -259,7 +259,7 @@ Home
                 } 
             });
         });
-        var ScreenWidth = screen.width; 
+        var ScreenWidth = window.innerWidth; 
         if (ScreenWidth >= 768) {
             var bottom_value = 0;
             if (ScreenWidth > 1199) {
@@ -270,21 +270,18 @@ Home
                 bottom_value = 50;
             }
             $('.body').on('mouseover', '.headline', function() { 
-                var elem_id = $(this).data('id');
-                var _block = $('.posting[data-id="'+elem_id+'"]');
+                var _block = $('.posting[data-id="'+$(this).data('id')+'"]');
                 _block.animate({
                     'bottom': ''+bottom_value+'px'
                 }, 300);
             });
             $('.body').on('mouseleave', '.headline', function() { 
-                var elem_id = $(this).data('id');
-                var _block = $('.posting[data-id="'+elem_id+'"]');
+                var _block = $('.posting[data-id="'+$(this).data('id')+'"]');
                 _block.animate({
                     'bottom': '0px'
                 }, 300);
             });
         };
-
         $("#carousepostmain").carousel('cycle');
     });
 
