@@ -23,3 +23,16 @@ public/uploads/
 public/error_log
 *.jpeg
 /config/filesystems.php
+public/config/auth.php
+public/config/app.php
+public/config/broadcasting.php
+public/config/cache.php
+public/config/database.php
+public/config/filesystems.php
+public/config/mail.php
+public/config/queue.php
+public/config/services.php
+public/config/session.php
+public/config/view.php
+routes/bootstrap/app.php
+routes/bootstrap/autoload.php
