@@ -62,6 +62,44 @@ class ToolsController extends Controller
 
                 return view('tools.'.$content->type, ['adv' => $adv, 'snip' => unserialize($content->content)]);
 
+            } elseif($content->type == 'rankedlist') {
+                $get_votes = DB::table('votes')->select(DB::raw('count(card_id) as count, card_id')) 
+                                               ->where(['post_id' => $content->id]) 
+                                               ->groupBy('card_id')
+                                               ->get();
+                $votes = [];
+                for($i = 0; $i < count($get_votes); $i++) 
+                    $votes[$get_votes[$i]->card_id] = $get_votes[$i]->count;
+
+                $content_cards = unserialize($content->content);
+                $element_id = 1;
+                foreach($content_cards as $key => $value) {
+                    $votes_elem = isset($votes[$element_id]) ? $votes[$element_id] : 0;
+                    if($value['type_card'] == 'image') {
+                        $data[$votes_elem][] = [
+                            'post_title' => $value['post_title'],
+                            'caption'    => $value['caption_card'],
+                            'type_card'  => $value['type_card'],
+                            'image'      => $value['image_card'],
+                            'votes'      => $votes_elem,
+                            'element_id' => $element_id
+                        ];
+                    } else {
+                        $data[$votes_elem][] = [
+                            'post_title' => $value['post_title'],
+                            'caption'    => $value['caption_card'],
+                            'type_card'  => $value['type_card'],
+                            'youtube'    => $value['youtube_clip'],
+                            'votes'      => $votes_elem,
+                            'element_id' => $element_id
+                        ];
+                    }
+                    $element_id++;
+                }
+                krsort($data);
+
+                return view('tools.'.$content->type, ['body_class' => 'view '.$content->type, 'content' => $content, 'data' => $data, 'name' => $content->type, 'user_name' => $user_name, 'source_link' => '', 'ads' => $ads, 'tags' => unserialize($content->tags), 'date' => $date]);
+
             } else {
                 return view('tools.'.$content->type, ['body_class' => 'view '.$content->type, 'content' => $content, 'name' => $content->type, 'user_name' => $user_name, 'source_link' => '', 'ads' => $ads, 'tags' => unserialize($content->tags), 'date' => $date]);
             }

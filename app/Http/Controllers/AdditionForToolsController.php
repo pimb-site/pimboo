@@ -9,6 +9,19 @@ use Request;
 class AdditionForToolsController extends Controller
 {
 
+	public static function translit($string) {
+	    $string = (string) $string;
+	    $string = strip_tags($string);
+	    $string = str_replace(array("\n", "\r"), " ", $string);
+	    $string = trim($string);
+	    $string = function_exists('mb_strtolower') ? mb_strtolower($string) : strtolower($string);
+	    $string = strtr($string, array('а'=>'a','б'=>'b','в'=>'v','г'=>'g','д'=>'d','е'=>'e','ё'=>'e','ж'=>'j','з'=>'z','и'=>'i','й'=>'y','к'=>'k','л'=>'l','м'=>'m','н'=>'n','о'=>'o','п'=>'p','р'=>'r','с'=>'s','т'=>'t','у'=>'u','ф'=>'f','х'=>'h','ц'=>'c','ч'=>'ch','ш'=>'sh','щ'=>'shch','ы'=>'y','э'=>'e','ю'=>'yu','я'=>'ya','ъ'=>'','ь'=>''));
+	   	$string = preg_replace("/[^0-9a-z-_ ]/i", "", $string);
+	   	$string = preg_replace("/\s+/", ' ', $string);
+	   	$string = str_replace(" ", "-", $string);
+	   	return $string;
+	}
+
 	public function successPage($author, $link, Request $request) {
 		if ($author != '' && $link != '') {
 			$url = url('/').'/'.$author.'/'.$link;
