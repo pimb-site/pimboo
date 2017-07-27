@@ -17,22 +17,7 @@
 @section('tool_content')
 		
 	<?php
-	$options = unserialize($content->options);
-	$uncontent = unserialize($content->content);
-	$element_id = $data_id = 1;
-	foreach($uncontent as $key => $value) {
-		$data[$value['votes']][] = [
-			'post_title' => $value['post_title'],
-			'caption'    => $value['caption1'],
-			'type_card'  => $value['type_card_front'],
-			'youtube'    => $value['youtube_clip1'],
-			'image'      => $value['front_card'],
-			'votes'      => $value['votes'],
-			'element_id' => $element_id
-		];
-		$element_id++;
-	}
-	krsort($data);
+	$data_id = 1;
 	?>
 	<div class="content-rankedlist">
 		<div class="description">{{ $content->description_text }} </div>
@@ -41,7 +26,7 @@
 				<div class="card" data-id="{{ $data_id }}">
 					<div class="info-card">
 						<div class="vote">
-							<div class="vote-button" data-cid="{!! $content->id !!}" data-id="{{ $data_id }}" data-elemid="{!! $value['element_id'] !!}"></div>
+							<div class="vote-button" data-pid="{!! $content->id !!}" data-id="{{ $data_id }}" data-elemid="{!! $value['element_id'] !!}"></div>
 							<b data-id="{{ $data_id }}">+{!! $value['votes'] !!}</b>
 						</div>
 						<div class="title-card">{{ $value['post_title'] }}</div>
@@ -71,12 +56,12 @@
 			var token = '{!! csrf_token() !!}';
 			current_id = $(this).attr('data-id');
 			elem_id = $(this).data('elemid');
-			cid = $(this).data('cid');
+			pid = $(this).data('pid');
 			$.post(
 			  "/create/rankedlist/vote",
 			  {
-				id: elem_id,
-				cid: cid,
+				cid: elem_id,
+				pid: pid,
 				_token: token
 			  },
 			  onSuccessVote

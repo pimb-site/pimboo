@@ -90,7 +90,7 @@ $(document).ready(function () {
 				if(response.success == true) {
 					if(side_fc == 1) {
 					   $('.main-remove-front[data-id="'+current_id+'"]').empty();
-					   $('.front-card[data-id="'+current_id+'"]').prepend("<img style='position:relative; margin-top:157px; margin-left: 324px; opacity: 0.5' src='/img/movie_icon.png'  />");
+					   $('.front-card[data-id="'+current_id+'"]').prepend("<img style='position:absolute; bottom:40%; left: 45%; opacity: 0.5' src='/img/movie_icon.png'  />");
 					   $('.front-card[data-id="'+current_id+'"]').prepend("<img style='position:absolute;' class='image-card' src='"+response.thumbnail_url+"'  />");
 					   $('.input-form-clip[data-id="'+current_id+'"][data-side="1"]').val(value_url);
 					   $('.input-type-card[data-id="'+current_id+'"][data-side="1"]').val('video');
@@ -145,15 +145,15 @@ $(document).ready(function () {
 							html_trivia += '<div class="trivia_item_title">'+value.post_title+'</div>';
 							html_trivia += '<div class="trivia_main_wrap" data-id="'+i+'">';
 							
-							if(value.caption1 == null) value.caption1 = "";
+							if(value.caption_card == null) value.caption_card = "";
 
-							if(value.type_card_front == "image") {
-								if(value.front_card == null) value.front_card = "../img/no-img.jpg";
-								html_trivia += '<div class="trivia_main_front" data-id="'+i+'"><img class="image-card" style="position:absolute;" src="/temp/'+value.front_card+'" />';
-								html_trivia += '<div class="trivia_main_caption">'+value.caption1+'</div></div>';
+							if(value.type_card == "image") {
+								if(value.image_card == null) value.image_card = "../img/no-img.jpg";
+								html_trivia += '<div class="trivia_main_front" data-id="'+i+'"><img class="image-card" style="position:absolute;" src="/temp/'+value.image_card+'" />';
+								html_trivia += '<div class="trivia_main_caption">'+value.caption_card+'</div></div>';
 							} else {
-								html_trivia += '<div class="trivia_main_front" data-id="'+i+'">'+value.youtube_clip1;
-								html_trivia += '<div class="trivia_main_caption">'+value.caption1+'</div></div>';
+								html_trivia += '<div class="trivia_main_front" data-id="'+i+'">'+value.youtube_clip;
+								html_trivia += '<div class="trivia_main_caption">'+value.caption_card+'</div></div>';
 							}
 							
 							html_trivia += '</div>';
@@ -179,7 +179,7 @@ $(document).ready(function () {
 						$('.modal-alert').modal().open();
 				} else {
 					alertHtml = '<div class="warning-text"><b>Warning!</b></div> <ul>';
-                    $.each(data.errors, function (i, value) {
+                    $.each(data.errorText, function (i, value) {
                         alertHtml += '<li>' + value + '</li>';
                     });
                     alertHtml += '</ul>';
@@ -200,7 +200,7 @@ $(document).ready(function () {
 					url = "/success"+data.link;
 					$( location ).attr("href", url);
                 } else {
-                    $.each(data.errors, function (i, value) {
+                    $.each(data.errorText, function (i, value) {
                         alertHtml += '<li>' + value + '</li>';
                     });
                     alertHtml += '</ul>';
