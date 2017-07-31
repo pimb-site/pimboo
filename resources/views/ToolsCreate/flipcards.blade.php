@@ -20,17 +20,17 @@
 					<div class="top">
 						<div class="photo">CLICK<br>TO ADD PHOTO</div>
 						<div class="text_info">
-							<input type="text" name="form_flip[form_flip_cards_title]" placeholder="Flip cards title" autocomplete="off">
-							<input type="text" name="form_flip[form_description]" placeholder="Flip cards description" autocomplete="off">
-							<input type="text" name="flip_cards[1][form_item_title]" placeholder="Enter item title (45 symbols max)" maxlength="45" autocomplete="off">
+							<input type="text" name="flipcards[data][flipcards_title]" placeholder="Flip cards title" autocomplete="off">
+							<textarea class="variable-description" name="flipcards[data][flipcards_description]" placeholder="Flip cards description" autocomplete="off"></textarea>
 						</div>
 					</div>
-					<textarea name="form_flip[form_footer]" placeholder="Footer text (500 symbols max)" maxlength="500" autocomplete="off"></textarea>
+					<textarea name="flipcards[data][flipcards_footer]" placeholder="Footer text (500 symbols max)" maxlength="500" autocomplete="off"></textarea>
 				</div>
 				<div class="buttons">
-					<button type="button" class="front_card" data-id="1">FRONT CARD</button>
+					<button type="button" class="front_card" data-id="1" style="background-color: #99afd9;">FRONT CARD</button>
 					<button type="button" class="back_card" data-id="1">BACK CARD</button>
 				</div>
+				<input class="item-title-input" type="text" name="flipcards[cards][1][card_item_title]" placeholder="Enter item title (45 symbols max)" maxlength="45" autocomplete="off">
 				<div class="editor" data-id="1">
 					<div class="front-card" data-id="1">
 						<div class="title">CLICK TO ADD PHOTO OR TEXT</div>
@@ -54,15 +54,13 @@
 					<button type="button" id="publish" class="btn-publish">PUBLISH</button>
 				</div>
 				<input name="isDraft" type="hidden" value="publish" class="isDraft" autocomplete="off">
-				<input name="postID" type="hidden" value="" class="postID" autocomplete="off">
-				<input name="form_flip[form_photo]" type="hidden" value="" class="input-form-photo" autocomplete="off">
-				<input name="form_flip[form_photo_facebook]" type="hidden" value="" class="input-form-photo-facebook" autocomplete="off">
-				<input name="flip_cards[1][type_front]" type="hidden" value="image" class="input-type-front" autocomplete="off" data-id="1">
-				<input name="flip_cards[1][type_back]" type="hidden" value="image" class="input-type-back" autocomplete="off" data-id="1">
-				<input name="flip_cards[1][img_src1]" type="hidden" value="" class="input-form-img1" autocomplete="off" data-id="1">
-				<input name="flip_cards[1][img_src2]" type="hidden" value="" class="input-form-img2" autocomplete="off" data-id="1">
-				<input name="flip_cards[1][theme1]" type="hidden" value="blue" class="input-form-theme1" autocomplete="off" data-id="1">
-				<input name="flip_cards[1][theme2]" type="hidden" value="blue" class="input-form-theme2" autocomplete="off" data-id="1">
+				<input name="flipcards[data][postID]" type="hidden" value="" class="postID" autocomplete="off">
+				<input name="flipcards[data][photo_main]" type="hidden" value="" class="input-form-photo" autocomplete="off">
+				<input name="flipcards[data][photo_facebook]" type="hidden" value="" class="input-form-photo-facebook" autocomplete="off">
+				<input name="flipcards[cards][1][card_type_front]" type="hidden" value="image" class="input-type-front" autocomplete="off" data-id="1">
+				<input name="flipcards[cards][1][card_type_back]" type="hidden" value="image" class="input-type-back" autocomplete="off" data-id="1">
+				<input name="flipcards[cards][1][front_card_image]" type="hidden" value="" class="input-form-img1" autocomplete="off" data-id="1">
+				<input name="flipcards[cards][1][back_card_image]" type="hidden" value="" class="input-form-img2" autocomplete="off" data-id="1">
 			</div>
 			<div class="right">
 				<div class="title">SOCIAL APPEARANCE</div>
