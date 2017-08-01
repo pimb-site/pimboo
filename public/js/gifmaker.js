@@ -381,7 +381,7 @@ $(document).ready(function () {
 						$('.modal-alert').html(alertHtml);
 						$('.modal-alert').modal().open();
 				} else {
-					alertHtml = '<div class="warning-text"><b>Warning!</b></div> <ul>';
+					alertHtml = '<div class="warning-img"></div><div class="warning-text"><b>Something went wrong</b></div> <ul>';
                     $.each(data.errors, function (i, value) {
                         alertHtml += '<li>' + value + '</li>';
                     });
@@ -395,7 +395,7 @@ $(document).ready(function () {
 	
 	$('.btn-publish').click(function() {
 		$('.isDraft').val('publish');
-		var alertHtml = '<div class="warning-text"><b>Warning!</b></div> <ul>';
+		var alertHtml = '<div class="warning-img"></div><div class="warning-text"><b>Something went wrong</b></div> <ul>';
         $('#form_upload_cards').ajaxSubmit({
             dataType: "json",
             success: function (data) {
