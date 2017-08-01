@@ -11,7 +11,7 @@
 	<body class="tools_create_page">
 		@include('header')
 		<div class="body">
-		<form id="form_upload_cards" action="/create/rankedlist/send" method="POST">
+		<form action="/create/rankedlist/send" id="form_upload_cards" method="POST">
 			<input type="hidden" name="_token" value="{{ csrf_token() }}">
 			<div class="left">
 				<div class="title">RANKED LIST CREATION</div>

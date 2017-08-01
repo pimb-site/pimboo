@@ -39,7 +39,6 @@ class RankedlistController extends Controller {
 					break;
 			}
 		}
-
 		return Response::json(['success' => false, 'errorText' => 'Invalid data! Try reload page.']);
 	}
 
@@ -97,7 +96,7 @@ class RankedlistController extends Controller {
     	}
     	return Response::json(['success' => false, 'errorText' => 'Invalid data! Try reload page.']);
 	}
-	// не забыть проверить на ../
+	
 	private function publish($draft) {
 		$data = Input::only('rankedlist');
 		if(count($data) != 0) {
@@ -107,7 +106,7 @@ class RankedlistController extends Controller {
 	            'photo_facebook'        => 'required',
 	            'rankedlist_title'      => 'required|min:3|max:400',
 	            'rankedlist_footer'     => 'required|min:3|max:500',
-	            'rankedlist_description' => 'required|min:3',
+	            'rankedlist_description' => 'required|min:3|max:2000',
 	        ]);
 			if ($validator->fails())
 				return Response::json(['success' => false, 'errorText' => $validator->errors()->all()]);
@@ -130,10 +129,12 @@ class RankedlistController extends Controller {
 	        $data['rankedlist']['cards'] = array_slice($data['rankedlist']['cards'], 0, 15);
 
 	        // Checking if images are loaded ( main and facebook photo )
+	        $data['rankedlist']['data']['photo_main'] = str_replace('..', '', $data['rankedlist']['data']['photo_main']);
 	        if(!File::exists(public_path()."/temp/".$data['rankedlist']['data']['photo_main']))
 	        	$errors_array[] = "The main photo not found. Please, upload a new image!";
 
-	        if(!File::exists(public_path()."/temp/".$data['rankedlist']['data']['photo_main']))
+	       	$data['rankedlist']['data']['photo_facebook'] = str_replace('..', '', $data['rankedlist']['data']['photo_facebook']);
+	        if(!File::exists(public_path()."/temp/".$data['rankedlist']['data']['photo_facebook']))
 	        	$errors_array[] = "The facebook photo not found. Please, upload a new image!";
 
 	        if(count($errors_array) != 0)
@@ -141,11 +142,12 @@ class RankedlistController extends Controller {
 
 	        // Checking if images are loaded or exist youtube video ( card post )
 	        $available_types = ['image', 'video'];
-	        foreach ($data['rankedlist']['cards'] as $key => $value) {
+	        foreach ($data['rankedlist']['cards'] as $key => &$value) {
 	        	if(!in_array($value['type_card'], $available_types))
 	        		return Response::json(['success' => false, 'errorText' => ['Unknown card type. Please, try reload page!']]);
 
 	        	if($value['type_card'] == 'image') {
+	        		$value['image_card'] = str_replace('..', '', $value['image_card']);
 	        		if($value['image_card'] != "") {
 	        			if(!File::exists(public_path()."/temp/".$value['image_card'])) {
 	        				$errors_array[] = "The card image not found. Please, upload a new image!";
@@ -293,6 +295,6 @@ class RankedlistController extends Controller {
 			$all_votes = DB::table('votes')->where(['post_id' => Input::get('pid'), 'card_id' => Input::get('cid')])->count();
 			return Response::json(['success' => true, 'votes' => $all_votes]);
 		}
-		return Response::json(['success' => false, 'errorText' => 'Invalid data!']);
+		return Response::json(['success' => false, 'errorText' => $validator->errors()->all()]);
 	}
 }
