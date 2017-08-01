@@ -18,33 +18,29 @@
 	<?php
 	$current_id = 1;
 	$flipcards  = unserialize($content->content);
-	$themes = [
-		'green' => '#8dc63f',
-		'purple' => '#605ca8',
-		'blue'  => '#009cff',
-		'turquoise' => '#00a99d'
-	];
 	?>
 	<div class="content-flipcard">
 		<div class="description">{{ $content->description_text }} </div>
 		@foreach($flipcards as $key => $value)
 		<div class="card">
 			<div class="info-card">
-				<div class="id-card">{{ $current_id++ }}</div>
-				<div class="title-card">{{ $value['item_title'] }}</div>
+				<div class="id-card">{{ $current_id }}</div>
+				<div class="title-card">{{ $value['card_item_title'] }}</div>
 			</div>
 			<div class="flipcard">
 				<div class="sides" data-id="{{ $current_id++ }}">
-					@if ($value['text_front'] == "")
-						<div class="front"><img src="/uploads/{{ $value['front_card'] }}"/></div>
+
+					@if ($value['card_type_front'] == "image")
+						<div class="front"><img src="/uploads/{{ $value['front_card_image'] }}"/></div>
 					@else
-						<div class="front" style="background-color: {{ $themes[$value['theme_front']] }}">{{ $value['text_front'] }}</div>
+						<div class="front" style="background-color: {{ $value['front_card_theme'] }}">{{ $value['front_card_text'] }}</div>
 					@endif
 
-					@if ($value['text_back'] == "")
-						<div class="back" ><img src="/uploads/{{ $value['back_card'] }}"/></div>
+
+					@if ($value['card_type_back'] == "image")
+						<div class="back" ><img src="/uploads/{{ $value['back_card_image'] }}"/></div>
 					@else
-						<div class="back" style="background-color: {{ $themes[$value['theme_back']] }}">{{ $value['text_back'] }}</div>
+						<div class="back" style="background-color: {{ $value['back_card_theme'] }}">{{ $value['back_card_text'] }}</div>
 					@endif
 				</div>
 				<div class="click-text">Click to flip</div>

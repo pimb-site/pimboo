@@ -141,7 +141,7 @@ class FlipcardsController extends Controller {
 
 	        // Checking if images are loaded or exist youtube video ( card post )
 	        $available_types = ['image', 'text'];
-	        foreach ($data['flipcards']['cards'] as $key => &$value) {
+	        foreach ($data['flipcards']['cards'] as $key => $value) {
 	        	if(!in_array($value['card_type_front'], $available_types))
 	        		return Response::json(['success' => false, 'errorText' => ['Unknown card type. Please, try reload page!']]);
 	        	if(!in_array($value['card_type_back'], $available_types))
