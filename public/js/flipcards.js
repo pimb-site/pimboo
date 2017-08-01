@@ -264,7 +264,7 @@ $(document).ready(function () {
 	$('.btn-publish').click(function() {
 		$('.isDraft').val('publish');
 
-		var alertHtml = '<div class="warning-text"><b>Warning!</b></div> <ul>';
+		var alertHtml = '<div class="warning-img"></div><div class="warning-text"><b>Something went wrong</b></div> <ul>';
 		if (tinymce_init == 1) {
 			tinyMCE.get("content_textarea").save();
 		}
@@ -297,7 +297,7 @@ $(document).ready(function () {
 						$('.modal-alert').html(alertHtml);
 						$('.modal-alert').modal().open();
 				} else {
-					alertHtml = '<div class="warning-text"><b>Warning!</b></div> <ul>';
+					alertHtml = '<div class="warning-img"></div><div class="warning-text"><b>Something went wrong</b></div> <ul>';
                     $.each(data.errors, function (i, value) {
                         alertHtml += '<li>' + value + '</li>';
                     });
@@ -471,7 +471,7 @@ $(document).ready(function () {
 		  var file = ui.files[0];
 		  if( ui.other.length ){
 			var errors = ui.other[0].errors;
-			var alertHtml = '<div class="warning-text"><b>Warning!</b></div><div class="warning-text-other"><b> The image you are trying to upload is too small / big. </br> Minimum dimensions: 320x240 </br> Maximum dimensions: 3840x2160</b></div>';
+			var alertHtml = '<div class="warning-img"></div><div class="warning-text"><b>Something went wrong</b></div><div class="warning-text-other"><b> The image you are trying to upload is too small / big. </br> Minimum dimensions: 320x240 </br> Maximum dimensions: 3840x2160</b></div>';
 			$('.modal-alert').html(alertHtml);
 			$('.modal-alert').modal().open();
 		  }
