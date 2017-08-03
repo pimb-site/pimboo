@@ -218,7 +218,6 @@
 				<div class="popup__body"><div class="js-img"></div></div>
 			</div>
 			<div class="img-credentials">
-				<input type="text" placeholder="Image credentials">
 				<div class="js-upload btn btn_browse btn_browse_small">DONE</div>
 			</div>
 		</div>

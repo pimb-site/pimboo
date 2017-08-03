@@ -106,6 +106,11 @@
 					<div class="modal-upload-column">
 						<p> UPLOAD IMAGE </p>
 						<div class="select-file-for-cover"> <div class="modal-file-icon"></div><input type="file" name="filedata"></div>
+						<div class="modal-upload-url">
+							<p>or</p>
+							<input type="text" class="upload-img-url" placeholder="Enter URL">	
+							<button type="button" class="upload-img-url-btn">GO</button>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -116,6 +121,11 @@
 					<div class="modal-upload-column">
 						<p> UPLOAD IMAGE </p>
 						<div class="select-file-for-photo"> <div class="modal-file-icon"></div><input type="file" name="filedata"></div>
+						<div class="modal-upload-url">
+							<p>or</p>
+							<input type="text" class="upload-img-url" placeholder="Enter URL">	
+							<button type="button" class="upload-img-url-btn">GO</button>
+						</div>
 					</div>
 				</div>
 			</div>
