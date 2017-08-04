@@ -7,9 +7,34 @@ use Illuminate\Http\Request;
 use App\User;
 use DateTime;
 use DB;
+use App\Post;
 
 class ToolsController extends Controller
 {
+
+    public function editTool($name, $title_url) { 
+        if(Auth::guest())
+            return redirect('auth/login');
+
+        if($name != '' && $title_url != '') {
+            if(Auth::user()->permission == 1) { 
+                if(Auth::user()->name != $name)
+                    return redirect('/home');
+                $post = Post::where(['author_name' => $name, 'url' => $title_url])->get();
+                if(count($post) != 0) {
+                    return view('editTool.'.$post->type, ['body_class' => 'tools_create_page', 'isAdmin' => false]);
+                }
+                return redirect('/home');
+            } else if (Auth::user()->permission == 10) {
+                $post = Post::where(['author_name' => $name, 'url' => $title_url])->get();
+                if(count($post) != 0) {
+                    return view('ToolsEdit.'.$post[0]->type, ['body_class' => 'tools_create_page', 'post' => $post[0], 'isAdmin' => true]);
+                }
+                return redirect('/home');
+            }
+        }
+        return redirect('/home');
+    }
 
     public function viewTool($name, $title_url, Request $request) {
 

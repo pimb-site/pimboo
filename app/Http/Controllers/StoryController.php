@@ -1,203 +1,154 @@
 <?php namespace App\Http\Controllers;
-use Illuminate\View\View;
-use App\PostView;
-use Auth;
-use Illuminate\Http\Request;
+
+use Validator;
+use Response;
+use App\Post;
+use App\User;
 use Input;
-use DB;
+use Auth;
+use File;
 
-class StoryController extends Controller
-{
-	
-    public function displayCreatePage() {
-        if(Auth::guest()) return view('auth/login');
-        else return view('ToolsCreate.story');
-    }
+class StoryController extends Controller {
 
-
-    public static function translit($s) {
-	    $s = (string) $s;
-	    $s = strip_tags($s);
-	    $s = str_replace(array("\n", "\r"), " ", $s);
-	    $s = trim($s);
-	    $s = function_exists('mb_strtolower') ? mb_strtolower($s) : strtolower($s);
-	    $s = strtr($s, array('а'=>'a','б'=>'b','в'=>'v','г'=>'g','д'=>'d','е'=>'e','ё'=>'e','ж'=>'j','з'=>'z','и'=>'i','й'=>'y','к'=>'k','л'=>'l','м'=>'m','н'=>'n','о'=>'o','п'=>'p','р'=>'r','с'=>'s','т'=>'t','у'=>'u','ф'=>'f','х'=>'h','ц'=>'c','ч'=>'ch','ш'=>'sh','щ'=>'shch','ы'=>'y','э'=>'e','ю'=>'yu','я'=>'ya','ъ'=>'','ь'=>''));
-    	$s = preg_replace("/[^0-9a-z-_ ]/i", "", $s);
-    	$s = preg_replace("/\s+/", ' ', $s);
-    	$s = str_replace(" ", "-", $s);
-
-    	return $s;
-    }
+	public function displayCreatePage() {
+		return Auth::guest() ? redirect('auth/login') : view('ToolsCreate.story', ['body_class' => 'tools_create_page']);
+	}
 
 	public function sendStory() {
-        if(Auth::guest()) return Response::json(['success' => false, 'errorText' => 'You are not authorized.']);
-        $input = Input::all();
-		
-		$tags = [];
-		if(isset($input['tags'])) {
-			if(count($input['tags']) > 0) {
-				foreach ($input['tags'] as $key => $value) {
+		if(Auth::guest()) return Response::json(['success' => false, 'errorText' => 'You are not authorized!']);
+		if(Input::get('isDraft') !== null) {
+			switch (Input::get('isDraft')) {
+				case 'save':
+					return $this->publish('save');
+					break;
+
+				case 'publish':
+					return $this->publish('publish');
+					break;
+
+				default:
+					return Response::json(['success' => false, 'errorText' => 'Invalid data! Try reload page.']);
+					break;
+			}
+		}
+		return Response::json(['success' => false, 'errorText' => 'Invalid data! Try reload page.']);
+	}
+
+	private function publish($draft) {
+		$data = Input::only('story');
+		if(count($data) != 0) {
+			// Validation the Main Data
+			$validator = Validator::make($data['story']['data'], [
+	            'photo_main'        => 'required',
+	            'photo_facebook'    => 'required',
+	            'story_title'       => 'required|min:3|max:400',
+	            'story_description' => 'required|min:3|max:2000',
+	        ]);
+			if ($validator->fails())
+				return Response::json(['success' => false, 'errorText' => $validator->errors()->all()]);
+
+			// Validation the Cards
+			$validator = Validator::make($data['story'], [
+				'story_content' => 'required|min:50|max:5000', 
+			]);
+			if ($validator->fails()) 
+				return Response::json(['success' => false, 'errorText' => $validator->errors()->all()]);
+
+			$errors_array = [];
+
+	        // Checking if images are loaded ( main and facebook photo )
+	        $data['story']['data']['photo_main'] = str_replace('..', '', $data['story']['data']['photo_main']);
+	        if(!File::exists(public_path()."/temp/".$data['story']['data']['photo_main']) && !File::exists(public_path()."/uploads/".$data['story']['data']['photo_main']))
+	        	$errors_array[] = "The main photo not found. Please, upload a new image!";
+
+	       	$data['story']['data']['photo_facebook'] = str_replace('..', '', $data['story']['data']['photo_facebook']);
+	        if(!File::exists(public_path()."/temp/".$data['story']['data']['photo_facebook']) && !File::exists(public_path()."/uploads/".$data['story']['data']['photo_facebook']))
+	        	$errors_array[] = "The facebook photo not found. Please, upload a new image!";
+
+	        if(count($errors_array) != 0)
+	        	return Response::json(['success' => false, 'errorText' => $errors_array]);
+
+	        // Moving main photo/ facebook photo
+	        if(strpos($data['story']['data']['photo_main'], '/') !== false) {
+	        	$main_photo = uniqid().".jpeg";
+		        if(!File::move(public_path()."/temp/".$data['story']['data']['photo_main'], public_path()."/uploads/".$main_photo))
+		        	$errors_array[] = "An error occurred while moving the main photo. Please, upload a new image!";
+		    } else $main_photo = $data['story']['data']['photo_main'];
+
+		    if(strpos($data['story']['data']['photo_facebook'], '/') !== false) {
+		    	$facebook_photo = uniqid().".jpeg";
+				if(!File::move(public_path()."/temp/".$data['story']['data']['photo_facebook'], public_path()."/uploads/".$facebook_photo))
+					$errors_array[] = "An error occurred while moving the facebook photo. Please, upload a new image!";
+			} else $facebook_photo = $data['story']['data']['photo_facebook'];
+	        if(count($errors_array) != 0)
+	        	return Response::json(['success' => false, 'errorText' => $errors_array]);
+
+			// tags recording | max count tags : 22
+			$tags = [];
+			if(Input::has('tags'))
+				$get_tags = Input::get('tags');
+			if(isset($get_tags) && count($get_tags > 0)) {
+				$get_tags = array_slice($get_tags, 0, 22);
+				foreach ($get_tags as $key => $value) {
 					$tags[] = $value;
 				}
 			}
+			$tags = serialize($tags);
+
+			// options recording
+			$options = [];
+			$options = serialize($options);
+
+			// If there is a postID, then to update post
+			$validator = Validator::make($data['story']['data'], [
+				'postID' => 'required|integer|min:1',
+			]);
+
+			if (!$validator->fails()) {
+				$owner = Post::select('author_name', 'user_id', 'url')->where(['id' => $data['story']['data']['postID'], 'type' => 'story'])->get();
+				if(count($owner) != 0 && ($owner[0]->user_id == Auth::user()->id || Auth::user()->permission == 10)) {
+					Post::where(['id' => $data['story']['data']['postID'], 'type' => 'story'])
+						->update(['description_title'  => $data['story']['data']['story_title'],  
+								  'description_text'   => $data['story']['data']['story_description'],
+								  'description_image'  => $main_photo,
+								  'image_facebook'     => $facebook_photo, 'content' => $data['story']['story_content'], 'permission' => 'public',
+								  'options' => $options, 'tags' => $tags, 'isDraft' => $draft
+					]);
+					$link = '/'.$owner[0]->author_name.'/'.$owner[0]->url;
+					return Response::json(['success' => true, 'link' => $link]);
+				}
+				return Response::json(['false' => true, 'errorText' => 'Invalid data(postID)']);
+			}
+
+			// Transliteration field title for URL
+			$title_url = AdditionForToolsController::translit($data['story']['data']['story_title']);
+			if(strlen($title_url) < 3)
+				$title_url = 'story';
+			else if(strlen($title_url) > 180)
+				$title_url = substr($title_url, 0, 180); 
+
+
+			// Insert a new post in DB
+			$counter = -1;
+			$url  = $title_url;
+			while (true) {
+				$result = Post::where(['url' => $title_url, 'author_name' => Auth::user()->name])->count();
+				if($result == 0) {
+					Post::insert(['description_title'  => $data['story']['data']['story_title'], 
+								  'description_text'   => $data['story']['data']['story_description'],
+							   	  'description_image'  => $main_photo, 'image_facebook' => $facebook_photo, 
+							   	  'content' => $data['story']['story_content'], 'type'  => 'story',
+								  'permission'  => 'public', 'options' => $options, 'tags' => $tags, 'isDraft' => $draft, 'url' => $title_url, 
+								  'author_name' => Auth::user()->name, 'user_id' => Auth::user()->id
+					]);
+					$link = '/'.Auth::user()->name.'/'.$title_url;
+					return Response::json(['success' => true, 'link' => $link]);
+				}
+				$title_url = $url.$counter;
+				$counter--;
+			}
+
 		}
-		$tags = serialize($tags);
-		
-		$content = array();
-
-		if($input['form_story']['form_photo_facebook'] == "") $photo_fb = "";
-			else $photo_fb = '/temp/'.$input['form_story']['form_photo_facebook'];
-			
-		if($input['form_story']['form_photo'] == "") $photo = "";
-			else $photo = '/temp/'.$input['form_story']['form_photo'];
-		
-		$options = [];
-		if(isset($input['display_item_numbers'])) {
-			if($input['display_item_numbers'] == 'yes') $display_item_numbers = 'yes';
-			else $display_item_numbers = 'no';
-		} else $display_item_numbers = 'no';
-			
-		$options = ['display_item_numbers' => $display_item_numbers];
-		$options = serialize($options);
-
-        $validator = \Validator::make(
-            array(
-                'Story Title' => $input['form_story']['form_story_cards_title'],
-                'Story Description' => $input['form_story']['form_description'],
-                'Story Photo' => $input['form_story']['form_photo'],
-				'Story Facebook Photo' => $input['form_story']['form_photo_facebook'],
-				'Story Content' => $input['form_story']['content']
-            ),
-            array(
-                'Story Title' => 'required|min:3|max:400',
-                'Story Description' => 'required|min:3',
-                'Story Photo' => 'required',
-				'Story Facebook Photo' => 'required',
-				'Story Content' => 'required'
-            )
-        );
-		
-        if (!$validator->fails())
-        {
-
-
-    //     	if($input['isDraft'] == 'save') {
-				// if(isset($input['postID'])) {
-				// 	$postID = (int)$input['postID'];
-				// 	if(is_int($postID) && $postID > 0) {
-				// 		$current_owner = \DB::select('select user_id from posts where id = ?', [$postID]);
-				// 		if(count($current_owner != 0)) {
-				// 			if($current_owner[0]->user_id == \Auth::user()->id) {
-				// 				\DB::table('posts')
-				// 					->where('id', $postID)
-				// 					->update(['description_title' => $input['form_story']['form_story_cards_title'], 'description_text' => $input['form_story']['form_description'],
-				// 							'description_footer' => $input['form_story']['form_footer'], 'content' => serialize($content), 'description_image' => $photo, 'image_facebook' => $photo_fb,
-				// 							'type' => 'story', 'isDraft' => 'save', 'tags' => $tags, 'permission' => 'public', 'options' => $options
-				// 						]);
-				// 				return \Response::json(['success' => true, 'id' => $postID]);
-				// 			}
-				// 		}
-				// 	}
-				// }
-
-				// $string = $input['form_story']['form_story_cards_title'];
-				// $string = StoryController::translit($string);
-				// if(strlen($string) < 10) $string = 'post-story-'.strtolower(str_random(30));
-
-				// $str2 = $string;
-				// $str2 = $str2.'-'.date('Y-d-m');
-
-				// $count = DB::table('posts')->where('author_name', '=', Auth::user()->name)->where('url', '=', $str2)->count();
-				// if($count == 0) {
-				// 	$id = \DB::table('posts')->insertGetId(
-				// 		['user_id' => \Auth::user()->id, 'author_name' => Auth::user()->name, 'url' => $str2, 'description_title' => $input['form_story']['form_story_cards_title'], 'description_text' => $input['form_story']['form_description'],
-				// 		'content' => $input['form_story']['content'], 'description_image' => $uniqid3.".jpeg", 'image_facebook' => $uniqid4.".jpeg",
-				// 		'type' => 'story', 'isDraft' => 'save', 'tags' => $tags, 'permission' => 'public', 'options' => $options]
-				// 	);
-	   //              return \Response::json(['success' => true, 'id' => $id]);
-				// } else {
-				// 	$string = 'post-story-'.strtolower(str_random(30));
-				// 	$str2 = $string;
-				// 	$str2 = $str2.'-'.date('Y-d-m');
-				// 	$id = \DB::table('posts')->insertGetId(
-				// 		['user_id' => \Auth::user()->id, 'author_name' => Auth::user()->name, 'url' => $str2, 'description_title' => $input['form_story']['form_story_cards_title'], 'description_text' => $input['form_story']['form_description'],
-				// 		'content' => $input['form_story']['content'], 'description_image' => $uniqid3.".jpeg", 'image_facebook' => $uniqid4.".jpeg",
-				// 		'type' => 'story', 'isDraft' => 'save', 'tags' => $tags, 'permission' => 'public', 'options' => $options]
-				// 	);
-				// 	return \Response::json(['success' => true, 'id' => $id]);
-				// }
-
-    //     	}
-
-            $errors_array = array();
-			
-            if(!file_exists('temp/'.$input['form_story']['form_photo'])) $errors_array[] = 'Wrong photo link';
-			if(!file_exists('temp/'.$input['form_story']['form_photo_facebook'])) $errors_array[] = 'Wrong Facebook photo link';
-			
-			
-            if(count($errors_array) == 0) {
-                $content = array();
-                $uniqid3 = uniqid();
-				$uniqid4 = uniqid();
-				
-                copy('temp/'.$input['form_story']['form_photo'], 'uploads/'.$uniqid3.'.jpeg');
-				copy('temp/'.$input['form_story']['form_photo_facebook'], 'uploads/'.$uniqid4.'.jpeg');
-                unlink('temp/'.$input['form_story']['form_photo']);
-				unlink('temp/'.$input['form_story']['form_photo_facebook']);
-				
-				$photo = $uniqid3.'.jpeg';
-				$photo_fb = $uniqid4.'.jpeg';
-				
-				$tags = [];
-				if(isset($input['tags'])) {
-					if(count($input['tags']) > 0) {
-						foreach ($input['tags'] as $key => $value) {
-							$tags[] = $value;
-						}
-					}
-				}
-				$tags = serialize($tags);
-				
-				$options = [];
-				if(isset($input['display_item_numbers'])) {
-					if($input['display_item_numbers'] == 'yes') $display_item_numbers = 'yes';
-					else $display_item_numbers = 'no';
-				} else $display_item_numbers = 'no';
-				
-				$options = ['display_item_numbers' => $display_item_numbers];
-				$options = serialize($options);
-
-
-
-				$string = $input['form_story']['form_story_cards_title'];
-				$string = StoryController::translit($string);
-				if(strlen($string) < 3) {
-					$string = 'story';
-				} else if(strlen($string) > 180) {
-					$string = substr($string, 0, 190);
-				}
-
-				$str = $string;
-
-				$first = false;
-				$count = -1;
-
-				while(true) {
-					$result = DB::table('posts')->where('author_name', '=', Auth::user()->name)->where('url', '=', $string)->count();
-					if($result == 0) {
-						$id = \DB::table('posts')->insertGetId(
-							['user_id' => \Auth::user()->id, 'author_name' => Auth::user()->name, 'url' => $string, 'description_title' => $input['form_story']['form_story_cards_title'], 'description_text' => $input['form_story']['form_description'],
-							'content' => $input['form_story']['content'], 'description_image' => $uniqid3.".jpeg", 'image_facebook' => $uniqid4.".jpeg",
-							'type' => 'story', 'isDraft' => 'publish', 'tags' => $tags, 'permission' => 'public', 'options' => $options]
-						);
-						$link = '/'.Auth::user()->name.'/'.$string;
-						return \Response::json(['success' => true, 'link' => $link]);
-					} else {
-						$string = $str.$count;
-						$count--;
-					}
-				}
-            }
-        } else return \Response::json(['success' => false, 'errors' => $validator->errors()]);
-    }
+		return Response::json(['success' => false, 'errorText' => 'Invalid data! Try reload page.']);
+	}
 }

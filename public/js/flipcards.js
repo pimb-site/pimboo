@@ -193,36 +193,13 @@ $(document).ready(function () {
 		}
 		
 	});
-	
-	// $('#publish').click(function() {
-	// 	$('.isDraft').val('publish');
-	// 	var alertHtml = '<div class="warning-text"><b>Warning!</b></div> <ul>';
-	// 	if (tinymce_init == 1) {
-	// 		tinyMCE.get("content_textarea").save();
-	// 	}
- //        $('#form_upload_cards').ajaxSubmit({
- //            dataType: "json",
- //            success: function (data) {
- //                if (data.success == true) {
-	// 				url = '/success'+data.link;
-	// 				$( location ).attr("href", url);
- //                } else {
- //                    $.each(data.errors, function (i, value) {
- //                        alertHtml += '<li>' + value + '</li>';
- //                    });
- //                    alertHtml += '</ul>';
-	// 				$('.modal-alert').html(alertHtml);
-	// 				$('.modal-alert').modal().open();
- //                }
- //            }
- //        });
-	// });
+
 	
 	$('.btn-publish').click(function() {
 		$('.isDraft').val('publish');
 
 		var alertHtml = '<div class="warning-img"></div><div class="warning-text"><b>Something went wrong</b></div> <ul>';
-		if (tinymce_init == 1) {
+		if (typeof  tinymce_init != 'undefined' && tinymce_init == 1) {
 			tinyMCE.get("content_textarea").save();
 		}
         $('#form_upload_cards').ajaxSubmit({
@@ -254,13 +231,8 @@ $(document).ready(function () {
 						$('.modal-alert').html(alertHtml);
 						$('.modal-alert').modal().open();
 				} else {
-<<<<<<< HEAD
 					alertHtml = '<div class="warning-img"></div><div class="warning-text"><b>Something went wrong</b></div> <ul>';
                     $.each(data.errors, function (i, value) {
-=======
-					alertHtml = '<div class="warning-text"><b>Warning!</b></div> <ul>';
-                    $.each(data.errorText, function (i, value) {
->>>>>>> 8cab92e6c4775583551d09d3da9f38fbdc08620b
                         alertHtml += '<li>' + value + '</li>';
                     });
                     alertHtml += '</ul>';

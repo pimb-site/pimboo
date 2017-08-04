@@ -82,7 +82,7 @@ Admin
 								<div class="tag"><label><input class="checkbox" type="checkbox" name="tags[]" value="" data-id="{{ $post->id }}" data-action="set_latest" <?php if($post->home_latest) print 'checked'; ?>><span class="checkbox-custom"></span></label></div>
 							</div>
 							<div class="row_cell cell_edit">
-								<div class="buttons editPost" data-id="{{ $post-> id}}" data-type="{{ $post->type }}">
+								<div class="buttons editPost" data-url="{{ $post->url }}" data-author_name="{{ $post->author_name }}">
 									<button ><span class="glyphicon glyphicon-pencil"></span></button>
 								</div>
 							</div>
@@ -174,7 +174,7 @@ Admin
 		    			html += '<div class="tag"><label><input class="checkbox" type="checkbox" name="tags[]" value="" data-id="'+value.id+'" data-action="set_right" '+checked_right+'><span class="checkbox-custom"></span></label></div></div>';
 		    			html += '<div class="row_cell cell_checkbox">';
 		    			html += '<div class="tag"><label><input class="checkbox" type="checkbox" name="tags[]" value="" data-id="'+value.id+'" data-action="set_latest" '+checked_latest+'><span class="checkbox-custom"></span></label></div></div>';
-		    			html += '<div class="row_cell cell_edit"> <div class="buttons editPost" data-id="'+value.id+'" data-type="'+value.type+'">';
+		    			html += '<div class="row_cell cell_edit"> <div class="buttons editPost" data-url="'+value.url+'" data-author_name="'+value.author_name+'">';
 		    			html += '<button ><span class="glyphicon glyphicon-pencil"></span></button> </div> </div>';
 		    			html += '<div class="row_cell cell_del"><div class="buttons deletePost" data-id="'+value.id+'">';
 		    			html += '<button ><span class="glyphicon glyphicon-remove"></span></button> </div> </div> </div>';
@@ -208,9 +208,9 @@ Admin
 	});
 
 	$('.admin_table').on('click', '.editPost', function() {
-		var post_id = $(this).data('id');
-		var post_type = $(this).data('type');
-		window.location = '/admin/editing/'+post_type+'/'+post_id;
+		var author_name = $(this).data('author_name');
+		var url = $(this).data('url');
+		window.location = '/edit/'+author_name+'/'+url;
 	});
 
 	$('.admin_table').on('click', '.deletePost', function() {

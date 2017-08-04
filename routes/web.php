@@ -65,7 +65,7 @@ Route::get('/success/{author}/{link}',         'AdditionForToolsController@succe
 
 // Snip
 Route::get('/create/snip', 'SnipController@displayCreatePage');
-Route::post('/create/snip/createlink', 'SnipController@createLink');
+Route::post('/create/snip/send', 'SnipController@sendSnip');
 
 // Flipcards
 Route::get('/create/flipcards', 'FlipcardsController@displayCreatePage');
@@ -81,9 +81,9 @@ Route::post('/create/rankedlist/send', 'RankedlistController@sendRankedList');
 Route::post('/create/rankedlist/vote', 'RankedlistController@voteRankedList');
 
 // GIFMaker
-Route::get('/create/gifmaker', 'VideoGifController@displayCreatePage');
-Route::post('/create/gifmaker/upload', 'VideoGifController@uploadGIF');
-Route::post('/create/gifmaker/send', 'VideoGifController@sendGIF');
+Route::get('/create/gifmaker', 'GIFMakerController@displayCreatePage');
+Route::post('/create/gifmaker/create', 'GIFMakerController@createGIF');
+Route::post('/create/gifmaker/send', 'GIFMakerController@sendGIF');
 
 // Register
 Route::post('/auth/register', 'Auth\AuthController@postRegister');
@@ -111,15 +111,13 @@ Route::get('/admin/home', 'AdminController@getHome');
 Route::post('/admin/ads/save', 'AdminController@saveAds');
 Route::get('/admin/snip', 'AdminController@getAdvSnip');
 Route::post('/admin/snip/save', 'AdminController@saveAdvSnip');
-// Editing
-Route::post('/admin/editing/update/rankedlist', 'AdminEditingController@updateRankedlist');
-Route::post('/admin/editing/update/flipcards', 'AdminEditingController@updateFlipcards');
-Route::post('/admin/editing/update/story', 'AdminEditingController@updateStory');
-Route::post('/admin/editing/update/snip', 'AdminEditingController@updateSnip');
-Route::post('/admin/editing/update/gif', 'AdminEditingController@updateGif');
+
+// Editing for users
+Route::get('/edit/{name}/{title}', 'ToolsController@editTool');
+
+// editing user profile for admins
 Route::post('/admin/editing/update/user', 'AdminController@updateUser');
 Route::get('/admin/editing/user/{id}', 'AdminController@editUser');
-Route::get('/admin/editing/{type}/{id}', 'AdminController@editPost');
 // adm action
 Route::post('/admin/action/deleteuser', 'AdminController@deleteUser');
 Route::post('/admin/action/deletepost', 'AdminController@deletePost');

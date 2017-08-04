@@ -382,7 +382,7 @@ $(document).ready(function () {
 						$('.modal-alert').modal().open();
 				} else {
 					alertHtml = '<div class="warning-img"></div><div class="warning-text"><b>Something went wrong</b></div> <ul>';
-                    $.each(data.errors, function (i, value) {
+                    $.each(data.errorText, function (i, value) {
                         alertHtml += '<li>' + value + '</li>';
                     });
                     alertHtml += '</ul>';
@@ -403,7 +403,7 @@ $(document).ready(function () {
 					url = "/success"+data.link;
 					$( location ).attr("href", url);
                 } else {
-                    $.each(data.errors, function (i, value) {
+                    $.each(data.errorText, function (i, value) {
                         alertHtml += '<li>' + value + '</li>';
                     });
                     alertHtml += '</ul>';

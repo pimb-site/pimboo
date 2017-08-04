@@ -1,86 +1,105 @@
 <?php namespace App\Http\Controllers;
 
-use Illuminate\View\View;
-use Input;
-use redirect;
+use Validator;
 use Response;
+use App\Post;
+use App\User;
+use Input;
 use Auth;
-use DB;
-use DOMDocument;
 
 class SnipController extends Controller {
 
 	public function displayCreatePage() {
-		return (Auth::guest()) ? view('auth/login') : view('ToolsCreate.snip');
+		return Auth::guest() ? redirect('auth/login') : view('ToolsCreate.snip', ['body_class' => 'tools_create_page']);
 	}
 
-	public function createLink() {
-		if (Auth::guest()) return Response::json(['success' => false, 'errorText' => 'auth']);
+	public function sendSnip() {
+		if(Auth::guest()) return Response::json(['success' => false, 'errorText' => 'You are not authorized!']);
 
-		$input = Input::all();
+		$data = Input::only('snip');
+		if(count($data) != 0) {
+			$validator = Validator::make($data['snip']['data'], [
+				'url' => 'required|url',
+			]);
+			if ($validator->fails())
+				return Response::json(['success' => false, 'errorText' => $validator->errors()->all()]);
 
-		$url = $input['url'];
+			// checking headers of the site
+			$headers = @get_headers($data['snip']['data']['url'], 1);
+			$headers = array_change_key_case($headers);
 
-		if (!filter_var($url, FILTER_VALIDATE_URL) === false) {
-			$header = @get_headers($url, 1);
-			$header = array_change_key_case($header, CASE_LOWER);
-			if (!$header || !stripos($header[0], '200 OK ') === false) {
-				return Response::json(['success' => false, 'text' => 'This domain has opted out of the service. Please try another domain.']);
+			if(!$headers || !stripos($headers[0], '200 OK ') === false)
+				return Response::json(['success' => false, 'errorText' => 'This domain has opted out of the service. Please try another domain.']);
+			elseif (isset($headers['x-frame-options']) && (stripos($headers['x-frame-options'], 'SAMEORIGIN') !== false || stripos($headers['x-frame-options'], 'deny') !== false) || isset($headers['content-security-policy'])) {
+				return Response::json(['success' => false, 'errorText' => 'This domain has opted out of the service. Please try another domain.']);
 			}
-			elseif (isset($header['x-frame-options']) && (stripos($header['x-frame-options'], 'SAMEORIGIN') !== false || stripos($header['x-frame-options'], 'deny') !== false) || isset($header['content-security-policy'])) {
-				return Response::json(['success' => false, 'text' => 'This domain has opted out of the service. Please try another domain.']);
-			}
-		}
-		else {
-			return Response::json(['success' => false, 'text' => 'Incorrect URL']);
-		}
 
-		$title = SnipController::get_title($url);
-		// Content(iframe url)
-		$content = ['iframe_url' => $url, 'title' => $title];
-		$content = serialize($content);
+			// taking the title of the page
+			$title = AdditionForToolsController::get_title_site($data['snip']['data']['url']);
+			if($title == '') $title = 'Snip of '.$data['snip']['data']['url'];
 
-		// TAGS
-		$tags = [];
-		if(isset($input['tags'])) {
-			if(count($input['tags']) > 0) {
-				foreach ($input['tags'] as $key => $value) {
+			$title_url = AdditionForToolsController::translit($title);
+			if(strlen($title_url) < 3)
+				$title_url = 'snip';
+			else if(strlen($title_url) > 180)
+				$title_url = substr($title_url, 0, 180); 
+			
+			// content creation
+			$content = [
+				'iframe_url' => $data['snip']['data']['url'],
+				'title'      => $title,
+			];
+			$content = serialize($content);
+
+			// tags recording | max count tags : 22
+			$tags = [];
+			if(Input::has('tags'))
+				$get_tags = Input::get('tags');
+			if(isset($get_tags) && count($get_tags > 0)) {
+				$get_tags = array_slice($get_tags, 0, 22);
+				foreach ($get_tags as $key => $value) {
 					$tags[] = $value;
 				}
 			}
-		}		
-		$tags = serialize($tags);
+			$tags = serialize($tags);
 
-		// OPTIONS
-		$options = [];
-		$options = serialize($options);
+			// options recording
+			$options = [];
+			$options = serialize($options);
 
-		$url_snip = 'post-snip-'.strtolower(str_random(30)).'-'.date('Y-d-m');
+			// If there is a postID, then to update post
+			$validator = Validator::make($data['snip']['data'], [
+				'postID' => 'required|integer|min:1',
+			]);
 
-		$id = DB::table('posts')->insertGetId(
-			['user_id' => Auth::user()->id, 'author_name' => Auth::user()->name, 'url' => $url_snip, 'description_title' => 'snip', 'description_text' => 'snip',
-			'content' => $content, 'description_image' => 'snip.png', 'image_facebook' => 'snip.png',
-			'type' => 'snip', 'isDraft' => 'publish', 'tags' => $tags, 'permission' => 'public', 'options' => $options]
-		);
+			if (!$validator->fails()) {
+				$owner = Post::select('author_name', 'user_id', 'url')->where(['id' => $data['snip']['data']['postID'], 'type' => 'snip'])->get();
+				if(count($owner) != 0 && ($owner[0]->user_id == Auth::user()->id || Auth::user()->permission == 10)) {
+					Post::where(['id' => $data['snip']['data']['postID'], 'type' => 'gif'])
+						->update([ 'description_title' => $title, 'description_text' => $title, 'content' => $content, 'tags' => $tags, 'options' => $options
+					]);
+					$link = '/'.$owner[0]->author_name.'/'.$owner[0]->url;
+					return Response::json(['success' => true, 'link' => $link]);
+				}
+				return Response::json(['false' => true, 'errorText' => 'Invalid data(postID)']);
+			}
 
-		$link = '/'.Auth::user()->name.'/'.$url_snip;
-
-		return Response::json(['success' => true, 'link' => $link]);
-	}
-
-	public static function get_title($url_site) {
-	    $ch = curl_init();
-	    curl_setopt($ch, CURLOPT_URL, $url_site);
-	    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-	    // some websites like Facebook need a user agent to be set.
-	    curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.94 Safari/537.36');
-  	    $html = curl_exec($ch);
-	    curl_close($ch);
-
-	    $dom  = new DOMDocument;
-	    @$dom->loadHTML($html);
-
-	    $title = $dom->getElementsByTagName('title')->item('0')->nodeValue;
-	    return $title;
+			// Insert a new post in DB
+			$counter = -1;
+			$url  = $title_url;
+			while (true) {
+				$result = Post::where(['url' => $title_url, 'author_name' => Auth::user()->name])->count();
+				if($result == 0) {
+					Post::insert(['description_title' => $title, 'description_text' => $title, 'description_image' => 'snip.png', 'type' => 'snip',
+								  'permission' => 'public', 'options' => $options, 'isDraft' => 'publish', 'content' => $content, 'tags' => $tags,
+								  'image_facebook' => 'snip.png', 'author_name' => Auth::user()->name, 'user_id' => Auth::user()->id, 'url' => $title_url
+					]);
+					$link = '/'.Auth::user()->name.'/'.$title_url;
+					return Response::json(['success' => true, 'link' => $link]);
+				}
+				$title_url = $url.$counter;
+				$counter--;
+			}
+		}
 	}
 }

@@ -49,7 +49,7 @@ class AdminController extends Controller
 			$input = Input::get();
 
 			$validator = Validator::make($input, [
-	            'name' => 'required|min:3|max:255|unique:users|alpha_num|regex:/^[a-zA-Z0-9]+$/u|not_in:admin,create,upload,success,report,auth,user,ref,referrals,home,logout,login,charity,disclaimer,channel',
+	            'name' => 'required|min:3|max:255|unique:users|alpha_num|regex:/^[a-zA-Z0-9]+$/u|not_in:admin,create,upload,success,report,auth,user,ref,referrals,home,logout,login,charity,disclaimer,channel,edit',
 	        ]);
 			if(!$validator->fails()) {
 				$info = User::select('name')->where('name', $input['name'])->get();

@@ -11,10 +11,7 @@ use File;
 class FlipcardsController extends Controller {
 
 	public function displayCreatePage() {
-        if(Auth::guest()) { 
-    		return redirect('/auth/login');
-    	}
-        return view('ToolsCreate.flipcards');
+		return Auth::guest() ? redirect('auth/login') : view('ToolsCreate.flipcards', ['body_class' => 'tools_create_page']);
 	}
 
 	public function sendFlipcards() {
@@ -129,11 +126,11 @@ class FlipcardsController extends Controller {
 
 	        // Checking if images are loaded ( main and facebook photo )
 	        $data['flipcards']['data']['photo_main'] = str_replace('..', '', $data['flipcards']['data']['photo_main']);
-	        if(!File::exists(public_path()."/temp/".$data['flipcards']['data']['photo_main']))
+	        if(!File::exists(public_path()."/temp/".$data['flipcards']['data']['photo_main']) && !File::exists(public_path()."/uploads/".$data['flipcards']['data']['photo_main']))
 	        	$errors_array[] = "The main photo not found. Please, upload a new image!";
 
 	       	$data['flipcards']['data']['photo_facebook'] = str_replace('..', '', $data['flipcards']['data']['photo_facebook']);
-	        if(!File::exists(public_path()."/temp/".$data['flipcards']['data']['photo_facebook']))
+	        if(!File::exists(public_path()."/temp/".$data['flipcards']['data']['photo_facebook']) && !File::exists(public_path()."/uploads/".$data['flipcards']['data']['photo_facebook']))
 	        	$errors_array[] = "The facebook photo not found. Please, upload a new image!";
 
 	        if(count($errors_array) != 0)
@@ -151,7 +148,7 @@ class FlipcardsController extends Controller {
 	        	if($value['card_type_front'] == "image") {
 	        		$value['front_card_image'] = str_replace('..', '', $value['front_card_image']);
 	        		if($value['front_card_image'] != "") {
-	        			if(!File::exists(public_path()."/temp/".$value['front_card_image'])) {
+	        			if(!File::exists(public_path()."/temp/".$value['front_card_image']) && !File::exists(public_path()."/uploads/".$value['front_card_image'])) {
 	        				$errors_array[] = "The front card image not found. Please, upload a new image!";
 	        			}
 	        		} else {
@@ -169,7 +166,7 @@ class FlipcardsController extends Controller {
 	        	if($value['card_type_back'] == "image") {
 	        		$value['back_card_image'] = str_replace('..', '', $value['back_card_image']);
 	        		if($value['back_card_image'] != "") {
-	        			if(!File::exists(public_path()."/temp/".$value['back_card_image'])) {
+	        			if(!File::exists(public_path()."/temp/".$value['back_card_image']) && !File::exists(public_path()."/uploads/".$value['back_card_image'])) {
 	        				$errors_array[] = "The back card image not found. Please, upload a new image!";
 	        			}
 	        		} else {
@@ -188,12 +185,16 @@ class FlipcardsController extends Controller {
 	        }
 
 	        // Moving main photo/ facebook photo
-	        $main_photo     = uniqid().".jpeg";
-	        $facebook_photo = uniqid().".jpeg";
-	        if(!File::move(public_path()."/temp/".$data['flipcards']['data']['photo_main'], public_path()."/uploads/".$main_photo))
-	        	$errors_array[] = "An error occurred while moving the main photo. Please, upload a new image!";
-			if(!File::move(public_path()."/temp/".$data['flipcards']['data']['photo_facebook'], public_path()."/uploads/".$facebook_photo))
-				$errors_array[] = "An error occurred while moving the facebook photo. Please, upload a new image!";
+	        if(strpos($data['flipcards']['data']['photo_main'], '/') !== false) {
+	        	$main_photo = uniqid().".jpeg";
+		        if(!File::move(public_path()."/temp/".$data['flipcards']['data']['photo_main'], public_path()."/uploads/".$main_photo))
+		        	$errors_array[] = "An error occurred while moving the main photo. Please, upload a new image!";
+	    	} else $main_photo = $data['flipcards']['data']['photo_main'];
+	    	if(strpos($data['flipcards']['data']['photo_facebook'], '/') !== false) {
+	    		$facebook_photo = uniqid().".jpeg";
+				if(!File::move(public_path()."/temp/".$data['flipcards']['data']['photo_facebook'], public_path()."/uploads/".$facebook_photo))
+					$errors_array[] = "An error occurred while moving the facebook photo. Please, upload a new image!";
+	    	} else $facebook_photo = $data['flipcards']['data']['photo_facebook'];
 	        if(count($errors_array) != 0)
 	        	return Response::json(['success' => false, 'errorText' => $errors_array]);
 
@@ -207,15 +208,19 @@ class FlipcardsController extends Controller {
 	        $content_flipcards = [];
 	        foreach ($data['flipcards']['cards'] as $key => $value) {
 	        	if($value['card_type_front'] == "image") {
-	        		$front_card_image = uniqid().".jpeg";
-					if(!File::move(public_path()."/temp/".$value['front_card_image'], public_path()."/uploads/".$front_card_image))
-						$errors_array[] = "An error occurred while moving the image card. Please, try reload page!";
+	        		if(strpos($value['front_card_image'], '/') !== false) {
+	        			$front_card_image = uniqid().".jpeg";
+						if(!File::move(public_path()."/temp/".$value['front_card_image'], public_path()."/uploads/".$front_card_image))
+							$errors_array[] = "An error occurred while moving the image card. Please, try reload page!";
+					} else $front_card_image = $value['front_card_image'];
 				}
 
 	        	if($value['card_type_back'] == "image") {
-	        		$back_card_image = uniqid().".jpeg";
-					if(!File::move(public_path()."/temp/".$value['back_card_image'], public_path()."/uploads/".$back_card_image))
-						$errors_array[] = "An error occurred while moving the image card. Please, try reload page!";
+	        		if(strpos($value['back_card_image'], '/') !== false) {
+		        		$back_card_image = uniqid().".jpeg";
+						if(!File::move(public_path()."/temp/".$value['back_card_image'], public_path()."/uploads/".$back_card_image))
+							$errors_array[] = "An error occurred while moving the image card. Please, try reload page!";
+					} else $back_card_image = $value['back_card_image']; 
 				}
 
 	        	$front_card_text  = isset($value['front_card_text']) ? $value['front_card_text'] : '';
@@ -236,13 +241,17 @@ class FlipcardsController extends Controller {
 	        		'front_card_text'  => $front_card_text,
 	        		'back_card_text'   => $back_card_text,
 	        	];
+
+
 	        }
 
 			// tags recording | max count tags : 22
 			$tags = [];
-			if(isset($data['tags']) && count($data['tags']) > 0) {
-				$data['tags'] = array_slice($data['tags'], 0, 22);
-				foreach ($data['tags'] as $key => $value) {
+			if(Input::has('tags'))
+				$get_tags = Input::get('tags');
+			if(isset($get_tags) && count($get_tags > 0)) {
+				$get_tags = array_slice($get_tags, 0, 22);
+				foreach ($get_tags as $key => $value) {
 					$tags[] = $value;
 				}
 			}
@@ -259,21 +268,21 @@ class FlipcardsController extends Controller {
 			$options = serialize($options);
 
 			// If there is a postID, then to update post
-			$validator = Validator::make($data, [
+			$validator = Validator::make($data['flipcards']['data'], [
 				'postID' => 'required|integer|min:1',
 			]);
 
 			if (!$validator->fails()) {
-				$owner = Post::select('user_id', 'url')->where(['id' => $data['postID'], 'type' => 'flipcards'])->get();
-				if(count($owner) != 0 && $owner[0]->user_id == Auth::user()->id) {
-					Post::where(['postID' => $data['postID'], 'type' => 'flipcards'])
+				$owner = Post::select('author_name', 'user_id', 'url')->where(['id' => $data['flipcards']['data']['postID'], 'type' => 'flipcards'])->get();
+				if(count($owner) != 0 && ($owner[0]->user_id == Auth::user()->id || Auth::user()->permission == 10)) {
+					Post::where(['id' => $data['flipcards']['data']['postID'], 'type' => 'flipcards'])
 						->update(['description_title'  => $data['flipcards']['data']['flipcards_title'],  
 								  'description_text'  => $data['flipcards']['data']['flipcards_description'],
 								  'description_footer' => $data['flipcards']['data']['flipcards_footer'], 'description_image' => $main_photo,
 								  'image_facebook'     => $facebook_photo, 'content' => serialize($content_flipcards), 'permission' => 'public',
 								  'options' => $options, 'tags' => $tags, 'isDraft' => $draft
 					]);
-					$link = '/'.Auth::user()->name.'/'.$current_owner[0]->url;
+					$link = '/'.$owner[0]->author_name.'/'.$owner[0]->url;
 					return Response::json(['success' => true, 'link' => $link]);
 				}
 				return Response::json(['false' => true, 'errorText' => 'Invalid data(postID)']);

@@ -12,10 +12,7 @@ use DB;
 class RankedlistController extends Controller {
 
 	public function displayCreatePage() {
-        if(Auth::guest()) { 
-    		return redirect('/auth/login');
-    	}
-        return view('ToolsCreate.rankedlist');
+		return Auth::guest() ? redirect('auth/login') : view('ToolsCreate.rankedlist', ['body_class' => 'tools_create_page']);
 	}
 	
 	public function sendRankedList() {
@@ -130,11 +127,11 @@ class RankedlistController extends Controller {
 
 	        // Checking if images are loaded ( main and facebook photo )
 	        $data['rankedlist']['data']['photo_main'] = str_replace('..', '', $data['rankedlist']['data']['photo_main']);
-	        if(!File::exists(public_path()."/temp/".$data['rankedlist']['data']['photo_main']))
+	        if(!File::exists(public_path()."/temp/".$data['rankedlist']['data']['photo_main']) && !File::exists(public_path()."/uploads/".$data['rankedlist']['data']['photo_main'])) 
 	        	$errors_array[] = "The main photo not found. Please, upload a new image!";
 
 	       	$data['rankedlist']['data']['photo_facebook'] = str_replace('..', '', $data['rankedlist']['data']['photo_facebook']);
-	        if(!File::exists(public_path()."/temp/".$data['rankedlist']['data']['photo_facebook']))
+	        if(!File::exists(public_path()."/temp/".$data['rankedlist']['data']['photo_facebook']) && !File::exists(public_path()."/uploads/".$data['rankedlist']['data']['photo_facebook']))
 	        	$errors_array[] = "The facebook photo not found. Please, upload a new image!";
 
 	        if(count($errors_array) != 0)
@@ -142,14 +139,14 @@ class RankedlistController extends Controller {
 
 	        // Checking if images are loaded or exist youtube video ( card post )
 	        $available_types = ['image', 'video'];
-	        foreach ($data['rankedlist']['cards'] as $key => &$value) {
+	        foreach ($data['rankedlist']['cards'] as $key => $value) {
 	        	if(!in_array($value['type_card'], $available_types))
 	        		return Response::json(['success' => false, 'errorText' => ['Unknown card type. Please, try reload page!']]);
 
 	        	if($value['type_card'] == 'image') {
 	        		$value['image_card'] = str_replace('..', '', $value['image_card']);
 	        		if($value['image_card'] != "") {
-	        			if(!File::exists(public_path()."/temp/".$value['image_card'])) {
+	        			if(!File::exists(public_path()."/temp/".$value['image_card']) && !File::exists(public_path()."/uploads/".$value['image_card'])) {
 	        				$errors_array[] = "The card image not found. Please, upload a new image!";
 	        			}
 	        		} else {
@@ -171,12 +168,18 @@ class RankedlistController extends Controller {
 	        }
 
 	        // Moving main photo/ facebook photo
-	        $main_photo     = uniqid().".jpeg";
-	        $facebook_photo = uniqid().".jpeg";
-	        if(!File::move(public_path()."/temp/".$data['rankedlist']['data']['photo_main'], public_path()."/uploads/".$main_photo))
-	        	$errors_array[] = "An error occurred while moving the main photo. Please, upload a new image!";
-			if(!File::move(public_path()."/temp/".$data['rankedlist']['data']['photo_facebook'], public_path()."/uploads/".$facebook_photo))
-				$errors_array[] = "An error occurred while moving the facebook photo. Please, upload a new image!";
+	        if(strpos($data['rankedlist']['data']['photo_main'], '/') !== false) {
+	        	$main_photo     = uniqid().".jpeg";
+	        	if(!File::move(public_path()."/temp/".$data['rankedlist']['data']['photo_main'], public_path()."/uploads/".$main_photo))
+	        		$errors_array[] = "An error occurred while moving the main photo. Please, upload a new image!";
+	        } else $main_photo = $data['rankedlist']['data']['photo_main'];
+
+	        if(strpos($data['rankedlist']['data']['photo_facebook'], '/') !== false) {
+	        	$facebook_photo = uniqid().".jpeg";
+				if(!File::move(public_path()."/temp/".$data['rankedlist']['data']['photo_facebook'], public_path()."/uploads/".$facebook_photo))
+					$errors_array[] = "An error occurred while moving the facebook photo. Please, upload a new image!";
+			} else $facebook_photo = $data['rankedlist']['data']['photo_facebook'];
+
 	        if(count($errors_array) != 0)
 	        	return Response::json(['success' => false, 'errorText' => $errors_array]);
 
@@ -195,9 +198,11 @@ class RankedlistController extends Controller {
 						'youtube_clip' => $value['youtube_clip'],
 					];
 	        	} else {
-	        		$image_card = uniqid().".jpeg";
-					if(!File::move(public_path()."/temp/".$value['image_card'], public_path()."/uploads/".$image_card))
-						$errors_array[] = "An error occurred while moving the image card. Please, try reload page!";
+	        		if(strpos($value['image_card'], '/') !== false) {
+	        			$image_card = uniqid().".jpeg";
+						if(!File::move(public_path()."/temp/".$value['image_card'], public_path()."/uploads/".$image_card))
+							$errors_array[] = "An error occurred while moving the image card. Please, try reload page!";
+					} else $image_card = $value['image_card'];
 			        if(count($errors_array) != 0)
 			        	return Response::json(['success' => false, 'errorText' => $errors_array]);
 
@@ -212,9 +217,11 @@ class RankedlistController extends Controller {
 
 			// tags recording | max count tags : 22
 			$tags = [];
-			if(isset($data['tags']) && count($data['tags']) > 0) {
-				$data['tags'] = array_slice($data['tags'], 0, 22);
-				foreach ($data['tags'] as $key => $value) {
+			if(Input::has('tags'))
+				$get_tags = Input::get('tags');
+			if(isset($get_tags) && count($get_tags > 0)) {
+				$get_tags = array_slice($get_tags, 0, 22);
+				foreach ($get_tags as $key => $value) {
 					$tags[] = $value;
 				}
 			}
@@ -225,20 +232,20 @@ class RankedlistController extends Controller {
 			$options = serialize($options);
 
 			// If there is a postID, then to update post
-			$validator = Validator::make($data, [
+			$validator = Validator::make($data['rankedlist']['data'], [
 				'postID' => 'required|integer|min:1',
 			]);
 
 			if (!$validator->fails()) {
-				$owner = Post::select('user_id', 'url')->where(['id' => $data['postID'], 'type' => 'rankedlist'])->get();
-				if(count($owner) != 0 && $owner[0]->user_id == Auth::user()->id) {
-					Post::where(['postID' => $data['postID'], 'type' => 'rankedlist'])
+				$owner = Post::select('author_name', 'user_id', 'url')->where(['id' => $data['rankedlist']['data']['postID'], 'type' => 'rankedlist'])->get();
+				if(count($owner) != 0 && ($owner[0]->user_id == Auth::user()->id || Auth::user()->permission == 10)) {
+					Post::where(['id' => $data['rankedlist']['data']['postID'], 'type' => 'rankedlist'])
 						->update(['description_title'  => $data['rankedlist']['data']['rankedlist_title'],  'description_text'  => $data['rankedlist']['data']['rankedlist_description'],
 								  'description_footer' => $data['rankedlist']['data']['rankedlist_footer'], 'description_image' => $main_photo,
 								  'image_facebook'     => $facebook_photo, 'content' => serialize($content_rankedlist), 'permission' => 'public',
 								  'options' => $options, 'tags' => $tags, 'isDraft' => $draft
 					]);
-					$link = '/'.Auth::user()->name.'/'.$current_owner[0]->url;
+					$link = '/'.$owner[0]->author_name.'/'.$owner[0]->url;
 					return Response::json(['success' => true, 'link' => $link]);
 				}
 				return Response::json(['false' => true, 'errorText' => 'Invalid data(postID)']);
