@@ -221,7 +221,7 @@ Admin
 		var post_id = $(this).data('id');
 		var token  = "{{ csrf_token() }}";
 		$.ajax({
-		    url: '/admin/action/deletepost',
+		    url: '/channel/deletepost/deletepost',
 		    dataType : "json",
 		    data: {'post_id' : post_id, '_token': token},
 		    type: 'POST',
