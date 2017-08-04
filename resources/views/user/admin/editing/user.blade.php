@@ -72,18 +72,18 @@
 								<div class="sub_title">WEEKLY DIGEST</div>
 								<div class="text">A weekly newsletter from your favorite Pimboo<br>channels</div>
 								@if ($user->weekly_digest)
-									<div class="checkbox"><label><input class="checkbox" type="checkbox" name="weekly_digest" value="1" checked><span class="checkbox-custom"></span><span class="label">User are subscribed</span></label></div>
+									<div class="checkbox"><label><input class="checkbox checkbox_sub" data-id="1" type="checkbox" name="weekly_digest" value="1" checked><span class="checkbox-custom"></span><span class="label" data-id="1">User are subscribed</span></label></div>
 								@else
-									<div class="checkbox"><label><input class="checkbox" type="checkbox" name="weekly_digest" value="1"><span class="checkbox-custom"></span><span class="label">User are unsubscribed</span></label></div>
+									<div class="checkbox"><label><input class="checkbox checkbox_sub"  data-id="1" type="checkbox" name="weekly_digest" value="1"><span class="checkbox-custom"></span><span class="label"  data-id="1">User are unsubscribed</span></label></div>
 								@endif
 							</div>
 							<div class="subscribers">
 								<div class="sub_title">NEW SUBSCRIBERS UPDATE</div>
 								<div class="text">Get an update for new subscribers in your<br>channels</div>
 								@if ($user->new_subs_update)
-									<div class="checkbox"><label><input class="checkbox" type="checkbox" name="new_subs_update"  value="1" checked><span class="checkbox-custom"></span><span class="label">User are subscribed</span></label></div>
+									<div class="checkbox"><label><input class="checkbox checkbox_sub" data-id="2" type="checkbox" name="new_subs_update"  value="1" checked><span class="checkbox-custom"></span><span class="label" data-id="2">User are subscribed</span></label></div>
 								@else
-									<div class="checkbox"><label><input class="checkbox" type="checkbox" name="new_subs_update"  value="1" ><span class="checkbox-custom"></span><span class="label">User are unsubscribed</span></label></div>
+									<div class="checkbox"><label><input class="checkbox checkbox_sub" data-id="2" type="checkbox" name="new_subs_update"  value="1" ><span class="checkbox-custom"></span><span class="label" data-id="2">User are unsubscribed</span></label></div>
 								@endif
 
 							</div>
@@ -124,7 +124,17 @@
 @endsection
 @section('script')
 	<script>
-		
+
+        $('.checkbox_sub').click(function() {
+        	current_id = $(this).data("id");
+			if($('.checkbox[data-id="'+current_id+'"]').prop('checked')) {
+			    $('.label[data-id="'+current_id+'"]').html("User are subscribed");
+			} else {
+			    $('.label[data-id="'+current_id+'"]').html("User are unsubscribed");
+			}
+        });
+
+
 		$('a.adm-del-photo').click(function() {
 			var token = "{{ csrf_token() }}";
 			var user_id = $(this).data('id');
@@ -144,4 +154,5 @@
 		});
 
 	</script>
+
 @endsection

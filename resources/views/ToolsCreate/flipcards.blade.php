@@ -156,10 +156,43 @@
 			
 			<div class="flipcard_main_footer">
 			</div>
+<<<<<<< HEAD
 			
 			<div class="flipcard_main_buttons">
 				<button type="button" class="btn-save" id="save_draft">SAVE DRAFT</button>
 				<button type="button" class="btn-publish" id="publish">PUBLISH</button>
+=======
+			<div class="img-credentials">
+				<div class="js-upload btn btn_browse btn_browse_small">DONE</div>
+			</div>
+		</div>
+		
+		
+		<div id="preview-modal" class="preview-modal" style="display: none;">
+			<div class="main-preview">
+				<div class="title">FLIP CARD PREVIEW</div>
+				<div class="flipcard_main">
+					<div class="flipcard_main_all">
+						<div class="flipcard_main_title"></div>
+						<div class="flipcard_main_description">
+						</div>
+						<div class="flipcard_main_tags">Tags: <b></b></div>
+						<div class="flipcard_main_author">
+							<img src="/img/author.png">
+							<div class="flipcard_main_author_by"> Create by <b>Author...</b><br/>
+							on (Waiting for Publish) </div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="flipcard_main_footer">
+				</div>
+				
+				<div class="flipcard_main_buttons">
+					<button type="button" class="btn-save" id="save_draft">SAVE DRAFT</button>
+					<button type="button" class="btn-publish" id="publish">PUBLISH</button>
+				</div>
+>>>>>>> 7233cd403b8f8ba4af06d1e09ed90bfae303b2a4
 			</div>
 		</div>
 	</div>
