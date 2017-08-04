@@ -10,7 +10,7 @@ $(document).ready(function () {
 	var maxSizeW;
 	if (ScreenWidth >= 768) {
 		ScreenWidth = '50%';
-		maxSizeW    = 500;
+		maxSizeW    = 700;
 	} else if (ScreenWidth <= 479){
 		ScreenWidth = '50%';
 		maxSizeW    = 300;
@@ -250,17 +250,12 @@ $(document).ready(function () {
 			success: function (data) {
 				if (data.success == true) {
 					$('.postID').val(data.id);
-					alertHtml = '<div class="success-save">Flip cards successfully saved!</div>';
+					alertHtml = '<div class="success-img"></div><div class="success-text"><b>Flip cards successfully saved!</b></div><button type="button" class="success-button btn btn_browse btn_browse_small">OK</button>';
 						$('.modal-alert').html(alertHtml);
 						$('.modal-alert').modal().open();
 				} else {
-<<<<<<< HEAD
 					alertHtml = '<div class="warning-img"></div><div class="warning-text"><b>Something went wrong</b></div> <ul>';
                     $.each(data.errors, function (i, value) {
-=======
-					alertHtml = '<div class="warning-text"><b>Warning!</b></div> <ul>';
-                    $.each(data.errorText, function (i, value) {
->>>>>>> 8cab92e6c4775583551d09d3da9f38fbdc08620b
                         alertHtml += '<li>' + value + '</li>';
                     });
                     alertHtml += '</ul>';

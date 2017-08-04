@@ -377,7 +377,7 @@ $(document).ready(function () {
 			success: function (data) {
 				if (data.success == true) {
 					$('.postID').val(data.id);
-					var alertHtml = '<div class="success-save"><center>GIF successfully saved!</center></div>';
+					var alertHtml = '<div class="success-img"></div><div class="success-text"><b>GIF successfully saved!</b></div><button type="button" class="success-button btn btn_browse btn_browse_small">OK</button>';
 						$('.modal-alert').html(alertHtml);
 						$('.modal-alert').modal().open();
 				} else {

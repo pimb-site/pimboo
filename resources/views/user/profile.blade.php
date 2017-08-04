@@ -1,5 +1,7 @@
 @extends('page')
-
+@section('css')
+	<link href="/css/jquery.Jcrop.min.css" rel="stylesheet" type="text/css"/>
+@endsection
 @section('content')
 		<div class="body">
 			<div class="wrap">
@@ -71,18 +73,18 @@
 								<div class="sub_title">WEEKLY DIGEST</div>
 								<div class="text">A weekly newsletter from your favorite Pimboo<br>channels</div>
 								@if ($user->weekly_digest)
-									<div class="checkbox"><label><input class="checkbox" type="checkbox" name="weekly_digest" value="1" checked><span class="checkbox-custom"></span><span class="label">You are subscribed</span></label></div>
+									<div class="checkbox"><label><input class="checkbox checkbox_sub" data-id="1" type="checkbox" name="weekly_digest" value="1" checked><span class="checkbox-custom"></span><span class="label" data-id="1">You are subscribed</span></label></div>
 								@else
-									<div class="checkbox"><label><input class="checkbox" type="checkbox" name="weekly_digest" value="1"><span class="checkbox-custom"></span><span class="label">You are unsubscribed</span></label></div>
+									<div class="checkbox"><label><input class="checkbox checkbox_sub" data-id="1" type="checkbox" name="weekly_digest" value="1"><span class="checkbox-custom"></span><span class="label" data-id="1">You are unsubscribed</span></label></div>
 								@endif
 							</div>
 							<div class="subscribers">
 								<div class="sub_title">NEW SUBSCRIBERS UPDATE</div>
 								<div class="text">Get an update for new subscribers in your<br>channels</div>
 								@if ($user->new_subs_update)
-									<div class="checkbox"><label><input class="checkbox" type="checkbox" name="new_subs_update"  value="1" checked><span class="checkbox-custom"></span><span class="label">You are subscribed</span></label></div>
+									<div class="checkbox"><label><input class="checkbox checkbox_sub" data-id="2" type="checkbox" name="new_subs_update"  value="1" checked><span class="checkbox-custom"></span><span class="label" data-id="2">You are subscribed</span></label></div>
 								@else
-									<div class="checkbox"><label><input class="checkbox" type="checkbox" name="new_subs_update"  value="1" ><span class="checkbox-custom"></span><span class="label">You are unsubscribed</span></label></div>
+									<div class="checkbox"><label><input class="checkbox checkbox_sub" data-id="2" type="checkbox" name="new_subs_update"  value="1" ><span class="checkbox-custom"></span><span class="label" data-id="2">You are unsubscribed</span></label></div>
 								@endif
 
 							</div>
@@ -106,11 +108,6 @@
 					<div class="modal-upload-column">
 						<p> UPLOAD IMAGE </p>
 						<div class="select-file-for-cover"> <div class="modal-file-icon"></div><input type="file" name="filedata"></div>
-						<div class="modal-upload-url">
-							<p>or</p>
-							<input type="text" class="upload-img-url" placeholder="Enter URL">	
-							<button type="button" class="upload-img-url-btn">GO</button>
-						</div>
 					</div>
 				</div>
 			</div>
@@ -121,13 +118,22 @@
 					<div class="modal-upload-column">
 						<p> UPLOAD IMAGE </p>
 						<div class="select-file-for-photo"> <div class="modal-file-icon"></div><input type="file" name="filedata"></div>
-						<div class="modal-upload-url">
-							<p>or</p>
-							<input type="text" class="upload-img-url" placeholder="Enter URL">	
-							<button type="button" class="upload-img-url-btn">GO</button>
-						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+@endsection
+@section('script')
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('.checkbox_sub').click(function() {
+        	current_id = $(this).data("id");
+			if($('.checkbox[data-id="'+current_id+'"]').prop('checked')) {
+			    $('.label[data-id="'+current_id+'"]').html("You are subscribed");
+			} else {
+			    $('.label[data-id="'+current_id+'"]').html("You are unsubscribed");
+			}
+        });
+    });
+</script>
 @endsection
