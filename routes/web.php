@@ -120,7 +120,6 @@ Route::post('/admin/editing/update/user', 'AdminController@updateUser');
 Route::get('/admin/editing/user/{id}', 'AdminController@editUser');
 // adm action
 Route::post('/admin/action/deleteuser', 'AdminController@deleteUser');
-Route::post('/admin/action/deletepost', 'AdminController@deletePost');
 Route::post('/admin/action/postposition', 'AdminController@updatePost');
 Route::post('/admin/action/sortentries', 'AdminController@sortEntries');
 Route::post('/admin/action/deleteuserphoto', 'AdminController@deletePhotoUser');
@@ -132,6 +131,7 @@ Route::post('/referrals/mass', 'ReferralController@MassMailing');
 // Channel page
 Route::get('/{name}', 'ChannelController@viewChannel');
 Route::post('/channel/filter', 'ChannelController@filterChannel');
+Route::post('/channel/deletepost', 'ChannelController@deletePost');
 
 // View tools
 Route::get('/{name}/{title}', 'ToolsController@viewTool');
