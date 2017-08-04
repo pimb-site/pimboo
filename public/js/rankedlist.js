@@ -182,7 +182,7 @@ $(document).ready(function () {
 						}).open();
 						setTimeout(function() { window.location.href = '/edit'+data.link; }, 2000);
 				} else {
-					alertHtml = '<div class="warning-img"></div><div class="warning-text"><b>Something went wrong</b></div> <ul>';
+					alertHtml = '<button type="button" class="close" onclick="$(\'.modal-alert\').modal().close();" data-dismiss="modal" aria-hidden="true">&times;</button><div class="warning-img"></div><div class="warning-text"><b>Something went wrong</b></div> <ul>';
                     $.each(data.errorText, function (i, value) {
                         alertHtml += '<li>' + value + '</li>';
                     });
@@ -196,7 +196,7 @@ $(document).ready(function () {
 	
 	$('.btn-publish').click(function() {
 		$('.isDraft').val('publish');
-		var alertHtml = '<div class="warning-img"></div><div class="warning-text"><b>Something went wrong</b></div> <ul>';
+		var alertHtml = '<button type="button" class="close" onclick="$(\'.modal-alert\').modal().close();" data-dismiss="modal" aria-hidden="true">&times;</button><div class="warning-img"></div><div class="warning-text"><b>Something went wrong</b></div> <ul>';
         $('#form_upload_cards').ajaxSubmit({
             dataType: "json",
             success: function (data) {

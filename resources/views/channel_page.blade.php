@@ -67,7 +67,7 @@
 						@endif
 						@if ($isAdmin || $isRights)
 						<div class="buttons deletePost" data-id="{{ $count }}" data-pid="{{ $post->id }}" data-toggle="confirmation" data-placement="bottom">
-							<button ><img src="/img/del_button.png"></span></button>
+							<button ><img src="/img/del_button.png"></button>
 						</div>
 						<div class="buttons editPost">
 							<button onclick="window.location.href = '{{ url('/edit/'.$post->author_name.'/'.$post->url) }}';"><img src="/img/edit_button.png"></button>

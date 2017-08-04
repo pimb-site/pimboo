@@ -32,8 +32,8 @@ $(document).ready(function() {
 
 						if(data.isAdmin || data.isRights) {
 							html_post += '<div class="buttons deletePost" data-id="'+data_title_id+'" data-pid="'+value.id+'" data-toggle="confirmation" data-placement="bottom">';
-							html_post += '<button ><span class="glyphicon glyphicon-remove"></span></button></div>';
-							html_post += '<div class="buttons editPost"><button onclick="window.location.href=\''+"/edit/"+value.author_name+"/"+value.url+'\' "><span class="glyphicon glyphicon-pencil"></span></button></div></div>	';
+							html_post += '<button ><img src="/img/del_button.png"></button></div>';
+							html_post += '<div class="buttons editPost"><button onclick="window.location.href=\''+"/edit/"+value.author_name+"/"+value.url+'\' "><img src="/img/edit_button.png"></button></div></div>	';
 						}
 
 						html_post += '<div class="link"  data-id="'+data_title_id+'"><span class="link_in">COPIED TO YOUR<br>CLIPBOARD</span><input type="" name="" value="" /></div></div></div></div>';
@@ -87,8 +87,8 @@ $(document).ready(function() {
 
 						if(data.isAdmin || data.isRights) {
 							html_post += '<div class="buttons deletePost" data-id="'+data_title_id+'" data-pid="'+value.id+'" data-toggle="confirmation" data-placement="bottom">';
-							html_post += '<button ><span class="glyphicon glyphicon-remove"></span></button></div>';
-							html_post += '<div class="buttons editPost"><button onclick="window.location.href=\''+"/edit/"+value.author_name+"/"+value.url+'\' "><span class="glyphicon glyphicon-pencil"></span></button></div></div>	';
+							html_post += '<button ><img src="/img/del_button.png"></button></div>';
+							html_post += '<div class="buttons editPost"><button onclick="window.location.href=\''+"/edit/"+value.author_name+"/"+value.url+'\' "><img src="/img/edit_button.png"></button></div></div>	';
 						}
 
 						html_post += '<div class="link"  data-id="'+data_title_id+'"><span class="link_in">COPIED TO YOUR<br>CLIPBOARD</span><input type="" name="" value="" /></div></div></div></div>';
