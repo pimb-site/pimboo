@@ -65,6 +65,12 @@
 								<button data-title="{{ $post->description_title }}" data-url="{{ url('/'.$post->author_name.'/'.$post->url) }}" data-type="li" class="butt-for-sharing"><img src="/img/view_linkedin.png"></button>
 								<button><img src="/img/view_link.png"></button>
 								<button class="get_link" data-href="{{ url('/'.$post->author_name.'/'.$post->url) }}" data-id="{{ $count }}">GET LINK</button>
+								<div class="buttons deletePost" data-id="{{ $post->id }}">
+									<button ><span class="glyphicon glyphicon-remove"></span></button>
+								</div>
+								<div class="buttons editPost" data-url="{{ $post->url }}" data-author_name="{{ $post->author_name }}">
+									<button ><span class="glyphicon glyphicon-pencil"></span></button>
+								</div>
 							</div>
                             <div class="link"  data-id="{{ $count }}">
                                 <span class="link_in">COPIED TO YOUR<br>CLIPBOARD</span>
