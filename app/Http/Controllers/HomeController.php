@@ -32,9 +32,9 @@ class HomeController extends Controller {
      */
     public function index()
     {
-        $home_main_post = Post::where([ ['home_left', '=', '1'] ])->get();
-        $home_top_posts = Post::where('home_right', '=', '1')->get();
-        $latest = Post::where('home_latest', 1)->take(6)->get();
+        $home_main_post = Post::where(['home_left' => 1, 'isDraft' => 'publish'])->get();
+        $home_top_posts = Post::where(['home_right' => 1, 'isDraft' => 'publish'])->get();
+        $latest = Post::where(['home_latest' => 1, 'isDraft' => 'publish'])->take(6)->get();
 
         return view('home', [
             'body_class' => 'home', 

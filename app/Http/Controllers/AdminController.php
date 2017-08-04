@@ -238,7 +238,7 @@ class AdminController extends Controller
 		if(Auth::guest()) return redirect('/');
 		if(Auth::user()->permission == 1) return redirect('/');
 		if(Auth::user()->permission == 10) {
-			$posts = Post::latest()->where('isDraft', 'publish')->take(100)->get();
+			$posts = Post::latest()->take(100)->get();
 			return view('user.admin.home_table', ['body_class' => 'admin', 'posts' => $posts]);
 		}
 	}
