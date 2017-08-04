@@ -136,7 +136,7 @@ class AdminController extends Controller
 			$operator_right = ($right == -1) ? '<>' : '=';
 
 			if ($right != 1)  
-				$posts = Post::select('id', 'author_name', 'url', 'description_image', 'description_title', 'home_left', 'home_right', 'home_latest', 'type', 'created_at')
+				$posts = Post::select('id', 'author_name', 'url', 'description_image', 'description_title', 'home_left', 'home_right', 'home_latest', 'type', 'created_at', 'isDraft')
 							 ->whereDate('created_at', '>=', $start_time)->whereDate('created_at', '<=', $end_time)
 							 ->where([ ['author_name', $operator_name, $name], ['type', $operator_type, $type], ['home_left', $operator_right, $right], 
 						 		       ['home_right', $operator_right, $right], ['home_latest', $operator_right, $right] ])
@@ -145,7 +145,7 @@ class AdminController extends Controller
 							 ->latest()
 							 ->get();
 			else
-				$posts = Post::select('id', 'author_name', 'url', 'description_image', 'description_title', 'home_left', 'home_right', 'home_latest', 'type', 'created_at')
+				$posts = Post::select('id', 'author_name', 'url', 'description_image', 'description_title', 'home_left', 'home_right', 'home_latest', 'type', 'created_at', 'isDraft')
 							 ->whereDate('created_at', '>=', $start_time)->whereDate('created_at', '<=', $end_time)
 							 ->where([ ['author_name', $operator_name, $name], ['type', $operator_type, $type] ])
 							 ->orWhere('home_left', '=', $right)

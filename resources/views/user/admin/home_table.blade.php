@@ -73,7 +73,7 @@ Admin
 							<div class="row_cell cell_user"><a class="title" title="{{ $post->author_name }}" href="/{{ $post->author_name }}">{{ $post->author_name }}</a></div>
 							<div class="row_cell cell_title"><a href="/{{ $post->author_name.'/'.$post->url }}" title="{{ $post->description_title }}" class="text">{{ $post->description_title }}</a></div>
 							<div class="row_cell cell_created">{{ $post->created_at }}</div>
-							<div class="row_cell cell_status">Published</div>
+							<div class="row_cell cell_status"><?php print $post->isDraft == 'save' ? 'saved' : 'published'; ?></div>
 							<div class="row_cell cell_checkbox">					
 								<div class="tag"><label><input class="checkbox" type="checkbox" name="tags[]" value="" data-id="{{ $post->id }}" data-action="set_left" <?php if($post->home_left) print 'checked'; ?>><span class="checkbox-custom"></span></label></div>
 							</div>
@@ -164,12 +164,14 @@ Admin
 		    			var checked_left = (value.home_left == 1) ? 'checked' : '';
 		    			var checked_right = (value.home_right == 1) ? 'checked' : '';
 		    			var checked_latest = (value.home_latest == 1) ? 'checked' : '';
+		    			var status = value.isDraft == 'save' ? 'saved' : 'published'
 		    			html += '<div class="table_row" data-id="'+value.id+'">';
 		    			html += '<div class="row_cell cell_image"><a href="/'+value.author_name+'/'+value.url+'" class="img"><img width="75px" src="/uploads/'+value.description_image+'" /></a></div>';
 		    			html += '<div class="row_cell cell_type" >'+value.type+'</div>';
 		    			html += '<div class="row_cell cell_user"><a class="title" title="'+value.author_name+'" href="/'+value.author_name+'">'+value.author_name+'</a></div>';
 		    			html += '<div class="row_cell cell_title"><a href="/'+value.author_name+'/'+value.url+'" title="'+value.description_title+'" class="text">'+value.description_title+'</a></div>';
 		    			html += '<div class="row_cell cell_created">'+value.created_at+'</div>';
+		    			html += '<div class="row_cell cell_status">'+status+'</div>';
 		    			html += '<div class="row_cell cell_checkbox">';
 		    			html += '<div class="tag"><label><input class="checkbox" type="checkbox" name="tags[]" value="" data-id="'+value.id+'" data-action="set_left" '+checked_left+'><span class="checkbox-custom"></span></label></div></div>';
 		    			html += '<div class="row_cell cell_checkbox">';

@@ -16,10 +16,13 @@ class ChannelController extends Controller
 			}
 			$user_info = DB::select('select id, name, photo, cover_photo, public_info from users where name = ?', [$channel_name]);
 			if(count($user_info) != 0) {
+				if(Auth::user()->permission == 10 || $channel_name == Auth::user()->name) {
+					$isDraft = ['publish', 'save'];
+				} else $isDraft = ['publish'];
 				$types = ['trivia', 'story', 'flipcards', 'rankedlist', 'gif', 'snip'];
 				$channel_content = DB::table('posts')
 									->where('user_id', $user_info[0]->id)
-									->where('isDraft', 'publish')
+									->whereIn('isDraft', $isDraft)
 									->whereIn('type', $types)
 									->orderBy('created_at', 'desc')
 									->skip(0)->take(10)
