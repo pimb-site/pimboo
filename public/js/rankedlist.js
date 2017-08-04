@@ -174,9 +174,13 @@ $(document).ready(function () {
 			success: function (data) {
 				if (data.success == true) {
 					$('.postID').val(data.id);
-					var alertHtml = '<div class="success-img"></div><div class="success-text"><b>Ranked list successfully saved!</b></div><button type="button" class="success-button btn btn_browse btn_browse_small">OK</button>';
+					var alertHtml = '<div class="success-img"></div><div class="success-text"><b>Ranked list successfully saved!</b></div><button type="button" onclick="window.location.href = \''+'/edit'+data.link+'\'" class="success-button btn btn_browse btn_browse_small">OK</button>';
 						$('.modal-alert').html(alertHtml);
-						$('.modal-alert').modal().open();
+						$('.modal-alert').modal({
+				            closeOnEsc: false,
+				            closeOnOverlayClick: false,
+						}).open();
+						setTimeout(function() { window.location.href = '/edit'+data.link; }, 2000);
 				} else {
 					alertHtml = '<div class="warning-img"></div><div class="warning-text"><b>Something went wrong</b></div> <ul>';
                     $.each(data.errorText, function (i, value) {

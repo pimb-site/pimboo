@@ -222,17 +222,25 @@ $(document).ready(function () {
 	
 	$('.btn-save').click(function() {
 		$('.isDraft').val('save');
+		if (typeof  tinymce_init != 'undefined' && tinymce_init == 1) {
+			tinyMCE.get("content_textarea").save();
+			var tool = 'Story';
+		} else var tool = 'Flip Cards';
 		$('#form_upload_cards').ajaxSubmit({
 			dataType: "json",
 			success: function (data) {
 				if (data.success == true) {
 					$('.postID').val(data.id);
-					alertHtml = '<div class="success-img"></div><div class="success-text"><b>Flip cards successfully saved!</b></div><button type="button" class="success-button btn btn_browse btn_browse_small">OK</button>';
+					alertHtml = '<div class="success-img"></div><div class="success-text"><b>'+tool+' successfully saved!</b></div><button type="button" onclick="window.location.href = \''+'/edit'+data.link+'\'" class="success-button btn btn_browse btn_browse_small">OK</button>';
 						$('.modal-alert').html(alertHtml);
-						$('.modal-alert').modal().open();
+						$('.modal-alert').modal({
+				            closeOnEsc: false,
+				            closeOnOverlayClick: false,
+						}).open();
+						setTimeout(function() { window.location.href = '/edit'+data.link; }, 2000);
 				} else {
 					alertHtml = '<div class="warning-img"></div><div class="warning-text"><b>Something went wrong</b></div> <ul>';
-                    $.each(data.errors, function (i, value) {
+                    $.each(data.errorText, function (i, value) {
                         alertHtml += '<li>' + value + '</li>';
                     });
                     alertHtml += '</ul>';
@@ -441,6 +449,5 @@ $(document).ready(function () {
 			 }).open();
 		  }
 	    },
-    });
-  
+    });  
 });
