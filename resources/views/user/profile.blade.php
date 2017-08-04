@@ -123,7 +123,7 @@
 			</div>
 		</div>
 @endsection
-@section('script')
+<!-- @section('script')
 <script type="text/javascript">
     $(document).ready(function(){
         $('.checkbox_sub').click(function() {
@@ -136,4 +136,4 @@
         });
     });
 </script>
-@endsection
+@endsection -->
