@@ -16,7 +16,11 @@ $(document).ready(function() {
 						html_post += '<div class="date">'+value.posted+'</div> </div>';
 						html_post += '<div class="post-right"><div class="title"><a href="/'+value.author_name+'/'+value.url+'">'+value.description_title+'</a></div>'; 2
 						html_post += '<div class="description">'+value.description_text+'</div>';
-						html_post += '<div class="share">Share this <a href="#">'+value.type+'</a></div>';
+						if(value.isDraft == 'publish') {
+							html_post += '<div class="share">Share this <a href="#">'+value.type+'</a></div>';
+						else {
+							html_post += '<div class="share">This post has been saved. You can publish this post on the post edit page.</div>';
+						}
 						html_post += '<div class="buttons_share" data-id="'+data_title_id+'">';
 						if(value.isDraft == 'publish') {
 							html_post += '<button class="butt-for-sharing" data-title="'+value.description_title+'" data-url="'+window.location.hostname+"/"+value.author_name+"/"+value.url+'" data-type="fb" ><img src="/img/view_fb.png"></button>';
