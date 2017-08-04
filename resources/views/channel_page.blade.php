@@ -67,10 +67,10 @@
 						@endif
 						@if ($isAdmin || $isRights)
 						<div class="buttons deletePost" data-id="{{ $count }}" data-pid="{{ $post->id }}" data-toggle="confirmation" data-placement="bottom">
-							<button ><span class="glyphicon glyphicon-remove"></span></button>
+							<button ><img src="/img/del_button.png"></span></button>
 						</div>
 						<div class="buttons editPost">
-							<button onclick="window.location.href = '{{ url('/edit/'.$post->author_name.'/'.$post->url) }}';"><span class="glyphicon glyphicon-pencil"></span></button>
+							<button onclick="window.location.href = '{{ url('/edit/'.$post->author_name.'/'.$post->url) }}';"><img src="/img/edit_button.png"></button>
 						</div>
 						@endif
 					</div>
@@ -80,13 +80,15 @@
                     </div>
 				</div>
 			</div>
-			<?php $count++; ?>
-			@endforeach
-			@if($show_more == true)
-				<button class="show-more">SHOW MORE</button>
-			@else
-				<button class="show-more" style="display: none;">SHOW MORE</button>
-			@endif
+				<?php $count++; ?>
+				@endforeach
+			<div class="btn-box">
+				@if($show_more == true)
+					<button class="show-more">SHOW MORE</button>
+				@else
+					<button class="show-more" style="display: none;">SHOW MORE</button>
+				@endif
+			</div>
 		</div>
 		<div class="right-block">
 			<div class="profile">
