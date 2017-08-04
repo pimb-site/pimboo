@@ -125,14 +125,14 @@
 @section('script')
 	<script>
 
-        $('.checkbox_sub').click(function() {
-        	current_id = $(this).data("id");
-			if($('.checkbox[data-id="'+current_id+'"]').prop('checked')) {
-			    $('.label[data-id="'+current_id+'"]').html("User are subscribed");
-			} else {
-			    $('.label[data-id="'+current_id+'"]').html("User are unsubscribed");
-			}
-        });
+   //      $('.checkbox_sub').click(function() {
+   //      	current_id = $(this).data("id");
+			// if($('.checkbox[data-id="'+current_id+'"]').prop('checked')) {
+			//     $('.label[data-id="'+current_id+'"]').html("User are subscribed");
+			// } else {
+			//     $('.label[data-id="'+current_id+'"]').html("User are unsubscribed");
+			// }
+   //      });
 
 
 		$('a.adm-del-photo').click(function() {

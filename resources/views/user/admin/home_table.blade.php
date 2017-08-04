@@ -57,6 +57,7 @@ Admin
 					<div class="title_cell cell_user">User</div>
 					<div class="title_cell cell_title">Title</div>
 					<div class="title_cell cell_created">Created</div>
+					<div class="title_cell cell_status">Status</div> 
   					<div class="title_cell cell_checkbox">Main(left)</div>
   					<div class="title_cell cell_checkbox">Main(right)</div>
   					<div class="title_cell cell_checkbox">LATEST</div>
@@ -72,6 +73,7 @@ Admin
 							<div class="row_cell cell_user"><a class="title" title="{{ $post->author_name }}" href="/{{ $post->author_name }}">{{ $post->author_name }}</a></div>
 							<div class="row_cell cell_title"><a href="/{{ $post->author_name.'/'.$post->url }}" title="{{ $post->description_title }}" class="text">{{ $post->description_title }}</a></div>
 							<div class="row_cell cell_created">{{ $post->created_at }}</div>
+							<div class="row_cell cell_status">Published</div>
 							<div class="row_cell cell_checkbox">					
 								<div class="tag"><label><input class="checkbox" type="checkbox" name="tags[]" value="" data-id="{{ $post->id }}" data-action="set_left" <?php if($post->home_left) print 'checked'; ?>><span class="checkbox-custom"></span></label></div>
 							</div>
