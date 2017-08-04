@@ -184,13 +184,7 @@
 	<div class="modal-text-photo">ADD PHOTO</div>
 		<div class="modal-upload-column-img">
 			<div class="popup__body"><div class="js-img"></div></div>
-		</div>
-<<<<<<< HEAD
-		<div class="img-credentials">
-			<input type="text" placeholder="Image credentials">
-			<div class="js-upload btn btn_browse btn_browse_small">DONE</div>
-=======
-		
+		</div>		
 		<div id="popup" class="popup" style="display: none;">
 		<div class="modal-text-photo">ADD PHOTO</div>
 			<div class="modal-upload-column-img">
@@ -199,7 +193,6 @@
 			<div class="img-credentials">
 				<div class="js-upload btn btn_browse btn_browse_small">DONE</div>
 			</div>
->>>>>>> 7233cd403b8f8ba4af06d1e09ed90bfae303b2a4
 		</div>
 	</div>
 
