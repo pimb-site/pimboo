@@ -28,18 +28,27 @@ $(".input-snip input").on("change", function() {
 });
 
 $(".button-snip button, #down_snip").click(function() {
+  var alertHtml = '<div class="warning-img"></div><div class="warning-text"><b>Something went wrong</b></div> <ul>';
     $('#form_create_snip').ajaxSubmit({
         dataType: "json",
         error: function(){
-	        alert('URL unanvaible');
+          alertHtml += '<center><li>URL unanvaible!</li></center>';
+          alertHtml += '</ul>';
+          $('.modal-alert').html(alertHtml);
+          $('.modal-alert').modal().open();
 	    },
         success: function (data) {
         	if(data.success == true) {
         		url = "/success"+data.link;
-				$( location ).attr("href", url);
+				    $( location ).attr("href", url);
         	}
         	else {
-        		alert(data.errorText);
+            $.each(data.errorText, function (i, value) {
+                alertHtml += '<li>' + value + '</li>';
+            });
+            alertHtml += '</ul>';
+            $('.modal-alert').html(alertHtml);
+            $('.modal-alert').modal().open();
         	}
         },
         timeout: 3000 // sets timeout to 3 seconds
