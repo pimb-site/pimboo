@@ -185,7 +185,7 @@ class ChannelController extends Controller
             	return Response::json(['success' => false, 'errorText' => 'You are already subscribed to this channel']);
             }
 		} 
-		return Response::json(['success' => false, 'errorText' => 'Invalid data']);
+		return Response::json(['success' => false, 'errorText' => 'You cannot subscribe to yourself!']);
 	}
 
 	public function unsubscribe() {

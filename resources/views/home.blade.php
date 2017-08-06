@@ -269,13 +269,13 @@ Home
             } else {
                 bottom_value = 50;
             }
-            $('.body').on('mouseover', '.headline', function() { 
+            $('.headlines').on('mouseover', '.headline', function() { 
                 var _block = $('.posting[data-id="'+$(this).data('id')+'"]');
                 _block.animate({
                     'bottom': ''+bottom_value+'px'
                 }, 300);
             });
-            $('.body').on('mouseleave', '.headline', function() { 
+            $('.headlines').on('mouseleave', '.headline', function() { 
                 var _block = $('.posting[data-id="'+$(this).data('id')+'"]');
                 _block.animate({
                     'bottom': '0px'

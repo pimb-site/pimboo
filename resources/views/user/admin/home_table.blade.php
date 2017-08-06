@@ -78,7 +78,12 @@ Admin
 								<div class="tag"><label><input class="checkbox" type="checkbox" name="tags[]" value="" data-id="{{ $post->id }}" data-action="set_left" <?php if($post->home_left) print 'checked'; ?>><span class="checkbox-custom"></span></label></div>
 							</div>
 							<div class="row_cell cell_checkbox">
-								<div class="tag"><label><input class="checkbox" type="checkbox" name="tags[]" value="" data-id="{{ $post->id }}" data-action="set_right" <?php if($post->home_right) print 'checked'; ?>><span class="checkbox-custom"></span></label></div>
+								<div class="tag">
+									<label>
+										<input class="checkbox" type="checkbox" name="tags[]" value="" data-id="{{ $post->id }}" data-action="set_right" <?php if($post->home_right) print 'checked'; ?>>
+										<span class="checkbox-custom"></span>
+									</label>
+								</div>
 							</div>
 							<div class="row_cell cell_checkbox">
 								<div class="tag"><label><input class="checkbox" type="checkbox" name="tags[]" value="" data-id="{{ $post->id }}" data-action="set_latest" <?php if($post->home_latest) print 'checked'; ?>><span class="checkbox-custom"></span></label></div>

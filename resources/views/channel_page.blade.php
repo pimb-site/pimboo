@@ -66,7 +66,7 @@
 						<button class="get_link" data-href="{{ url('/'.$post->author_name.'/'.$post->url) }}" data-id="{{ $count }}">GET LINK</button>
 						@endif
 						@if ($isAdmin || $isRights)
-						<div class="buttons deletePost" data-id="{{ $count }}" data-pid="{{ $post->id }}" data-toggle="confirmation" data-placement="bottom">
+						<div class="buttons deletePost" data-id="{{ $count }}" data-pid="{{ $post->id }}" data-toggle="confirmation" data-placement="left" data-singleton="true" data-popout="true">
 							<button ><img src="/img/del_button.png"></button>
 						</div>
 						<div class="buttons editPost">
@@ -122,41 +122,21 @@
 				<input type="hidden" name="_token" value="{{ csrf_token() }}">
 				<input type="hidden" name="channel_id" value="{{ $user_info->id }}" />
 				<input type="hidden" name="multiplier" value="1" />
-				<div class="cards-left">
-					<div class="item">
-						<input type="checkbox" id="test1" value="trivia" name="types[]" checked autocomplete="off" />
-    					<label for="test1">Trivia card</label>
-					</div>
-					<div class="item">
-						<input type="checkbox" id="test2" value="flipcards" name="types[]" checked autocomplete="off"/>
-    					<label for="test2">Flip Card</label>
-					</div>
-					<div class="item">
-						<input type="checkbox" id="test3" value="gif" name="types[]" checked autocomplete="off"/>
-    					<label for="test3">GIF</label>
-					</div>
-				</div>
-				<div class="cards-right">
-					<div class="item">
-						<input type="checkbox" id="test4" value="story" name="types[]" checked autocomplete="off"/>
-    					<label for="test4">Story</label>
-					</div>
-					<div class="item">
-						<input type="checkbox" id="test5" value="rankedlist" name="types[]" checked autocomplete="off"/>
-    					<label for="test5">Ranked list</label>
-					</div>
-					<div class="item">
-						<input type="checkbox" id="test6" value="snip" name="types[]" checked autocomplete="off"/>
-    					<label for="test6">Snip</label>
-					</div>
+				<div class="cards">
+						<div class="tag"><label><input type="checkbox" value="trivia" name="types[]" checked autocomplete="off" ><span class="checkbox-custom"></span><span class="label">Trivia card</span></label></div>
+						<div class="tag"><label><input type="checkbox" value="flipcards" name="types[]" checked autocomplete="off" ><span class="checkbox-custom"></span><span class="label">Flip Card</span></label></div>
+						<div class="tag"><label><input type="checkbox" value="gif" name="types[]" checked autocomplete="off" ><span class="checkbox-custom"></span><span class="label">GIF</span></label></div>
+						<div class="tag"><label><input type="checkbox" value="story" name="types[]" checked autocomplete="off" ><span class="checkbox-custom"></span><span class="label">Story</span></label></div>
+						<div class="tag"><label><input type="checkbox" value="rankedlist" name="types[]" checked autocomplete="off" ><span class="checkbox-custom"></span><span class="label">Ranked list</span></label></div>
+						<div class="tag"><label><input type="checkbox" value="snip" name="types[]" checked autocomplete="off" ><span class="checkbox-custom"></span><span class="label">Snip</span></label></div>
 				</div>
 				</form>
 				<button class="run-filter">FILTER</button>
 			</div>
 		</div>
-		<div id="modal-alert" class="modal-alert" style="display:none;">
-			<div class="popup__body"><div class="js-img"></div></div>
-		</div>
+	</div>
+	<div id="modal-alert" class="modal-alert" style="display:none;">
+		<div class="popup__body"><div class="js-img"></div></div>
 	</div>
 </div>
 @endsection
