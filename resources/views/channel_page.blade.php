@@ -104,12 +104,14 @@
 						<button><img src="/img/profile_google_plus_icon.png"></button>
 					</div>
 					
-					@if($isSubscribe == true)
-						<button class="subscribes unsubscribe-me" style="display: block;">UNSUBSCRIBE</button>
-						<button class="subscribes subscribe-me" style="display: none;">SUBSCRIBE</button>
-					@else
-						<button class="subscribes subscribe-me">SUBSCRIBE</button>
-						<button class="subscribes unsubscribe-me">UNSUBSCRIBE</button>
+					@if($show_btn_subscribe == true)
+						@if($isSubscribe == true)
+							<button class="subscribes unsubscribe-me" style="display: block;">UNSUBSCRIBE</button>
+							<button class="subscribes subscribe-me" style="display: none;">SUBSCRIBE</button>
+						@else
+							<button class="subscribes subscribe-me">SUBSCRIBE</button>
+							<button class="subscribes unsubscribe-me">UNSUBSCRIBE</button>
+						@endif
 					@endif
 				</div>
 			</div>
