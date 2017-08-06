@@ -22,7 +22,7 @@ class ToolsController extends Controller
                     return redirect('/home');
                 $post = Post::where(['author_name' => $name, 'url' => $title_url])->get();
                 if(count($post) != 0) {
-                    return view('editTool.'.$post->type, ['body_class' => 'tools_create_page', 'isAdmin' => false]);
+                    return view('ToolsEdit.'.$post[0]->type, ['body_class' => 'tools_create_page', 'post' => $post[0], 'isAdmin' => false]);
                 }
                 return redirect('/home');
             } else if (Auth::user()->permission == 10) {

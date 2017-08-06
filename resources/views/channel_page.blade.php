@@ -156,7 +156,6 @@
 </div>
 @endsection
 @section('script')
-<script src="/js/footer.min.js" type="text/javascript"></script>
 <script src="/js/bootstrap-confirmation.min.js" type="text/javascript"></script>
 <script src="/js/channel.js" type="text/javascript"></script>
 @endsection

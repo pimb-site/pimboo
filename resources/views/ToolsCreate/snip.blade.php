@@ -53,7 +53,9 @@
 			</div>
 		</form>
 	</div>
-
+	<div id="modal-alert" class="modal-alert" style="display:none;">
+		<div class="popup__body"><div class="js-img"></div></div>
+	</div>
 @endsection
 @section('script')
 <script src="/js/snip.js"></script>

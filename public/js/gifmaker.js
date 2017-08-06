@@ -85,35 +85,44 @@ $(document).ready(function () {
 	});
 
 	$('#input-video').on("change", function() {
+		var alertHtml = '<div class="warning-img"></div><div class="warning-text"><b>Something went wrong</b></div> <ul>';
 		var files = this.files[0];
+		if(files.type != 'video/mp4') {
+			alertHtml += '<center><li>Invalid file type! Please, upload a video with the format mp4.</li></center>';
+			alertHtml += '</ul>';
+			$('.modal-alert').html(alertHtml);
+			$('.modal-alert').modal().open();
+		}
 
 		if(files.size/1024/1024 > 15) {
-			return false;
+			alertHtml += '<center><li>The file size must not exceed 15 MB.</li></center>';
+			alertHtml += '</ul>';
+			$('.modal-alert').html(alertHtml);
+			$('.modal-alert').modal().open();
 		} else {
 			variant_upload_video = 2;
 			video_loaded = true;
 			$('.btn-create-gif button').css({'display': 'block'});
-		}
+			var url = URL.createObjectURL(files);
 
-		var url = URL.createObjectURL(files);
+			$('.iframe-youtube').html("<video id='player-user' src='"+url+"'  autoplay muted loop></video><div class='txt-caption'> </div>");
 
-		$('.iframe-youtube').html("<video id='player-user' src='"+url+"'  autoplay muted loop></video><div class='txt-caption'> </div>");
-
-		video = document.getElementById('player-user');
-		videoStartTime = 0;
-		durationTime = 1;
-		video.addEventListener('loadedmetadata', function() {
-			this.currentTime = videoStartTime;
-			$(".nstSlider[data-id='1']").nstSlider("set_range", 0, parseInt(video.duration));
-			$('.txt-caption').css({'display': 'block'});
-			video_loaded = true;
-		}, false);
-
-		video.addEventListener('timeupdate', function() {
-			if(this.currentTime > videoStartTime + durationTime){
+			video = document.getElementById('player-user');
+			videoStartTime = 0;
+			durationTime = 1;
+			video.addEventListener('loadedmetadata', function() {
 				this.currentTime = videoStartTime;
-			}
-		});
+				$(".nstSlider[data-id='1']").nstSlider("set_range", 0, parseInt(video.duration));
+				$('.txt-caption').css({'display': 'block'});
+				video_loaded = true;
+			}, false);
+
+			video.addEventListener('timeupdate', function() {
+				if(this.currentTime > videoStartTime + durationTime){
+					this.currentTime = videoStartTime;
+				}
+			});
+		}
 	});
 
 	$('.select-video').click(function() {
@@ -343,32 +352,6 @@ $(document).ready(function () {
 		});
 	}
 
-	$('.upl-image-valid').click(function() {
-		value_url = $('.upl-input-image-url').val();
-		$.modal().close();
-		if(value_url != '') {
-			$.ajax({
-                url: 'upload/img_url',
-				data: {'image_url': value_url, '_token': token},
-                type: 'POST',
-            }).success(function (result) {
-				if(result.success == true) {
-					if(image_type_fc == 1) {
-						$('.photo').empty();
-						$('.photo').css({'padding-top': '0px'});
-						$('.photo').prepend("<img class='main-photo' src='/temp/" + result.file + "'  />");
-						$('.input-form-photo').val(result.file); 
-					}if (image_type_fc == 2) {
-					   $('.add_fb_img').empty();
-					   $('.add_fb_img').css({'padding-top': '0px'});
-					   $('.add_fb_img').prepend("<img class='facebook-photo' src='/temp/" + result.file + "'  />");
-					   $('.input-form-photo-facebook').val(result.file);
-					}
-				}
-		    });
-		}
-	});
-
 	$('.btn-save').click(function() {
 		$('.isDraft').val('save');
 		
@@ -417,7 +400,4 @@ $(document).ready(function () {
             }
         });
 	});
-
-	token = $('input[name="_token"]').val();
-
 });
