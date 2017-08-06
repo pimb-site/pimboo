@@ -94,10 +94,16 @@ class ChannelController extends Controller
 			}
 
 			if(count($types) != 0) {
-				if($channel_id == Auth::user()->id)
-					$isDraft = ['publish', 'save'];
-				else
+
+				if(Auth::guest()) {
+					$isAdmin = false;
+					$isRights = false;
 					$isDraft = ['publish'];
+				} else {
+					$isDraft = (Auth::user()->permission == 10 || $channel_id == Auth::user()->id) ? ['publish', 'save'] : ['publish'];
+					$isAdmin  = Auth::user()->permission == 10 ? true : false;
+					$isRights = $channel_id == Auth::user()->id ? true : false;
+				}
 
 				$records = DB::table('posts')
 							->where('user_id', $channel_id)
@@ -121,8 +127,6 @@ class ChannelController extends Controller
 
 					$current_date = new DateTime();
 
-					$isAdmin  = Auth::user()->permission == 10 ? true : false;
-					$isRights = $channel_id == Auth::user()->id ? true : false;
 					foreach ($records as $key => $value) {
 
 						$post_date = new DateTime($value->created_at);
@@ -202,7 +206,7 @@ class ChannelController extends Controller
 	}
 
 	public function deletePost() {
-		if(Auth::guest()) return Response::json(['success' => false, 'errorText' => 'You are not authorized!']);
+		if(Auth::guest()) return Response::json(['success' => false, 'errorText' => ['You are not authorized!']]);
 
 		$validator = Validator::make(Input::get(), [
 			'post_id' => 'required|integer|min:1'

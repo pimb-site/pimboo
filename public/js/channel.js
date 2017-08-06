@@ -187,8 +187,10 @@ $(document).ready(function() {
 			        		});
 			        	} else {
 			        		var alertHtml = '<button type="button" class="close" onclick="$(\'.modal-alert\').modal().close();" data-dismiss="modal" aria-hidden="true">&times;</button><div class="warning-img"></div><div class="warning-text"><b>Something went wrong</b></div> <ul>';
-			        		alertHtml += '<center><li>'+ response.errorText +'</li></center>';
-			        		alertHtml += '</ul>';
+		                    $.each(data.errorText, function (i, value) {
+				        		alertHtml += '<center><li>'+ value +'</li></center>';
+		                    });
+		                    alertHtml += '</ul>';
 							$('.modal-alert').html(alertHtml);
 							$('.modal-alert').modal().open();
 			        	}
