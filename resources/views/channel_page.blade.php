@@ -154,9 +154,9 @@
 				<button class="run-filter">FILTER</button>
 			</div>
 		</div>
-		<div id="modal-alert" class="modal-alert" style="display:none;">
-			<div class="popup__body"><div class="js-img"></div></div>
-		</div>
+	</div>
+	<div id="modal-alert" class="modal-alert" style="display:none;">
+		<div class="popup__body"><div class="js-img"></div></div>
 	</div>
 </div>
 @endsection
