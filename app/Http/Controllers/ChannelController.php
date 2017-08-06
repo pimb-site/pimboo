@@ -19,9 +19,17 @@ class ChannelController extends Controller
 			}
 			$user_info = DB::select('select id, name, photo, cover_photo, public_info from users where name = ?', [$channel_name]);
 			if(count($user_info) != 0) {
-				if(Auth::user()->permission == 10 || $channel_name == Auth::user()->name) {
-					$isDraft = ['publish', 'save'];
-				} else $isDraft = ['publish'];
+				if(Auth::guest()) {
+					$isDraft = ['publish'];
+					$show_btn_subscribe = false;
+					$isAdmin  = false;
+					$isRights = false;
+				} else {
+					$isDraft = (Auth::user()->permission == 10 || $channel_name == Auth::user()->name) ? ['publish', 'save'] : ['publish'];
+					$show_btn_subscribe = Auth::user()->name == $channel_name ? false : true;
+					$isAdmin  = Auth::user()->permission == 10 ? true : false;
+					$isRights = $channel_name == Auth::user()->name ? true : false;
+				}
 				$types = ['trivia', 'story', 'flipcards', 'rankedlist', 'gif', 'snip'];
 				$channel_content = DB::table('posts')
 									->where('user_id', $user_info[0]->id)
@@ -35,7 +43,6 @@ class ChannelController extends Controller
 
 
 				$user_id = Auth::guest() ? 0 : Auth::user()->id;
-				$show_btn_subscribe = Auth::user()->name == $channel_name ? false : true;
 
 				// is subscribe? 
 				if($user_info[0]->id!= $user_id) {
@@ -53,8 +60,6 @@ class ChannelController extends Controller
 
 				// count subscribers
 				$subscribers = DB::table('subscribes')->where('channel_id', '=', $user_info[0]->id)->count();
-				$isAdmin  = Auth::user()->permission == 10 ? true : false;
-				$isRights = $channel_name == Auth::user()->name ? true : false;
 				return view('channel_page', ['body_class' => 'channel-page', 'isAdmin' => $isAdmin, 'isRights' => $isRights, 
 						    'user_info' => $user_info[0], 'channel_content' => $channel_content, 'show_more' => $show_more, 
 						    'isSubscribe' => $isSubscribe, 'subscribers' => $subscribers, 'show_btn_subscribe' => $show_btn_subscribe]);

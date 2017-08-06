@@ -121,6 +121,12 @@ $(document).ready(function() {
 
 	        		var subscribers = $('.subscribers b').html();
 	        		$('.subscribers b').html(parseInt(subscribers) + 1);
+	        	} else {
+	        		var alertHtml = '<button type="button" class="close" onclick="$(\'.modal-alert\').modal().close();" data-dismiss="modal" aria-hidden="true">&times;</button><div class="warning-img"></div><div class="warning-text"><b>Something went wrong</b></div> <ul>';
+	        		alertHtml += '<center><li>'+ response.errorText +'</li></center>';
+	        		alertHtml += '</ul>';
+					$('.modal-alert').html(alertHtml);
+					$('.modal-alert').modal().open();
 	        	}
 	        },
 	        error: function(jqXHR, textStatus, errorThrown) {
@@ -144,6 +150,12 @@ $(document).ready(function() {
 
 	        		var subscribers = $('.subscribers b').html();
 	        		$('.subscribers b').html(parseInt(subscribers) - 1);
+	        	} else {
+	        		var alertHtml = '<button type="button" class="close" onclick="$(\'.modal-alert\').modal().close();" data-dismiss="modal" aria-hidden="true">&times;</button><div class="warning-img"></div><div class="warning-text"><b>Something went wrong</b></div> <ul>';
+	        		alertHtml += '<center><li>'+ response.errorText +'</li></center>';
+	        		alertHtml += '</ul>';
+					$('.modal-alert').html(alertHtml);
+					$('.modal-alert').modal().open();
 	        	}
 	        },
 	        error: function(jqXHR, textStatus, errorThrown) {
@@ -173,6 +185,12 @@ $(document).ready(function() {
 									$('.show-more').css({'display': 'none'});
 			        			}
 			        		});
+			        	} else {
+			        		var alertHtml = '<button type="button" class="close" onclick="$(\'.modal-alert\').modal().close();" data-dismiss="modal" aria-hidden="true">&times;</button><div class="warning-img"></div><div class="warning-text"><b>Something went wrong</b></div> <ul>';
+			        		alertHtml += '<center><li>'+ response.errorText +'</li></center>';
+			        		alertHtml += '</ul>';
+							$('.modal-alert').html(alertHtml);
+							$('.modal-alert').modal().open();
 			        	}
 			        },
 			        error: function(jqXHR, textStatus, errorThrown) {
