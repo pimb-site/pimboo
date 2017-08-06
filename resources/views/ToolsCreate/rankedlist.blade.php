@@ -18,7 +18,7 @@
 						<div class="photo">CLICK<br>TO ADD PHOTO</div>
 						<div class="text_info">
 							<input type="text" name="rankedlist[data][rankedlist_title]" placeholder="Ranked list title" autocomplete="off" style="color:#6e8dc9;">
-							<textarea name="rankedlist[data][rankedlist_description]" class="top_textarea_trivia" placeholder="Ranked list description" autocomplete="off" wrap="off"></textarea>
+							<textarea name="rankedlist[data][rankedlist_description]" class="top_textarea_trivia" placeholder="Ranked list description" autocomplete="off" ></textarea>
 						</div>
 					</div>
 					<textarea name="rankedlist[data][rankedlist_footer]" placeholder="Footer text (500 symbols max)" maxlength="500" autocomplete="off" style="color:#6e8dc9;"></textarea>

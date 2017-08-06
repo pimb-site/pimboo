@@ -21,7 +21,7 @@
 						<div class="photo">CLICK<br>TO ADD PHOTO</div>
 						<div class="text_info">
 							<input type="text" name="form_flip[form_flip_cards_title]" placeholder="Trivia title" autocomplete="off" style="color:#6e8dc9;">
-							<textarea name="form_flip[form_description]" class="top_textarea_trivia" placeholder="Trivia description" autocomplete="off" wrap="off"></textarea>
+							<textarea name="form_flip[form_description]" class="top_textarea_trivia" placeholder="Trivia description" autocomplete="off"></textarea>
 						</div>
 					</div>
 					<textarea name="form_flip[form_footer]" placeholder="Footer text (1500 symbols max)" maxlength="1500" autocomplete="off" style="color:#6e8dc9;"></textarea>
