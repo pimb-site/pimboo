@@ -123,12 +123,12 @@
 				<input type="hidden" name="channel_id" value="{{ $user_info->id }}" />
 				<input type="hidden" name="multiplier" value="1" />
 				<div class="cards">
-						<div class="tag"><label><input type="checkbox" value="trivia" name="types[]" checked autocomplete="off" ><span class="checkbox-custom"></span><span class="label">Trivia card</span></label></div>
-						<div class="tag"><label><input type="checkbox" value="flipcards" name="types[]" checked autocomplete="off" ><span class="checkbox-custom"></span><span class="label">Flip Card</span></label></div>
-						<div class="tag"><label><input type="checkbox" value="gif" name="types[]" checked autocomplete="off" ><span class="checkbox-custom"></span><span class="label">GIF</span></label></div>
-						<div class="tag"><label><input type="checkbox" value="story" name="types[]" checked autocomplete="off" ><span class="checkbox-custom"></span><span class="label">Story</span></label></div>
-						<div class="tag"><label><input type="checkbox" value="rankedlist" name="types[]" checked autocomplete="off" ><span class="checkbox-custom"></span><span class="label">Ranked list</span></label></div>
-						<div class="tag"><label><input type="checkbox" value="snip" name="types[]" checked autocomplete="off" ><span class="checkbox-custom"></span><span class="label">Snip</span></label></div>
+						<div class="tag"><label><input class="checkbox" type="checkbox" value="trivia" name="types[]" checked  ><span class="checkbox-custom"></span><span class="label">Trivia card</span></label></div>
+						<div class="tag"><label><input class="checkbox" type="checkbox" value="flipcards" name="types[]" checked autocomplete="off" ><span class="checkbox-custom"></span><span class="label">Flip Card</span></label></div>
+						<div class="tag"><label><input class="checkbox" type="checkbox" value="gif" name="types[]" checked autocomplete="off" ><span class="checkbox-custom"></span><span class="label">GIF</span></label></div>
+						<div class="tag"><label><input class="checkbox" type="checkbox" value="story" name="types[]" checked autocomplete="off" ><span class="checkbox-custom"></span><span class="label">Story</span></label></div>
+						<div class="tag"><label><input class="checkbox" type="checkbox" value="rankedlist" name="types[]" checked autocomplete="off" ><span class="checkbox-custom"></span><span class="label">Ranked list</span></label></div>
+						<div class="tag"><label><input class="checkbox" type="checkbox" value="snip" name="types[]" checked autocomplete="off" ><span class="checkbox-custom"></span><span class="label">Snip</span></label></div>
 				</div>
 				</form>
 				<button class="run-filter">FILTER</button>
