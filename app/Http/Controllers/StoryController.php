@@ -70,13 +70,13 @@ class StoryController extends Controller {
 
 	        // Moving main photo/ facebook photo
 	        if(strpos($data['story']['data']['photo_main'], '/') !== false) {
-	        	$main_photo = uniqid().".jpeg";
+	        	$main_photo = uniqid('pimboo', true).".jpeg";
 		        if(!File::move(public_path()."/temp/".$data['story']['data']['photo_main'], public_path()."/uploads/".$main_photo))
 		        	$errors_array[] = "An error occurred while moving the main photo. Please, upload a new image!";
 		    } else $main_photo = $data['story']['data']['photo_main'];
 
 		    if(strpos($data['story']['data']['photo_facebook'], '/') !== false) {
-		    	$facebook_photo = uniqid().".jpeg";
+		    	$facebook_photo = uniqid('pimboo', true).".jpeg";
 				if(!File::move(public_path()."/temp/".$data['story']['data']['photo_facebook'], public_path()."/uploads/".$facebook_photo))
 					$errors_array[] = "An error occurred while moving the facebook photo. Please, upload a new image!";
 			} else $facebook_photo = $data['story']['data']['photo_facebook'];

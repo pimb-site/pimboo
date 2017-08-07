@@ -169,13 +169,13 @@ class RankedlistController extends Controller {
 
 	        // Moving main photo/ facebook photo
 	        if(strpos($data['rankedlist']['data']['photo_main'], '/') !== false) {
-	        	$main_photo     = uniqid().".jpeg";
+	        	$main_photo     = uniqid('pimboo', true).".jpeg";
 	        	if(!File::move(public_path()."/temp/".$data['rankedlist']['data']['photo_main'], public_path()."/uploads/".$main_photo))
 	        		$errors_array[] = "An error occurred while moving the main photo. Please, upload a new image!";
 	        } else $main_photo = $data['rankedlist']['data']['photo_main'];
 
 	        if(strpos($data['rankedlist']['data']['photo_facebook'], '/') !== false) {
-	        	$facebook_photo = uniqid().".jpeg";
+	        	$facebook_photo = uniqid('pimboo', true).".jpeg";
 				if(!File::move(public_path()."/temp/".$data['rankedlist']['data']['photo_facebook'], public_path()."/uploads/".$facebook_photo))
 					$errors_array[] = "An error occurred while moving the facebook photo. Please, upload a new image!";
 			} else $facebook_photo = $data['rankedlist']['data']['photo_facebook'];
@@ -199,7 +199,7 @@ class RankedlistController extends Controller {
 					];
 	        	} else {
 	        		if(strpos($value['image_card'], '/') !== false) {
-	        			$image_card = uniqid().".jpeg";
+	        			$image_card = uniqid('pimboo', true).".jpeg";
 						if(!File::move(public_path()."/temp/".$value['image_card'], public_path()."/uploads/".$image_card))
 							$errors_array[] = "An error occurred while moving the image card. Please, try reload page!";
 					} else $image_card = $value['image_card'];

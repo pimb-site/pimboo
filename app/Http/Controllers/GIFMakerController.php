@@ -76,17 +76,17 @@ class GIFMakerController extends Controller {
 
 	        // Moving main photo/ facebook photo / main gif
 	        if(strpos($data['gifmaker']['gif'], '/') !== false) {
-	        	 $main_gif  = uniqid().".gif";
+	        	 $main_gif  = uniqid('pimboo', true).".gif";
 		        if(!File::move(public_path()."/temp/".$data['gifmaker']['gif'], public_path()."/uploads/".$main_gif))
 		        	$errors_array[] = "An error occurred while moving the GIF-image. Please, create a new GIF-image!";
 		    } else  $main_gif = $data['gifmaker']['gif'];
 		    if(strpos($data['gifmaker']['data']['photo_main'], '/') !== false) {
-		    	$main_photo = uniqid().".jpeg";
+		    	$main_photo = uniqid('pimboo', true).".jpeg";
 		        if(!File::move(public_path()."/temp/".$data['gifmaker']['data']['photo_main'], public_path()."/uploads/".$main_photo))
 		        	$errors_array[] = "An error occurred while moving the main photo. Please, upload a new image!";
 		    } else $main_photo = $data['gifmaker']['data']['photo_main'];
 		    if(strpos($data['gifmaker']['data']['photo_facebook'], '/') !== false) {
-		    	$facebook_photo = uniqid().".jpeg";
+		    	$facebook_photo = uniqid('pimboo', true).".jpeg";
 				if(!File::move(public_path()."/temp/".$data['gifmaker']['data']['photo_facebook'], public_path()."/uploads/".$facebook_photo))
 					$errors_array[] = "An error occurred while moving the facebook photo. Please, upload a new image!";
 			} else $facebook_photo = $data['gifmaker']['data']['photo_facebook'];
@@ -196,9 +196,9 @@ class GIFMakerController extends Controller {
 						File::makeDirectory($main_path);
 
 					// generation of unique names for files
-					$gif = uniqid().'.gif';
-					$thumbnail_fb_photo = uniqid().'.jpeg';
-					$thumbnail_main_photo = uniqid().'.jpeg';
+					$gif = uniqid('pimboo', true).'.gif';
+					$thumbnail_fb_photo = uniqid('pimboo', true).'.jpeg';
+					$thumbnail_main_photo = uniqid('pimboo', true).'.jpeg';
 
 					// saving images from response
 					Image::make($response['facebook_photo'])->save($main_path . '/' . $thumbnail_fb_photo);

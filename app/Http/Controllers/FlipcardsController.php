@@ -186,12 +186,12 @@ class FlipcardsController extends Controller {
 
 	        // Moving main photo/ facebook photo
 	        if(strpos($data['flipcards']['data']['photo_main'], '/') !== false) {
-	        	$main_photo = uniqid().".jpeg";
+	        	$main_photo = uniqid('pimboo', true).".jpeg";
 		        if(!File::move(public_path()."/temp/".$data['flipcards']['data']['photo_main'], public_path()."/uploads/".$main_photo))
 		        	$errors_array[] = "An error occurred while moving the main photo. Please, upload a new image!";
 	    	} else $main_photo = $data['flipcards']['data']['photo_main'];
 	    	if(strpos($data['flipcards']['data']['photo_facebook'], '/') !== false) {
-	    		$facebook_photo = uniqid().".jpeg";
+	    		$facebook_photo = uniqid('pimboo', true).".jpeg";
 				if(!File::move(public_path()."/temp/".$data['flipcards']['data']['photo_facebook'], public_path()."/uploads/".$facebook_photo))
 					$errors_array[] = "An error occurred while moving the facebook photo. Please, upload a new image!";
 	    	} else $facebook_photo = $data['flipcards']['data']['photo_facebook'];
@@ -209,7 +209,7 @@ class FlipcardsController extends Controller {
 	        foreach ($data['flipcards']['cards'] as $key => $value) {
 	        	if($value['card_type_front'] == "image") {
 	        		if(strpos($value['front_card_image'], '/') !== false) {
-	        			$front_card_image = uniqid().".jpeg";
+	        			$front_card_image = uniqid('pimboo', true).".jpeg";
 						if(!File::move(public_path()."/temp/".$value['front_card_image'], public_path()."/uploads/".$front_card_image))
 							$errors_array[] = "An error occurred while moving the image card. Please, try reload page!";
 					} else $front_card_image = $value['front_card_image'];
@@ -217,7 +217,7 @@ class FlipcardsController extends Controller {
 
 	        	if($value['card_type_back'] == "image") {
 	        		if(strpos($value['back_card_image'], '/') !== false) {
-		        		$back_card_image = uniqid().".jpeg";
+		        		$back_card_image = uniqid('pimboo', true).".jpeg";
 						if(!File::move(public_path()."/temp/".$value['back_card_image'], public_path()."/uploads/".$back_card_image))
 							$errors_array[] = "An error occurred while moving the image card. Please, try reload page!";
 					} else $back_card_image = $value['back_card_image']; 
