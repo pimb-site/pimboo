@@ -47,7 +47,7 @@
                             <div class="modal-content">
                               <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                <h4 class="modal-title" id="myModalLabel">Report Post</h4>
+                                <h4 class="modal-title" id="myModalLabel">REPORT POST</h4>
                               </div>
                               <div class="modal-body">
                                 <input type="radio" id="report_type1" name="report_type" value="It's rude, vulgar or uses bad language" checked><label for="report_type1"><span></span>It's rude, vulgar or uses bad language</label><br>

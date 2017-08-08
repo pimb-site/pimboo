@@ -35,7 +35,7 @@
 			?>
 			<div class="post" data-id="{{ $count }}" >
 				<div class="post-left">
-					<div class="photo"> <img src="/uploads/{{ $post->description_image }}"></div>
+					<div class="photo"><a href="{{ url('/'.$post->author_name.'/'.$post->url) }}"><img src="/uploads/{{ $post->description_image }}"></a></div>
 					<div class="date">
 					<?php $status = $post->isDraft == 'save' ? 'Saved' : 'Posted'; ?>
 					@if($month == 0)
