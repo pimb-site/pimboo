@@ -79,7 +79,7 @@ $(document).ready(function () {
 						
 						// TAGS
 						$('.flipcard_main_tags b').append(data.tags.join());
-						
+						var repository = '/uploads/';
 						$.each(data.cards, function (i, value) {
 							if(value.card_item_title == null) value.card_item_title = "";
 							$(".flipcard_main_footer").before('<div class="flipcard_main_cards">'
@@ -89,16 +89,18 @@ $(document).ready(function () {
 								+'<div class="flipcard_main_back" data-id="'+i+'"></div>'
 								+'</div></div></div>');
 							if(value.card_type_front == "image") {
-								if(value.front_card_image == "") value.front_card_image = "../img/no-img.jpg";
-								$('.flipcard_main_front[data-id="'+i+'"]').append('<img class="image-card" src="/temp/'+value.front_card_image+'" />');
+								if(typeof value.front_card_image == 'undefined' || value.front_card_image == "") value.front_card_image = "../img/no-img.jpg";
+								else repository = (~value.front_card_image.indexOf('/')) ? '/temp/' : '/uploads/';
+								$('.flipcard_main_front[data-id="'+i+'"]').append('<img class="image-card" src="'+repository+value.front_card_image+'" />');
 							} else {
 								$('.flipcard_main_front[data-id="'+i+'"]').css({'background-color': value.front_card_theme});
 								$('.flipcard_main_front[data-id="'+i+'"]').append('<div class="flipcard_main_text">'+value.front_card_text+'</div>');
 							}
 							
 							if(value.card_type_back == "image") {
-								if(value.back_card_image == "") value.back_card_image = "../img/no-img.jpg";
-								$('.flipcard_main_back[data-id="'+i+'"]').append('<img class="image-card" src="/temp/'+value.back_card_image+'" />');
+								if(typeof value.back_card_image == 'undefined' || value.back_card_image == "") value.back_card_image = "../img/no-img.jpg";
+								else repository = (~value.back_card_image.indexOf('/')) ? '/temp/' : '/uploads/';
+								$('.flipcard_main_back[data-id="'+i+'"]').append('<img class="image-card" src="'+repository+value.back_card_image+'" />');
 								
 							} else {
 								$('.flipcard_main_back[data-id="'+i+'"]').css({'background-color': value.back_card_theme});

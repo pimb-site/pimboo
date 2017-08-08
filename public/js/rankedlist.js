@@ -135,7 +135,7 @@ $(document).ready(function () {
 						
 						// TAGS
 						$('.trivia_main_tags b').append(data.tags.join());
-						
+						var repository = '/uploads/';
 						$.each(data.cards, function (i, value) {
 							
 							if(value.post_title == null) value.post_title = "";
@@ -148,8 +148,9 @@ $(document).ready(function () {
 							if(value.caption_card == null) value.caption_card = "";
 
 							if(value.type_card == "image") {
-								if(value.image_card == null) value.image_card = "../img/no-img.jpg";
-								html_trivia += '<div class="trivia_main_front" data-id="'+i+'"><img class="image-card" style="position:absolute;" src="/temp/'+value.image_card+'" />';
+								if(typeof value.image_card == 'undefined' || value.image_card == null) value.image_card = "../img/no-img.jpg";
+								else repository = (~value.image_card.indexOf('/')) ? '/temp/' : '/uploads/';
+								html_trivia += '<div class="trivia_main_front" data-id="'+i+'"><img class="image-card" style="position:absolute;" src="'+repository+value.image_card+'" />';
 								html_trivia += '<div class="trivia_main_caption">'+value.caption_card+'</div></div>';
 							} else {
 								html_trivia += '<div class="trivia_main_front" data-id="'+i+'">'+value.youtube_clip;
