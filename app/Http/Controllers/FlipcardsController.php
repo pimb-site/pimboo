@@ -273,8 +273,8 @@ class FlipcardsController extends Controller {
 			]);
 
 			if (!$validator->fails()) {
-				$owner = Post::select('author_name', 'user_id', 'url')->where(['id' => $data['flipcards']['data']['postID'], 'type' => 'flipcards'])->get();
-				if(count($owner) != 0 && ($owner[0]->user_id == Auth::user()->id || Auth::user()->permission == 10)) {
+				$owner = Post::select('author_name', 'user_id', 'url')->where(['id' => $data['flipcards']['data']['postID'], 'type' => 'flipcards'])->first();
+				if(count($owner) != 0 && ($owner->user_id == Auth::user()->id || Auth::user()->permission == 10)) {
 					Post::where(['id' => $data['flipcards']['data']['postID'], 'type' => 'flipcards'])
 						->update(['description_title'  => $data['flipcards']['data']['flipcards_title'],  
 								  'description_text'  => $data['flipcards']['data']['flipcards_description'],
@@ -282,7 +282,7 @@ class FlipcardsController extends Controller {
 								  'image_facebook'     => $facebook_photo, 'content' => serialize($content_flipcards), 'permission' => 'public',
 								  'options' => $options, 'tags' => $tags, 'isDraft' => $draft
 					]);
-					$link = '/'.$owner[0]->author_name.'/'.$owner[0]->url;
+					$link = '/'.$owner->author_name.'/'.$owner->url;
 					return Response::json(['success' => true, 'link' => $link]);
 				}
 				return Response::json(['false' => true, 'errorText' => 'Invalid data(postID)']);

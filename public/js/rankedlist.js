@@ -47,6 +47,14 @@ $(document).ready(function () {
 							$('.input-type-card[data-id="'+current_id+'"][data-side="1"]').val('image');
 						} 
 					}
+				} else {
+					var alertHtml = '<button type="button" class="close" onclick="$(\'.modal-alert\').modal().close();" data-dismiss="modal" aria-hidden="true">&times;</button><div class="warning-img"></div><div class="warning-text"><b>Something went wrong</b></div> <ul>';
+                    $.each(result.errorText, function (i, value) {
+                        alertHtml += '<li>' + value + '</li>';
+                    });
+                    alertHtml += '</ul>';
+					$('.modal-alert').html(alertHtml);
+					$('.modal-alert').modal().open();
 				}
 		    });
 		}
@@ -95,10 +103,14 @@ $(document).ready(function () {
 					   $('.input-form-clip[data-id="'+current_id+'"][data-side="1"]').val(value_url);
 					   $('.input-type-card[data-id="'+current_id+'"][data-side="1"]').val('video');
 				   }
-				}
-				else 
-				{
-					// code...
+				} else {
+					var alertHtml = '<button type="button" class="close" onclick="$(\'.modal-alert\').modal().close();" data-dismiss="modal" aria-hidden="true">&times;</button><div class="warning-img"></div><div class="warning-text"><b>Something went wrong</b></div> <ul>';
+                    $.each(response.errorText, function (i, value) {
+                        alertHtml += '<li>' + value + '</li>';
+                    });
+                    alertHtml += '</ul>';
+					$('.modal-alert').html(alertHtml);
+					$('.modal-alert').modal().open();
 				}
 			});
 		}

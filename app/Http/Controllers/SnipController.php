@@ -73,12 +73,12 @@ class SnipController extends Controller {
 			]);
 
 			if (!$validator->fails()) {
-				$owner = Post::select('author_name', 'user_id', 'url')->where(['id' => $data['snip']['data']['postID'], 'type' => 'snip'])->get();
-				if(count($owner) != 0 && ($owner[0]->user_id == Auth::user()->id || Auth::user()->permission == 10)) {
+				$owner = Post::select('author_name', 'user_id', 'url')->where(['id' => $data['snip']['data']['postID'], 'type' => 'snip'])->first();
+				if(count($owner) != 0 && ($owner->user_id == Auth::user()->id || Auth::user()->permission == 10)) {
 					Post::where(['id' => $data['snip']['data']['postID'], 'type' => 'gif'])
 						->update([ 'description_title' => $title, 'description_text' => $title, 'content' => $content, 'tags' => $tags, 'options' => $options
 					]);
-					$link = '/'.$owner[0]->author_name.'/'.$owner[0]->url;
+					$link = '/'.$owner->author_name.'/'.$owner->url;
 					return Response::json(['success' => true, 'link' => $link]);
 				}
 				return Response::json(['false' => true, 'errorText' => 'Invalid data(postID)']);
