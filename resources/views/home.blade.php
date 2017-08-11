@@ -51,7 +51,7 @@ Home
                             <?php $count = 1; ?>
                             @foreach ($main_post as $post_main)
                                 <div class="item <?php if($count == 1) print 'active'; ?>">
-                                <div class="img"><a href="/{{  $post_main->author_name.'/'.$post_main->url }}"><div class="photo" style="background-image: url('/uploads/{{  $post_main->description_image }}');"></div></a></div>
+                                <div class="img"><a href="/{{  $post_main->author_name.'/'.$post_main->url }}"><img width="750px" height="445px" src="/uploads/{{  $post_main->description_image }}" /></a></div>
                                 <div class="carousel_bottom">
                                     <div class="title"><a href="/{{  $post_main->author_name.'/'.$post_main->url }}">{{  $post_main->description_title }}</a></div>
                                     <div class="text">{{  $post_main->description_text }}</div>
