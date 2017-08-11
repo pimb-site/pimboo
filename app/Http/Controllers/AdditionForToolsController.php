@@ -6,8 +6,99 @@ use Auth;
 use Session;
 use Request;
 use DOMDocument;
+use Validator;
+use File;
+use Image;
+use App\Post;
 
 class AdditionForToolsController extends Controller {
+
+	public function saveImage() {
+		if(Auth::guest()) return Response::json(['success' => false, 'errorText' => ['You are not authorized!'] ]);
+
+		if(Input::hasFile('filedata')) {
+			if(Input::file('filedata')->isValid()) {
+				$validator = Validator::make(Input::file(), [
+					'filedata' => 'dimensions:max_width=4000,max_height=4000|image',
+				]);
+				if (!$validator->fails()) {
+					$destinationPath = public_path('temp/' . Session::getId(). '/');
+					$this->makeDirectory($destinationPath);
+					$fileName = uniqid('pimboo' , true) . '.jpeg';
+					Input::file('filedata')->move($destinationPath, $fileName);
+					return Response::json(['success' => true, 'file' => Session::getId() . '/' . $fileName]);
+				}
+				return Response::json(['success' => false, 'errorText' => $validator->errors()->all()]);
+			}
+			return Response::json(['success' => false, 'errorText' => ['The file failed validation'] ]);
+		}
+		return Response::json(['success' => false, 'errorText' => ['It must be a file!'] ]);
+	}
+
+	public function saveImageOnURL() {
+		if(Auth::guest()) return Response::json(['success' => false, 'errorText' => ['You are not authorized!'] ]);
+
+		$validator = Validator::make(Input::get() , [
+			'image_url' => 'required|url',
+		]);
+		if (!$validator->fails()) {
+			$pathinfo = pathinfo(Input::get('image_url'));
+			$validator = Validator::make($pathinfo, [
+				'extension' => 'required|in:jpeg,jpg,png,bmp',
+			]);
+			if (!$validator->fails()) {
+				$destinationPath = public_path('temp/' . Session::getId(). '/');
+				$this->makeDirectory($destinationPath);
+				$fileName = uniqid('pimboo', true) . '.jpeg';
+				$image = Image::make(Input::get('image_url'));
+				$image->save($destinationPath . $fileName);
+				return Response::json(['success' => true, 'file' => Session::getId() . '/' . $fileName]);
+			}
+			return Response::json(['success' => false, 'errorText' => ['Invalid extension for image! List of available extensions for the image: png, jpg, bmp.']]);
+		}
+		return Response::json(['success' => false, 'errorText' => $validator->errors()->all()]);
+	}
+
+	public function getInfoYoutube() {
+		if(Auth::guest()) return Response::json(['success' => false, 'errorText' => ['You are not authorized!'] ]);
+
+		$validator = Validator::make(Input::get(), [
+			'video_url' => 'required|url'
+		]);
+		if (!$validator->fails()) {
+			$array_information = @file_get_contents('https://www.youtube.com/oembed?url='.Input::get('video_url').'&format=json');
+			$array_information = json_decode($array_information, true);
+			if(is_array($array_information))
+				return Response::json(['success' => true, 'thumbnail_url' => $array_information['thumbnail_url'], 'html' => $array_information['html'] ]);
+			else
+				return Response::json(['success' => false, 'errorText' => ['Youtube video on this link was not found!'] ]);
+		}
+		return Response::json(['success' => false, 'errorText' => $validator->errors()->all()]);
+	}
+
+	public function successPage($author, $url) {
+		if (Auth::guest()) return redirect('auth/login');
+		$data = ['author' => $author, 'url' => $url];
+		$validator = Validator::make($data, [
+			'author' => 'required|min:3|max:255',
+			'url'    => 'required|min:3|max:200',
+		]);
+		if (!$validator->fails()) {
+			$count = Post::where(['user_id' => Auth::user()->id, 'author_name' => $author, 'url' => $url])->count();
+			if($count != 0) {
+				return view('success', ['url' => url($author . '/' . $url)]);
+			}
+			return redirect('/home');
+		}
+		return redirect('/home');
+    }
+
+    private function makeDirectory($path) {
+    	if(!File::exists($path))
+    		return File::makeDirectory($path);
+    	else
+    		return false;
+    }
 
 	public static function get_title_site($url) {
 	    $ch = curl_init();
@@ -34,77 +125,5 @@ class AdditionForToolsController extends Controller {
 	   	$string = preg_replace("/\s+/", ' ', $string);
 	   	$string = str_replace(" ", "-", $string);
 	   	return $string;
-	}
-
-	public function successPage($author, $link, Request $request) {
-		if ($author != '' && $link != '') {
-			$url = url('/').'/'.$author.'/'.$link;
-			return view('success', ['url' => $url]);
-		} else redirect('/home');
-    }
-
-	public function saveImage() {
-		if(Auth::guest()) return Response::json(['success' => false, 'errorText' => 'You are not authorized.']);
-		if (Input::file('filedata')->isValid()) {
-			$filename = uniqid().".jpeg";
-			$file_tmp = 'temp/'.Session::getId()."/";
-			Input::file('filedata')->move($file_tmp, $filename);
-			return Response::json(['success' => true, 'file' => Session::getId()."/".$filename]);
-		}
-	}
-
-	public function getInfoYoutube() {
-		if(Auth::guest()) return Response::json(['success' => false, 'errorText' => 'You are not authorized.']);
-
-		$url = Input::get('video_url');
-		$api_key = "AIzaSyCxldnrnpZKFHg64lO5vum9OaLJfS7ikiM";
-		if (!filter_var($url, FILTER_VALIDATE_URL) === false) {
-			$content = @file_get_contents('https://www.youtube.com/oembed?url='.$url.'&format=json');
-			$array_information = json_decode($content, true);
-			if(is_array($array_information)) {
-				preg_match("/^(?:http(?:s)?:\/\/)?(?:www\.)?(?:m\.)?(?:youtu\.be\/|youtube\.com\/(?:(?:watch)?\?(?:.*&)?v(?:i)?=|(?:embed|v|vi|user)\/))([^\?&\"'>]+)/", $url, $matches);
-				$video_id = $matches[1];
-				$duration = file_get_contents("https://www.googleapis.com/youtube/v3/videos?part=contentDetails&id=$video_id&key=$api_key");
-				$duration = json_decode($duration, true);
-				$duration = $duration['items'][0]['contentDetails']['duration'];
-				return Response::json(['success' => true, 'thumbnail_url' => $array_information['thumbnail_url'], 'html' => $array_information['html'], 'duration' => $duration]);
-			} else {
-				return Response::json(['success' => false, 'errorText' => 'Video not found.']);
-			}
-		} else {
-			return Response::json(['success' => false, 'errorText' => 'Invalid link.']);
-		}
-	}
-
-
-	public function saveImageOnURL() {
-		if(Auth::guest()) return Response::json(['success' => false, 'errorText' => 'You are not authorized.']);
-
-		$url = Input::get('image_url');
-		if (!filter_var($url, FILTER_VALIDATE_URL) === false) {
-			$enabled = array( 'png', 'jpeg' );
-			$name = uniqid().'.jpg';
-			$image = file_get_contents($url);
-			if(!file_exists("temp/".\Session::getId())) {
-				mkdir("temp/".Session::getId());
-			}
-			$full_path = Session::getId()."/".$name;
-			$success = file_put_contents("temp/".$full_path, $image);
-			unset($image);
-			if($success) {
-				if( $info = getimagesize("temp/".$full_path)) {
-					$type = trim( strrchr( $info['mime'], '/' ), '/' );
-					if( !in_array( $type, $enabled ) ) {
-						unlink("temp/".$full_path);
-						return Response::json(['success' => false, 'errorText' => 'Invalid image mimetype.']);
-					} else {
-						return Response::json(['success' => true, 'file' => $full_path]);
-					}
-				} else return Response::json(['success' => false, 'errorText' => 'Invalid image.']);
-			}
-			
-		} else {
-			return Response::json(['success' => false, 'errorText' => 'Invalid URL.']);
-		}
 	}
 }

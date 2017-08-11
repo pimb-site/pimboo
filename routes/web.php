@@ -61,7 +61,7 @@ Route::post('/create/addition/getInfoYoutube', 'AdditionForToolsController@getIn
 Route::post('/create/addition/saveimageonURL', 'AdditionForToolsController@saveImageOnURL');
 Route::post('/create/addition/saveimage',      'AdditionForToolsController@saveImage');
 // Success page after publish tool
-Route::get('/success/{author}/{link}',         'AdditionForToolsController@successPage');
+Route::get('/success/{author}/{url}',         'AdditionForToolsController@successPage');
 
 // Snip
 Route::get('/create/snip', 'SnipController@displayCreatePage');

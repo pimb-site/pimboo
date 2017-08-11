@@ -56,6 +56,14 @@ $(document).ready(function () {
 						   $('.input-form-img2[data-id="'+current_id+'"]').val(result.file);
 					   }
 				   }
+				} else  {
+					var alertHtml = '<button type="button" class="close" onclick="$(\'.modal-alert\').modal().close();" data-dismiss="modal" aria-hidden="true">&times;</button><div class="warning-img"></div><div class="warning-text"><b>Something went wrong</b></div> <ul>';
+                    $.each(result.errorText, function (i, value) {
+                        alertHtml += '<li>' + value + '</li>';
+                    });
+                    alertHtml += '</ul>';
+					$('.modal-alert').html(alertHtml);
+					$('.modal-alert').modal().open();
 				}
 			});
 		}

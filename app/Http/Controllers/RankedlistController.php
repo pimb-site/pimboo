@@ -237,15 +237,15 @@ class RankedlistController extends Controller {
 			]);
 
 			if (!$validator->fails()) {
-				$owner = Post::select('author_name', 'user_id', 'url')->where(['id' => $data['rankedlist']['data']['postID'], 'type' => 'rankedlist'])->get();
-				if(count($owner) != 0 && ($owner[0]->user_id == Auth::user()->id || Auth::user()->permission == 10)) {
+				$owner = Post::select('author_name', 'user_id', 'url')->where(['id' => $data['rankedlist']['data']['postID'], 'type' => 'rankedlist'])->first();
+				if(count($owner) != 0 && ($owner->user_id == Auth::user()->id || Auth::user()->permission == 10)) {
 					Post::where(['id' => $data['rankedlist']['data']['postID'], 'type' => 'rankedlist'])
 						->update(['description_title'  => $data['rankedlist']['data']['rankedlist_title'],  'description_text'  => $data['rankedlist']['data']['rankedlist_description'],
 								  'description_footer' => $data['rankedlist']['data']['rankedlist_footer'], 'description_image' => $main_photo,
 								  'image_facebook'     => $facebook_photo, 'content' => serialize($content_rankedlist), 'permission' => 'public',
 								  'options' => $options, 'tags' => $tags, 'isDraft' => $draft
 					]);
-					$link = '/'.$owner[0]->author_name.'/'.$owner[0]->url;
+					$link = '/'.$owner->author_name.'/'.$owner->url;
 					return Response::json(['success' => true, 'link' => $link]);
 				}
 				return Response::json(['false' => true, 'errorText' => 'Invalid data(postID)']);
