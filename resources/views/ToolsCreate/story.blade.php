@@ -107,8 +107,8 @@
 			<div class="modal-upload-column">
 				<p> UPLOAD IMAGE </p>
 				<div class="select-file"> <div class="modal-file-icon"></div><input type="file" name="filedata"></div>
+				<p>or</p>
 				<div class="modal-upload-url">
-					<p>or</p>
 					<input type="text" class="upload-img-url" placeholder="Enter URL">	
 					<button type="button" class="upload-img-url-btn">GO</button>
 				</div>

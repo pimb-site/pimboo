@@ -7,9 +7,12 @@ $(document).ready(function () {
 	var ScreenWidth = screen.width;
 	var maxSizeW;
 	var token = '{!! csrf_token() !!}';
-	if (ScreenWidth >= 768) {
+	if (ScreenWidth >= 991) {
 		ScreenWidth = '50%';
 		maxSizeW    = 700;
+	} else if (ScreenWidth <= 768 && ScreenWidth  >= 480){
+		ScreenWidth = '50%';
+		maxSizeW    = 500;
 	} else if (ScreenWidth <= 479){
 		ScreenWidth = '50%';
 		maxSizeW    = 300;
@@ -315,7 +318,7 @@ $(document).ready(function () {
 		  var file = ui.files[0];
 		  if( ui.other.length ){
 			var errors = ui.other[0].errors;
-			var alertHtml = '<div class="warning-img"></div><div class="warning-text"><b>Something went wrong</b></div><div class="warning-text-other"><b> The image you are trying to upload is too small / big. </br> Minimum dimensions: 200x160 </br> Maximum dimensions: 3840x2160</b></div>';
+			var alertHtml = '<button type="button" class="close" onclick="$(\'.modal-alert\').modal().close();" data-dismiss="modal" aria-hidden="true">&times;</button><div class="warning-img"></div><div class="warning-text"><b>Something went wrong</b></div><div class="warning-text-other"><b> The image you are trying to upload is too small / big. </br> Minimum dimensions: 200x160 </br> Maximum dimensions: 3840x2160</b></div>';
 			$('.modal-alert').html(alertHtml);
 			$('.modal-alert').modal().open();
 		  }
