@@ -15,6 +15,7 @@
 					<div class="title_cell cell_email_us">E-mail</div>
 					<div class="title_cell cell_views_us">Num of posts</div>
 					<div class="title_cell cell_channelID_us">Channel ID</div>
+					<div class="title_cell cell_new">New cell</div>
   					<div class="title_cell cell_edit_us">Edit account</div>
   					<div class="title_cell cell_del_us">Delete</div>
 				</div>
@@ -29,6 +30,7 @@
 							<div class="row_cell cell_email_us" >{{ $user->email }}</div>
 							<div class="row_cell cell_views_us"> <a href="#"> {{ $count_posts[$user->id] }}</a></div>
 							<div class="row_cell cell_channelID_us">{{ $user->id }}</div>
+							<div class="row_cell cell_new">192.168.192.168</div>
 							<div class="row_cell cell_edit_us">
 								<div class="buttons editUser" data-id="{{ $user->id }}" >
 									<button ><span class="glyphicon glyphicon-pencil"></span></button>
