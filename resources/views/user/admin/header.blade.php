@@ -1,3 +1,4 @@
+@if (Auth::user()->permission == 10)
 <div class="top_menu">
 	<a class="menu" href="/admin">
 		<img src="/img/member_my_acc.png" />
@@ -16,3 +17,4 @@
 		<div class="menu_text">ADV SNIP</div>
 	</a>
 </div>
+@endif
