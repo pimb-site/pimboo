@@ -104,6 +104,7 @@ Route::get('/user/referrals', 'UserController@getReferrals');
 // Admin panel
 Route::get('/admin', 'AdminController@getHome');
 Route::get('/admin/users', 'AdminController@getUsers');
+Route::post('/admin/users/add', 'AdminController@addUsers');
 Route::get('/admin/reports', 'AdminController@getReports');
 Route::get('/admin/reports/update', 'AdminController@updateReport');
 Route::get('/admin/ads', 'AdminController@getAds');

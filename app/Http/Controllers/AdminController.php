@@ -114,6 +114,42 @@ class AdminController extends Controller
 			}
 			return view('user.admin.users_list', ['body_class' => 'admin', 'users' => $users, 'count_posts' => $count_posts]);
 		}
+		if(Auth::user()->permission == 2) {
+			$users = User::select('id', 'name', 'first_name', 'last_name', 'email', 'photo', 'permission', 'last_ip')->take(1000)->get();
+			$count_posts = [];
+			foreach ($users as $key => $value) {
+				$count = Post::where('user_id', $value['id'])->count();
+				$count_posts[$value['id']] = $count;
+			}
+			return view('user.admin.users_list_second', ['body_class' => 'admin', 'users' => $users, 'count_posts' => $count_posts]);
+		}
+	}
+
+	public function addUsers() {
+		if(Auth::guest()) return redirect('/');
+		if(Auth::user()->permission == 1) return redirect('/');
+		if(Auth::user()->permission == 10) {
+			$users = User::select('id', 'name', 'email', 'photo', 'permission')->get();
+			$count_posts = [];
+			foreach ($users as $key => $value) {
+				$count = Post::where('user_id', $value['id'])->count();
+				$count_posts[$value['id']] = $count;
+			}
+			return view('user.admin.users_list', ['body_class' => 'admin', 'users' => $users, 'count_posts' => $count_posts]);
+		}
+		if(Auth::user()->permission == 2) {
+			$input = Input::get();
+			$users = User::select('id', 'name', 'first_name', 'last_name', 'email', 'photo', 'permission', 'last_ip')
+			->skip(1000 * $input['page'])
+			->take(1000)
+			->get();
+			$count_posts = [];
+			foreach ($users as $key => $value) {
+				$count = Post::where('user_id', $value['id'])->count();
+				$count_posts[$value['id']] = $count;
+			}
+			return view('user.admin.users_list_second_add', ['users' => $users, 'count_posts' => $count_posts]);
+		}
 	}
 
 	public function sortEntries() {
