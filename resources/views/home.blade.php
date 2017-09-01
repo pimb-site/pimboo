@@ -133,9 +133,7 @@ Home
                     @endforeach
                 </div>
                 <button type="button" class="headlines_show_more" style="border: 0;">SHOW MORE</button>
-            </div>
-            <div class="join_us">
-                <div class="wrap">
+                <div class="join_us">
                     <div class="header">JOIN US</div>
                     <div class="distab">
                         <div class="left"><div class="iframe-youtube"><iframe id="player" frameborder="0" allowfullscreen="1" title="YouTube video player" width="720" height="406" src="https://www.youtube.com/embed/j8nZh-aTXIg?autoplay=0&amp;controls=0&amp;disablekb=1&amp;fs=0&amp;modestbranding=1&amp;showinfo=0&amp;enablejsapi=1&amp;origin=http%3A%2F%2Fpimboobeta.com&amp;widgetid=1&amp;rel=0"></iframe></div></div>

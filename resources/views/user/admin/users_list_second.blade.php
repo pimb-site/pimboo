@@ -7,17 +7,13 @@
 	<div class="body">
 		<div class="wrap">
 			@include('user.admin.header')
-			<div class="top_title">Users</div>
+			<div class="top_title">Users ({{ number_format($total) }} total)</div>
 			<div class="all_user_table">
 				<div class="table_title" id="aside1">
-					<div class="title_cell cell_image_us">Photo</div>
-					<div class="title_cell cell_user_us">Name</div>
+					<div class="title_cell cell_user_us">First Name</div>
+					<div class="title_cell cell_user_us">Last Name</div>
 					<div class="title_cell cell_email_us">E-mail</div>
-					<div class="title_cell cell_views_us">Num of posts</div>
-					<div class="title_cell cell_channelID_us">Channel ID</div>
-					<div class="title_cell cell_new">New cell</div>
-  					<div class="title_cell cell_edit_us">Edit account</div>
-  					<div class="title_cell cell_del_us">Delete</div>
+					<div class="title_cell cell_new">Last IP</div>
 				</div>
 					<div class="user_table">
 					@foreach($users as $user)
@@ -25,26 +21,16 @@
 						$photo = (strlen($user->photo) > 0) ? '/uploads/'.$user->photo : '/img/header_default_photo.png';
 						?>
 						<div class="table_row" data-id="{{ $user->id }}">
-							<div class="row_cell cell_image_us"><a href="/{{ $user->name }}" class="img"><img width="75px" src="{{ $photo }}" /></a></div>
-							<div class="row_cell cell_user_us"><a class="title" title="{{ $user->name }}" href="/{{ $user->name }}">{{ $user->name }}</a></div>
-							<div class="row_cell cell_email_us" >{{ $user->email }}</div>
-							<div class="row_cell cell_views_us"> <a href="#"> {{ $count_posts[$user->id] }}</a></div>
-							<div class="row_cell cell_channelID_us">{{ $user->id }}</div>
-							<div class="row_cell cell_new">192.168.192.168</div>
-							<div class="row_cell cell_edit_us">
-								<div class="buttons editUser" data-id="{{ $user->id }}" >
-									<button ><span class="glyphicon glyphicon-pencil"></span></button>
-								</div>
-							</div>
-							<div class="row_cell cell_del_us">
-								<div class="buttons deleteUser" data-id="{{ $user->id }}">
-									<button ><span class="glyphicon glyphicon-remove"></span></button>
-								</div>
-							</div>
+							<div class="row_cell cell_user_us"><?php if (empty($user->first_name)) { echo $user->name; } else { echo $user->first_name; } ?></a></div>
+							<div class="row_cell cell_user_us">{{ $user->last_name }}</a></div>
+							<div class="row_cell cell_email_us" ><?php if (empty($user->social_type)) { echo $user->email; } else { echo $user->email_for_news; } ?></div>
+							<div class="row_cell cell_new">{{ $user->last_ip }}</div>
 						</div>
 					@endforeach
 					</div>
 			</div>
+			<button class='show_more' type="button">SHOW MORE</button>
+			{{ $users->links() }}
 			</div>
 		</div>
 	</div>
@@ -73,6 +59,22 @@
 			    	}
 			    } 
 			});
+		});
+	});
+	<?php
+	if (isset($_GET['page'])) {
+		$page = $_GET['page'] - 1;
+		echo 'page = '.$page.';';
+	} else {
+		echo 'page = 0;';
+	}
+	?>
+	
+	$('.show_more').click(function() {
+		page = page + 1;
+		$.post( "/admin/users/add", { page:page, '_token': '{{ csrf_token() }}' })
+		.done(function( data ) {
+			$('.user_table').append(data);
 		});
 	});
 	(function(){  // анонимная функция (function(){ })(), чтобы переменные "a" и "b" не стали глобальными

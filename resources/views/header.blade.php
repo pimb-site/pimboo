@@ -64,6 +64,9 @@
 							@if (Auth::user()->permission == 10)
 								<li class="hrefs"><a href="/admin">Admin Area</a></li>
 							@endif
+							@if (Auth::user()->permission == 2)
+								<li class="hrefs"><a href="/admin/users">Admin Area</a></li>
+							@endif
 							<li class="hrefs"><a href="/user/account">Stats</a></li>
 							<li class="divider" role="separator"></li>
 							<li class="hrefs"><a id="header_logout" href="/logout" >Logout</a></li>
