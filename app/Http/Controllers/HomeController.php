@@ -44,6 +44,7 @@ class HomeController extends Controller {
         ]);
     }
 
+// auth need fix
     public function create()
     {
         return view('create', ['body_class' => 'create-page']);
