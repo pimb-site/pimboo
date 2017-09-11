@@ -7,15 +7,6 @@
 	<title>Pimboo @yield('title')</title>
 	<link href="/css/style.min.css" rel="stylesheet">
 	@yield('css')
-	<script>
-		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-		})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-		ga('create', 'UA-84731412-1', 'auto');
-		ga('send', 'pageview');
-	</script>
 	<script type="text/javascript">
 		_atrk_opts = { atrk_acct:"49ALk1a4eFf2O7", domain:"pimboo.com",dynamic: true};
 		(function() { var as = document.createElement('script'); as.type = 'text/javascript'; as.async = true; as.src = "https://d31qbv1cthcecs.cloudfront.net/atrk.js"; var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(as, s); })();
