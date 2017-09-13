@@ -50,6 +50,7 @@ Route::get('/create', 'HomeController@create');
 
 // Home page
 Route::get('/', 'HomeController@index');
+Route::get('/mailcheck', 'HomeController@mail_check');
 Route::get('/home', 'HomeController@index');
 Route::post('/home/showmore/', 'HomeController@showmore');
 

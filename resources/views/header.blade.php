@@ -42,7 +42,9 @@
 									<div class="alerts">
 
 									</div>
+									<div class="sub_title">We will never sell, rent or barter your email address.</div>
 									<button id="register-submit">REGISTER</button>
+									<div class="sub_title" style="font-size: 10px;">By registering now you agree to our privacy policy.</div>
 								</div>
 							</div>
 						</div>
