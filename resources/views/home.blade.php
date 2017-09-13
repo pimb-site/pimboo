@@ -12,7 +12,7 @@ Home
                                 <div class="miniwrap">
                                     <div class="text1">Create Fun Flip cards</div>
                                     <div class="text2">SHARE & PROFIT!</div>
-                                    <a class="join_now">JOIN NOW</a>
+                                    <a class="join_now" onclick='window.location.href = "/login"'>JOIN NOW</a>
                                 </div>
                             </div>
                         </div>
@@ -21,7 +21,7 @@ Home
                                 <div class="miniwrap">
                                     <div class="text1">Create Interesting Stories</div>
                                     <div class="text2">SHARE & PROFIT!</div>
-                                    <a class="join_now">JOIN NOW</a>
+                                    <a class="join_now" onclick='window.location.href = "/login"'>JOIN NOW</a>
                                 </div>
                             </div>
                         </div>
