@@ -11,6 +11,21 @@
 		_atrk_opts = { atrk_acct:"49ALk1a4eFf2O7", domain:"pimboo.com",dynamic: true};
 		(function() { var as = document.createElement('script'); as.type = 'text/javascript'; as.async = true; as.src = "https://d31qbv1cthcecs.cloudfront.net/atrk.js"; var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(as, s); })();
 	</script>
+	<!-- Piwik -->
+	<script type="text/javascript">
+		var _paq = _paq || [];
+		/* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+		_paq.push(['trackPageView']);
+		_paq.push(['enableLinkTracking']);
+		(function() {
+			var u="//pimboo.com/piwik/";
+			_paq.push(['setTrackerUrl', u+'piwik.php']);
+			_paq.push(['setSiteId', '1']);
+			var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+			g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+		})();
+	</script>
+	<!-- End Piwik Code -->
 	<noscript><img src="https://d5nxst8fruw4z.cloudfront.net/atrk.gif?account=49ALk1a4eFf2O7" style="display:none" height="1" width="1" alt="" /></noscript>
 </head>
 	<body class="{!! $body_class or 'home' !!}">
