@@ -60,9 +60,9 @@ Home
                                         <div class="posting">
                                             <span class="buttons_share" data-id="{{ $count }}">
                                                 <span class="sharing">SHARE & PROFIT:</span>
-                                                <a data-title="{{  $post_main->description_title }}" data-url="{{  '/'.$post_main->author_name.'/'.$post_main->url }}" data-type="fb"  class="butt-for-sharing facebook" href=""></a>
-                                                <a data-title="{{  $post_main->description_title }}" data-url="{{  '/'.$post_main->author_name.'/'.$post_main->url }}" data-type="tw"  class="butt-for-sharing twitter" href=""></a>
-                                                <a data-title="{{  $post_main->description_title }}" data-url="{{  '/'.$post_main->author_name.'/'.$post_main->url }}" data-type="li"  class="butt-for-sharing linkedin" href=""></a>
+                                                <a data-title="{{  $post_main->description_title }}" data-url="{{  url('/'.$post_main->author_name.'/'.$post_main->url) }}" data-type="fb"  class="butt-for-sharing facebook" href=""></a>
+                                                <a data-title="{{  $post_main->description_title }}" data-url="{{  url('/'.$post_main->author_name.'/'.$post_main->url) }}" data-type="tw"  class="butt-for-sharing twitter" href=""></a>
+                                                <a data-title="{{  $post_main->description_title }}" data-url="{{  url('/'.$post_main->author_name.'/'.$post_main->url) }}" data-type="li"  class="butt-for-sharing linkedin" href=""></a>
                                                 <button class="get_link" data-id="{{ $count }}" data-href="{{  url('/'.$post_main->author_name.'/'.$post_main->url) }}">GET LINK</button>
                                             </span>
                                             <span class="link" data-id="{{ $count }}">
@@ -88,9 +88,9 @@ Home
                                     <div class="posting">
                                         <span class="buttons_share" data-id="{{ $count }}">
                                             <span class="sharing">SHARE &<br>PROFIT:</span>
-                                            <a data-title="{{  $post->description_title }}" data-url="{{  '/'.$post->author_name.'/'.$post->url }}" data-type="fb"  class="butt-for-sharing facebook" href=""></a>
-                                            <a data-title="{{  $post->description_title }}" data-url="{{  '/'.$post->author_name.'/'.$post->url }}" data-type="tw"  class="butt-for-sharing twitter" href=""></a>
-                                            <a data-title="{{  $post->description_title }}" data-url="{{  '/'.$post->author_name.'/'.$post->url }}" data-type="li"  class="butt-for-sharing linkedin" href=""></a>
+                                            <a data-title="{{  $post->description_title }}" data-url="{{  url('/'.$post_main->author_name.'/'.$post_main->url) }}" data-type="fb"  class="butt-for-sharing facebook" href=""></a>
+                                            <a data-title="{{  $post->description_title }}" data-url="{{  url('/'.$post_main->author_name.'/'.$post_main->url) }}" data-type="tw"  class="butt-for-sharing twitter" href=""></a>
+                                            <a data-title="{{  $post->description_title }}" data-url="{{  url('/'.$post_main->author_name.'/'.$post_main->url) }}" data-type="li"  class="butt-for-sharing linkedin" href=""></a>
                                             <button class="get_link" data-id="{{ $count }}" data-href="{{  url('/'.$post->author_name.'/'.$post->url) }}">GET LINK</button>
                                         </span>
                                         <span class="link" data-id="{{ $count }}">
@@ -116,9 +116,9 @@ Home
                             <div class="posting" data-id="{{ $count }}">
                                 <span class="buttons_share" data-id="{{ $count }}">
                                     <span class="sharing">SHARE &<br>PROFIT:</span>
-                                    <a data-title="{{  $post->description_title }}" data-url="{{  '/'.$post->author_name.'/'.$post->url }}" data-type="fb"  class="butt-for-sharing facebook" href=""></a>
-                                    <a data-title="{{  $post->description_title }}" data-url="{{  '/'.$post->author_name.'/'.$post->url }}" data-type="tw"  class="butt-for-sharing twitter" href=""></a>
-                                    <a data-title="{{  $post->description_title }}" data-url="{{  '/'.$post->author_name.'/'.$post->url }}" data-type="li"  class="butt-for-sharing linkedin" href=""></a>
+                                    <a data-title="{{  $post->description_title }}" data-url="{{  url('/'.$post_main->author_name.'/'.$post_main->url) }}" data-type="fb"  class="butt-for-sharing facebook" href=""></a>
+                                    <a data-title="{{  $post->description_title }}" data-url="{{  url('/'.$post_main->author_name.'/'.$post_main->url) }}" data-type="tw"  class="butt-for-sharing twitter" href=""></a>
+                                    <a data-title="{{  $post->description_title }}" data-url="{{  url('/'.$post_main->author_name.'/'.$post_main->url) }}" data-type="li"  class="butt-for-sharing linkedin" href=""></a>
                                     <button class="get_link" data-href="{{  url('/'.$post->author_name.'/'.$post->url) }}" data-id="{{ $count }}">GET LINK</button>
                                 </span>
                                 <span class="link" data-id="{{ $count }}">
